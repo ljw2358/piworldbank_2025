@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>PiWorldBank — EN+12 (Auto Language)</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="stylesheet" href="styles.css">
+  <meta name="theme-color" content="#7c3aed"/>
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <div class="brand">
+        <div class="logo" aria-hidden="true"></div>
+        <div>
+          <div class="title">PiWorldBank</div>
+          <div class="tag" data-i18n="slogan">The web3 digital bank for all humanity</div>
+        </div>
+      </div>
+      <div class="lang">
+        <span class="badge">EN+12</span>
+        <label for="language" class="tag" data-i18n="language">Language</label>
+        <select id="language" aria-label="Language select">
+          <option value="uk">Українська</option>
+          <option value="en">English</option>
+          <option value="ko">한국어</option>
+          <option value="zh">中文（简体）</option>
+          <option value="hi">हिन्दी</option>
+          <option value="ar">العربية</option>
+          <option value="es">Español</option>
+          <option value="vi">Tiếng Việt</option>
+          <option value="id">Bahasa Indonesia</option>
+          <option value="pt-BR">Português (Brasil)</option>
+          <option value="ja">日本語</option>
+          <option value="de">Deutsch</option>
+          <option value="fr">Français</option>
+        </select>
+      </div>
+    </header>
+
+    <div class="cta">
+      <button id="installBtn" data-i18n="install">Install PWA</button>
+      <button id="demoBtn" data-i18n="oneTouch">One-Touch Demo</button>
+    </div>
+
+    <section class="grid" aria-label="Main actions">
+      <div class="card">
+        <h3 data-i18n="ubi">UBI</h3>
+        <p data-i18n="ubi_desc">Basic income rewards for pioneers</p>
+      </div>
+      <div class="card">
+        <h3 data-i18n="pay">Remit / Pay</h3>
+        <p data-i18n="pay_desc">Pi transfers & payments</p>
+      </div>
+      <div class="card">
+        <h3 data-i18n="stake">Staking (31.4% APY)</h3>
+        <p data-i18n="stake_desc">Deposit / Earn with Pi</p>
+      </div>
+      <div class="card">
+        <h3 data-i18n="reward">Rewards</h3>
+        <p data-i18n="reward_desc">Daily tasks & bonuses</p>
+      </div>
+      <div class="card">
+        <h3 data-i18n="support">Customer Center</h3>
+        <p data-i18n="support_desc">Auto-translate Q&A</p>
+        <p class="note" data-i18n="gcv_inline">One GCV for all nations — Global Pi value reference</p>
+      </div>
+    </section>
+
+    <hr/>
+
+    <section>
+      <div class="card">
+        <h3 data-i18n="media_title">YouTube & TikTok</h3>
+        <p data-i18n="media_desc">Dubbing/Subtitles supported for 13 languages.</p>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="tag"><span class="powered" data-i18n="powered_by">Powered by PiWorldBank</span> • By Hyekong (ljw2358)</div>
+      <a class="link" href="#" id="qrLink" data-i18n="qr_text">Show Install QR (placeholder)</a>
+    </footer>
+  </div>
+
+  <script src="i18n.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
