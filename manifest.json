@@ -2,20 +2,23 @@
   "name": "PiWorldBank 2025",
   "short_name": "PWB 2025",
   "description": "The Web3 Digital Bank for All Humanity",
-  "start_url": "./index.html",
+  "start_url": "./",
+  "scope": "./",
   "display": "standalone",
   "background_color": "#000000",
   "theme_color": "#3a0072",
   "icons": [
     {
-      "src": "assets/img/logo.png",
+      "src": "assets/img/logo_192.png",
       "sizes": "192x192",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     },
     {
       "src": "assets/img/logo_512.png",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     }
   ],
   "lang": "en",
