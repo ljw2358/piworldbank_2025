@@ -1,0 +1,82 @@
+/* ===== Base ===== */
+:root{
+  --bg:#0e0526; --panel:#1c0f3d; --panel2:#20124a;
+  --text:#fff; --muted:#b5b5c9; --accent:#a67cff; --accent2:#ffcf7f;
+  --radius:20px;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0; color:var(--text); background:radial-gradient(80% 120% at 50% 0%, #1b0a3b 0%, #0e0526 60%) fixed;
+  font-family: system-ui, "Pretendard", "Noto Sans KR", "Apple SD Gothic Neo", Arial, sans-serif;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+}
+
+/* ===== Layout ===== */
+.container{max-width:980px; margin:0 auto; padding:24px 16px}
+.section{background:linear-gradient(180deg, var(--panel) 0%, var(--panel2) 100%);
+  border:1px solid rgba(255,255,255,.08); border-radius:var(--radius);
+  box-shadow:0 8px 24px rgba(0,0,0,.25); padding:20px; margin:16px 0}
+
+/* ===== Header ===== */
+.header{position:sticky; top:0; z-index:20; backdrop-filter:blur(8px);
+  background:rgba(14,5,38,.65); border-bottom:1px solid rgba(255,255,255,.08)}
+.header-inner{display:flex; align-items:center; gap:12px; padding:12px 16px}
+.logo{width:32px; height:32px; border-radius:9px; background:#6b46c1; display:grid; place-items:center; font-weight:800}
+.title{font-size:20px; font-weight:800; letter-spacing:.2px}
+.badge{margin-left:auto; font-size:12px; color:#e5d8ff; opacity:.9}
+.langbar{display:flex; align-items:center; gap:8px}
+.langbar select{
+  appearance:none; background:#2a184e; color:#fff; border:1px solid rgba(255,255,255,.15);
+  padding:8px 12px; border-radius:12px; font-weight:600
+}
+
+/* ===== Buttons ===== */
+.btn{display:inline-flex; align-items:center; justify-content:center; gap:8px;
+  padding:12px 16px; border-radius:16px; border:1px solid rgba(255,255,255,.1);
+  background:linear-gradient(135deg, rgba(166,124,255,.35), rgba(255,207,127,.25));
+  color:#fff; font-weight:700; text-decoration:none; transition:.18s ease; box-shadow:0 6px 18px rgba(0,0,0,.25)}
+.btn:hover{transform:translateY(-1px); box-shadow:0 10px 24px rgba(0,0,0,.3)}
+.btn.ghost{background:transparent}
+.btn-row{display:flex; flex-wrap:wrap; gap:12px}
+
+/* ===== Feature cards ===== */
+.grid{display:grid; grid-template-columns:repeat(2,1fr); gap:16px}
+@media (max-width:720px){.grid{grid-template-columns:1fr}}
+.card{background:linear-gradient(180deg, #23124c, #1b0f3e);
+  border:1px solid rgba(255,255,255,.08); border-radius:18px; padding:22px;
+  box-shadow:0 10px 24px rgba(0,0,0,.25)}
+.card h3{margin:0 0 8px; font-size:22px}
+.card p{margin:0; color:var(--muted)}
+
+/* ===== Media block (YT/TikTok) ===== */
+.media h2{margin:0 0 12px; font-size:26px}
+.media .btn-row{margin-bottom:12px}
+.video{
+  width:100%; aspect-ratio:16/9; border-radius:14px; overflow:hidden;
+  border:1px solid rgba(255,255,255,.1); background:#12092d
+}
+video{width:100%; height:100%; display:block}
+
+/* ===== Chat / Customer Center ===== */
+.chat{display:grid; gap:10px}
+.chat .bubble{max-width:92%; padding:12px 14px; border-radius:16px; line-height:1.45}
+.chat .bubble.admin{background:#2a184e; border:1px solid rgba(255,255,255,.08)}
+.chat .row{display:flex; gap:10px}
+.chat input{
+  flex:1; padding:12px 14px; border-radius:14px; border:1px solid rgba(255,255,255,.12);
+  background:#1b0f3e; color:#fff; outline:none
+}
+.chat .send{min-width:92px}
+
+/* ===== Language Pills (UK EN KO …) ===== */
+.pills{display:flex; flex-wrap:wrap; gap:8px}
+.pill{padding:8px 10px; border-radius:14px; font-weight:700; font-size:12px;
+  background:#2a184e; color:#cfc6ff; border:1px solid rgba(255,255,255,.08)}
+.pill.active{background:linear-gradient(135deg,#a67cff,#ffcf7f); color:#2b174e}
+
+/* ===== Footer ===== */
+.footer{display:flex; justify-content:space-between; gap:10px; align-items:center; padding:16px 0 28px}
+.footer small{color:var(--muted)}
+/* utility */
+.mt-8{margin-top:8px} .mt-16{margin-top:16px} .mt-24{margin-top:24px}
