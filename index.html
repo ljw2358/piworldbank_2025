@@ -7,9 +7,9 @@
 <style>
 :root {
   --bg:#0f0a1f; --card:#1a1333; --text:#f7f7fb; --muted:#bcb7dc;
-  --accent:#ffd84d; --border:rgba(255,255,255,.12); --radius:22px;
+  --accent:#ffd84d; --border:rgba(255,255,255,.15); --radius:22px;
   --shadow:0 8px 28px rgba(0,0,0,.4);
-  --qr-max:120px; --qr-size:min(15vw,var(--qr-max));
+  --qr-max:160px; --qr-size:min(22vw,var(--qr-max));
 }
 *{box-sizing:border-box;}
 html,body{margin:0;height:100%;}
@@ -39,7 +39,30 @@ header{text-align:center;margin-top:12px;margin-bottom:8px;}
 .subtitle{font-size:13px;color:var(--muted);}
 .people{font-size:13px;color:var(--accent);font-weight:700;margin-top:4px;}
 
-/* 섹션 */
+/* 카드 버튼형 서비스 */
+.services {
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(130px,1fr));
+  gap:10px;
+  width:90%;max-width:700px;
+  margin:20px auto;
+}
+.service-card {
+  background:rgba(255,255,255,0.05);
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:14px;
+  box-shadow:0 6px 18px rgba(0,0,0,0.3);
+  transition:0.3s;
+}
+.service-card:hover {
+  background:rgba(255,255,255,0.08);
+  transform:translateY(-4px);
+}
+.service-card h3{color:var(--accent);margin:4px 0;}
+.service-card p{font-size:13px;color:var(--muted);margin:0;}
+
+/* 섹션 공통 */
 .section{background:rgba(255,255,255,0.05);border:1px solid var(--border);
   border-radius:var(--radius);box-shadow:var(--shadow);
   width:90%;max-width:880px;margin:20px auto;padding:18px;text-align:center;}
@@ -61,11 +84,11 @@ footer{text-align:center;margin:36px 0 20px;color:var(--muted);font-size:12px;}
 <div class="lang-select">
   <select>
     <option selected>🇺🇸 English</option>
-    <option>🇰🇷 한국어</option>
-    <option>🇨🇳 简体中文</option>
-    <option>🇯🇵 日本語</option>
-    <option>🇫🇷 Français</option>
-    <option>🇩🇪 Deutsch</option>
+    <option>🇰🇷 Korean</option>
+    <option>🇨🇳 Chinese</option>
+    <option>🇯🇵 Japanese</option>
+    <option>🇫🇷 French</option>
+    <option>🇩🇪 German</option>
   </select>
 </div>
 
@@ -75,15 +98,15 @@ footer{text-align:center;margin:36px 0 20px;color:var(--muted);font-size:12px;}
   <div class="people">People, not profit</div>
 </header>
 
-<!-- 기능 -->
-<section class="section">
-  <h3>UBI</h3><p>기본소득 리워드</p>
-  <h3>Payments</h3><p>송금 · 결제</p>
-  <h3>Staking</h3><p>예치 · 31.4%</p>
-  <h3>Rewards</h3><p>참여 보상</p>
-  <h3>Support</h3><p>고객센터</p>
-  <h3>FAQ</h3><p>이용약관 · 정책 · 문의</p>
-</section>
+<!-- 6개 기능 -->
+<div class="services">
+  <div class="service-card"><h3>UBI</h3><p>Universal Basic Income Rewards</p></div>
+  <div class="service-card"><h3>Payments</h3><p>Pi-based Transfers & Payments</p></div>
+  <div class="service-card"><h3>Staking</h3><p><b>31.4% APY</b> Stable Pi Staking</p></div>
+  <div class="service-card"><h3>Rewards</h3><p>Community Participation Benefits</p></div>
+  <div class="service-card"><h3>Support</h3><p>Help Desk for All Users</p></div>
+  <div class="service-card"><h3>FAQ</h3><p>Policy · Terms · Inquiry</p></div>
+</div>
 
 <!-- QR -->
 <section class="section">
@@ -112,9 +135,9 @@ footer{text-align:center;margin:36px 0 20px;color:var(--muted);font-size:12px;}
   <div style="margin-top:16px;">
     <p><b>Swap</b></p>
     <ul>
-      <li>If the swap is not ready, keep this as description only</li>
-      <li>When ready, bind real URL to “Launch Swap”</li>
-      <li>Show risks, fees, slippage ahead of launch</li>
+      <li>Prepare for Pi ↔ PWB swap function</li>
+      <li>Launch and pool features coming soon</li>
+      <li>Transparent fees and safety-focused liquidity</li>
     </ul>
     <a class="button primary" href="#">Launch Swap</a>
     <a class="button" href="#">Pool / LP</a>
@@ -138,18 +161,17 @@ footer{text-align:center;margin:36px 0 20px;color:var(--muted);font-size:12px;}
 
 <!-- FAQ -->
 <section class="section">
-  <h3>FAQ</h3>
+  <h3>FAQ (Terms & Contact)</h3>
   <ul>
-    <li><b>이용약관 (Terms of Use)</b><br>본 서비스는 정보 제공용 데모입니다.</li>
-    <li><b>개인정보처리방침 (Privacy Policy)</b><br>필수 최소 정보만 수집하며 제3자 제공은 없습니다.</li>
-    <li><b>문의 (Contact)</b><br>ljw2358@gmail.com / ljw2358@naver.com</li>
+    <li><b>Terms of Use</b> — This is a demo web app for Pi Browser demonstration.</li>
+    <li><b>Privacy Policy</b> — No personal data is stored or shared externally.</li>
+    <li><b>Contact</b> — ljw2358@gmail.com / ljw2358@naver.com</li>
   </ul>
 </section>
 
 <footer>© 2025 PiWorldBank · Built for everyday Pioneers</footer>
 
 <script>
-/* One-Touch Launch */
 (function(){
   const TARGET_URL="https://ljw2358.github.io/piworldbank_2025/";
   const ua=(navigator.userAgent||"").toLowerCase();
@@ -161,7 +183,7 @@ footer{text-align:center;margin:36px 0 20px;color:var(--muted);font-size:12px;}
       if(isPi){ window.location.href=TARGET_URL; }
       else{
         window.open(TARGET_URL,"_blank","noopener");
-        toast("💡 Tip: Pi Browser에서 스캔하면 즉시 실행됩니다.");
+        toast("💡 Tip: Open directly in Pi Browser for instant access.");
       }
     });
   }
