@@ -4,321 +4,171 @@
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
   <title>PiWorldBank</title>
-  <meta name="description" content="The Web3 digital bank for all humanity."/>
+  <meta name="description" content="The Web3 digital bank for all humanity"/>
   <link rel="icon" href="assets/icon-192.png"/>
   <style>
-    :root{
-      --bg:#0f0a1f; --card:#1a1333; --text:#f7f7fb; --muted:#c8c2e3;
-      --accent:#ffd84d; --blue:#7aa6ff; --border:rgba(255,255,255,.10);
-      --shadow:0 10px 30px rgba(0,0,0,.35); --radius:22px;
+    :root {
+      --bg:#0f0a1f; --card:#1a1333; --text:#f7f7fb;
+      --muted:#b9b5d9; --accent:#ffd84d; --border:rgba(255,255,255,.12);
+      --shadow:0 8px 28px rgba(0,0,0,.4); --radius:22px;
     }
     *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
+    body {
       margin:0;
-      background:radial-gradient(1200px 800px at 80% -10%, #2a1f55 0%, transparent 60%), var(--bg);
+      background:radial-gradient(1000px 700px at 70% -20%, #241a4f 0%, transparent 60%), var(--bg);
       color:var(--text);
       font-family:system-ui,-apple-system,Segoe UI,Roboto,Noto Sans,"Apple SD Gothic Neo","Malgun Gothic","PingFang SC",sans-serif;
-      line-height:1.45;
+      text-align:center;
     }
-    a{color:var(--blue); text-decoration:none}
-    .wrap{max-width:1100px;margin:0 auto;padding:28px 18px 60px}
+    a {color:#7aa6ff; text-decoration:none}
 
     /* header */
-    header{
-      display:grid; grid-template-columns:auto auto 1fr; align-items:center; gap:12px; margin-bottom:18px;
+    header {
+      display:flex; flex-direction:column; align-items:center; justify-content:center;
+      margin-top:20px; margin-bottom:10px;
     }
-    .lang{
-      order:1; /* 왼쪽으로 더 나오게(브랜드 왼쪽) */
-      display:flex; align-items:center; gap:8px;
+    .lang {
+      position:absolute; top:18px; right:18px;
       background:var(--card); border:1px solid var(--border);
-      padding:8px 10px; border-radius:14px;
+      padding:8px 12px; border-radius:14px;
+      display:flex; align-items:center; gap:8px;
+      font-size:14px;
     }
-    .lang select{background:var(--card); color:var(--text); border:none; font-weight:700; outline:none}
-    .lang option{background:#1a1a2e; color:#fff;}
+    .lang select {
+      background:var(--card); color:var(--text); border:none; font-weight:700;
+      outline:none; cursor:pointer;
+    }
+    .logo {
+      width:60px; height:60px;
+      border-radius:18px;
+      background:linear-gradient(135deg,#6e4bff,#c28bff);
+      display:grid; place-items:center;
+      font-size:32px; font-weight:900; margin-bottom:6px; box-shadow:var(--shadow);
+    }
+    h1 {margin:0; font-size:34px; letter-spacing:0.4px;}
+    .tagline {font-size:13px; color:var(--muted);}
+    .people {margin-top:6px; font-size:12px; color:#ffd84d; font-weight:600;}
 
-    .brand{order:2; display:flex; align-items:center; gap:12px}
-    .logo{width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,#6e4bff,#c28bff);display:grid;place-items:center;box-shadow:var(--shadow);font-weight:900}
-    .title-group h1{margin:0; font-size:34px; font-weight:900; letter-spacing:.3px} /* 더 작게 */
-    .title-group .tagline{margin:3px 0 0; font-size:12px; color:var(--muted)}
-    .spacer{order:3}
+    /* feature grid */
+    .grid {
+      display:grid; grid-template-columns:repeat(2,1fr); gap:12px;
+      max-width:420px; margin:20px auto;
+    }
+    .btn-tile {
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      padding:16px 0;
+      box-shadow:var(--shadow);
+      transition:transform .1s ease, border-color .1s ease;
+    }
+    .btn-tile:hover {transform:translateY(-2px); border-color:#322b60;}
+    .btn-tile b {display:block; font-size:16px;}
+    .btn-tile span {display:block; font-size:12px; color:var(--muted);}
 
-    /* cards/sections */
-    .card{background:var(--card); border:1px solid var(--border); border-radius:var(--radius); box-shadow:var(--shadow)}
-    section{margin:24px 0}
-    .section-head{display:flex; align-items:center; justify-content:space-between; padding:16px 18px; border-bottom:1px solid var(--border)}
-    .section-head h3{margin:0; font-size:20px}
-    .section-body{padding:18px}
-    .pill{display:inline-flex; align-items:center; gap:8px; padding:8px 12px; border-radius:999px; background:#22204a; border:1px solid var(--border); font-size:13px}
+    /* QR Section */
+    .qr-wrap {
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      width:90%;
+      max-width:420px;
+      margin:25px auto;
+      padding:18px;
+    }
+    .qr-title {display:flex; justify-content:space-between; align-items:center;}
+    .qr-title h3{margin:0;font-size:18px;}
+    .qr-box {
+      width:110px;height:110px;background:#fff;
+      border-radius:14px;overflow:hidden;margin:12px auto 6px;
+    }
+    .qr-box img{width:100%;height:100%;object-fit:cover;}
+    .qr-caption {font-size:13px;color:var(--muted);}
+    .qr-mini {font-size:11px;color:#aab2d9;}
 
-    /* feature tiles */
-    .hero{display:grid; grid-template-columns:1fr; gap:16px}
-    .grid{display:grid; grid-template-columns:repeat(2,1fr); gap:12px}
-    .btn-tile{border:1px solid var(--border); background:#211a3f; padding:16px 14px; border-radius:18px; display:flex; flex-direction:column; gap:6px; transition:transform .12s ease,border-color .12s ease}
-    .btn-tile:hover{transform:translateY(-2px); border-color:#2e2a55}
-    .btn-tile b{font-size:16px}
-    .btn-tile span{font-size:12px; color:var(--muted)}
+    /* swap/token/media/faq placeholders to maintain structure */
+    section.card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);width:90%;max-width:880px;margin:22px auto;padding:20px;text-align:left;}
+    .section-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;}
+    .section-head h3{margin:0;font-size:18px;}
+    .pill{background:#22204a;border:1px solid var(--border);border-radius:20px;padding:6px 12px;font-size:12px;}
+    footer{margin-top:30px;font-size:12px;color:var(--muted);}
 
-    /* QR (FAQ 위 한 곳) */
-    .qr-wrap{display:flex; align-items:center; gap:16px; flex-wrap:wrap}
-    .qr-box{width:120px;height:120px;background:#fff;border-radius:14px;display:grid;place-items:center;box-shadow:var(--shadow);overflow:hidden;border:5px solid #fff}
-    .qr-box img{width:100%;height:100%;object-fit:cover}
-    .qr-text{font-size:13px;color:var(--muted)}
-    .mini{font-size:11px;color:#aab2d9;margin-top:4px}
-
-    /* swap/token */
-    .row{display:grid; grid-template-columns:1fr 1fr; gap:16px}
-    .cta{display:flex; gap:10px; flex-wrap:wrap; margin-top:10px}
-    .cta a{display:inline-flex; align-items:center; justify-content:center; padding:12px 14px; border-radius:14px; border:1px solid var(--border); background:#221a42; font-weight:800; font-size:14px; min-width:140px}
-    .cta a.primary{background:linear-gradient(135deg,#ffd84d,#ffb84d); color:#2b1e05; border-color:rgba(0,0,0,.05)}
-
-    /* media previews 복원: 썸네일/iframe */
-    .social .cards{display:grid; grid-template-columns:1fr 1fr; gap:16px}
-    .social .card-inner{padding:16px}
-    .thumb{border-radius:14px; overflow:hidden; border:1px solid var(--border); aspect-ratio:16/9; background:#000; position:relative}
-    .thumb iframe{width:100%; height:100%; border:0}
-    .thumb .placeholder{position:absolute; inset:0; display:grid; place-items:center; color:#9aa; font-weight:700}
-
-    /* FAQ */
-    .faq details{padding:14px 18px; border-top:1px solid var(--border)}
-    .faq summary{cursor:pointer; list-style:none; font-weight:800}
-    .faq summary::-webkit-details-marker{display:none}
-    .faq p{margin:10px 0 0; color:var(--muted); font-size:14px}
-
-    footer{margin-top:36px; padding:18px; text-align:center; color:var(--muted); font-size:12px}
-
-    @media (max-width:960px){
-      header{grid-template-columns:auto 1fr auto}
-      .title-group h1{font-size:28px}
+    @media(max-width:600px){
+      h1{font-size:28px}
       .grid{grid-template-columns:1fr}
-      .row{grid-template-columns:1fr}
-      .social .cards{grid-template-columns:1fr}
     }
   </style>
 </head>
 <body>
-  <div class="wrap">
-    <header>
-      <!-- 언어를 왼쪽으로 더 당김 -->
-      <div class="lang" aria-label="Language">
-        <span>🌐</span>
-        <select id="langSelect">
-          <option value="uk">🇺🇦 Українська</option>
-          <option value="en" selected>🇺🇸 English</option>
-          <option value="ko">🇰🇷 한국어</option>
-          <option value="zh">🇨🇳 简体中文</option>
-          <option value="ja">🇯🇵 日本語</option>
-          <option value="es">🇪🇸 Español</option>
-          <option value="ru">🇷🇺 Русский</option>
-          <option value="fr">🇫🇷 Français</option>
-          <option value="de">🇩🇪 Deutsch</option>
-          <option value="ar">🇸🇦 العربية</option>
-          <option value="hi">🇮🇳 हिन्दी</option>
-          <option value="pt">🇵🇹 Português</option>
-          <option value="vi">🇻🇳 Tiếng Việt</option>
-        </select>
-      </div>
-
-      <div class="brand">
-        <div class="logo">π</div>
-        <div class="title-group">
-          <h1>PiWorldBank</h1>
-          <div class="tagline">ONE WORLD ONE PI ONE FUTURE</div>
-        </div>
-      </div>
-
-      <div class="spacer"></div>
-    </header>
-
-    <!-- 기능 타일 -->
-    <section class="hero card">
-      <div class="section-body">
-        <div class="grid">
-          <a class="btn-tile"><b>UBI</b><span>기본소득 리워드</span></a>
-          <a class="btn-tile"><b>Payments</b><span>송금 · 결제</span></a>
-          <a class="btn-tile"><b>Staking</b><span>예치 · 31.4%*</span></a>
-          <a class="btn-tile"><b>Rewards</b><span>참여 보상</span></a>
-          <a class="btn-tile"><b>Support</b><span>고객센터</span></a>
-          <a class="btn-tile" href="#faq"><b>FAQ</b><span>이용약관 · 정책 · 문의</span></a>
-        </div>
-      </div>
-    </section>
-
-    <!-- QR (FAQ 위 한 곳) -->
-    <section class="card" id="qrSection">
-      <div class="section-head">
-        <h3>One-Touch QR</h3>
-        <div class="pill">Pi Browser</div>
-      </div>
-      <div class="section-body">
-        <div class="qr-wrap">
-          <div class="qr-box">
-            <!-- 실제 QR 이미지로 교체 가능 -->
-            <img src="assets/qr-hyekong.png" alt="One-Touch QR (Pi Browser)"/>
-          </div>
-          <div>
-            <div class="qr-text" id="qrCaption">Scan with Pi Browser to open.</div>
-            <div class="mini">https://ljw2358.github.io/piworldbank</div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Swapping & Token (복원) -->
-    <section id="swap" class="card">
-      <div class="section-head">
-        <h3 id="swapTitle">Swapping &amp; Token (PWB)</h3>
-        <div class="pill" id="swapPill">π ↔ PWB · Docs</div>
-      </div>
-      <div class="section-body">
-        <div class="row">
-          <!-- Token(PWB) 원상복구 -->
-          <div class="card" style="padding:16px">
-            <b id="tokenBoxTitle">Token (PWB)</b>
-            <ul class="list" id="tokenList" style="margin:8px 0 0; padding-left:18px; color:var(--muted); font-size:14px">
-              <li>Utility-centric design (fees, rewards, governance).</li>
-              <li>Phased opening aligned with security &amp; KYC policy.</li>
-              <li>Liquidity, lock/vesting roadmap documented.</li>
-            </ul>
-            <div class="cta">
-              <a class="primary" href="#" target="_blank" rel="noopener" id="btnWhitepaper">Whitepaper</a>
-              <a href="#" target="_blank" rel="noopener" id="btnTokenomics">Tokenomics</a>
-            </div>
-          </div>
-          <!-- SWAP 원상복구 -->
-          <div class="card" style="padding:16px">
-            <b id="swapBoxTitle">Swap</b>
-            <ul class="list" id="swapList" style="margin:8px 0 0; padding-left:18px; color:var(--muted); font-size:14px">
-              <li>If the swap is not ready, keep this as description only.</li>
-              <li>When ready, bind real URL to “Launch Swap”.</li>
-              <li>Show risks, fees, slippage ahead of launch.</li>
-            </ul>
-            <div class="cta">
-              <a class="primary" href="#" aria-disabled="true" style="opacity:.6; pointer-events:none" id="btnLaunchSwap">Launch Swap</a>
-              <a href="#" aria-disabled="true" style="opacity:.6; pointer-events:none" id="btnPool">Pool / LP</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Media (YouTube/TikTok 프리뷰 둘 다 복원) -->
-    <section id="social" class="social card">
-      <div class="section-head">
-        <h3 id="mediaTitle">Media</h3>
-        <div class="pill">YouTube · TikTok</div>
-      </div>
-      <div class="section-body">
-        <div class="cards">
-          <!-- YouTube 프리뷰 -->
-          <div class="card card-inner">
-            <div class="thumb" id="ytThumb">
-              <!-- 채널/영상 ID로 교체: 아래는 예시 미리보기 -->
-              <iframe id="ytIframe"
-                src="https://www.youtube.com/embed/VIDEO_ID?rel=0&modestbranding=1"
-                title="YouTube preview" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
-              </iframe>
-              <div class="placeholder" id="ytPlaceholder" style="display:none">YouTube Preview</div>
-            </div>
-            <div class="cta" style="margin-top:12px">
-              <a id="yt" href="#" target="_blank" rel="noopener">Open YouTube</a>
-              <a id="ytTop" href="#" target="_blank" rel="noopener">Top Playlist</a>
-            </div>
-          </div>
-
-          <!-- TikTok 프리뷰 -->
-          <div class="card card-inner">
-            <div class="thumb" id="ttThumb">
-              <!-- 임베드 가이드: tiktok 임베드는 공식 widget 스크립트 사용 -->
-              <iframe id="ttIframe"
-                src="about:blank" title="TikTok preview"></iframe>
-              <div class="placeholder" id="ttPlaceholder">TikTok Preview</div>
-            </div>
-            <div class="cta" style="margin-top:12px">
-              <a id="tt" href="#" target="_blank" rel="noopener">Open TikTok</a>
-              <a id="ttLatest" href="#" target="_blank" rel="noopener">Latest Short</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- FAQ (하단 한 곳만) -->
-    <section id="faq" class="faq card">
-      <div class="section-head">
-        <h3 id="faqTitle">FAQ</h3>
-        <div class="pill" id="faqPill">Terms · Policy · Contact</div>
-      </div>
-      <div class="section-body">
-        <details>
-          <summary id="faqTerms">이용약관 (Terms of Use)</summary>
-          <p id="faqTermsBody">본 서비스는 정보 제공용 데모입니다. 금융 기능(예: 스왑)은 관련 규정에 따라 단계적으로 오픈됩니다.</p>
-        </details>
-        <details>
-          <summary id="faqPrivacy">개인정보처리방침 (Privacy Policy)</summary>
-          <p id="faqPrivacyBody">필수 최소 정보만 수집하며 제3자 제공은 없습니다. 보안 점검 및 로그 최소화 원칙을 적용합니다.</p>
-        </details>
-        <details>
-          <summary id="faqContact">문의 (Contact)</summary>
-          <p id="faqContactBody">이메일: <a href="mailto:ljw2358@gmail.com">ljw2358@gmail.com</a> / <a href="mailto:ljw2358@naver.com">ljw2358@naver.com</a></p>
-        </details>
-      </div>
-    </section>
-
-    <footer>© <span id="year"></span> PiWorldBank · Built for everyday Pioneers</footer>
+  <!-- 언어 선택 -->
+  <div class="lang">
+    🌐
+    <select id="langSelect">
+      <option value="uk">🇺🇦 Українська</option>
+      <option value="en" selected>🇺🇸 English</option>
+      <option value="ko">🇰🇷 한국어</option>
+      <option value="zh">🇨🇳 简体中文</option>
+      <option value="ja">🇯🇵 日本語</option>
+      <option value="es">🇪🇸 Español</option>
+    </select>
   </div>
 
+  <!-- 헤더 -->
+  <header>
+    <div class="logo">π</div>
+    <h1>PiWorldBank</h1>
+    <div class="tagline">ONE WORLD ONE PI ONE FUTURE</div>
+    <div class="people">People, not profit</div>
+  </header>
+
+  <!-- 핵심 기능 -->
+  <div class="grid">
+    <div class="btn-tile"><b>UBI</b><span>기본소득 리워드</span></div>
+    <div class="btn-tile"><b>Payments</b><span>송금 · 결제</span></div>
+    <div class="btn-tile"><b>Staking</b><span>예치 · 31.4%*</span></div>
+    <div class="btn-tile"><b>Rewards</b><span>참여 보상</span></div>
+    <div class="btn-tile"><b>Support</b><span>고객센터</span></div>
+    <div class="btn-tile"><b>FAQ</b><span>이용약관 · 정책 · 문의</span></div>
+  </div>
+
+  <!-- QR -->
+  <div class="qr-wrap">
+    <div class="qr-title">
+      <h3>One-Touch QR</h3>
+      <div class="pill">Pi Browser</div>
+    </div>
+    <div class="qr-box">
+      <img src="assets/qr-hyekong2.png" alt="One-Touch QR"/>
+    </div>
+    <div class="qr-caption">Scan with Pi Browser to open</div>
+    <div class="qr-mini">https://ljw2358.github.io/piworldbank_2025</div>
+  </div>
+
+  <!-- FAQ -->
+  <section class="card">
+    <div class="section-head">
+      <h3>FAQ</h3>
+      <div class="pill">Terms · Policy · Contact</div>
+    </div>
+    <ul style="list-style:none;padding-left:10px;line-height:1.7;font-size:14px;margin:0;">
+      <li><b>이용약관</b> (Terms of Use)</li>
+      <li><b>개인정보처리방침</b> (Privacy Policy)</li>
+      <li><b>문의</b> (Contact)</li>
+    </ul>
+  </section>
+
+  <footer>© 2025 PiWorldBank · Built for everyday Pioneers</footer>
+
   <script>
-    // footer year
-    document.getElementById('year').textContent = new Date().getFullYear();
-
-    // 기본 링크/영상 자리(필요 시 교체)
-    const ytId = ""; // 예: "dQw4w9WgXcQ"
-    const ttEmbed = ""; // TikTok 임베드 URL (공유 → 임베드 링크)
-
-    const ytIframe = document.getElementById('ytIframe');
-    const ytPlaceholder = document.getElementById('ytPlaceholder');
-    if(ytId){
-      ytIframe.src = "https://www.youtube.com/embed/"+ytId+"?rel=0&modestbranding=1";
-    }else{
-      ytIframe.style.display="none";
-      ytPlaceholder.style.display="grid";
-    }
-
-    const ttIframe = document.getElementById('ttIframe');
-    const ttPlaceholder = document.getElementById('ttPlaceholder');
-    if(ttEmbed){
-      ttIframe.src = ttEmbed;
-      ttPlaceholder.style.display="none";
-    }else{
-      ttIframe.style.display="none";
-      ttPlaceholder.style.display="grid";
-    }
-
-    // QR 캡션 언어별
-    const I18N = {
-      en:{qr:"Scan with Pi Browser to open",media:"Media",swapTitle:"Swapping & Token (PWB)",swapPill:"π ↔ PWB · Docs"},
-      uk:{qr:"Скануйте у Pi Browser, щоб відкрити",media:"Медіа",swapTitle:"Свопінг і токен (PWB)",swapPill:"π ↔ PWB · Документи"},
-      ko:{qr:"Pi 브라우저로 스캔하여 접속",media:"미디어",swapTitle:"스와핑 및 토큰 (PWB)",swapPill:"π ↔ PWB · 문서"}
-    };
-
-    const selectEl = document.getElementById('langSelect');
-    function applyLang(lang){
-      const t = I18N[lang] || I18N.en;
-      document.getElementById('qrCaption').textContent = t.qr;
-      document.getElementById('mediaTitle').textContent = t.media;
-      document.getElementById('swapTitle').textContent = t.swapTitle;
-      document.getElementById('swapPill').textContent = t.swapPill;
-    }
-    applyLang('en'); // 기본 영어
-    selectEl.value = 'en'; // 우크라이나가 목록 1번이지만 기본 표시는 영어
-    selectEl.addEventListener('change', e => applyLang(e.target.value));
-
-    // 외부 링크(필요 시 교체)
-    document.getElementById('yt').href = "#";
-    document.getElementById('ytTop').href = "#";
-    document.getElementById('tt').href = "#";
-    document.getElementById('ttLatest').href = "#";
+    // 언어 기본 영어
+    const select=document.getElementById("langSelect");
+    select.addEventListener("change",e=>{
+      const lang=e.target.value;
+      if(lang==='ko'){document.querySelector('.qr-caption').textContent="Pi 브라우저로 스캔하여 접속";}
+      else if(lang==='uk'){document.querySelector('.qr-caption').textContent="Скануйте у Pi Browser, щоб відкрити";}
+      else{document.querySelector('.qr-caption').textContent="Scan with Pi Browser to open";}
+    });
   </script>
 </body>
 </html>
