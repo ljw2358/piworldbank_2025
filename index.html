@@ -1,204 +1,425 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>PiWorldBank</title>
+
+<!-- PWA: 원터치 설치용 매니페스트 (루트에 manifest.json 필요) -->
+<link rel="manifest" href="manifest.json" />
+<meta name="theme-color" content="#1a1333" />
+
 <style>
-:root {
+:root{
   --bg:#0f0a1f; --card:#1a1333; --text:#f7f7fb; --muted:#bcb7dc;
-  --accent:#ffd84d; --border:rgba(255,255,255,.15); --radius:22px;
-  --shadow:0 8px 28px rgba(0,0,0,.4);
-  --qr-max:160px; --qr-size:min(22vw,var(--qr-max));
+  --accent:#ffd84d; --blue:#7aa6ff; --border:rgba(255,255,255,.15);
+  --radius:22px; --shadow:0 8px 28px rgba(0,0,0,.4);
+  /* QR 크기 (크게) */
+  --qr-max: 220px;
+  --qr-size: min(24vw, var(--qr-max));
 }
-*{box-sizing:border-box;}
-html,body{margin:0;height:100%;}
+*{box-sizing:border-box}
+html,body{height:100%; margin:0}
 body{
-  background:radial-gradient(circle at top,#2b1d61,#130a2a);
+  background:radial-gradient(1000px 700px at 70% -20%, #241a4f 0%, transparent 60%), var(--bg);
   color:var(--text);
   font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;
   line-height:1.5;
-  padding-top:70px;
+  padding-top:72px; /* 언어 선택 고정으로 여백 확보 */
 }
 
-/* 언어 선택 */
-.lang-select{
-  position:fixed; top:12px; right:16px; z-index:1000;
+/* 언어 드롭다운 (EN+12/13개) */
+.lang{
+  position:fixed; top:14px; right:16px; z-index:1000;
+  display:flex; align-items:center; gap:8px;
   background:var(--card); border:1px solid var(--border);
-  border-radius:14px; padding:8px 12px;
-  box-shadow:var(--shadow);
+  border-radius:14px; padding:8px 12px; box-shadow:var(--shadow);
 }
-.lang-select select{
-  background:var(--card); color:#fff; border:none; font-weight:700; outline:none;
+.lang select{
+  background:var(--card); color:#fff; border:none; font-weight:700; outline:none; cursor:pointer;
 }
-.lang-select option{background:#1a1a2e;color:#fff;}
+.lang option{ background:#1a1a2e; color:#fff; }
 
 /* 헤더 */
-header{text-align:center;margin-top:12px;margin-bottom:8px;}
-.logo{font-size:34px;font-weight:900;}
-.subtitle{font-size:13px;color:var(--muted);}
-.people{font-size:13px;color:var(--accent);font-weight:700;margin-top:4px;}
-
-/* 카드 버튼형 서비스 */
-.services {
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(130px,1fr));
-  gap:10px;
-  width:90%;max-width:700px;
-  margin:20px auto;
+header{text-align:center; margin:0 16px 10px}
+.logo{
+  width:60px; height:60px; border-radius:18px;
+  background:linear-gradient(135deg,#6e4bff,#c28bff);
+  display:grid; place-items:center; font-size:32px; font-weight:900; box-shadow:var(--shadow); margin:0 auto 8px;
 }
-.service-card {
-  background:rgba(255,255,255,0.05);
-  border:1px solid var(--border);
-  border-radius:16px;
-  padding:14px;
-  box-shadow:0 6px 18px rgba(0,0,0,0.3);
-  transition:0.3s;
-}
-.service-card:hover {
-  background:rgba(255,255,255,0.08);
-  transform:translateY(-4px);
-}
-.service-card h3{color:var(--accent);margin:4px 0;}
-.service-card p{font-size:13px;color:var(--muted);margin:0;}
+h1{margin:0; font-size:34px; letter-spacing:.3px}
+.tagline{font-size:12px; color:var(--muted)}
+.people{font-size:12px; color:var(--accent); font-weight:800; margin-top:4px}
 
-/* 섹션 공통 */
-.section{background:rgba(255,255,255,0.05);border:1px solid var(--border);
-  border-radius:var(--radius);box-shadow:var(--shadow);
-  width:90%;max-width:880px;margin:20px auto;padding:18px;text-align:center;}
-.section h3{color:#a9b4ff;margin:8px 0;}
-.section ul{text-align:left;display:inline-block;font-size:14px;color:var(--muted);line-height:1.7;}
+/* 6개 기능 카드 */
+.services{
+  display:grid; grid-template-columns:repeat(auto-fit, minmax(140px, 1fr));
+  gap:12px; width:92%; max-width:900px; margin:20px auto;
+}
+.card-tile{
+  background:rgba(255,255,255,.05); border:1px solid var(--border);
+  border-radius:16px; padding:14px; text-align:center;
+  box-shadow:0 6px 18px rgba(0,0,0,.3); transition:.18s;
+}
+.card-tile:hover{ transform:translateY(-3px); background:rgba(255,255,255,.08) }
+.card-tile b{display:block; color:var(--accent); margin-bottom:4px}
+.card-tile span{display:block; font-size:13px; color:var(--muted)}
 
-.qr-box{margin:10px auto;}
-.qr-box img{width:var(--qr-size);height:var(--qr-size);border-radius:12px;background:#fff;}
-.button{display:inline-block;background:#382B7C;color:#fff;
-  padding:10px 16px;border-radius:12px;margin:8px;text-decoration:none;
-  font-weight:700;transition:background .2s ease;}
-.button:hover{background:#4a38b0;}
-.primary{background:linear-gradient(135deg,#ffd84d,#ffb84d);color:#2b1e05;}
-footer{text-align:center;margin:36px 0 20px;color:var(--muted);font-size:12px;}
+/* 공용 섹션 카드 */
+.section{
+  background:rgba(255,255,255,.05); border:1px solid var(--border);
+  border-radius:var(--radius); box-shadow:var(--shadow);
+  width:92%; max-width:900px; margin:22px auto; padding:18px;
+}
+.section .head{display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:12px}
+.section .head h3{margin:0; font-size:18px; color:#a9b4ff}
+.pill{background:#22204a; border:1px solid var(--border); border-radius:999px; padding:6px 12px; font-size:12px}
+
+/* QR 크게 */
+.qr-wrap{display:flex; align-items:center; gap:18px; flex-wrap:wrap; justify-content:center}
+.qr-box img{width:var(--qr-size); height:var(--qr-size); border-radius:12px; background:#fff}
+.qr-cap{font-size:13px; color:var(--muted); text-align:center}
+.qr-mini{font-size:11px; color:#aab2d9; text-align:center}
+
+/* 버튼 */
+.btn{display:inline-block; padding:10px 16px; border-radius:12px; font-weight:800; text-decoration:none}
+.primary{background:linear-gradient(135deg,#ffd84d,#ffb84d); color:#2b1e05; border:1px solid rgba(0,0,0,.06)}
+.ghost{background:#221a42; color:#fff; border:1px solid var(--border)}
+.btn + .btn{margin-left:8px}
+
+/* 하단 */
+footer{text-align:center; color:var(--muted); font-size:12px; margin:34px 0 20px}
+
+/* 설치 FAB 아이콘 (beforeinstallprompt 발생 시 노출) */
+.install-fab{
+  position:fixed; right:16px; bottom:18px; z-index:1100;
+  width:54px; height:54px; border-radius:50%;
+  display:none; align-items:center; justify-content:center;
+  background:linear-gradient(135deg,#ffd84d,#ffb84d); color:#2b1e05;
+  box-shadow:0 10px 26px rgba(0,0,0,.35); font-weight:900; font-size:22px;
+}
+
+/* 반응형 */
+@media (max-width:600px){
+  h1{font-size:28px}
+}
 </style>
 </head>
 <body>
 
-<div class="lang-select">
-  <select>
-    <option selected>🇺🇸 English</option>
-    <option>🇰🇷 Korean</option>
-    <option>🇨🇳 Chinese</option>
-    <option>🇯🇵 Japanese</option>
-    <option>🇫🇷 French</option>
-    <option>🇩🇪 German</option>
+<!-- 언어 드롭다운 (EN 기본, 우크라이나 1번) -->
+<div class="lang" aria-label="Language">
+  <span>🌐</span>
+  <select id="langSelect">
+    <option value="uk">🇺🇦 Українська</option>
+    <option value="en" selected>🇺🇸 English</option>
+    <option value="ko">🇰🇷 한국어</option>
+    <option value="zh">🇨🇳 简体中文</option>
+    <option value="ja">🇯🇵 日本語</option>
+    <option value="es">🇪🇸 Español</option>
+    <option value="ru">🇷🇺 Русский</option>
+    <option value="fr">🇫🇷 Français</option>
+    <option value="de">🇩🇪 Deutsch</option>
+    <option value="ar">🇸🇦 العربية</option>
+    <option value="hi">🇮🇳 हिन्दी</option>
+    <option value="pt">🇵🇹 Português</option>
+    <option value="vi">🇻🇳 Tiếng Việt</option>
   </select>
 </div>
 
 <header>
-  <div class="logo">PiWorldBank</div>
-  <div class="subtitle">ONE WORLD ONE PI ONE FUTURE</div>
-  <div class="people">People, not profit</div>
+  <div class="logo">π</div>
+  <h1 id="appTitle">PiWorldBank</h1>
+  <div class="tagline" id="tagline">ONE WORLD ONE PI ONE FUTURE</div>
+  <div class="people" id="people">People, not profit</div>
 </header>
 
-<!-- 6개 기능 -->
+<!-- 6개 기능 (테두리/그림자) -->
 <div class="services">
-  <div class="service-card"><h3>UBI</h3><p>Universal Basic Income Rewards</p></div>
-  <div class="service-card"><h3>Payments</h3><p>Pi-based Transfers & Payments</p></div>
-  <div class="service-card"><h3>Staking</h3><p><b>31.4% APY</b> Stable Pi Staking</p></div>
-  <div class="service-card"><h3>Rewards</h3><p>Community Participation Benefits</p></div>
-  <div class="service-card"><h3>Support</h3><p>Help Desk for All Users</p></div>
-  <div class="service-card"><h3>FAQ</h3><p>Policy · Terms · Inquiry</p></div>
+  <a class="card-tile"><b>UBI</b><span id="tile1">Basic income rewards</span></a>
+  <a class="card-tile"><b>Payments</b><span id="tile2">Pay · Transfer</span></a>
+  <a class="card-tile"><b>Staking</b><span id="tile3"><strong>31.4% APY</strong> (demo)</span></a>
+  <a class="card-tile"><b>Rewards</b><span id="tile4">Engagement rewards</span></a>
+  <a class="card-tile"><b>Support</b><span id="tile5">Help center</span></a>
+  <a class="card-tile" href="#faq"><b>FAQ</b><span id="tile6">Terms · Policy · Contact</span></a>
 </div>
 
-<!-- QR -->
-<section class="section">
-  <h3>One-Touch QR</h3>
-  <div class="qr-box">
-    <img src="assets/qr-hyekong.png" alt="One-Touch QR (Pi Browser)">
+<!-- QR (크게) + 원터치 실행/설치 -->
+<section class="section" id="qrSection">
+  <div class="head">
+    <h3 id="qrTitle">One-Touch QR</h3>
+    <div class="pill" id="qrPill">Pi Browser</div>
   </div>
-  <p>Scan with Pi Browser to open<br>
-  <small>https://ljw2358.github.io/piworldbank_2025</small></p>
-  <a id="btnOneTouch" class="button primary" href="#">▶ One-Touch Launch</a>
-</section>
-
-<!-- Token & Swap -->
-<section class="section">
-  <h3>Swapping & Token (PWB)</h3>
-  <div>
-    <p><b>Token (PWB)</b></p>
-    <ul>
-      <li>Utility-centric design (fees, rewards, governance)</li>
-      <li>Phased opening aligned with security & KYC policy</li>
-      <li>Liquidity and lock/vesting roadmap documented</li>
-    </ul>
-    <a class="button primary" href="#">Whitepaper</a>
-    <a class="button" href="#">Tokenomics</a>
+  <div class="qr-wrap">
+    <div class="qr-box">
+      <!-- QR 이미지 교체는 여기 (파일만 갈아끼워도 OK) -->
+      <img src="assets/qr-hyekong.png" alt="One-Touch QR (Pi Browser)"/>
+    </div>
+    <div>
+      <div class="qr-cap" id="qrCaption">Scan with Pi Browser to open.</div>
+      <div class="qr-mini" id="qrMini">https://ljw2358.github.io/piworldbank_2025</div>
+    </div>
   </div>
-  <div style="margin-top:16px;">
-    <p><b>Swap</b></p>
-    <ul>
-      <li>Prepare for Pi ↔ PWB swap function</li>
-      <li>Launch and pool features coming soon</li>
-      <li>Transparent fees and safety-focused liquidity</li>
-    </ul>
-    <a class="button primary" href="#">Launch Swap</a>
-    <a class="button" href="#">Pool / LP</a>
+  <div style="text-align:center; margin-top:12px">
+    <a id="btnOneTouch" class="btn primary" href="#">▶ One-Touch Launch</a>
+    <a id="btnInstall" class="btn ghost" href="#" style="display:none">⬇ Add to Home</a>
   </div>
 </section>
 
-<!-- Media -->
-<section class="section">
-  <h3>Media</h3>
-  <div>
-    <p>YouTube Preview</p>
-    <a class="button primary" href="https://www.youtube.com/@딱봐도혜공" target="_blank">Open YouTube</a>
-    <a class="button" href="https://www.youtube.com/@딱봐도혜공/playlists" target="_blank">Top Playlist</a>
+<!-- Token & Swap (요약 유지) -->
+<section class="section" id="swap">
+  <div class="head">
+    <h3 id="swapTitle">Swapping & Token (PWB)</h3>
+    <div class="pill" id="swapPill">π ↔ PWB · Docs</div>
   </div>
-  <div style="margin-top:18px;">
-    <p>TikTok Preview</p>
-    <a class="button primary" href="https://www.tiktok.com/@worldpibank" target="_blank">Open TikTok</a>
-    <a class="button" href="https://www.tiktok.com/@worldpibank/video" target="_blank">Latest Short</a>
-  </div>
-</section>
-
-<!-- FAQ -->
-<section class="section">
-  <h3>FAQ (Terms & Contact)</h3>
-  <ul>
-    <li><b>Terms of Use</b> — This is a demo web app for Pi Browser demonstration.</li>
-    <li><b>Privacy Policy</b> — No personal data is stored or shared externally.</li>
-    <li><b>Contact</b> — ljw2358@gmail.com / ljw2358@naver.com</li>
+  <ul id="tokenList">
+    <li>Utility-centric design (fees, rewards, governance)</li>
+    <li>Phased opening aligned with security & KYC policy</li>
+    <li>Liquidity and lock/vesting roadmap documented</li>
   </ul>
 </section>
 
-<footer>© 2025 PiWorldBank · Built for everyday Pioneers</footer>
+<!-- Media (버튼 이동만 유지) -->
+<section class="section" id="media">
+  <div class="head">
+    <h3 id="mediaTitle">Media</h3>
+    <div class="pill">YouTube · TikTok</div>
+  </div>
+  <div style="text-align:center">
+    <a class="btn primary" id="yt" href="https://www.youtube.com/@%EB%94%B1%EB%B4%90%EB%8F%84%ED%98%9C%EA%B3%B5" target="_blank" rel="noopener">Open YouTube</a>
+    <a class="btn ghost" id="ytTop" href="https://www.youtube.com/@%EB%94%B1%EB%B4%90%EB%8F%84%ED%98%9C%EA%B3%B5/playlists" target="_blank" rel="noopener">Top Playlist</a>
+    <a class="btn primary" id="tt" href="https://www.tiktok.com/@worldpibank" target="_blank" rel="noopener">Open TikTok</a>
+    <a class="btn ghost" id="ttLatest" href="https://www.tiktok.com/@worldpibank/video" target="_blank" rel="noopener">Latest Short</a>
+  </div>
+</section>
+
+<!-- FAQ (영문 표기) -->
+<section class="section" id="faq">
+  <div class="head">
+    <h3 id="faqTitle">FAQ</h3>
+    <div class="pill" id="faqPill">Terms · Policy · Contact</div>
+  </div>
+  <ul style="margin:0">
+    <li id="faq1"><b>Terms of Use</b> — Demo web app for Pi Browser.</li>
+    <li id="faq2"><b>Privacy Policy</b> — No external sharing; minimal logs.</li>
+    <li id="faq3"><b>Contact</b> — ljw2358@gmail.com / ljw2358@naver.com</li>
+  </ul>
+</section>
+
+<footer>© <span id="year"></span> PiWorldBank · Built for everyday Pioneers</footer>
+
+<!-- 설치 FAB (beforeinstallprompt 이벤트 시 자동 노출) -->
+<button id="installFab" class="install-fab" title="Add to Home">⬇</button>
 
 <script>
+/* ===== 기본 세팅 ===== */
+document.getElementById('year').textContent = new Date().getFullYear();
+
+/* ===== One-Touch 실행 (Pi Browser 감지) ===== */
 (function(){
-  const TARGET_URL="https://ljw2358.github.io/piworldbank_2025/";
-  const ua=(navigator.userAgent||"").toLowerCase();
-  const isPi=ua.includes("pibrowser");
-  const btn=document.getElementById("btnOneTouch");
-  if(btn){
-    btn.addEventListener("click",ev=>{
-      ev.preventDefault();
-      if(isPi){ window.location.href=TARGET_URL; }
-      else{
-        window.open(TARGET_URL,"_blank","noopener");
-        toast("💡 Tip: Open directly in Pi Browser for instant access.");
-      }
-    });
-  }
-  function toast(msg){
+  const TARGET_URL = "https://ljw2358.github.io/piworldbank_2025/";
+  const ua = (navigator.userAgent || "").toLowerCase();
+  const isPi = ua.includes("pibrowser");
+  const btn = document.getElementById("btnOneTouch");
+  if (btn) btn.addEventListener("click", (e)=>{
+    e.preventDefault();
+    if (isPi) { location.href = TARGET_URL; }
+    else { window.open(TARGET_URL, "_blank", "noopener"); tip("Tip: Faster in Pi Browser."); }
+  });
+
+  function tip(msg){
     const t=document.createElement("div");
     t.textContent=msg;
     Object.assign(t.style,{
-      position:"fixed",left:"50%",bottom:"28px",transform:"translateX(-50%)",
+      position:"fixed",left:"50%",bottom:"26px",transform:"translateX(-50%)",
       background:"rgba(0,0,0,.75)",color:"#fff",padding:"10px 14px",
       borderRadius:"10px",fontSize:"13px",zIndex:2000
     });
     document.body.appendChild(t);
-    setTimeout(()=>t.remove(),2600);
+    setTimeout(()=>t.remove(),2400);
   }
 })();
+
+/* ===== PWA 설치(원터치 아이콘 생성) =====
+   - manifest.json 필요 (루트)
+   - 서비스워커 sw.js 등록 권장 (없어도 버튼은 안내용으로 표시 가능)
+*/
+if ('serviceWorker' in navigator) {
+  // sw.js가 있으면 등록(없어도 에러 무시)
+  navigator.serviceWorker.register('./sw.js').catch(()=>{});
+}
+
+let deferredPrompt = null;
+const btnInstall = document.getElementById('btnInstall');
+const installFab = document.getElementById('installFab');
+
+window.addEventListener('beforeinstallprompt', (e)=>{
+  e.preventDefault();
+  deferredPrompt = e;
+  if (btnInstall) btnInstall.style.display = 'inline-block'; // QR 섹션 버튼 노출
+  if (installFab) installFab.style.display = 'flex'; // 우하단 FAB 노출
+});
+
+function doInstall(e){
+  e && e.preventDefault();
+  if (!deferredPrompt) { alert('Install not available in this browser yet.'); return; }
+  deferredPrompt.prompt();
+  deferredPrompt.userChoice.finally(()=>{ deferredPrompt = null; });
+}
+btnInstall?.addEventListener('click', doInstall);
+installFab?.addEventListener('click', doInstall);
+
+/* ===== 13개 언어 I18N ===== */
+const I18N = {
+  en:{tag:"ONE WORLD ONE PI ONE FUTURE", ppl:"People, not profit",
+      t1:"Basic income rewards", t2:"Pay · Transfer", t3:"31.4% APY (demo)",
+      t4:"Engagement rewards", t5:"Help center", t6:"Terms · Policy · Contact",
+      qrT:"One-Touch QR", qrP:"Pi Browser", qrC:"Scan with Pi Browser to open.",
+      swapT:"Swapping & Token (PWB)", swapP:"π ↔ PWB · Docs",
+      mediaT:"Media", faqT:"FAQ", faqP:"Terms · Policy · Contact",
+      f1:"Terms of Use — Demo web app for Pi Browser.",
+      f2:"Privacy Policy — No external sharing; minimal logs.",
+      f3:"Contact — ljw2358@gmail.com / ljw2358@naver.com", dir:"ltr"},
+  uk:{tag:"ОДИН СВІТ ОДНА PI ОДНЕ МАЙБУТНЄ", ppl:"Люди, не прибуток",
+      t1:"Базовий дохід", t2:"Платежі · Переказ", t3:"31.4% APY (демо)",
+      t4:"Винагороди за участь", t5:"Підтримка", t6:"Умови · Політика · Контакти",
+      qrT:"One-Touch QR", qrP:"Pi Browser", qrC:"Скануйте у Pi Browser, щоб відкрити.",
+      swapT:"Свопінг і токен (PWB)", swapP:"π ↔ PWB · Документи",
+      mediaT:"Медіа", faqT:"FAQ", faqP:"Умови · Політика · Контакти",
+      f1:"Умови використання — демо-додаток для Pi Browser.",
+      f2:"Політика конфіденційності — без зовнішнього поширення.",
+      f3:"Контакти — ljw2358@gmail.com / ljw2358@naver.com", dir:"ltr"},
+  ko:{tag:"ONE WORLD ONE PI ONE FUTURE", ppl:"People, not profit",
+      t1:"기본소득 리워드", t2:"송금 · 결제", t3:"31.4% APY (데모)",
+      t4:"참여 보상", t5:"고객센터", t6:"이용약관 · 정책 · 문의",
+      qrT:"원터치 QR", qrP:"Pi 브라우저", qrC:"Pi 브라우저로 스캔하여 접속",
+      swapT:"스와핑 및 토큰 (PWB)", swapP:"π ↔ PWB · 문서",
+      mediaT:"미디어", faqT:"FAQ", faqP:"이용약관 · 정책 · 문의",
+      f1:"이용약관 — Pi 브라우저 데모 웹앱입니다.",
+      f2:"개인정보처리방침 — 외부 공유 없음, 로그 최소화.",
+      f3:"문의 — ljw2358@gmail.com / ljw2358@naver.com", dir:"ltr"},
+  zh:{tag:"同一个世界 同一个PI 同一个未来", ppl:"以人为本，并非逐利",
+      t1:"基本收入奖励", t2:"支付 · 转账", t3:"31.4% APY（演示）",
+      t4:"参与奖励", t5:"支持中心", t6:"条款 · 政策 · 联系",
+      qrT:"一键二维码", qrP:"Pi 浏览器", qrC:"使用 Pi 浏览器扫码打开。",
+      swapT:"兑换与代币 (PWB)", swapP:"π ↔ PWB · 文档",
+      mediaT:"媒体", faqT:"常见问题", faqP:"条款 · 政策 · 联系",
+      f1:"使用条款 — 面向 Pi 浏览器的演示应用。",
+      f2:"隐私政策 — 不对外分享，最小化日志。",
+      f3:"联系 — ljw2358@gmail.com / ljw2358@naver.com", dir:"ltr"},
+  ja:{tag:"ONE WORLD ONE PI ONE FUTURE", ppl:"人々のために、利益のためではない",
+      t1:"ベーシックインカム", t2:"送金 · 決済", t3:"31.4% APY（デモ）",
+      t4:"リワード", t5:"サポート", t6:"規約 · 方針 · お問い合わせ",
+      qrT:"ワンタッチQR", qrP:"Pi Browser", qrC:"Pi Browserでスキャンして開く。",
+      swapT:"スワップとトークン (PWB)", swapP:"π ↔ PWB · ドキュメント",
+      mediaT:"メディア", faqT:"FAQ", faqP:"規約 · 方針 · 連絡先",
+      f1:"利用規約 — Pi Browser向けデモ。",
+      f2:"プライバシー — 外部共有なし、ログ最小化。",
+      f3:"連絡先 — ljw2358@gmail.com / ljw2358@naver.com", dir:"ltr"},
+  es:{tag:"UN MUNDO UNA PI UN FUTURO", ppl:"Personas, no lucro",
+      t1:"Renta básica", t2:"Pago · Transferencia", t3:"31.4% APY (demo)",
+      t4:"Recompensas", t5:"Soporte", t6:"Términos · Política · Contacto",
+      qrT:"QR de un toque", qrP:"Pi Browser", qrC:"Escanee con Pi Browser para abrir.",
+      swapT:"Intercambio y Token (PWB)", swapP:"π ↔ PWB · Docs",
+      mediaT:"Medios", faqT:"FAQ", faqP:"Términos · Política · Contacto",
+      f1:"Términos — App demo para Pi Browser.",
+      f2:"Privacidad — Sin compartir; logs mínimos.",
+      f3:"Contacto — ljw2358@gmail.com / ljw2358@naver.com", dir:"ltr"},
+  ru:{tag:"ОДИН МИР ОДНА PI ОДНО БУДУЩЕЕ", ppl:"Люди, не прибыль",
+      t1:"Базовый доход", t2:"Платежи · Перевод", t3:"31.4% APY (демо)",
+      t4:"Награды за участие", t5:"Поддержка", t6:"Условия · Политика · Контакты",
+      qrT:"QR одним касанием", qrP:"Pi Browser", qrC:"Сканируйте в Pi Browser, чтобы открыть.",
+      swapT:"Обмен и токен (PWB)", swapP:"π ↔ PWB · Документы",
+      mediaT:"Медиа", faqT:"FAQ", faqP:"Условия · Политика · Контакты",
+      f1:"Условия — демо-приложение для Pi Browser.",
+      f2:"Конфиденциальность — без передачи вовне.",
+      f3:"Контакты — ljw2358@gmail.com / ljw2358@naver.com", dir:"ltr"},
+  fr:{tag:"UN MONDE UNE PI UN AVENIR", ppl:"Les gens, pas le profit",
+      t1:"Revenu de base", t2:"Paiement · Transfert", t3:"31.4% APY (démo)",
+      t4:"Récompenses", t5:"Support", t6:"Conditions · Politique · Contact",
+      qrT:"QR en un geste", qrP:"Pi Browser", qrC:"Scannez avec Pi Browser pour ouvrir.",
+      swapT:"Échange & Jeton (PWB)", swapP:"π ↔ PWB · Docs",
+      mediaT:"Médias", faqT:"FAQ", faqP:"Conditions · Politique · Contact",
+      f1:"Conditions — Application démo pour Pi Browser.",
+      f2:"Confidentialité — Aucune diffusion externe.",
+      f3:"Contact — ljw2358@gmail.com / ljw2358@naver.com", dir:"ltr"},
+  de:{tag:"EINE WELT EINE PI EINE ZUKUNFT", ppl:"Menschen, nicht Profit",
+      t1:"Grundeinkommen", t2:"Zahlung · Überweisung", t3:"31.4% APY (Demo)",
+      t4:"Rewards", t5:"Support", t6:"Bedingungen · Richtlinien · Kontakt",
+      qrT:"One-Touch-QR", qrP:"Pi Browser", qrC:"Mit Pi Browser scannen.",
+      swapT:"Swap & Token (PWB)", swapP:"π ↔ PWB · Docs",
+      mediaT:"Medien", faqT:"FAQ", faqP:"Bedingungen · Richtlinien · Kontakt",
+      f1:"Nutzungsbedingungen — Demo-Webapp für Pi Browser.",
+      f2:"Datenschutz — Keine externe Weitergabe.",
+      f3:"Kontakt — ljw2358@gmail.com / ljw2358@naver.com", dir:"ltr"},
+  ar:{tag:"عالم واحد، بي آي واحدة، مستقبل واحد", ppl:"الناس أولاً لا الأرباح",
+      t1:"دخل أساسي", t2:"دفع · تحويل", t3:"31.4% APY (تجريبي)",
+      t4:"مكافآت المشاركة", t5:"الدعم", t6:"الشروط · السياسة · التواصل",
+      qrT:"رمز QR بلمسة", qrP:"متصفح Pi", qrC:"امسح باستخدام متصفح Pi للفتح.",
+      swapT:"المبادلة والرمز (PWB)", swapP:"π ↔ PWB · مستندات",
+      mediaT:"وسائط", faqT:"الأسئلة الشائعة", faqP:"الشروط · السياسة · التواصل",
+      f1:"الشروط — تطبيق عرض لـ Pi Browser.",
+      f2:"الخصوصية — دون مشاركة خارجية، سجلات محدودة.",
+      f3:"التواصل — ljw2358@gmail.com / ljw2358@naver.com", dir:"rtl"},
+  hi:{tag:"वन वर्ल्ड वन पी वन फ्यूचर", ppl:"लोग, मुनाफा नहीं",
+      t1:"मूल आय रिवार्ड", t2:"भुगतान · ट्रांसफर", t3:"31.4% APY (डेमो)",
+      t4:"रिवार्ड्स", t5:"सपोर्ट", t6:"नियम · नीति · संपर्क",
+      qrT:"वन-टच QR", qrP:"Pi ब्राउज़र", qrC:"Pi Browser से स्कैन कर खोलें।",
+      swapT:"स्वैपिंग व टोकन (PWB)", swapP:"π ↔ PWB · दस्तावेज़",
+      mediaT:"मीडिया", faqT:"FAQ", faqP:"नियम · नीति · संपर्क",
+      f1:"नियम — Pi Browser के लिए डेमो वेबऐप।",
+      f2:"गोपनीयता — बाहरी साझा नहीं; न्यूनतम लॉग।",
+      f3:"संपर्क — ljw2358@gmail.com / ljw2358@naver.com", dir:"ltr"},
+  pt:{tag:"UM MUNDO UMA PI UM FUTURO", ppl:"Pessoas, não lucro",
+      t1:"Renda básica", t2:"Pagamento · Transferência", t3:"31.4% APY (demo)",
+      t4:"Recompensas", t5:"Suporte", t6:"Termos · Política · Contato",
+      qrT:"QR de um toque", qrP:"Pi Browser", qrC:"Escaneie com o Pi Browser para abrir.",
+      swapT:"Swap e Token (PWB)", swapP:"π ↔ PWB · Docs",
+      mediaT:"Mídia", faqT:"FAQ", faqP:"Termos · Política · Contato",
+      f1:"Termos — App demo para Pi Browser.",
+      f2:"Privacidade — Sem compartilhamento externo.",
+      f3:"Contato — ljw2358@gmail.com / ljw2358@naver.com", dir:"ltr"},
+  vi:{tag:"MỘT THẾ GIỚI MỘT PI MỘT TƯƠNG LAI", ppl:"Vì con người, không vì lợi nhuận",
+      t1:"Thu nhập cơ bản", t2:"Thanh toán · Chuyển", t3:"31.4% APY (demo)",
+      t4:"Phần thưởng", t5:"Hỗ trợ", t6:"Điều khoản · Chính sách · Liên hệ",
+      qrT:"QR một chạm", qrP:"Trình duyệt Pi", qrC:"Quét bằng Pi Browser để mở.",
+      swapT:"Hoán đổi & Token (PWB)", swapP:"π ↔ PWB · Tài liệu",
+      mediaT:"Truyền thông", faqT:"FAQ", faqP:"Điều khoản · Chính sách · Liên hệ",
+      f1:"Điều khoản — Ứng dụng demo cho Pi Browser.",
+      f2:"Quyền riêng tư — Không chia sẻ ra ngoài.",
+      f3:"Liên hệ — ljw2358@gmail.com / ljw2358@naver.com", dir:"ltr"}
+};
+
+function applyLang(code){
+  const t = I18N[code] || I18N.en;
+  document.documentElement.lang = code;
+  document.body.dir = t.dir || 'ltr';
+  // 헤더
+  document.getElementById('tagline').textContent = t.tag;
+  document.getElementById('people').textContent = t.ppl;
+  // 타일
+  document.getElementById('tile1').textContent = t.t1;
+  document.getElementById('tile2').textContent = t.t2;
+  document.getElementById('tile3').textContent = t.t3;
+  document.getElementById('tile4').textContent = t.t4;
+  document.getElementById('tile5').textContent = t.t5;
+  document.getElementById('tile6').textContent = t.t6;
+  // QR/Swap/Media/FAQ
+  document.getElementById('qrTitle').textContent = t.qrT;
+  document.getElementById('qrPill').textContent = t.qrP;
+  document.getElementById('qrCaption').textContent = t.qrC;
+  document.getElementById('swapTitle').textContent = t.swapT;
+  document.getElementById('swapPill').textContent = t.swapP;
+  document.getElementById('mediaTitle').textContent = t.mediaT;
+  document.getElementById('faqTitle').textContent = t.faqT;
+  document.getElementById('faqPill').textContent = t.faqP;
+  document.getElementById('faq1').innerHTML = "<b>"+t.f1.split(" — ")[0]+"</b> — "+t.f1.split(" — ")[1];
+  document.getElementById('faq2').innerHTML = "<b>"+t.f2.split(" — ")[0]+"</b> — "+t.f2.split(" — ")[1];
+  document.getElementById('faq3').innerHTML = "<b>"+t.f3.split(" — ")[0]+"</b> — "+t.f3.split(" — ")[1];
+}
+const selectEl = document.getElementById('langSelect');
+applyLang('en'); selectEl.value = 'en';
+selectEl.addEventListener('change', e=>applyLang(e.target.value));
 </script>
 </body>
 </html>
