@@ -203,6 +203,82 @@
     document.querySelectorAll('.card').forEach(el=>{
       el.addEventListener('click', ()=> { const key=el.getAttribute('data-action'); if(actions[key]) actions[key](); });
     });
-  </script>
+  </script
+  <script>
+/* ===== USD 표시 완전 자동 스니펫 =====
+ * 붙여넣기 위치: </body> 바로 위
+ * 바꿀 수 있는 값:
+ * USD_PER_PI : 1 PI의 달러 환산가
+ * PWB_PER_PI : 1 PI가 몇 PWB인지(기본 100)
+ */
+(function () {
+  const USD_PER_PI = 288; // ← 필요시 여기 숫자만 바꾸면 됨
+  const PWB_PER_PI = 100; // 1 PI = 100 PWB 가정
+
+  // 스타일(가볍게)
+  const style = document.createElement('style');
+  style.textContent = `
+    .usd-badge{font-size:.95rem;opacity:.9;margin-top:.25rem}
+    .usd-badge small{opacity:.7;font-weight:500}
+  `;
+  document.head.appendChild(style);
+
+  // 카드마다 USD 표시 업데이트
+  function updateCardUSD(card){
+    // 이미 붙어 있으면 엘리먼트 재사용
+    let badge = card.querySelector('.usd-badge');
+    if(!badge){
+      badge = document.createElement('div');
+      badge.className = 'usd-badge';
+      card.appendChild(badge);
+    }
+
+    // 1) 단위 추정: data-unit 속성 > 텍스트 스캔(PWB/PI)
+    const unit =
+      (card.getAttribute('data-unit') || card.dataset?.unit || '')
+        .toUpperCase() || (/PWB/i.test(card.textContent) ? 'PWB' : 'PI');
+
+    // 2) 수량 추정: data-qty > 안쪽에 흔한 클래스/속성 > 텍스트 첫 숫자
+    let qtyStr =
+      card.getAttribute('data-qty') ||
+      card.querySelector('[data-qty]')?.getAttribute('data-qty') ||
+      card.querySelector('.amount,.qty,.value,strong,b')?.textContent ||
+      card.textContent;
+
+    if(!qtyStr){ badge.textContent = ''; return; }
+
+    const m = String(qtyStr).replace(/,/g,'').match(/(\d+(\.\d+)?)/);
+    if(!m){ badge.textContent = ''; return; }
+
+    const qty = parseFloat(m[1]);
+
+    // 3) USD 환산
+    let usdPerUnit = USD_PER_PI; // 기본: PI
+    if(unit === 'PWB') usdPerUnit = USD_PER_PI / PWB_PER_PI;
+
+    const usd = qty * usdPerUnit;
+
+    // 4) 출력
+    const fmt = n => n.toLocaleString(undefined,{maximumFractionDigits:2});
+    badge.innerHTML = `≈ <b>$${fmt(usd)}</b> <small>USD</small>`;
+  }
+
+  // 초기 렌더 + 클릭 갱신(카드 열고 닫을 때도 업데이트)
+  function init(){
+    document.querySelectorAll('.card').forEach(card=>{
+      updateCardUSD(card);
+      card.addEventListener('click', ()=> updateCardUSD(card));
+      // 값이 동적으로 변하는 경우를 대비해 변화 감지(optional)
+      const mo = new MutationObserver(()=> updateCardUSD(card));
+      mo.observe(card, {subtree:true, childList:true, characterData:true});
+    });
+  }
+
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', init);
+  } else { init(); }
+})();
+</script>  
 </body>
 </html>
+
