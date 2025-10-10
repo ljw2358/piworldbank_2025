@@ -1,82 +1,142 @@
-/* ===== Base ===== */
-:root{
-  --bg:#0e0526; --panel:#1c0f3d; --panel2:#20124a;
-  --text:#fff; --muted:#b5b5c9; --accent:#a67cff; --accent2:#ffcf7f;
-  --radius:20px;
+root{
+  --bg:#0A0720;
+  --bg2:#130B2E;
+  --panel:#1C0E35;
+  --card:#241046;
+  --text:#F5F2FF;
+  --muted:#C9BFF0;
+  --accent:#E2C24F;
+  --ok:#63E6BE;
+  --warn:#FFD166;
+  --neon:#A98BFF;
 }
 *{box-sizing:border-box}
 html,body{height:100%}
 body{
-  margin:0; color:var(--text); background:radial-gradient(80% 120% at 50% 0%, #1b0a3b 0%, #0e0526 60%) fixed;
-  font-family: system-ui, "Pretendard", "Noto Sans KR", "Apple SD Gothic Neo", Arial, sans-serif;
-  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  margin:0;
+  font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,"Apple Color Emoji","Segoe UI Emoji";
+  color:var(--text);
+  overflow-x:hidden;
 }
 
-/* ===== Layout ===== */
-.container{max-width:980px; margin:0 auto; padding:24px 16px}
-.section{background:linear-gradient(180deg, var(--panel) 0%, var(--panel2) 100%);
-  border:1px solid rgba(255,255,255,.08); border-radius:var(--radius);
-  box-shadow:0 8px 24px rgba(0,0,0,.25); padding:20px; margin:16px 0}
-
-/* ===== Header ===== */
-.header{position:sticky; top:0; z-index:20; backdrop-filter:blur(8px);
-  background:rgba(14,5,38,.65); border-bottom:1px solid rgba(255,255,255,.08)}
-.header-inner{display:flex; align-items:center; gap:12px; padding:12px 16px}
-.logo{width:32px; height:32px; border-radius:9px; background:#6b46c1; display:grid; place-items:center; font-weight:800}
-.title{font-size:20px; font-weight:800; letter-spacing:.2px}
-.badge{margin-left:auto; font-size:12px; color:#e5d8ff; opacity:.9}
-.langbar{display:flex; align-items:center; gap:8px}
-.langbar select{
-  appearance:none; background:#2a184e; color:#fff; border:1px solid rgba(255,255,255,.15);
-  padding:8px 12px; border-radius:12px; font-weight:600
+/* Animated cosmic background */
+.bg-animated{
+  background: radial-gradient(1200px 600px at 20% -10%, #402373 0%, var(--bg2) 40%, var(--bg) 100%);
+  background-size: 160% 160%;
+  animation: bgshift 18s ease-in-out infinite;
+}
+@keyframes bgshift{
+  0%{background-position: 0% 30%}
+  50%{background-position: 100% 70%}
+  100%{background-position: 0% 30%}
 }
 
-/* ===== Buttons ===== */
-.btn{display:inline-flex; align-items:center; justify-content:center; gap:8px;
-  padding:12px 16px; border-radius:16px; border:1px solid rgba(255,255,255,.1);
-  background:linear-gradient(135deg, rgba(166,124,255,.35), rgba(255,207,127,.25));
-  color:#fff; font-weight:700; text-decoration:none; transition:.18s ease; box-shadow:0 6px 18px rgba(0,0,0,.25)}
-.btn:hover{transform:translateY(-1px); box-shadow:0 10px 24px rgba(0,0,0,.3)}
-.btn.ghost{background:transparent}
-.btn-row{display:flex; flex-wrap:wrap; gap:12px}
-
-/* ===== Feature cards ===== */
-.grid{display:grid; grid-template-columns:repeat(2,1fr); gap:16px}
-@media (max-width:720px){.grid{grid-template-columns:1fr}}
-.card{background:linear-gradient(180deg, #23124c, #1b0f3e);
-  border:1px solid rgba(255,255,255,.08); border-radius:18px; padding:22px;
-  box-shadow:0 10px 24px rgba(0,0,0,.25)}
-.card h3{margin:0 0 8px; font-size:22px}
-.card p{margin:0; color:var(--muted)}
-
-/* ===== Media block (YT/TikTok) ===== */
-.media h2{margin:0 0 12px; font-size:26px}
-.media .btn-row{margin-bottom:12px}
-.video{
-  width:100%; aspect-ratio:16/9; border-radius:14px; overflow:hidden;
-  border:1px solid rgba(255,255,255,.1); background:#12092d
+/* Glass header/footer */
+.glass{
+  background: rgba(255,255,255,.05);
+  backdrop-filter: blur(10px);
+  border:1px solid rgba(255,255,255,.08);
 }
-video{width:100%; height:100%; display:block}
 
-/* ===== Chat / Customer Center ===== */
-.chat{display:grid; gap:10px}
-.chat .bubble{max-width:92%; padding:12px 14px; border-radius:16px; line-height:1.45}
-.chat .bubble.admin{background:#2a184e; border:1px solid rgba(255,255,255,.08)}
-.chat .row{display:flex; gap:10px}
-.chat input{
-  flex:1; padding:12px 14px; border-radius:14px; border:1px solid rgba(255,255,255,.12);
-  background:#1b0f3e; color:#fff; outline:none
+.app-header{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px 18px;position:sticky;top:0;z-index:10;
 }
-.chat .send{min-width:92px}
+.brand{display:flex;align-items:center;gap:14px}
+.logo{width:44px;height:44px;border-radius:10px}
+.title-strong{margin:0;font-size:22px;font-weight:900;letter-spacing:.3px}
+.subtitle{margin:2px 0 0;color:var(--muted);font-weight:600}
 
-/* ===== Language Pills (UK EN KO …) ===== */
-.pills{display:flex; flex-wrap:wrap; gap:8px}
-.pill{padding:8px 10px; border-radius:14px; font-weight:700; font-size:12px;
-  background:#2a184e; color:#cfc6ff; border:1px solid rgba(255,255,255,.08)}
-.pill.active{background:linear-gradient(135deg,#a67cff,#ffcf7f); color:#2b174e}
+/* Language */
+.lang-select select{
+  background:var(--card);color:var(--text);border:1px solid rgba(255,255,255,.15);
+  padding:10px 12px;border-radius:12px;font-weight:700
+}
 
-/* ===== Footer ===== */
-.footer{display:flex; justify-content:space-between; gap:10px; align-items:center; padding:16px 0 28px}
-.footer small{color:var(--muted)}
-/* utility */
-.mt-8{margin-top:8px} .mt-16{margin-top:16px} .mt-24{margin-top:24px}
+/* HERO */
+.hero{
+  text-align:center;max-width:1100px;margin:28px auto 8px;padding:10px 16px;
+  animation: fadeIn 0.8s ease both .05s;
+}
+.slogan{
+  margin:0 0 8px;
+  font-size: clamp(28px, 4.8vw, 56px);
+  font-weight: 1000;
+  letter-spacing:.6px;
+  line-height:1.08;
+  text-shadow: 0 0 18px rgba(169,139,255,.45);
+}
+.neon{
+  background: linear-gradient(90deg,#fff, #c9bff0, #b399ff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 0 10px rgba(167,134,255,.25));
+}
+.hero-lead{
+  margin:8px auto 16px;max-width:900px;color:var(--muted);font-size:clamp(14px,1.6vw,18px)
+}
+.hero-cta{display:flex;gap:10px;justify-content:center}
+.cta{
+  padding:12px 18px;border-radius:14px;border:1px solid rgba(255,255,255,.15);font-weight:900;
+  transition:.25s transform,.25s box-shadow;
+}
+.cta.big{font-size:16px}
+.cta:not(.ghost){background:var(--accent);color:#1a1200}
+.cta.ghost{background:transparent;color:var(--text)}
+.cta:hover{transform:translateY(-2px);box-shadow:0 10px 26px rgba(0,0,0,.35)}
+
+/* MAIN */
+.container{max-width:1100px;margin:0 auto;padding:8px 16px 22px}
+.grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:12px 0 22px;
+}
+@media (max-width:780px){.grid{grid-template-columns:1fr}}
+
+.card{
+  background:linear-gradient(180deg,var(--card),#1B0D34);
+  border:1px solid rgba(255,255,255,.08);border-radius:18px;padding:18px;
+  cursor:pointer;transition:.25s transform,.25s box-shadow;
+  box-shadow:0 6px 18px rgba(0,0,0,.25);
+  min-height:126px;
+}
+.card.primary{outline:2px solid rgba(226,194,79,.5)}
+.card:hover{transform:translateY(-2px);box-shadow:0 10px 26px rgba(0,0,0,.35)}
+.card .icon{font-size:28px;margin-bottom:10px}
+.card .title{font-weight:900;margin-bottom:6px;font-size:17px}
+.card .desc{margin:0;color:var(--muted);font-size:14.5px;line-height:1.36}
+
+.panel{
+  display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:8px 0 26px;
+}
+@media (max-width:900px){.panel{grid-template-columns:1fr}}
+.panel-left,.panel-right{
+  background:var(--panel);border:1px solid rgba(255,255,255,.08);border-radius:18px;padding:18px
+}
+.panel-title{margin:0 0 8px;font-weight:900}
+.panel-text{margin:0 0 10px;color:var(--muted)}
+.qr{width:160px;height:160px;border-radius:10px;border:1px solid rgba(255,255,255,.08);background:#000;object-fit:cover}
+.bullets{margin:8px 0 14px 18px}
+.bullets li{margin:6px 0;color:var(--muted)}
+
+/* Status */
+.status{display:flex;flex-wrap:wrap;gap:18px;align-items:center;margin:6px 0 34px}
+.status-item{display:flex;align-items:center;gap:8px;color:var(--muted)}
+.dot{width:11px;height:11px;border-radius:50%}
+.dot.online{background:var(--ok)}
+.dot.shield{background:#7AA2F7}
+.dot.chain{background:#B388EB}
+
+/* Footer */
+.footer{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px 16px;margin-top:8px
+}
+.footer a{color:var(--muted);text-decoration:none;margin-left:14px}
+.footer a:hover{text-decoration:underline}
+
+/* Effects */
+.glow{filter: drop-shadow(0 0 10px rgba(175,140,255,.35))}
+.rise{animation: rise .6s ease both .12s}
+@keyframes rise{from{transform:translateY(8px);opacity:.0}to{transform:none;opacity:1}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
