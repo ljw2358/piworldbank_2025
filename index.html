@@ -3,18 +3,21 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>PiWorldBank — Web3 Digital Bank</title>
-  <meta name="description" content="PiWorldBank — Web3 Digital Bank for global pioneers. UBI, Payments, Staking, Rewards, Support." />
-  <link rel="manifest" href="manifest.json" />
-  <link rel="icon" href="assets/icons/icon-192.png" />
-  <link rel="apple-touch-icon" href="assets/icons/icon-192.png" />
+  <title>PiWorldBank — Web3 Digital Bank v5</title>
+  <meta name="description" content="PiWorldBank v5 — Web3 Digital Bank for all humanity (UBI, Payments, Staking ≤15%, Rewards, Support, Multi-language)." />
+  <meta name="version" content="v5" />
+  <link rel="manifest" href="manifest.json?v5" />
+  <link rel="icon" href="assets/icons/icon-192.png?v5" />
+  <link rel="apple-touch-icon" href="assets/icons/icon-192.png?v5" />
   <meta name="theme-color" content="#2B1545" />
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css?v5" />
 </head>
+
 <body class="bg-animated">
+  <!-- PiWorldBank v5 build : 2025-10-10 -->
   <header class="app-header glass">
     <div class="brand">
-      <img src="assets/icons/icon-192.png" alt="PiWorldBank" class="logo glow" />
+      <img src="assets/icons/icon-192.png?v5" alt="PiWorldBank" class="logo glow" />
       <div class="titles">
         <h1 id="app_title" class="title-strong">PiWorldBank</h1>
         <p class="subtitle" id="tagline">The web3 digital bank for all humanity</p>
@@ -42,7 +45,7 @@
     </div>
   </header>
 
-  <!-- HERO: 웅장한 슬로건 -->
+  <!-- HERO Section -->
   <section class="hero">
     <h2 class="slogan neon">One World · One Pi · One Future</h2>
     <p class="hero-lead">
@@ -54,8 +57,8 @@
     </div>
   </section>
 
+  <!-- MAIN -->
   <main class="container">
-    <!-- 2x3 (or 1x6 on mobile) primary actions — UBI first -->
     <section class="grid rise">
       <button class="card primary" data-action="ubi">
         <div class="icon">🌍</div>
@@ -72,7 +75,7 @@
       <button class="card" data-action="stake">
         <div class="icon">📉</div>
         <div class="title" id="nav_stake">Staking</div>
-        <p class="desc" id="stake_desc">Stake Pi. ≤15% APY demo.</p>
+        <p class="desc" id="stake_desc">Stake Pi. ≤15% APY (demo).</p>
       </button>
 
       <button class="card" data-action="rewards">
@@ -94,12 +97,12 @@
       </button>
     </section>
 
-    <!-- QR & Demo block -->
+    <!-- QR + Demo -->
     <section class="panel">
       <div class="panel-left">
         <h3 id="qr_title" class="panel-title">One-Touch QR</h3>
-        <p id="qr_desc" class="panel-text">Scan in Pi Browser to open the app instantly.</p>
-        <img src="assets/images/qr-demo.png" alt="QR Demo" class="qr glow" />
+        <p id="qr_desc" class="panel-text">Scan in Pi Browser to open instantly.</p>
+        <img src="assets/images/qr-demo.png?v5" alt="QR Demo" class="qr glow" />
       </div>
       <div class="panel-right">
         <h3 id="demo_title" class="panel-title">Live Demo</h3>
@@ -111,7 +114,7 @@
       </div>
     </section>
 
-    <!-- Status -->
+    <!-- STATUS -->
     <section class="status">
       <div class="status-item"><span class="dot online"></span><span id="status_online">Ready</span></div>
       <div class="status-item"><span class="dot shield"></span><span id="status_security">Security hardened (demo)</span></div>
@@ -119,10 +122,11 @@
     </section>
   </main>
 
+  <!-- FOOTER -->
   <footer class="footer glass">
     <div class="left">
       <strong>PiWorldBank</strong>
-      <span>© 2025</span>
+      <span>© 2025 v5</span>
     </div>
     <div class="right">
       <a href="#" id="footer_terms">Terms</a>
@@ -131,7 +135,7 @@
     </div>
   </footer>
 
-  <script src="languages.js"></script>
-  <script src="script.js"></script>
+  <script src="languages.js?v5"></script>
+  <script src="script.js?v5"></script>
 </body>
 </html>
