@@ -1,285 +1,137 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="uk">
 <head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>PiWorldBank — The Web3 Digital Bank for All Humanity</title>
-  <meta name="theme-color" content="#3b0764"/>
-  <meta name="description" content="PiWorldBank — UBI, Remittance, Staking, Rewards, Swap, Support. PWA + Pi SDK ready.">
-  <style>
-    *{box-sizing:border-box}html,body{margin:0;padding:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:#0f0a1f;color:#f8f5ff}
-    a{color:inherit;text-decoration:none}
-    .topbar{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;background:#240046;border-bottom:1px solid #3b0764;position:sticky;top:0;z-index:50}
-    .brand{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
-    .logo{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;background:#3b0764;font-weight:800}
-    .brand-text h1{margin:0;font-size:18px;letter-spacing:.2px}
-    .tagline{margin:2px 0 0;opacity:.9;font-size:12px}
-    .actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
-    .btn{border:1px solid #6d28d9;background:transparent;padding:10px 14px;border-radius:12px;cursor:pointer;transition:.2s;font-weight:600}
-    .btn:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(109,40,217,.35)}
-    .btn.primary{background:#6d28d9}
-    .btn.small{padding:8px 10px;font-size:12px}
-    .hero{padding:32px 16px 8px;text-align:center;background:linear-gradient(180deg,#1a1036 0%,#0f0a1f 60%)}
-    .hero h2{font-size:24px;margin:0 0 8px}
-    .hero p{opacity:.9;margin:0 0 14px}
-    .cta{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
-    .grid{padding:14px 12px;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;max-width:1100px;margin:0 auto;align-items:stretch;width:100%}
-    @media (min-width:1024px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
-    .card{background:#1b1240;border:1px solid #3b0764;border-radius:16px;padding:16px;min-height:110px;display:flex;flex-direction:column;justify-content:center;transition:.2s;min-width:0}
-    .card:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(109,40,217,.3)}
-    .panel{position:fixed;left:0;right:0;bottom:-60%;height:60%;background:#150c2e;border-top:2px solid #3b0764;border-radius:16px 16px 0 0;box-shadow:0 -10px 30px rgba(0,0,0,.4);transition:.25s;max-width:1000px;margin:0 auto}
-    .panel.open{bottom:0}.panel-header{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;border-bottom:1px solid #3b0764}
-    .panel-body{padding:16px;line-height:1.6}
-    #panelClose{background:#3b0764;border:none;color:#fff;width:32px;height:32px;border-radius:8px;cursor:pointer}
-    .media{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;padding:16px;max-width:1000px;margin:0 auto;width:100%}
-    .media-card{background:#1b1240;border:1px solid #3b0764;border-radius:16px;padding:16px;display:flex;flex-direction:column;gap:10px;align-items:flex-start}
-    .qr{width:100%;border-radius:12px;border:1px solid #3b0764;background:repeating-linear-gradient(45deg,#222,#222 8px,#333 8px,#333 16px);height:160px}
-    .footer{padding:24px 16px;text-align:center;opacity:.85;border-top:1px solid #3b0764;margin-top:16px}
-    .spin-slow{animation:spin 12s linear infinite}@keyframes spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
-    .fade-in{animation:fade .6s ease-out}@keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
-    .lift:active{transform:scale(.96)}
-  </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>PiWorldBank — Web3 Digital Bank</title>
+  <meta name="description" content="PiWorldBank — Web3 Digital Bank for global pioneers. UBI, Payments, Staking, Rewards, Support." />
+  <link rel="manifest" href="manifest.json" />
+  <link rel="icon" href="assets/icons/icon-192.png" />
+  <link rel="apple-touch-icon" href="assets/icons/icon-192.png" />
+  <meta name="theme-color" content="#2B1545" />
+  <link rel="stylesheet" href="style.css" />
 </head>
-<body>
-  <header class="topbar">
+<body class="bg-animated">
+  <header class="app-header glass">
     <div class="brand">
-      <div class="logo spin-slow">π</div>
-      <div class="brand-text">
-        <h1>PiWorldBank</h1>
-        <p class="tagline" data-i18n="slogan">The Web3 Digital Bank for All Humanity</p>
+      <img src="assets/icons/icon-192.png" alt="PiWorldBank" class="logo glow" />
+      <div class="titles">
+        <h1 id="app_title" class="title-strong">PiWorldBank</h1>
+        <p class="subtitle" id="tagline">The web3 digital bank for all humanity</p>
       </div>
     </div>
-    <div class="actions">
-      <!-- 🇺🇦 맨 위 / RU 제외 / 총 13개 -->
-      <select id="langSelect" aria-label="Language selector">
-        <option value="uk">UA</option><option value="en">EN</option><option value="kr">KR</option><option value="zh">中文</option><option value="ja">日本語</option><option value="es">ES</option><option value="fr">FR</option><option value="de">DE</option><option value="pt">PT</option><option value="ar">AR</option><option value="hi">HI</option><option value="id">ID</option><option value="vi">VI</option>
+
+    <!-- Language Switcher (UA top / RU bottom, + Brazil) -->
+    <div class="lang-select">
+      <select id="langSwitcher" aria-label="Language Switcher">
+        <option value="uk">Українська 🇺🇦</option>
+        <option value="en">English 🇺🇸</option>
+        <option value="ko">한국어 🇰🇷</option>
+        <option value="zh">中文 🇨🇳</option>
+        <option value="es">Español 🇪🇸</option>
+        <option value="pt-BR">Português (Brasil) 🇧🇷</option>
+        <option value="fr">Français 🇫🇷</option>
+        <option value="de">Deutsch 🇩🇪</option>
+        <option value="it">Italiano 🇮🇹</option>
+        <option value="ar">العربية 🇸🇦</option>
+        <option value="hi">हिन्दी 🇮🇳</option>
+        <option value="th">ไทย 🇹🇭</option>
+        <option value="vi">Tiếng Việt 🇻🇳</option>
+        <option value="ru">Русский 🇷🇺</option>
       </select>
-      <button id="installBtn" class="btn small" data-i18n="install">Install App</button>
     </div>
   </header>
 
-  <main>
-    <section class="hero fade-in">
-      <h2 data-i18n="hero_title">People, not profit — A bank built for everyday Pioneers</h2>
-      <p data-i18n="hero_desc">One-tap demo. PWA install. Pi SDK login ready. Offline support.</p>
-      <div class="cta">
-        <button class="btn primary" id="loginBtn" data-i18n="login">Login with Pi</button>
-        <a class="btn" href="#demo" data-i18n="view_demo">View Demo</a>
+  <!-- HERO: 웅장한 슬로건 -->
+  <section class="hero">
+    <h2 class="slogan neon">One World · One Pi · One Future</h2>
+    <p class="hero-lead">
+      UBI · Payments · Staking ≤15% APY · Rewards · Support — all in one global Web3 bank.
+    </p>
+    <div class="hero-cta">
+      <button id="btnInstall" class="cta big">Install App (PWA)</button>
+      <button id="btnCache" class="cta ghost big">Cache for Offline</button>
+    </div>
+  </section>
+
+  <main class="container">
+    <!-- 2x3 (or 1x6 on mobile) primary actions — UBI first -->
+    <section class="grid rise">
+      <button class="card primary" data-action="ubi">
+        <div class="icon">🌍</div>
+        <div class="title" id="nav_ubi">UBI</div>
+        <p class="desc" id="ubi_desc">Universal Basic Income pilot for pioneers.</p>
+      </button>
+
+      <button class="card" data-action="sendpay">
+        <div class="icon">💸</div>
+        <div class="title" id="nav_sendpay">Send / Pay</div>
+        <p class="desc" id="sendpay_desc">Fast Pi transfers & QR payments.</p>
+      </button>
+
+      <button class="card" data-action="stake">
+        <div class="icon">📉</div>
+        <div class="title" id="nav_stake">Staking</div>
+        <p class="desc" id="stake_desc">Stake Pi. ≤15% APY demo.</p>
+      </button>
+
+      <button class="card" data-action="rewards">
+        <div class="icon">🎁</div>
+        <div class="title" id="nav_rewards">Rewards</div>
+        <p class="desc" id="rewards_desc">Daily tasks & ecosystem rewards.</p>
+      </button>
+
+      <button class="card" data-action="support">
+        <div class="icon">💬</div>
+        <div class="title" id="nav_support">Support</div>
+        <p class="desc" id="support_desc">KYC / policy / help center.</p>
+      </button>
+
+      <button class="card" data-action="login">
+        <div class="icon">🔐</div>
+        <div class="title" id="nav_login">Login</div>
+        <p class="desc" id="login_desc">Pi Browser login (Demo).</p>
+      </button>
+    </section>
+
+    <!-- QR & Demo block -->
+    <section class="panel">
+      <div class="panel-left">
+        <h3 id="qr_title" class="panel-title">One-Touch QR</h3>
+        <p id="qr_desc" class="panel-text">Scan in Pi Browser to open the app instantly.</p>
+        <img src="assets/images/qr-demo.png" alt="QR Demo" class="qr glow" />
+      </div>
+      <div class="panel-right">
+        <h3 id="demo_title" class="panel-title">Live Demo</h3>
+        <ul class="bullets" id="demo_bullets">
+          <li>One-tap open in Pi Browser</li>
+          <li>Offline-first PWA (installable)</li>
+          <li>Web3 flows: UBI / Pay / Stake / Rewards</li>
+        </ul>
       </div>
     </section>
 
-    <section id="demo" class="grid">
-      <a class="card lift" data-action="ubi"><h3 data-i18n="menu_ubi">UBI</h3><p data-i18n="menu_ubi_desc">Basic income for everyday people.</p></a>
-      <a class="card lift" data-action="pay"><h3 data-i18n="menu_pay">Remittance/Pay</h3><p data-i18n="menu_pay_desc">Fast Pi payments & transfers.</p></a>
-      <a class="card lift" data-action="stake"><h3 data-i18n="menu_stake">Staking</h3><p><span data-i18n="menu_stake_desc">Signature APY</span> <strong id="apy">14.9</strong>%</p></a>
-      <a class="card lift" data-action="rewards"><h3 data-i18n="menu_rewards">Rewards</h3><p data-i18n="menu_rewards_desc">Tasks → Points → Pi.</p></a>
-      <a class="card lift" data-action="swap"><h3 data-i18n="menu_swap">Token Swap</h3><p data-i18n="menu_swap_desc">Pi ⇄ PWB (demo) — quotes only.</p></a>
-      <a class="card lift" data-action="support"><h3 data-i18n="menu_support">Support</h3><p data-i18n="menu_support_desc">KYC · Policy · Helpdesk.</p></a>
-      <a class="card lift" data-action="qr"><h3 data-i18n="menu_qr">QR / Install</h3><div class="qr" aria-label="QR placeholder"></div></a>
-    </section>
-
-    <section class="panel" id="panel">
-      <div class="panel-header">
-        <h3 id="panelTitle">Panel</h3>
-        <button id="panelClose" aria-label="Close">×</button>
-      </div>
-      <div id="panelBody" class="panel-body">
-        <p>Pi SDK login placeholder. After integrating Pi SDK, this will trigger <code>Pi.authenticate()</code>.</p>
-      </div>
-    </section>
-
-    <section class="media">
-      <div class="media-card">
-        <h3>YouTube</h3>
-        <a class="btn" href="https://www.youtube.com/@hyekong" target="_blank" rel="noopener">Open Channel</a>
-      </div>
-      <div class="media-card">
-        <h3>TikTok</h3>
-        <a class="btn" href="https://www.tiktok.com/" target="_blank" rel="noopener">Open TikTok</a>
-      </div>
-      <div class="media-card">
-        <h3 data-i18n="one_touch">One-Touch Demo</h3>
-        <div class="qr" aria-label="QR placeholder"></div>
-      </div>
+    <!-- Status -->
+    <section class="status">
+      <div class="status-item"><span class="dot online"></span><span id="status_online">Ready</span></div>
+      <div class="status-item"><span class="dot shield"></span><span id="status_security">Security hardened (demo)</span></div>
+      <div class="status-item"><span class="dot chain"></span><span id="status_chain">Mainnet-ready UX (demo)</span></div>
     </section>
   </main>
 
-  <footer class="footer">
-    <p>© 2025 PiWorldBank · <span data-i18n="by">By</span> Hyekong (ljw2358)</p>
+  <footer class="footer glass">
+    <div class="left">
+      <strong>PiWorldBank</strong>
+      <span>© 2025</span>
+    </div>
+    <div class="right">
+      <a href="#" id="footer_terms">Terms</a>
+      <a href="#" id="footer_policy">Policy</a>
+      <a href="#" id="footer_contact">Contact</a>
+    </div>
   </footer>
 
-  <script>
-    /* ===== i18n dictionaries (UA first, RU excluded) ===== */
-    const I18N = {
-      en: {"slogan":"The Web3 Digital Bank for All Humanity","install":"Install App","hero_title":"People, not profit — A bank built for everyday Pioneers","hero_desc":"One-tap demo. PWA install. Pi SDK login ready. Offline support.","login":"Login with Pi","view_demo":"View Demo","menu_ubi":"UBI","menu_ubi_desc":"Basic income for everyday people.","menu_pay":"Remittance/Pay","menu_pay_desc":"Fast Pi payments & transfers.","menu_stake":"Staking","menu_stake_desc":"Signature APY","menu_rewards":"Rewards","menu_rewards_desc":"Tasks → Points → Pi.","menu_swap":"Token Swap","menu_swap_desc":"Pi ⇄ PWB (demo) — quotes only.","menu_support":"Support","menu_support_desc":"KYC · Policy · Helpdesk.","menu_qr":"QR / Install","menu_qr_desc":"Scan to open or install.","by":"By","one_touch":"One-Touch Demo"},
-      uk: {"slogan":"Веб3 Цифровий банк для всього людства","install":"Встановити додаток","hero_title":"Люди, не прибуток — банк для піонерів","hero_desc":"Одне натискання · PWA · Вхід через Pi SDK · Офлайн підтримка","login":"Увійти через Pi","view_demo":"Переглянути демо","menu_ubi":"UBI","menu_ubi_desc":"Базовий дохід для всіх.","menu_pay":"Переказ / Оплата","menu_pay_desc":"Швидкі платежі Pi.","menu_stake":"Стейкінг","menu_stake_desc":"Фірмова прибутковість","menu_rewards":"Нагороди","menu_rewards_desc":"Завдання → Бали → Pi.","menu_swap":"Обмін токенів","menu_swap_desc":"Pi ⇄ PWB (демо) — лише котирування.","menu_support":"Підтримка","menu_support_desc":"KYC · Політика · Допомога.","menu_qr":"QR / Встановити","menu_qr_desc":"Скануйте, щоб відкрити або встановити.","by":"Від","one_touch":"Демо в один дотик"},
-      kr: {"slogan":"사람을 위한 Web3 디지털 은행","install":"앱 설치","hero_title":"사람 중심 — 파이오니어를 위한 디지털 은행","hero_desc":"원터치 데모 · PWA 설치 · Pi SDK 로그인 준비 · 오프라인 지원","login":"Pi로 로그인","view_demo":"데모 보기","menu_ubi":"UBI","menu_ubi_desc":"모든 사람을 위한 기본소득.","menu_pay":"송금/결제","menu_pay_desc":"빠른 Pi 결제와 이체.","menu_stake":"예치","menu_stake_desc":"시그니처 APY","menu_rewards":"리워드","menu_rewards_desc":"태스크 → 포인트 → Pi.","menu_swap":"토큰 스왑","menu_swap_desc":"Pi ⇄ PWB (데모) — 견적만.","menu_support":"고객센터","menu_support_desc":"KYC · 정책 · 헬프데스크.","menu_qr":"QR / 설치","menu_qr_desc":"스캔하여 열기 또는 설치.","by":"작성","one_touch":"원터치 데모"},
-      zh: {"slogan":"面向全人类的 Web3 数字银行","install":"安装应用","hero_title":"以人为本——为每位先行者打造的银行","hero_desc":"一键演示 · PWA 安装 · Pi SDK 登录就绪 · 离线支持","login":"使用 Pi 登录","view_demo":"查看演示","menu_ubi":"UBI","menu_ubi_desc":"全民基本收入。","menu_pay":"汇款/支付","menu_pay_desc":"快速 Pi 支付与转账。","menu_stake":"质押","menu_stake_desc":"标志性 APY","menu_rewards":"奖励","menu_rewards_desc":"任务→积分→Pi。","menu_swap":"代币兑换","menu_swap_desc":"Pi ⇄ PWB（演示）—仅报价。","menu_support":"客服","menu_support_desc":"KYC · 政策 · 帮助台。","menu_qr":"二维码/安装","menu_qr_desc":"扫描打开或安装。","by":"作者","one_touch":"一键演示"},
-      ja: {"slogan":"人類のためのWeb3デジタル銀行","install":"アプリをインストール","hero_title":"利益より人々 — すべてのパイオニアのための銀行","hero_desc":"ワンタップデモ・PWA・Pi SDKログイン準備・オフライン対応","login":"Piでログイン","view_demo":"デモを見る","menu_ubi":"UBI","menu_ubi_desc":"すべての人のためのベーシックインカム。","menu_pay":"送金/決済","menu_pay_desc":"高速なPi決済と送金。","menu_stake":"ステーキング","menu_stake_desc":"シグネチャAPY","menu_rewards":"リワード","menu_rewards_desc":"タスク→ポイント→Pi。","menu_swap":"トークンスワップ","menu_swap_desc":"Pi ⇄ PWB（デモ）—見積のみ。","menu_support":"サポート","menu_support_desc":"KYC・ポリシー・ヘルプデスク。","menu_qr":"QR / インストール","menu_qr_desc":"スキャンして開く/インストール。","by":"作成者","one_touch":"ワンタッチデモ"},
-      es: {"slogan":"El banco digital Web3 para toda la humanidad","install":"Instalar app","hero_title":"Personas, no lucro — Un banco para pioneros","hero_desc":"Demo de un toque · PWA · Pi SDK · Offline","login":"Entrar con Pi","view_demo":"Ver demo","menu_ubi":"UBI","menu_ubi_desc":"Renta básica para todos.","menu_pay":"Envíos/Pagos","menu_pay_desc":"Pagos y transferencias Pi rápidas.","menu_stake":"Staking","menu_stake_desc":"APY de la casa","menu_rewards":"Recompensas","menu_rewards_desc":"Tareas → Puntos → Pi.","menu_swap":"Intercambio de tokens","menu_swap_desc":"Pi ⇄ PWB (demo) — solo cotización.","menu_support":"Soporte","menu_support_desc":"KYC · Política · Mesa de ayuda.","menu_qr":"QR / Instalar","menu_qr_desc":"Escanea para abrir o instalar.","by":"Por","one_touch":"Demo de un toque"},
-      fr: {"slogan":"La banque numérique Web3 pour toute l’humanité","install":"Installer l’app","hero_title":"Les gens avant le profit — Une banque pour les pionniers","hero_desc":"Démo 1-clic · PWA · Pi SDK · Hors-ligne","login":"Connexion avec Pi","view_demo":"Voir la démo","menu_ubi":"UBI","menu_ubi_desc":"Revenu de base pour tous.","menu_pay":"Virement/Paiement","menu_pay_desc":"Paiements & virements Pi rapides.","menu_stake":"Staking","menu_stake_desc":"APY signature","menu_rewards":"Récompenses","menu_rewards_desc":"Tâches → Points → Pi.","menu_swap":"Échange de tokens","menu_swap_desc":"Pi ⇄ PWB (démo) — devis uniquement.","menu_support":"Support","menu_support_desc":"KYC · Politique · Helpdesk.","menu_qr":"QR / Installer","menu_qr_desc":"Scannez pour ouvrir ou installer.","by":"Par","one_touch":"Démo 1-clic"},
-      de: {"slogan":"Die Web3-Digitalbank für alle Menschen","install":"App installieren","hero_title":"Menschen statt Profit — Eine Bank für Pioniere","hero_desc":"One-Tap-Demo · PWA · Pi SDK · Offline","login":"Mit Pi anmelden","view_demo":"Demo ansehen","menu_ubi":"UBI","menu_ubi_desc":"Grundeinkommen für alle.","menu_pay":"Überweisung/Zahlung","menu_pay_desc":"Schnelle Pi-Zahlungen & Überweisungen.","menu_stake":"Staking","menu_stake_desc":"Signature-APY","menu_rewards":"Belohnungen","menu_rewards_desc":"Aufgaben → Punkte → Pi.","menu_swap":"Token-Tausch","menu_swap_desc":"Pi ⇄ PWB (Demo) — nur Quote.","menu_support":"Support","menu_support_desc":"KYC · Richtlinie · Helpdesk.","menu_qr":"QR / Installieren","menu_qr_desc":"Zum Öffnen/Installieren scannen.","by":"Von","one_touch":"One-Touch-Demo"},
-      pt: {"slogan":"Banco digital Web3 para toda a humanidade","install":"Instalar app","hero_title":"Pessoas, não lucro — Banco para pioneiros","hero_desc":"Demo em um toque · PWA · Pi SDK · Offline","login":"Entrar com Pi","view_demo":"Ver demo","menu_ubi":"UBI","menu_ubi_desc":"Renda básica para todos.","menu_pay":"Remessa/Pagamento","menu_pay_desc":"Pagamentos e transferências Pi rápidas.","menu_stake":"Staking","menu_stake_desc":"APY assinatura","menu_rewards":"Recompensas","menu_rewards_desc":"Tarefas → Pontos → Pi.","menu_swap":"Troca de tokens","menu_swap_desc":"Pi ⇄ PWB (demo) — apenas cotação.","menu_support":"Suporte","menu_support_desc":"KYC · Política · Helpdesk.","menu_qr":"QR / Instalar","menu_qr_desc":"Digitalize para abrir ou instalar.","by":"Por","one_touch":"Demo de um toque"},
-      ar: {"slogan":"البنك الرقمي Web3 من أجل الإنسانية","install":"تثبيت التطبيق","hero_title":"الناس قبل الربح — بنك للمبتكرين","hero_desc":"عرض بنقرة واحدة · PWA · Pi SDK · يعمل دون اتصال","login":"تسجيل الدخول مع Pi","view_demo":"عرض تجريبي","menu_ubi":"الدخل الأساسي","menu_ubi_desc":"دخل أساسي للجميع.","menu_pay":"تحويل/دفع","menu_pay_desc":"مدفوعات وتحويلات Pi سريعة.","menu_stake":"الاستيكينغ","menu_stake_desc":"عائد مميز","menu_rewards":"المكافآت","menu_rewards_desc":"مهام → نقاط → Pi.","menu_swap":"مبادلة الرموز","menu_swap_desc":"Pi ⇄ PWB (تجريبي) — تسعير فقط.","menu_support":"الدعم","menu_support_desc":"اعرف عميلك · السياسات · مكتب المساعدة.","menu_qr":"QR / التثبيت","menu_qr_desc":"امسح للفتح أو التثبيت.","by":"بواسطة","one_touch":"عرض بنقرة واحدة"},
-      hi: {"slogan":"पूरी मानवता के लिए Web3 डिजिटल बैंक","install":"ऐप इंस्टॉल करें","hero_title":"लाभ नहीं, लोग — पायोनियर्स के लिए बैंक","hero_desc":"वन-टैप डेमो · PWA · Pi SDK · ऑफ़लाइन","login":"Pi से लॉगिन","view_demo":"डेमो देखें","menu_ubi":"UBI","menu_ubi_desc":"सबके लिए बुनियादी आय।","menu_pay":"भेजना/भुगतान","menu_pay_desc":"तेज़ Pi भुगतान और ट्रांसफ़र।","menu_stake":"स्टेकिंग","menu_stake_desc":"सिग्नेचर APY","menu_rewards":"रिवार्ड्स","menu_rewards_desc":"टास्क → पॉइंट्स → Pi।","menu_swap":"टोकन स्वैप","menu_swap_desc":"Pi ⇄ PWB (डेमो) — केवल कोट।","menu_support":"सपोर्ट","menu_support_desc":"KYC · नीति · हेल्पडेस्क।","menu_qr":"QR / इंस्टॉल","menu_qr_desc":"खोलने/इंस्टॉल के लिए स्कैन करें।","by":"द्वारा","one_touch":"वन-टच डेमो"},
-      id: {"slogan":"Bank digital Web3 untuk seluruh umat manusia","install":"Instal Aplikasi","hero_title":"Orang, bukan profit — Bank untuk pionir","hero_desc":"Demo sekali sentuh · PWA · Pi SDK · Offline","login":"Masuk dengan Pi","view_demo":"Lihat Demo","menu_ubi":"UBI","menu_ubi_desc":"Pendapatan dasar untuk semua.","menu_pay":"Kirim/Bayar","menu_pay_desc":"Pembayaran & transfer Pi cepat.","menu_stake":"Staking","menu_stake_desc":"APY andalan","menu_rewards":"Rewards","menu_rewards_desc":"Tugas → Poin → Pi.","menu_swap":"Tukar Token","menu_swap_desc":"Pi ⇄ PWB (demo) — kutipan saja.","menu_support":"Dukungan","menu_support_desc":"KYC · Kebijakan · Helpdesk.","menu_qr":"QR / Instal","menu_qr_desc":"Pindai untuk membuka atau memasang.","by":"Oleh","one_touch":"Demo sekali sentuh"},
-      vi: {"slogan":"Ngân hàng số Web3 cho toàn nhân loại","install":"Cài đặt ứng dụng","hero_title":"Con người trên lợi nhuận — Ngân hàng cho Pioneers","hero_desc":"Demo một chạm · PWA · Pi SDK · Offline","login":"Đăng nhập với Pi","view_demo":"Xem demo","menu_ubi":"UBI","menu_ubi_desc":"Thu nhập cơ bản cho mọi người.","menu_pay":"Chuyển tiền/Thanh toán","menu_pay_desc":"Thanh toán & chuyển tiền Pi nhanh.","menu_stake":"Staking","menu_stake_desc":"APY đặc trưng","menu_rewards":"Phần thưởng","menu_rewards_desc":"Nhiệm vụ → Điểm → Pi.","menu_swap":"Hoán đổi token","menu_swap_desc":"Pi ⇄ PWB (demo) — chỉ báo giá.","menu_support":"Hỗ trợ","menu_support_desc":"KYC · Chính sách · Helpdesk.","menu_qr":"QR / Cài đặt","menu_qr_desc":"Quét để mở hoặc cài đặt.","by":"Bởi","one_touch":"Demo một chạm"}
-    };
-
-    const SUPPORTED = ['uk','en','kr','zh','ja','es','fr','de','pt','ar','hi','id','vi'];
-
-    function applyI18n(code){
-      const d = I18N[code] || I18N.en;
-      document.querySelectorAll('[data-i18n]').forEach(el=>{
-        const k = el.getAttribute('data-i18n');
-        if(d[k]) el.textContent = d[k];
-      });
-      document.documentElement.lang = code;
-      localStorage.setItem('lang', code);
-    }
-
-    (function initLang(){
-      const sel = document.getElementById('langSelect');
-      const saved = localStorage.getItem('lang');
-      const guess = (saved || (navigator.language||'en').slice(0,2)).toLowerCase();
-      const alias = { ko:'kr', ua:'uk', 'zh-cn':'zh', 'zh-tw':'zh' };
-      const initial = SUPPORTED.includes(alias[guess]||guess) ? (alias[guess]||guess) : 'en';
-      if(sel){ sel.value = initial; sel.onchange = e=> applyI18n(e.target.value); }
-      applyI18n(initial);
-    })();
-
-    /* ===== Minimal PWA install + SW (single-file) ===== */
-    let deferredPrompt;
-    window.addEventListener('beforeinstallprompt', (e)=>{ e.preventDefault(); deferredPrompt=e; document.getElementById('installBtn').style.display='inline-block'; });
-    document.getElementById('installBtn').addEventListener('click', async()=>{ if(deferredPrompt){ await deferredPrompt.prompt(); deferredPrompt=null; }});
-
-    if('serviceWorker' in navigator){
-      const swCode = `
-        const C='pwb-singlefile-v3';
-        self.addEventListener('install',e=>e.waitUntil(caches.open(C).then(c=>c.addAll(['./']))));
-        self.addEventListener('activate',e=>e.waitUntil(caches.keys().then(keys=>Promise.all(keys.map(k=>k!==C&&caches.delete(k))))));
-        self.addEventListener('fetch',e=>e.respondWith(caches.match(e.request).then(r=>r||fetch(e.request).catch(()=>caches.match('./')))));
-      `;
-      const blob = new Blob([swCode],{type:'text/javascript'});
-      navigator.serviceWorker.register(URL.createObjectURL(blob));
-    }
-
-    /* ===== One-click demo actions + swap quote ===== */
-    const panel = document.getElementById('panel'), panelTitle=document.getElementById('panelTitle'), panelBody=document.getElementById('panelBody');
-    document.getElementById('panelClose').onclick = ()=> panel.classList.remove('open');
-    function openPanel(title, html){ panelTitle.textContent=title; panelBody.innerHTML=html; panel.classList.add('open'); }
-    function dict(k,f){ const code=localStorage.getItem('lang')||'en'; return (I18N[code]&&I18N[code][k])||f; }
-
-    const actions = {
-      ubi: ()=> openPanel(dict('menu_ubi','UBI'), '<p>'+dict('menu_ubi_desc','Basic income for everyday people.')+'</p>'),
-      pay: ()=> openPanel(dict('menu_pay','Remittance/Pay'), '<p>'+dict('menu_pay_desc','Fast Pi payments & transfers.')+'</p>'),
-      stake: ()=> openPanel(dict('menu_stake','Staking'), '<p>'+dict('menu_stake_desc','Signature APY')+' <strong>'+document.getElementById('apy').textContent+'%</strong> (demo)</p>'),
-      rewards: ()=> openPanel(dict('menu_rewards','Rewards'), '<p>'+dict('menu_rewards_desc','Tasks → Points → Pi.')+'</p>'),
-      support: ()=> openPanel(dict('menu_support','Support'), '<p>'+dict('menu_support_desc','KYC · Policy · Helpdesk.')+'</p>'),
-      qr: ()=> openPanel(dict('menu_qr','QR / Install'), '<p>'+dict('menu_qr_desc','Scan to open or install.')+'</p><div class="qr"></div>'),
-      swap: ()=> openPanel(dict('menu_swap','Token Swap'), `
-        <div class="swap">
-          <label>${dict('swap_from','From')}</label>
-          <select id="from"><option value="PI">PI</option><option value="PWB">PWB</option></select>
-          <input id="fromAmt" type="number" min="0" step="0.0001" placeholder="0.0">
-          <label>${dict('swap_to','To')}</label>
-          <select id="to"><option value="PWB">PWB</option><option value="PI">PI</option></select>
-          <div class="quote">${dict('swap_quote','Quote')}: <strong id="quote">—</strong></div>
-          <button class="btn primary" id="getQuote">${dict('swap_get_quote','Get Quote')}</button>
-          <p class="hint">${dict('swap_hint','Demo only — price feed mocked, no on-chain transaction.')}</p>
-        </div>
-        <script>
-          (function(){
-            const fromSel=document.getElementById('from'), toSel=document.getElementById('to'), amt=document.getElementById('fromAmt'), q=document.getElementById('quote');
-            document.getElementById('getQuote').addEventListener('click',()=>{
-              const f=fromSel.value, t=toSel.value, a=parseFloat(amt.value||'0'); if(!a||a<=0){ q.textContent='0'; return; }
-              const rate=(f==='PI'&&t==='PWB')?100:(f==='PWB'&&t==='PI')?0.01:1; q.textContent=(a*rate).toFixed(4)+' '+t;
-            });
-          })();
-        <\/script>
-      `)
-    };
-
-    document.querySelectorAll('.card').forEach(el=>{
-      el.addEventListener('click', ()=> { const key=el.getAttribute('data-action'); if(actions[key]) actions[key](); });
-    });
-  </script
-  <script>
-/* ===== USD 표시 완전 자동 스니펫 =====
- * 붙여넣기 위치: </body> 바로 위
- * 바꿀 수 있는 값:
- * USD_PER_PI : 1 PI의 달러 환산가
- * PWB_PER_PI : 1 PI가 몇 PWB인지(기본 100)
- */
-(function () {
-  const USD_PER_PI = 288; // ← 필요시 여기 숫자만 바꾸면 됨
-  const PWB_PER_PI = 100; // 1 PI = 100 PWB 가정
-
-  // 스타일(가볍게)
-  const style = document.createElement('style');
-  style.textContent = `
-    .usd-badge{font-size:.95rem;opacity:.9;margin-top:.25rem}
-    .usd-badge small{opacity:.7;font-weight:500}
-  `;
-  document.head.appendChild(style);
-
-  // 카드마다 USD 표시 업데이트
-  function updateCardUSD(card){
-    // 이미 붙어 있으면 엘리먼트 재사용
-    let badge = card.querySelector('.usd-badge');
-    if(!badge){
-      badge = document.createElement('div');
-      badge.className = 'usd-badge';
-      card.appendChild(badge);
-    }
-
-    // 1) 단위 추정: data-unit 속성 > 텍스트 스캔(PWB/PI)
-    const unit =
-      (card.getAttribute('data-unit') || card.dataset?.unit || '')
-        .toUpperCase() || (/PWB/i.test(card.textContent) ? 'PWB' : 'PI');
-
-    // 2) 수량 추정: data-qty > 안쪽에 흔한 클래스/속성 > 텍스트 첫 숫자
-    let qtyStr =
-      card.getAttribute('data-qty') ||
-      card.querySelector('[data-qty]')?.getAttribute('data-qty') ||
-      card.querySelector('.amount,.qty,.value,strong,b')?.textContent ||
-      card.textContent;
-
-    if(!qtyStr){ badge.textContent = ''; return; }
-
-    const m = String(qtyStr).replace(/,/g,'').match(/(\d+(\.\d+)?)/);
-    if(!m){ badge.textContent = ''; return; }
-
-    const qty = parseFloat(m[1]);
-
-    // 3) USD 환산
-    let usdPerUnit = USD_PER_PI; // 기본: PI
-    if(unit === 'PWB') usdPerUnit = USD_PER_PI / PWB_PER_PI;
-
-    const usd = qty * usdPerUnit;
-
-    // 4) 출력
-    const fmt = n => n.toLocaleString(undefined,{maximumFractionDigits:2});
-    badge.innerHTML = `≈ <b>$${fmt(usd)}</b> <small>USD</small>`;
-  }
-
-  // 초기 렌더 + 클릭 갱신(카드 열고 닫을 때도 업데이트)
-  function init(){
-    document.querySelectorAll('.card').forEach(card=>{
-      updateCardUSD(card);
-      card.addEventListener('click', ()=> updateCardUSD(card));
-      // 값이 동적으로 변하는 경우를 대비해 변화 감지(optional)
-      const mo = new MutationObserver(()=> updateCardUSD(card));
-      mo.observe(card, {subtree:true, childList:true, characterData:true});
-    });
-  }
-
-  if(document.readyState === 'loading'){
-    document.addEventListener('DOMContentLoaded', init);
-  } else { init(); }
-})();
-</script>  
+  <script src="languages.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
-
-
