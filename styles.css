@@ -140,3 +140,18 @@ body{
 .rise{animation: rise .6s ease both .12s}
 @keyframes rise{from{transform:translateY(8px);opacity:.0}to{transform:none;opacity:1}}
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+/* 언어 선택 드롭다운 색상 수정 */
+select.language-selector,
+.language-dropdown {
+  background-color: #1a1a2e !important; /* 어두운 배경 */
+  color: #ffffff !important; /* 흰 글자 */
+  border: 1px solid #4e4e8a;
+  border-radius: 8px;
+  padding: 6px 10px;
+}
+
+/* 드롭다운 항목 */
+.language-dropdown option {
+  background-color: #1a1a2e !important;
+  color: #ffffff !important;
+}
