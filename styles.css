@@ -1,136 +1,43 @@
-/* ===========================
-   PiWorldBank Global CSS
-   Responsive fix for YouTube/TikTok buttons
-   =========================== */
+/* === HTML 수정 없이 유튜브·틱톡 버튼 겹침 해결 === */
 
-/* 기본 전체 레이아웃 */
-body {
-  margin: 0;
-  padding: 0;
-  font-family: "Noto Sans KR", "Roboto", sans-serif;
-  background-color: #12002F;
-  color: #fff;
-  line-height: 1.6;
-  text-align: center;
+/* 버튼 비슷한 것 전부 자동 인식 (button, a 등) */
+button, a {
+  box-sizing: border-box;
 }
 
-/* 콘텐츠 영역 */
-.container {
-  width: 95%;
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 20px;
-}
-
-/* 공통 버튼 스타일 */
-button {
-  border: none;
+/* 유튜브/틱톡/플레이리스트/숏츠 버튼 자동 줄바꿈 */
+button, a[href*="youtube"], a[href*="tiktok"], 
+a:contains("YouTube"), a:contains("TikTok"),
+button:contains("YouTube"), button:contains("TikTok"),
+button:contains("Playlist"), button:contains("Short") {
+  display: inline-block !important;
+  vertical-align: top !important;
+  width: calc(50% - 10px) !important; /* 2열 자동 정렬 */
+  min-width: 140px;
+  max-width: 260px;
+  margin: 6px 5px !important;
+  padding: 12px 10px !important;
   border-radius: 12px;
-  font-size: 16px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.2s ease-in-out;
+  font-weight: 700;
+  text-align: center;
+  white-space: normal !important;
 }
 
-/* 유튜브/틱톡 버튼 구역 */
-.media-buttons {
-  display: flex;
-  flex-wrap: wrap; /* ✅ 자동 줄바꿈 허용 */
-  justify-content: center;
-  gap: 12px; /* 버튼 간격 */
-  margin: 20px 0;
-}
-
-/* 개별 버튼 스타일 */
-.media-buttons button {
-  flex: 1 1 45%; /* ✅ 각 버튼이 반씩 차지 */
-  min-width: 150px;
-  max-width: 250px;
-  padding: 14px 10px;
-  font-size: 15px;
-  font-weight: bold;
-}
-
-/* 노란 버튼 (유튜브/틱톡) */
-.btn-yellow {
-  background-color: #FFCC33;
-  color: #1E003F;
-}
-.btn-yellow:hover {
-  background-color: #FFD966;
-}
-
-/* 보라 버튼 (Top Playlist / Latest Short) */
-.btn-purple {
-  background-color: #5D34A0;
-  color: #fff;
-}
-.btn-purple:hover {
-  background-color: #7D56C2;
-}
-
-/* 섹션 제목 */
-.section-title {
-  font-size: 18px;
-  margin-bottom: 10px;
-  color: #BFA9FF;
-}
-
-/* FAQ 영역 */
-.faq {
-  text-align: left;
-  font-size: 14px;
-  color: #D9D6E6;
-  margin-top: 30px;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-  padding-top: 15px;
-  line-height: 1.7;
-}
-
-/* ===========================
-   반응형 조정
-   =========================== */
-
-/* 작은 화면 (폰 세로) */
+/* 모바일(480px 이하)에서는 자동으로 세로 정렬 */
 @media screen and (max-width: 480px) {
-  .media-buttons {
-    flex-direction: column; /* ✅ 세로로 정렬 */
-    align-items: center;
-  }
-
-  .media-buttons button {
-    flex: 1 1 100%;
-    max-width: 90%;
-    font-size: 15px;
-    padding: 12px;
-  }
-
-  .section-title {
-    font-size: 16px;
+  button, a[href*="youtube"], a[href*="tiktok"] {
+    width: 100% !important;
+    max-width: 100% !important;
+    display: block !important;
+    margin: 6px 0 !important;
   }
 }
 
-/* 중간 화면 (태블릿) */
-@media screen and (min-width: 481px) and (max-width: 768px) {
-  .media-buttons {
-    flex-wrap: wrap;
-    justify-content: center;
-  }
+/* 중앙 정렬 보장 */
+body { text-align: center !important; }
 
-  .media-buttons button {
-    flex: 1 1 40%;
-    max-width: 200px;
-  }
-}
-
-/* 큰 화면 (PC) */
-@media screen and (min-width: 769px) {
-  .media-buttons {
-    justify-content: center;
-  }
-
-  .media-buttons button {
-    flex: 1 1 25%;
-    max-width: 220px;
-  }
-}
+/* 색상 유지 (기존 버튼 스타일 살림) */
+.btn-yellow { background:#FFCC33 !important; color:#1E003F !important; }
+.btn-yellow:hover { background:#FFD966 !important; }
+.btn-purple { background:#5D34A0 !important; color:#fff !important; }
+.btn-purple:hover { background:#7D56C2 !important; }
