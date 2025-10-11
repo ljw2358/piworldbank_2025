@@ -1,157 +1,136 @@
-root{
-  --bg:#0A0720;
-  --bg2:#130B2E;
-  --panel:#1C0E35;
-  --card:#241046;
-  --text:#F5F2FF;
-  --muted:#C9BFF0;
-  --accent:#E2C24F;
-  --ok:#63E6BE;
-  --warn:#FFD166;
-  --neon:#A98BFF;
-}
-*{box-sizing:border-box}
-html,body{height:100%}
-body{
-  margin:0;
-  font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,"Apple Color Emoji","Segoe UI Emoji";
-  color:var(--text);
-  overflow-x:hidden;
+/* ===========================
+   PiWorldBank Global CSS
+   Responsive fix for YouTube/TikTok buttons
+   =========================== */
+
+/* 기본 전체 레이아웃 */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Noto Sans KR", "Roboto", sans-serif;
+  background-color: #12002F;
+  color: #fff;
+  line-height: 1.6;
+  text-align: center;
 }
 
-/* Animated cosmic background */
-.bg-animated{
-  background: radial-gradient(1200px 600px at 20% -10%, #402373 0%, var(--bg2) 40%, var(--bg) 100%);
-  background-size: 160% 160%;
-  animation: bgshift 18s ease-in-out infinite;
-}
-@keyframes bgshift{
-  0%{background-position: 0% 30%}
-  50%{background-position: 100% 70%}
-  100%{background-position: 0% 30%}
+/* 콘텐츠 영역 */
+.container {
+  width: 95%;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
 }
 
-/* Glass header/footer */
-.glass{
-  background: rgba(255,255,255,.05);
-  backdrop-filter: blur(10px);
-  border:1px solid rgba(255,255,255,.08);
+/* 공통 버튼 스타일 */
+button {
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
 }
 
-.app-header{
-  display:flex;align-items:center;justify-content:space-between;
-  padding:14px 18px;position:sticky;top:0;z-index:10;
-}
-.brand{display:flex;align-items:center;gap:14px}
-.logo{width:44px;height:44px;border-radius:10px}
-.title-strong{margin:0;font-size:22px;font-weight:900;letter-spacing:.3px}
-.subtitle{margin:2px 0 0;color:var(--muted);font-weight:600}
-
-/* Language */
-.lang-select select{
-  background:var(--card);color:var(--text);border:1px solid rgba(255,255,255,.15);
-  padding:10px 12px;border-radius:12px;font-weight:700
+/* 유튜브/틱톡 버튼 구역 */
+.media-buttons {
+  display: flex;
+  flex-wrap: wrap; /* ✅ 자동 줄바꿈 허용 */
+  justify-content: center;
+  gap: 12px; /* 버튼 간격 */
+  margin: 20px 0;
 }
 
-/* HERO */
-.hero{
-  text-align:center;max-width:1100px;margin:28px auto 8px;padding:10px 16px;
-  animation: fadeIn 0.8s ease both .05s;
-}
-.slogan{
-  margin:0 0 8px;
-  font-size: clamp(28px, 4.8vw, 56px);
-  font-weight: 1000;
-  letter-spacing:.6px;
-  line-height:1.08;
-  text-shadow: 0 0 18px rgba(169,139,255,.45);
-}
-.neon{
-  background: linear-gradient(90deg,#fff, #c9bff0, #b399ff);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  filter: drop-shadow(0 0 10px rgba(167,134,255,.25));
-}
-.hero-lead{
-  margin:8px auto 16px;max-width:900px;color:var(--muted);font-size:clamp(14px,1.6vw,18px)
-}
-.hero-cta{display:flex;gap:10px;justify-content:center}
-.cta{
-  padding:12px 18px;border-radius:14px;border:1px solid rgba(255,255,255,.15);font-weight:900;
-  transition:.25s transform,.25s box-shadow;
-}
-.cta.big{font-size:16px}
-.cta:not(.ghost){background:var(--accent);color:#1a1200}
-.cta.ghost{background:transparent;color:var(--text)}
-.cta:hover{transform:translateY(-2px);box-shadow:0 10px 26px rgba(0,0,0,.35)}
-
-/* MAIN */
-.container{max-width:1100px;margin:0 auto;padding:8px 16px 22px}
-.grid{
-  display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:12px 0 22px;
-}
-@media (max-width:780px){.grid{grid-template-columns:1fr}}
-
-.card{
-  background:linear-gradient(180deg,var(--card),#1B0D34);
-  border:1px solid rgba(255,255,255,.08);border-radius:18px;padding:18px;
-  cursor:pointer;transition:.25s transform,.25s box-shadow;
-  box-shadow:0 6px 18px rgba(0,0,0,.25);
-  min-height:126px;
-}
-.card.primary{outline:2px solid rgba(226,194,79,.5)}
-.card:hover{transform:translateY(-2px);box-shadow:0 10px 26px rgba(0,0,0,.35)}
-.card .icon{font-size:28px;margin-bottom:10px}
-.card .title{font-weight:900;margin-bottom:6px;font-size:17px}
-.card .desc{margin:0;color:var(--muted);font-size:14.5px;line-height:1.36}
-
-.panel{
-  display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:8px 0 26px;
-}
-@media (max-width:900px){.panel{grid-template-columns:1fr}}
-.panel-left,.panel-right{
-  background:var(--panel);border:1px solid rgba(255,255,255,.08);border-radius:18px;padding:18px
-}
-.panel-title{margin:0 0 8px;font-weight:900}
-.panel-text{margin:0 0 10px;color:var(--muted)}
-.qr{width:160px;height:160px;border-radius:10px;border:1px solid rgba(255,255,255,.08);background:#000;object-fit:cover}
-.bullets{margin:8px 0 14px 18px}
-.bullets li{margin:6px 0;color:var(--muted)}
-
-/* Status */
-.status{display:flex;flex-wrap:wrap;gap:18px;align-items:center;margin:6px 0 34px}
-.status-item{display:flex;align-items:center;gap:8px;color:var(--muted)}
-.dot{width:11px;height:11px;border-radius:50%}
-.dot.online{background:var(--ok)}
-.dot.shield{background:#7AA2F7}
-.dot.chain{background:#B388EB}
-
-/* Footer */
-.footer{
-  display:flex;align-items:center;justify-content:space-between;
-  padding:14px 16px;margin-top:8px
-}
-.footer a{color:var(--muted);text-decoration:none;margin-left:14px}
-.footer a:hover{text-decoration:underline}
-
-/* Effects */
-.glow{filter: drop-shadow(0 0 10px rgba(175,140,255,.35))}
-.rise{animation: rise .6s ease both .12s}
-@keyframes rise{from{transform:translateY(8px);opacity:.0}to{transform:none;opacity:1}}
-@keyframes fadeIn{from{opacity:0}to{opacity:1}}
-/* 언어 선택 드롭다운 색상 수정 */
-select.language-selector,
-.language-dropdown {
-  background-color: #1a1a2e !important; /* 어두운 배경 */
-  color: #ffffff !important; /* 흰 글자 */
-  border: 1px solid #4e4e8a;
-  border-radius: 8px;
-  padding: 6px 10px;
+/* 개별 버튼 스타일 */
+.media-buttons button {
+  flex: 1 1 45%; /* ✅ 각 버튼이 반씩 차지 */
+  min-width: 150px;
+  max-width: 250px;
+  padding: 14px 10px;
+  font-size: 15px;
+  font-weight: bold;
 }
 
-/* 드롭다운 항목 */
-.language-dropdown option {
-  background-color: #1a1a2e !important;
-  color: #ffffff !important;
+/* 노란 버튼 (유튜브/틱톡) */
+.btn-yellow {
+  background-color: #FFCC33;
+  color: #1E003F;
+}
+.btn-yellow:hover {
+  background-color: #FFD966;
+}
+
+/* 보라 버튼 (Top Playlist / Latest Short) */
+.btn-purple {
+  background-color: #5D34A0;
+  color: #fff;
+}
+.btn-purple:hover {
+  background-color: #7D56C2;
+}
+
+/* 섹션 제목 */
+.section-title {
+  font-size: 18px;
+  margin-bottom: 10px;
+  color: #BFA9FF;
+}
+
+/* FAQ 영역 */
+.faq {
+  text-align: left;
+  font-size: 14px;
+  color: #D9D6E6;
+  margin-top: 30px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 15px;
+  line-height: 1.7;
+}
+
+/* ===========================
+   반응형 조정
+   =========================== */
+
+/* 작은 화면 (폰 세로) */
+@media screen and (max-width: 480px) {
+  .media-buttons {
+    flex-direction: column; /* ✅ 세로로 정렬 */
+    align-items: center;
+  }
+
+  .media-buttons button {
+    flex: 1 1 100%;
+    max-width: 90%;
+    font-size: 15px;
+    padding: 12px;
+  }
+
+  .section-title {
+    font-size: 16px;
+  }
+}
+
+/* 중간 화면 (태블릿) */
+@media screen and (min-width: 481px) and (max-width: 768px) {
+  .media-buttons {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .media-buttons button {
+    flex: 1 1 40%;
+    max-width: 200px;
+  }
+}
+
+/* 큰 화면 (PC) */
+@media screen and (min-width: 769px) {
+  .media-buttons {
+    justify-content: center;
+  }
+
+  .media-buttons button {
+    flex: 1 1 25%;
+    max-width: 220px;
+  }
 }
