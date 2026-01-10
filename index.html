@@ -389,7 +389,12 @@ const I18N = {
       f2:"Quyền riêng tư — Không chia sẻ ra ngoài.",
       f3:"Liên hệ — ljw2358@gmail.com / ljw2358@naver.com", dir:"ltr"}
 };
-
+<script>
+  document.querySelectorAll(".card-title").forEach(btn => {
+    btn.style.cursor = "pointer";
+    btn.onclick = () => alert("PiWorldBank pilot is running");
+  });
+</script>
 function applyLang(code){
   const t = I18N[code] || I18N.en;
   document.documentElement.lang = code;
@@ -423,3 +428,4 @@ selectEl.addEventListener('change', e=>applyLang(e.target.value));
 </script>
 </body>
 </html>
+
