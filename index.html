@@ -1,342 +1,1118 @@
-<!doctype html>
+  <!DOCTYPE html>
 <html lang="ko">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="theme-color" content="#5b2aa7" />
   <title>PiWorldBank</title>
-
-  <!-- PWA (설치) -->
-  <link rel="manifest" href="./manifest.json">
-  <link rel="icon" href="./favicon.ico">
 
   <style>
     :root{
-      --bg:#0b0c13;
-      --card:#14162a;
-      --card2:#101225;
-      --border:rgba(255,255,255,.12);
-      --text:#eef1ff;
-      --muted:rgba(238,241,255,.72);
-      --accent:#f5c542;
-      --accent2:#7c4dff;
-      --shadow: 0 14px 40px rgba(0,0,0,.35);
-      --radius:18px;
+      --bg: linear-gradient(135deg, #1e1b4b, #0f172a);
+      --border: rgba(255,255,255,.15);
+      --text: #e5e7eb;
+      --muted: rgba(229,231,235,.75);
+      --accent: #facc15;
+      --shadow: 0 16px 40px rgba(0,0,0,.35);
+      --radius: 18px;
     }
-    *{box-sizing:border-box}
+    *{ box-sizing:border-box; }
     body{
       margin:0;
-      font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, "Noto Sans KR", sans-serif;
-      color:var(--text);
-      background: radial-gradient(1200px 600px at 20% 0%, rgba(124,77,255,.25), transparent 55%),
-                  radial-gradient(1000px 520px at 80% 10%, rgba(245,197,66,.18), transparent 55%),
-                  var(--bg);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial;
+      background: var(--bg);
+      color: var(--text);
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding: 18px;
     }
-    .wrap{max-width:980px;margin:0 auto;padding:18px 14px 44px}
+    .wrap{
+      width:min(1020px, 100%);
+      background: rgba(0,0,0,.35);
+      border:1px solid var(--border);
+      border-radius: 22px;
+      box-shadow: var(--shadow);
+      padding: 18px;
+      position: relative;
+      overflow:hidden;
+    }
     .topbar{
-      display:flex;align-items:center;justify-content:space-between;
-      gap:10px;margin-bottom:14px
-    }
-    .lang{
-      display:flex;align-items:center;gap:8px;
-      background:rgba(255,255,255,.06);
-      border:1px solid var(--border);
-      padding:10px 12px;border-radius:999px;
-      box-shadow: var(--shadow);
-    }
-    select{
-      background:transparent;color:var(--text);
-      border:none;outline:none;font-weight:700;
-      cursor:pointer;
-    }
-    option{color:#000}
-    .hero{
-      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
-      border:1px solid var(--border);
-      border-radius:24px;
-      box-shadow: var(--shadow);
-      padding:18px 16px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      margin-bottom: 10px;
     }
     .brand{
-      display:flex;flex-direction:column;align-items:center;text-align:center;gap:10px;
-      padding:10px 0 4px;
-    }
-    .logo{
-      width:64px;height:64px;border-radius:18px;
-      display:grid;place-items:center;
-      background: linear-gradient(135deg, #7c4dff, #f5c542);
-      font-weight:900;font-size:30px;
-      box-shadow: 0 12px 26px rgba(124,77,255,.25);
-    }
-    h1{margin:0;font-size:30px;letter-spacing:.2px}
-    .tag{margin:0;color:var(--muted);font-weight:700}
-    .motto{margin:0;color:var(--accent);font-weight:900}
-    .grid{
-      display:grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap:12px;
-      margin-top:14px;
-    }
-    @media (max-width:760px){
-      .grid{grid-template-columns: repeat(2,1fr)}
-      h1{font-size:26px}
-    }
-    .card{
-      background:rgba(255,255,255,.04);
-      border:1px solid var(--border);
-      border-radius: var(--radius);
-      padding:14px 12px;
-      cursor:pointer;
-      transition:.15s transform ease, .15s background ease;
+      display:flex;
+      align-items:center;
+      gap:10px;
       user-select:none;
     }
-    .card:hover{transform: translateY(-2px); background:rgba(255,255,255,.06)}
-    .card b{display:block;margin-bottom:6px}
-    .card span{color:var(--muted);font-weight:700;font-size:13px;line-height:1.25}
-    .section{
-      margin-top:14px;
-      background:rgba(255,255,255,.04);
-      border:1px solid var(--border);
-      border-radius:24px;
-      padding:14px 14px;
-    }
-    .row{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
-    .btn{
-      border:none;border-radius:999px;
-      padding:12px 14px;
-      font-weight:900;
-      cursor:pointer;
-      background:linear-gradient(135deg, var(--accent), #ffdf7a);
-      color:#1b1400;
-      box-shadow: 0 12px 24px rgba(245,197,66,.18);
-    }
-    .btn2{
-      border:1px solid var(--border);
-      background:rgba(255,255,255,.06);
-      color:var(--text);
-      border-radius:999px;
-      padding:10px 12px;
-      font-weight:800;
-      cursor:pointer;
-    }
-    .small{color:var(--muted);font-weight:700;font-size:12px}
-    a.link{color:var(--text);text-decoration:none;font-weight:900}
-    a.link:hover{text-decoration:underline}
-    .footer{
-      margin-top:14px;
-      display:flex;gap:10px;flex-wrap:wrap;
-      justify-content:space-between;align-items:center;
-    }
     .pill{
-      padding:10px 12px;border-radius:999px;
+      padding:7px 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.06);
       border:1px solid var(--border);
-      background:rgba(255,255,255,.04);
+      font-weight:700;
+      font-size: 13px;
+    }
+    .langBox{
+      display:flex;
+      align-items:center;
+      gap:8px;
+    }
+    select{
+      padding: 8px 10px;
+      border-radius: 12px;
+      background: rgba(255,255,255,.06);
+      color:#fff;
+      border:1px solid var(--border);
+      outline:none;
+      font-weight:600;
+      max-width: 240px;
+    }
+
+    header{
+      text-align:center;
+      padding: 18px 10px 8px;
+    }
+    .logo{
+      width:70px;
+      height:70px;
+      border-radius: 18px;
+      margin:0 auto 12px;
+      background: linear-gradient(135deg,#a855f7,#6366f1);
+      display:grid;
+      place-items:center;
+      font-size:30px;
+      font-weight:900;
+      box-shadow: 0 10px 24px rgba(0,0,0,.3);
+    }
+    h1{ margin: 8px 0 4px; letter-spacing:.2px; }
+    .tagline{ color: var(--muted); font-weight:600; }
+    .people{ color: var(--accent); font-weight:800; margin-top:6px; }
+
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 12px;
+      margin-top: 14px;
+    }
+    .card{
+      background: rgba(255,255,255,.06);
+      border:1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px;
+      cursor:pointer;
+      transition: transform .12s ease, background .12s ease;
+      min-height: 84px;
+    }
+    .card:hover{ transform: translateY(-2px); background: rgba(255,255,255,.085); }
+    .card b{ display:block; font-size: 15px; margin-bottom: 6px; }
+    .card span{ color: var(--muted); font-weight:600; }
+
+    .panel{
+      margin-top: 14px;
+      display:flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      align-items:center;
+      justify-content:space-between;
+      padding: 14px;
+      border-radius: var(--radius);
+      background: rgba(255,255,255,.05);
+      border:1px solid var(--border);
+    }
+    .panelLeft{
+      display:flex;
+      flex-direction:column;
+      gap:6px;
+      min-width: 260px;
+      flex: 1 1 260px;
+    }
+    .panelTitle{ font-weight:900; }
+    .panelDesc{ color: var(--muted); font-weight:600; font-size: 13px; line-height: 1.35; }
+    .btns{
+      display:flex;
+      gap:10px;
+      flex-wrap: wrap;
+      justify-content:flex-end;
+      flex: 1 1 260px;
+    }
+    button, a.btn{
+      padding: 10px 14px;
+      border-radius: 14px;
+      border: none;
+      cursor: pointer;
+      font-weight: 900;
+      text-decoration:none;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      white-space:nowrap;
+    }
+    .btnPi{ background: var(--accent); color:#000; }
+    .btnGhost{ background: transparent; color:#fff; border:1px solid var(--border); }
+    .btnGhost[disabled]{ opacity:.45; cursor:not-allowed; }
+
+    .bottom{
+      margin-top: 12px;
+      display:flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items:center;
+      justify-content: space-between;
+    }
+    .links{
+      display:flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items:center;
+    }
+    .chip{
+      padding: 8px 12px;
+      border-radius: 999px;
+      border:1px solid var(--border);
+      background: rgba(255,255,255,.04);
+      color:#fff;
       font-weight:800;
+      cursor:pointer;
     }
-    .mono{font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace}
-    .toast{
-      position:fixed;left:50%;bottom:18px;transform:translateX(-50%);
-      background:rgba(20,22,42,.95);
-      border:1px solid var(--border);
-      padding:10px 12px;border-radius:999px;
-      color:var(--text);font-weight:800;
-      display:none;gap:10px;align-items:center;
-      box-shadow: var(--shadow);
-      max-width: calc(100% - 24px);
+    .status{
+      font-size: 12px;
+      color: var(--muted);
+      font-weight:700;
     }
-    .toast.show{display:flex}
+
+    @media (max-width: 520px){
+      .btns{ justify-content:flex-start; }
+      select{ max-width: 180px; }
+    }
   </style>
 </head>
 
 <body>
-<div class="wrap">
-  <div class="topbar">
-    <div class="pill mono">PiWorldBank</div>
-
-    <div class="lang">
-      <span class="small" id="langLabel">언어</span>
-      <select id="langSelect" aria-label="Language">
-        <option value="ko" selected>한국어</option>
-        <option value="en">English</option>
-      </select>
+  <div class="wrap">
+    <div class="topbar">
+      <div class="brand">
+        <div class="pill">PiWorldBank</div>
+      </div>
+      <div class="langBox">
+        <div class="pill" id="langLabel">언어</div>
+        <select id="langSelect" aria-label="Language"></select>
+      </div>
     </div>
-  </div>
 
-  <div class="hero">
-    <div class="brand">
+    <header>
       <div class="logo">π</div>
-      <h1 id="title">PiWorldBank</h1>
-      <p class="tag" id="tag">ONE WORLD · ONE PI · ONE FUTURE</p>
-      <p class="motto" id="motto">People, not profit</p>
-    </div>
+      <h1 id="appTitle">PiWorldBank</h1>
+      <div class="tagline" id="tagline">ONE WORLD · ONE PI · ONE FUTURE</div>
+      <div class="people" id="people">People, not profit</div>
+    </header>
 
     <div class="grid">
-      <div class="card" data-action="ubi">
-        <b id="c1t">UBI</b>
-        <span id="c1s">기본소득 · 리워드</span>
+      <div class="card" data-key="ubi"><b>UBI</b><span></span></div>
+      <div class="card" data-key="pay"><b>Payments</b><span></span></div>
+      <div class="card" data-key="stake"><b>Staking</b><span></span></div>
+      <div class="card" data-key="reward"><b>Rewards</b><span></span></div>
+      <div class="card" data-key="support"><b>Support</b><span></span></div>
+      <div class="card" data-key="faq"><b>FAQ</b><span></span></div>
+    </div>
+
+    <div class="panel">
+      <div class="panelLeft">
+        <div class="panelTitle" id="installTitle">원클릭 설치 / 실행</div>
+        <div class="panelDesc" id="installDesc">
+          브라우저에서 “홈 화면에 추가/설치”가 가능할 때 활성화됩니다.
+        </div>
+        <div class="panelDesc" id="installUrl">URL: <span id="siteUrl"></span></div>
       </div>
-      <div class="card" data-action="pay">
-        <b id="c2t">Payments</b>
-        <span id="c2s">결제 · 송금</span>
-      </div>
-      <div class="card" data-action="stake">
-        <b id="c3t">Staking</b>
-        <span id="c3s">31.4% APY (demo)</span>
-      </div>
-      <div class="card" data-action="reward">
-        <b id="c4t">Rewards</b>
-        <span id="c4s">참여 리워드</span>
-      </div>
-      <div class="card" data-action="support">
-        <b id="c5t">Support</b>
-        <span id="c5s">헬프센터</span>
-      </div>
-      <div class="card" data-action="faq">
-        <b id="c6t">FAQ</b>
-        <span id="c6s">약관 · 정책 · 문의</span>
+      <div class="btns">
+        <button class="btnPi" id="openPiBtn">Pi Browser로 열기</button>
+        <button class="btnGhost" id="installBtn" disabled>설치</button>
       </div>
     </div>
-  </div>
 
-  <div class="section">
-    <div class="row">
-      <div>
-        <div style="font-weight:900" id="installTitle">원클릭 설치 / 실행</div>
-        <div class="small" id="installDesc">브라우저에서 “홈 화면에 추가(설치)”가 가능할 때 활성화됩니다.</div>
+    <div class="bottom">
+      <div class="links">
+        <div class="chip" id="ytBtn">YouTube</div>
+        <div class="chip" id="ttBtn">TikTok</div>
+        <div class="chip" id="contactBtn">Contact</div>
       </div>
-      <div class="row">
-        <button class="btn2" id="openPiBrowser">Pi Browser로 열기</button>
-        <button class="btn" id="installBtn" disabled>설치</button>
-      </div>
-    </div>
-    <div class="small" style="margin-top:10px">
-      URL: <span class="mono" id="urlText"></span>
+      <div class="status" id="statusText">상태 : OK</div>
     </div>
   </div>
-
-  <div class="footer">
-    <a class="pill link" id="ytLink" href="https://www.youtube.com/" target="_blank" rel="noopener">YouTube</a>
-    <a class="pill link" id="ttLink" href="https://www.tiktok.com/" target="_blank" rel="noopener">TikTok</a>
-    <a class="pill link" id="contactLink" href="mailto:ljw2358@gmail.com">Contact</a>
-    <span class="pill small" id="status">status: OK</span>
-  </div>
-</div>
-
-<div class="toast" id="toast"><span id="toastMsg"></span></div>
 
 <script>
-  // ===== i18n (한국어 기본) =====
-  const I18N = {
-    ko: {
-      langLabel: "언어",
-      c1s:"기본소득 · 리워드",
-      c2s:"결제 · 송금",
-      c3s:"31.4% APY (demo)",
-      c4s:"참여 리워드",
-      c5s:"헬프센터",
-      c6s:"약관 · 정책 · 문의",
-      installTitle:"원클릭 설치 / 실행",
-      installDesc:"브라우저에서 “홈 화면에 추가(설치)”가 가능할 때 활성화됩니다.",
-      installBtn:"설치",
-      openPi:"Pi Browser로 열기",
-      status:"status: OK",
-      toastPilot:"(데모) 파일럿 화면입니다. 다음 단계에서 실제 기능을 연결합니다.",
-      toastInstallReady:"설치가 가능합니다. '설치' 버튼을 누르세요.",
-      toastInstallNotReady:"이 환경에서는 설치가 제한될 수 있습니다. (크롬/안드로이드 권장)"
-    },
-    en: {
-      langLabel: "Language",
-      c1s:"Basic income rewards",
-      c2s:"Pay · Transfer",
-      c3s:"31.4% APY (demo)",
-      c4s:"Engagement rewards",
-      c5s:"Help center",
-      c6s:"Terms · Policy · Contact",
-      installTitle:"One-click Install / Launch",
-      installDesc:"Enabled when 'Add to Home Screen' is available in your browser.",
-      installBtn:"Install",
-      openPi:"Open in Pi Browser",
-      status:"status: OK",
-      toastPilot:"(Demo) Pilot screen. Next step: connect real functions.",
-      toastInstallReady:"Install is available. Tap 'Install'.",
-      toastInstallNotReady:"Install may be limited here. (Chrome/Android recommended)"
-    }
-  };
+/* ------------------------------
+   40 Languages (UI label + content)
+--------------------------------- */
 
-  const $ = (id)=>document.getElementById(id);
-  const toast = (msg)=>{
-    $("toastMsg").textContent = msg;
-    $("toast").classList.add("show");
-    setTimeout(()=>$("toast").classList.remove("show"), 2200);
-  };
+const LANGS = [
+  { code:"ko", label:"한국어" },
+  { code:"en", label:"English" },
+  { code:"ja", label:"日本語" },
+  { code:"zh", label:"中文(简体)" },
+  { code:"zh-TW", label:"中文(繁體)" },
+  { code:"vi", label:"Tiếng Việt" },
+  { code:"th", label:"ไทย" },
+  { code:"id", label:"Bahasa Indonesia" },
+  { code:"ms", label:"Bahasa Melayu" },
+  { code:"tl", label:"Filipino" },
+  { code:"hi", label:"हिन्दी" },
+  { code:"bn", label:"বাংলা" },
+  { code:"ta", label:"தமிழ்" },
+  { code:"te", label:"తెలుగు" },
+  { code:"ur", label:"اردو" },
+  { code:"ar", label:"العربية" },
+  { code:"fa", label:"فارسی" },
+  { code:"he", label:"עברית" },
+  { code:"tr", label:"Türkçe" },
+  { code:"ru", label:"Русский" },
+  { code:"uk", label:"Українська" },
+  { code:"pl", label:"Polski" },
+  { code:"de", label:"Deutsch" },
+  { code:"fr", label:"Français" },
+  { code:"es", label:"Español" },
+  { code:"pt", label:"Português" },
+  { code:"it", label:"Italiano" },
+  { code:"nl", label:"Nederlands" },
+  { code:"sv", label:"Svenska" },
+  { code:"no", label:"Norsk" },
+  { code:"da", label:"Dansk" },
+  { code:"fi", label:"Suomi" },
+  { code:"cs", label:"Čeština" },
+  { code:"sk", label:"Slovenčina" },
+  { code:"hu", label:"Magyar" },
+  { code:"ro", label:"Română" },
+  { code:"bg", label:"Български" },
+  { code:"sr", label:"Српски" },
+  { code:"el", label:"Ελληνικά" },
+  { code:"sw", label:"Kiswahili" }
+];
 
-  // URL 표시
-  $("urlText").textContent = location.href;
+const RTL = new Set(["ar","he","fa","ur"]);
 
-  // 언어 적용
-  function applyLang(code){
-    const t = I18N[code] || I18N.ko;
-    document.documentElement.lang = code;
+const I18N = {
+  "ko": {
+    langLabel:"언어",
+    installTitle:"원클릭 설치 / 실행",
+    installDesc:"브라우저에서 “홈 화면에 추가/설치”가 가능할 때 활성화됩니다.",
+    openPi:"Pi Browser로 열기",
+    install:"설치",
+    status:"상태 : OK",
+    ubi:"기본소득 리워드",
+    pay:"결제 · 송금",
+    stake:"31.4% APY (데모)",
+    reward:"참여 리워드",
+    support:"헬프센터",
+    faq:"약관 · 정책 · 문의",
+    toastPilot:"PiWorldBank 파일럿 실행",
+    toastInstallReady:"설치 가능 상태입니다.",
+    toastInstallNotReady:"지금은 설치가 지원되지 않습니다."
+  },
 
-    $("langLabel").textContent = t.langLabel;
-    $("c1s").textContent = t.c1s;
-    $("c2s").textContent = t.c2s;
-    $("c3s").textContent = t.c3s;
-    $("c4s").textContent = t.c4s;
-    $("c5s").textContent = t.c5s;
-    $("c6s").textContent = t.c6s;
-    $("installTitle").textContent = t.installTitle;
-    $("installDesc").textContent = t.installDesc;
-    $("installBtn").textContent = t.installBtn;
-    $("openPiBrowser").textContent = t.openPi;
-    $("status").textContent = t.status;
+  "en": {
+    langLabel:"Language",
+    installTitle:"One-click Install / Launch",
+    installDesc:"Enabled when “Install / Add to Home Screen” is available in your browser.",
+    openPi:"Open in Pi Browser",
+    install:"Install",
+    status:"status : OK",
+    ubi:"Basic income rewards",
+    pay:"Pay · Transfer",
+    stake:"31.4% APY (demo)",
+    reward:"Engagement rewards",
+    support:"Help center",
+    faq:"Terms · Policy · Contact",
+    toastPilot:"PiWorldBank pilot is running",
+    toastInstallReady:"Install is available.",
+    toastInstallNotReady:"Install is not supported right now."
+  },
+
+  "ja": {
+    langLabel:"言語",
+    installTitle:"ワンクリック インストール / 起動",
+    installDesc:"ブラウザで「インストール / ホーム画面に追加」が可能な場合に有効になります。",
+    openPi:"Pi Browserで開く",
+    install:"インストール",
+    status:"状態 : OK",
+    ubi:"ベーシックインカム報酬",
+    pay:"支払い · 送金",
+    stake:"年利 31.4%（デモ）",
+    reward:"参加報酬",
+    support:"ヘルプセンター",
+    faq:"規約 · ポリシー · お問い合わせ",
+    toastPilot:"PiWorldBank のパイロットを実行中です",
+    toastInstallReady:"インストール可能です。",
+    toastInstallNotReady:"現在インストールはサポートされていません。"
+  },
+
+  "zh": {
+    langLabel:"语言",
+    installTitle:"一键安装 / 启动",
+    installDesc:"当浏览器支持“安装 / 添加到主屏幕”时启用。",
+    openPi:"在 Pi Browser 中打开",
+    install:"安装",
+    status:"状态 : OK",
+    ubi:"基本收入奖励",
+    pay:"支付 · 转账",
+    stake:"31.4% APY（演示）",
+    reward:"参与奖励",
+    support:"帮助中心",
+    faq:"条款 · 政策 · 联系",
+    toastPilot:"PiWorldBank 试运行中",
+    toastInstallReady:"可安装。",
+    toastInstallNotReady:"当前不支持安装。"
+  },
+
+  "zh-TW": {
+    langLabel:"語言",
+    installTitle:"一鍵安裝 / 啟動",
+    installDesc:"當瀏覽器支援「安裝 / 加到主畫面」時啟用。",
+    openPi:"在 Pi Browser 開啟",
+    install:"安裝",
+    status:"狀態 : OK",
+    ubi:"基本收入獎勵",
+    pay:"付款 · 轉帳",
+    stake:"31.4% APY（示範）",
+    reward:"參與獎勵",
+    support:"客服中心",
+    faq:"條款 · 政策 · 聯絡",
+    toastPilot:"PiWorldBank 試運行中",
+    toastInstallReady:"可以安裝。",
+    toastInstallNotReady:"目前不支援安裝。"
+  },
+
+  "vi": {
+    langLabel:"Ngôn ngữ",
+    installTitle:"Cài đặt / Mở bằng 1 chạm",
+    installDesc:"Sẽ bật khi trình duyệt hỗ trợ “Cài đặt / Thêm vào Màn hình chính”.",
+    openPi:"Mở bằng Pi Browser",
+    install:"Cài đặt",
+    status:"trạng thái : OK",
+    ubi:"Thưởng thu nhập cơ bản",
+    pay:"Thanh toán · Chuyển",
+    stake:"31.4% APY (demo)",
+    reward:"Thưởng tương tác",
+    support:"Trung tâm trợ giúp",
+    faq:"Điều khoản · Chính sách · Liên hệ",
+    toastPilot:"PiWorldBank đang chạy bản thử nghiệm",
+    toastInstallReady:"Có thể cài đặt.",
+    toastInstallNotReady:"Hiện chưa hỗ trợ cài đặt."
+  },
+
+  "th": {
+    langLabel:"ภาษา",
+    installTitle:"ติดตั้ง / เปิดใช้แบบคลิกเดียว",
+    installDesc:"จะเปิดใช้งานเมื่อเบราว์เซอร์รองรับ “ติดตั้ง / เพิ่มไปที่หน้าจอหลัก”.",
+    openPi:"เปิดใน Pi Browser",
+    install:"ติดตั้ง",
+    status:"สถานะ : OK",
+    ubi:"รางวัลรายได้พื้นฐาน",
+    pay:"ชำระเงิน · โอน",
+    stake:"31.4% APY (เดโม)",
+    reward:"รางวัลการมีส่วนร่วม",
+    support:"ศูนย์ช่วยเหลือ",
+    faq:"ข้อกำหนด · นโยบาย · ติดต่อ",
+    toastPilot:"กำลังรัน PiWorldBank เวอร์ชันทดลอง",
+    toastInstallReady:"สามารถติดตั้งได้",
+    toastInstallNotReady:"ขณะนี้ยังไม่รองรับการติดตั้ง"
+  },
+
+  "id": {
+    langLabel:"Bahasa",
+    installTitle:"Instal / Jalankan Sekali Klik",
+    installDesc:"Aktif saat browser mendukung “Instal / Tambahkan ke Layar Utama”.",
+    openPi:"Buka di Pi Browser",
+    install:"Instal",
+    status:"status : OK",
+    ubi:"Hadiah pendapatan dasar",
+    pay:"Bayar · Transfer",
+    stake:"31.4% APY (demo)",
+    reward:"Hadiah partisipasi",
+    support:"Pusat bantuan",
+    faq:"Syarat · Kebijakan · Kontak",
+    toastPilot:"PiWorldBank mode pilot berjalan",
+    toastInstallReady:"Instal tersedia.",
+    toastInstallNotReady:"Instal belum didukung saat ini."
+  },
+
+  "ms": {
+    langLabel:"Bahasa",
+    installTitle:"Pasang / Lancar Satu Klik",
+    installDesc:"Diaktifkan apabila pelayar menyokong “Pasang / Tambah ke Skrin Utama”.",
+    openPi:"Buka dalam Pi Browser",
+    install:"Pasang",
+    status:"status : OK",
+    ubi:"Ganjaran pendapatan asas",
+    pay:"Bayar · Pindah",
+    stake:"31.4% APY (demo)",
+    reward:"Ganjaran penglibatan",
+    support:"Pusat bantuan",
+    faq:"Terma · Polisi · Hubungi",
+    toastPilot:"PiWorldBank sedang berjalan (pilot)",
+    toastInstallReady:"Pemasangan tersedia.",
+    toastInstallNotReady:"Pemasangan tidak disokong buat masa ini."
+  },
+
+  "tl": {
+    langLabel:"Wika",
+    installTitle:"One-click Install / Launch",
+    installDesc:"Magiging aktibo kapag available ang “Install / Add to Home Screen” sa browser mo.",
+    openPi:"Buksan sa Pi Browser",
+    install:"I-install",
+    status:"status : OK",
+    ubi:"Gantimpala sa basic income",
+    pay:"Bayad · Padala",
+    stake:"31.4% APY (demo)",
+    reward:"Gantimpala sa pakikilahok",
+    support:"Help center",
+    faq:"Mga Tuntunin · Patakaran · Makipag-ugnayan",
+    toastPilot:"Tumatakbo ang PiWorldBank pilot",
+    toastInstallReady:"Available ang pag-install.",
+    toastInstallNotReady:"Hindi suportado ang pag-install ngayon."
+  },
+
+  "hi": {
+    langLabel:"भाषा",
+    installTitle:"वन-क्लिक इंस्टॉल / लॉन्च",
+    installDesc:"जब आपके ब्राउज़र में “Install / Add to Home Screen” उपलब्ध हो, तब सक्रिय होगा।",
+    openPi:"Pi Browser में खोलें",
+    install:"इंस्टॉल",
+    status:"स्थिति : OK",
+    ubi:"बेसिक इनकम रिवॉर्ड",
+    pay:"भुगतान · ट्रांसफर",
+    stake:"31.4% APY (डेमो)",
+    reward:"भागीदारी रिवॉर्ड",
+    support:"हेल्प सेंटर",
+    faq:"शर्तें · नीति · संपर्क",
+    toastPilot:"PiWorldBank पायलट चल रहा है",
+    toastInstallReady:"इंस्टॉल उपलब्ध है।",
+    toastInstallNotReady:"अभी इंस्टॉल समर्थित नहीं है।"
+  },
+
+  "bn": {
+    langLabel:"ভাষা",
+    installTitle:"এক-ক্লিক ইনস্টল / চালু",
+    installDesc:"ব্রাউজারে “Install / Add to Home Screen” উপলব্ধ হলে সক্রিয় হবে।",
+    openPi:"Pi Browser-এ খুলুন",
+    install:"ইনস্টল",
+    status:"অবস্থা : OK",
+    ubi:"বেসিক ইনকাম রিওয়ার্ড",
+    pay:"পেমেন্ট · ট্রান্সফার",
+    stake:"31.4% APY (ডেমো)",
+    reward:"অংশগ্রহণ রিওয়ার্ড",
+    support:"হেল্প সেন্টার",
+    faq:"শর্তাবলি · নীতি · যোগাযোগ",
+    toastPilot:"PiWorldBank পাইলট চলছে",
+    toastInstallReady:"ইনস্টল করা যাবে।",
+    toastInstallNotReady:"এখন ইনস্টল সমর্থিত নয়।"
+  },
+
+  "ta": {
+    langLabel:"மொழி",
+    installTitle:"ஒரே-கிளிக் நிறுவல் / தொடக்கம்",
+    installDesc:"உங்கள் உலாவியில் “Install / Add to Home Screen” கிடைக்கும்போது செயல்படும்.",
+    openPi:"Pi Browser-இல் திறக்கவும்",
+    install:"நிறுவு",
+    status:"நிலை : OK",
+    ubi:"அடிப்படை வருமான வெகுமதி",
+    pay:"பணம் செலுத்தல் · பரிமாற்றம்",
+    stake:"31.4% APY (டெமோ)",
+    reward:"பங்கேற்பு வெகுமதி",
+    support:"உதவி மையம்",
+    faq:"விதிமுறைகள் · கொள்கை · தொடர்பு",
+    toastPilot:"PiWorldBank பைலட் இயங்குகிறது",
+    toastInstallReady:"நிறுவ முடியும்.",
+    toastInstallNotReady:"தற்போது நிறுவல் ஆதரிக்கப்படவில்லை."
+  },
+
+  "te": {
+    langLabel:"భాష",
+    installTitle:"వన్-క్లిక్ ఇన్ స్టాల్ / లాంచ్",
+    installDesc:"మీ బ్రౌజర్ లో “Install / Add to Home Screen” అందుబాటులో ఉన్నప్పుడు యాక్టివ్ అవుతుంది.",
+    openPi:"Pi Browser లో తెరవండి",
+    install:"ఇన్ స్టాల్",
+    status:"స్థితి : OK",
+    ubi:"బేసిక్ ఇన్ కమ్ రివార్డ్ లు",
+    pay:"చెల్లింపు · బదిలీ",
+    stake:"31.4% APY (డెమో)",
+    reward:"పాల్గొనడం రివార్డ్ లు",
+    support:"హెల్ప్ సెంటర్",
+    faq:"నియమాలు · విధానం · సంప్రదించండి",
+    toastPilot:"PiWorldBank పైలట్ నడుస్తోంది",
+    toastInstallReady:"ఇన్ స్టాల్ అందుబాటులో ఉంది.",
+    toastInstallNotReady:"ప్రస్తుతం ఇన్ స్టాల్ కు మద్దతు లేదు."
+  },
+
+  "ur": {
+    langLabel:"زبان",
+    installTitle:"ون-کلک انسٹال / لانچ",
+    installDesc:"جب آپ کے براؤزر میں “Install / Add to Home Screen” دستیاب ہو تو فعال ہوگا۔",
+    openPi:"Pi Browser میں کھولیں",
+    install:"انسٹال",
+    status:"حالت : OK",
+    ubi:"بنیادی آمدن انعامات",
+    pay:"ادائیگی · منتقلی",
+    stake:"31.4% APY (ڈیمو)",
+    reward:"شرکت کے انعامات",
+    support:"ہیلپ سینٹر",
+    faq:"شرائط · پالیسی · رابطہ",
+    toastPilot:"PiWorldBank پائلٹ چل رہا ہے",
+    toastInstallReady:"انسٹال دستیاب ہے۔",
+    toastInstallNotReady:"فی الحال انسٹال سپورٹ نہیں ہے۔"
+  },
+
+  "ar": {
+    langLabel:"اللغة",
+    installTitle:"تثبيت / تشغيل بنقرة واحدة",
+    installDesc:"يتم التفعيل عندما يدعم المتصفح “تثبيت / إضافة إلى الشاشة الرئيسية”.",
+    openPi:"افتح في Pi Browser",
+    install:"تثبيت",
+    status:"الحالة : OK",
+    ubi:"مكافآت الدخل الأساسي",
+    pay:"دفع · تحويل",
+    stake:" 31.4% APY (تجريبي)",
+    reward:"مكافآت المشاركة",
+    support:"مركز المساعدة",
+    faq:"الشروط · السياسة · تواصل",
+    toastPilot:"PiWorldBank يعمل بوضع تجريبي",
+    toastInstallReady:"التثبيت متاح.",
+    toastInstallNotReady:"التثبيت غير مدعوم حاليًا."
+  },
+
+  "fa": {
+    langLabel:"زبان",
+    installTitle:"نصب / اجرا با یک کلیک",
+    installDesc:"وقتی مرورگر از «نصب / افزودن به صفحهٔ اصلی» پشتیبانی کند فعال می شود.",
+    openPi:"در Pi Browser باز کن",
+    install:"نصب",
+    status:"وضعیت : OK",
+    ubi:"پاداش درآمد پایه",
+    pay:"پرداخت · انتقال",
+    stake:"31.4% APY (دمو)",
+    reward:"پاداش مشارکت",
+    support:"مرکز راهنما",
+    faq:"شرایط · سیاست · تماس",
+    toastPilot:"پایلوت PiWorldBank در حال اجراست",
+    toastInstallReady:"امکان نصب وجود دارد.",
+    toastInstallNotReady:"در حال حاضر نصب پشتیبانی نمی شود."
+  },
+
+  "he": {
+    langLabel:"שפה",
+    installTitle:"התקנה / הפעלה בלחיצה אחת",
+    installDesc:"יופעל כאשר בדפדפן קיימת אפשרות “Install / Add to Home Screen”.",
+    openPi:"פתח ב-Pi Browser",
+    install:"התקן",
+    status:"מצב : OK",
+    ubi:"תגמולי הכנסה בסיסית",
+    pay:"תשלום · העברה",
+    stake:"31.4% APY (דמו)",
+    reward:"תגמולי השתתפות",
+    support:"מרכז עזרה",
+    faq:"תנאים · מדיניות · יצירת קשר",
+    toastPilot:"מצב ניסוי של PiWorldBank פועל",
+    toastInstallReady:"התקנה זמינה.",
+    toastInstallNotReady:"התקנה לא נתמכת כרגע."
+  },
+
+  "tr": {
+    langLabel:"Dil",
+    installTitle:"Tek tıkla Yükle / Başlat",
+    installDesc:"Tarayıcınız “Yükle / Ana Ekrana Ekle”yi desteklediğinde etkinleşir.",
+    openPi:"Pi Browser’da aç",
+    install:"Yükle",
+    status:"durum : OK",
+    ubi:"Temel gelir ödülleri",
+    pay:"Ödeme · Transfer",
+    stake:"31.4% APY (demo)",
+    reward:"Katılım ödülleri",
+    support:"Yardım merkezi",
+    faq:"Şartlar · Politika · İletişim",
+    toastPilot:"PiWorldBank pilot çalışıyor",
+    toastInstallReady:"Yükleme kullanılabilir.",
+    toastInstallNotReady:"Şu anda yükleme desteklenmiyor."
+  },
+
+  "ru": {
+    langLabel:"Язык",
+    installTitle:"Установка / Запуск в один клик",
+    installDesc:"Активируется, когда в браузере доступно “Install / Add to Home Screen”.",
+    openPi:"Открыть в Pi Browser",
+    install:"Установить",
+    status:"статус : OK",
+    ubi:"Награды базового дохода",
+    pay:"Оплата · Перевод",
+    stake:"31.4% APY (демо)",
+    reward:"Награды за участие",
+    support:"Центр помощи",
+    faq:"Условия · Политика · Контакты",
+    toastPilot:"Пилот PiWorldBank запущен",
+    toastInstallReady:"Установка доступна.",
+    toastInstallNotReady:"Установка сейчас не поддерживается."
+  },
+
+  "uk": {
+    langLabel:"Мова",
+    installTitle:"Встановлення / Запуск в один клік",
+    installDesc:"Активується, коли у браузері доступно “Install / Add to Home Screen”.",
+    openPi:"Відкрити в Pi Browser",
+    install:"Встановити",
+    status:"статус : OK",
+    ubi:"Винагороди базового доходу",
+    pay:"Оплата · Переказ",
+    stake:"31.4% APY (демо)",
+    reward:"Винагороди за участь",
+    support:"Центр допомоги",
+    faq:"Умови · Політика · Контакти",
+    toastPilot:"Пілот PiWorldBank запущено",
+    toastInstallReady:"Встановлення доступне.",
+    toastInstallNotReady:"Наразі встановлення не підтримується."
+  },
+
+  "pl": {
+    langLabel:"Język",
+    installTitle:"Instalacja / Uruchomienie jednym kliknięciem",
+    installDesc:"Aktywuje się, gdy w przeglądarce dostępne jest “Install / Add to Home Screen”.",
+    openPi:"Otwórz w Pi Browser",
+    install:"Zainstaluj",
+    status:"status : OK",
+    ubi:"Nagrody podstawowego dochodu",
+    pay:"Płatność · Przelew",
+    stake:"31.4% APY (demo)",
+    reward:"Nagrody za udział",
+    support:"Centrum pomocy",
+    faq:"Warunki · Polityka · Kontakt",
+    toastPilot:"Pilot PiWorldBank działa",
+    toastInstallReady:"Instalacja jest dostępna.",
+    toastInstallNotReady:"Instalacja nie jest teraz obsługiwana."
+  },
+
+  "de": {
+    langLabel:"Sprache",
+    installTitle:"1-Klick Installieren / Starten",
+    installDesc:"Wird aktiviert, wenn “Installieren / Zum Startbildschirm hinzufügen” im Browser verfügbar ist.",
+    openPi:"In Pi Browser öffnen",
+    install:"Installieren",
+    status:"Status : OK",
+    ubi:"Basis-Einkommensprämien",
+    pay:"Zahlen · Überweisen",
+    stake:"31,4% APY (Demo)",
+    reward:"Teilnahme-Prämien",
+    support:"Hilfe-Center",
+    faq:"AGB · Richtlinien · Kontakt",
+    toastPilot:"PiWorldBank-Pilot läuft",
+    toastInstallReady:"Installation verfügbar.",
+    toastInstallNotReady:"Installation wird derzeit nicht unterstützt."
+  },
+
+  "fr": {
+    langLabel:"Langue",
+    installTitle:"Installer / Lancer en 1 clic",
+    installDesc:"Activé lorsque “Installer / Ajouter à l’écran d’accueil” est disponible dans votre navigateur.",
+    openPi:"Ouvrir dans Pi Browser",
+    install:"Installer",
+    status:"statut : OK",
+    ubi:"Récompenses de revenu de base",
+    pay:"Paiement · Transfert",
+    stake:"31,4% APY (démo)",
+    reward:"Récompenses de participation",
+    support:"Centre d’aide",
+    faq:"Conditions · Politique · Contact",
+    toastPilot:"Le pilote PiWorldBank est en cours",
+    toastInstallReady:"L’installation est disponible.",
+    toastInstallNotReady:"L’installation n’est pas prise en charge pour le moment."
+  },
+
+  "es": {
+    langLabel:"Idioma",
+    installTitle:"Instalar / Iniciar con 1 clic",
+    installDesc:"Se activa cuando “Instalar / Añadir a la pantalla de inicio” está disponible en tu navegador.",
+    openPi:"Abrir en Pi Browser",
+    install:"Instalar",
+    status:"estado : OK",
+    ubi:"Recompensas de ingreso básico",
+    pay:"Pago · Transferencia",
+    stake:"31.4% APY (demo)",
+    reward:"Recompensas de participación",
+    support:"Centro de ayuda",
+    faq:"Términos · Política · Contacto",
+    toastPilot:"El piloto de PiWorldBank está en ejecución",
+    toastInstallReady:"La instalación está disponible.",
+    toastInstallNotReady:"La instalación no está disponible ahora."
+  },
+
+  "pt": {
+    langLabel:"Idioma",
+    installTitle:"Instalar / Abrir com 1 clique",
+    installDesc:"Ativa quando “Instalar / Adicionar à tela inicial” estiver disponível no seu navegador.",
+    openPi:"Abrir no Pi Browser",
+    install:"Instalar",
+    status:"status : OK",
+    ubi:"Recompensas de renda básica",
+    pay:"Pagamento · Transferência",
+    stake:"31,4% APY (demo)",
+    reward:"Recompensas de participação",
+    support:"Central de ajuda",
+    faq:"Termos · Política · Contato",
+    toastPilot:"O piloto do PiWorldBank está em execução",
+    toastInstallReady:"A instalação está disponível.",
+    toastInstallNotReady:"A instalação não é suportada no momento."
+  },
+
+  "it": {
+    langLabel:"Lingua",
+    installTitle:"Installa / Avvia con 1 clic",
+    installDesc:"Si attiva quando nel browser è disponibile “Installa / Aggiungi alla schermata Home”.",
+    openPi:"Apri in Pi Browser",
+    install:"Installa",
+    status:"stato : OK",
+    ubi:"Ricompense reddito di base",
+    pay:"Pagamento · Trasferimento",
+    stake:"31,4% APY (demo)",
+    reward:"Ricompense di partecipazione",
+    support:"Centro assistenza",
+    faq:"Termini · Policy · Contatti",
+    toastPilot:"Il pilot di PiWorldBank è in esecuzione",
+    toastInstallReady:"Installazione disponibile.",
+    toastInstallNotReady:"Installazione non supportata al momento."
+  },
+
+  "nl": {
+    langLabel:"Taal",
+    installTitle:"Installeren / Starten met 1 klik",
+    installDesc:"Wordt actief wanneer “Installeren / Toevoegen aan startscherm” beschikbaar is in je browser.",
+    openPi:"Openen in Pi Browser",
+    install:"Installeren",
+    status:"status : OK",
+    ubi:"Basisinkomen-beloningen",
+    pay:"Betalen · Overmaken",
+    stake:"31,4% APY (demo)",
+    reward:"Deelname-beloningen",
+    support:"Helpcentrum",
+    faq:"Voorwaarden · Beleid · Contact",
+    toastPilot:"PiWorldBank-pilot draait",
+    toastInstallReady:"Installeren is beschikbaar.",
+    toastInstallNotReady:"Installeren wordt nu niet ondersteund."
+  },
+
+  "sv": {
+    langLabel:"Språk",
+    installTitle:"Installera / Starta med ett klick",
+    installDesc:"Aktiveras när “Installera / Lägg till på startskärmen” finns i din webbläsare.",
+    openPi:"Öppna i Pi Browser",
+    install:"Installera",
+    status:"status : OK",
+    ubi:"Belöningar för basinkomst",
+    pay:"Betala · Överför",
+    stake:"31,4% APY (demo)",
+    reward:"Deltagarbelöningar",
+    support:"Hjälpcenter",
+    faq:"Villkor · Policy · Kontakt",
+    toastPilot:"PiWorldBank-pilot körs",
+    toastInstallReady:"Installation är tillgänglig.",
+    toastInstallNotReady:"Installation stöds inte just nu."
+  },
+
+  "no": {
+    langLabel:"Språk",
+    installTitle:"Installer / Start med ett klikk",
+    installDesc:"Aktiveres når “Installer / Legg til på startskjermen” er tilgjengelig i nettleseren.",
+    openPi:"Åpne i Pi Browser",
+    install:"Installer",
+    status:"status : OK",
+    ubi:"Grunninntektsbelønninger",
+    pay:"Betaling · Overføring",
+    stake:"31,4% APY (demo)",
+    reward:"Deltakelsesbelønninger",
+    support:"Hjelpesenter",
+    faq:"Vilkår · Policy · Kontakt",
+    toastPilot:"PiWorldBank-pilot kjører",
+    toastInstallReady:"Installasjon er tilgjengelig.",
+    toastInstallNotReady:"Installasjon støttes ikke akkurat nå."
+  },
+
+  "da": {
+    langLabel:"Sprog",
+    installTitle:"Installer / Start med ét klik",
+    installDesc:"Aktiveres, når “Installer / Føj til startskærm” er tilgængelig i din browser.",
+    openPi:"Åbn i Pi Browser",
+    install:"Installer",
+    status:"status : OK",
+    ubi:"Grundindkomst-belønninger",
+    pay:"Betal · Overfør",
+    stake:"31,4% APY (demo)",
+    reward:"Deltagelses-belønninger",
+    support:"Hjælpecenter",
+    faq:"Vilkår · Politik · Kontakt",
+    toastPilot:"PiWorldBank-pilot kører",
+    toastInstallReady:"Installation er tilgængelig.",
+    toastInstallNotReady:"Installation understøttes ikke lige nu."
+  },
+
+  "fi": {
+    langLabel:"Kieli",
+    installTitle:"Asenna / Käynnistä yhdellä klikkauksella",
+    installDesc:"Aktivoituu, kun selaimessa on “Asenna / Lisää aloitusnäytölle”.",
+    openPi:"Avaa Pi Browserissa",
+    install:"Asenna",
+    status:"tila : OK",
+    ubi:"Perustulon palkinnot",
+    pay:"Maksu · Siirto",
+    stake:"31,4% APY (demo)",
+    reward:"Osallistumispalkinnot",
+    support:"Ohjekeskus",
+    faq:"Ehdot · Käytännöt · Yhteys",
+    toastPilot:"PiWorldBank-pilotti on käynnissä",
+    toastInstallReady:"Asennus on saatavilla.",
+    toastInstallNotReady:"Asennusta ei tueta juuri nyt."
+  },
+
+  "cs": {
+    langLabel:"Jazyk",
+    installTitle:"Instalace / Spuštění jedním kliknutím",
+    installDesc:"Aktivuje se, když je v prohlížeči dostupné “Install / Add to Home Screen”.",
+    openPi:"Otevřít v Pi Browser",
+    install:"Instalovat",
+    status:"stav : OK",
+    ubi:"Odměny základního příjmu",
+    pay:"Platba · Převod",
+    stake:"31,4% APY (demo)",
+    reward:"Odměny za účast",
+    support:"Centrum nápovědy",
+    faq:"Podmínky · Zásady · Kontakt",
+    toastPilot:"Pilot PiWorldBank běží",
+    toastInstallReady:"Instalace je k dispozici.",
+    toastInstallNotReady:"Instalace nyní není podporována."
+  },
+
+  "sk": {
+    langLabel:"Jazyk",
+    installTitle:"Inštalácia / Spustenie jedným klikom",
+    installDesc:"Aktivuje sa, keď je v prehliadači dostupné “Install / Add to Home Screen”.",
+    openPi:"Otvoriť v Pi Browser",
+    install:"Inštalovať",
+    status:"stav : OK",
+    ubi:"Odmeny základného príjmu",
+    pay:"Platba · Prevod",
+    stake:"31,4% APY (demo)",
+    reward:"Odmeny za účasť",
+    support:"Centrum pomoci",
+    faq:"Podmienky · Zásady · Kontakt",
+    toastPilot:"Pilot PiWorldBank beží",
+    toastInstallReady:"Inštalácia je dostupná.",
+    toastInstallNotReady:"Inštalácia nie je momentálne podporovaná."
+  },
+
+  "hu": {
+    langLabel:"Nyelv",
+    installTitle:"Telepítés / Indítás egy kattintással",
+    installDesc:"Akkor aktiválódik, ha a böngészőben elérhető a “Telepítés / Kezdőképernyőre”.",
+    openPi:"Megnyitás Pi Browserben",
+    install:"Telepítés",
+    status:"állapot : OK",
+    ubi:"Alapjövedelem-jutalmak",
+    pay:"Fizetés · Átutalás",
+    stake:"31,4% APY (demo)",
+    reward:"Részvételi jutalmak",
+    support:"Súgóközpont",
+    faq:"Feltételek · Szabályzat · Kapcsolat",
+    toastPilot:"A PiWorldBank pilot fut",
+    toastInstallReady:"Telepítés elérhető.",
+    toastInstallNotReady:"A telepítés most nem támogatott."
+  },
+
+  "ro": {
+    langLabel:"Limbă",
+    installTitle:"Instalează / Pornește cu un clic",
+    installDesc:"Se activează când “Instalare / Adaugă pe ecranul de pornire” este disponibil în browser.",
+    openPi:"Deschide în Pi Browser",
+    install:"Instalează",
+    status:"stare : OK",
+    ubi:"Recompense venit de bază",
+    pay:"Plată · Transfer",
+    stake:"31,4% APY (demo)",
+    reward:"Recompense de participare",
+    support:"Centru de ajutor",
+    faq:"Termeni · Politică · Contact",
+    toastPilot:"Pilotul PiWorldBank rulează",
+    toastInstallReady:"Instalarea este disponibilă.",
+    toastInstallNotReady:"Instalarea nu este suportată acum."
+  },
+
+  "bg": {
+    langLabel:"Език",
+    installTitle:"Инсталиране / Стартиране с едно щракване",
+    installDesc:"Активира се, когато в браузъра е налично “Install / Add to Home Screen”.",
+    openPi:"Отвори в Pi Browser",
+    install:"Инсталирай",
+    status:"статус : OK",
+    ubi:"Награди за базов доход",
+    pay:"Плащане · Превод",
+    stake:"31.4% APY (демо)",
+    reward:"Награди за участие",
+    support:"Център за помощ",
+    faq:"Условия · Политика · Контакт",
+    toastPilot:"Пилотът на PiWorldBank работи",
+    toastInstallReady:"Инсталацията е налична.",
+    toastInstallNotReady:"Инсталацията не се поддържа в момента."
+  },
+
+  "sr": {
+    langLabel:"Језик",
+    installTitle:"Инсталација / Покретање једним кликом",
+    installDesc:"Активира се када је у прегледачу доступно “Install / Add to Home Screen”.",
+    openPi:"Отвори у Pi Browser-у",
+    install:"Инсталирај",
+    status:"статус : OK",
+    ubi:"Награде основног прихода",
+    pay:"Плаћање · Трансфер",
+    stake:"31.4% APY (демо)",
+    reward:"Награде за учешће",
+    support:"Центар за помоћ",
+    faq:"Услови · Политика · Контакт",
+    toastPilot:"PiWorldBank пилот ради",
+    toastInstallReady:"Инсталација је доступна.",
+    toastInstallNotReady:"Инсталација тренутно није подржана."
+  },
+
+  "el": {
+    langLabel:"Γλώσσα",
+    installTitle:"Εγκατάσταση / Εκκίνηση με ένα κλικ",
+    installDesc:"Ενεργοποιείται όταν το “Εγκατάσταση / Προσθήκη στην αρχική οθόνη” είναι διαθέσιμο στο πρόγραμμα περιήγησης.",
+    openPi:"Άνοιγμα στο Pi Browser",
+    install:"Εγκατάσταση",
+    status:"κατάσταση : OK",
+    ubi:"Ανταμοιβές βασικού εισοδήματος",
+    pay:"Πληρωμή · Μεταφορά",
+    stake:"31,4% APY (demo)",
+    reward:"Ανταμοιβές συμμετοχής",
+    support:"Κέντρο βοήθειας",
+    faq:"Όροι · Πολιτική · Επικοινωνία",
+    toastPilot:"Το PiWorldBank pilot εκτελείται",
+    toastInstallReady:"Η εγκατάσταση είναι διαθέσιμη.",
+    toastInstallNotReady:"Η εγκατάσταση δεν υποστηρίζεται προς το παρόν."
+  },
+
+  "sw": {
+    langLabel:"Lugha",
+    installTitle:"Sakinisha / Fungua kwa bonyeza moja",
+    installDesc:"Huwashwa wakati “Install / Add to Home Screen” inapatikana kwenye kivinjari chako.",
+    openPi:"Fungua kwenye Pi Browser",
+    install:"Sakinisha",
+    status:"hali : OK",
+    ubi:"Zawadi za kipato cha msingi",
+    pay:"Malipo · Hamisho",
+    stake:"31.4% APY (demo)",
+    reward:"Zawadi za ushiriki",
+    support:"Kituo cha usaidizi",
+    faq:"Masharti · Sera · Wasiliana",
+    toastPilot:"PiWorldBank pilot inaendelea",
+    toastInstallReady:"Usakinishaji unapatikana.",
+    toastInstallNotReady:"Usakinishaji hauungwi mkono kwa sasa."
   }
+};
 
-  $("langSelect").addEventListener("change", (e)=>applyLang(e.target.value));
-  applyLang("ko"); // ✅ 한국어 기본
+/* 안정 fallback: 혹시 빠진 언어가 있어도 English로 떨어짐 */
+function t(code){
+  return I18N[code] || I18N["en"];
+}
 
-  // 카드 클릭 (일단 데모 팝업)
-  document.addEventListener("click", (e)=>{
-    const card = e.target.closest(".card");
-    if(!card) return;
-    e.preventDefault();
-    const lang = $("langSelect").value || "ko";
-    toast(I18N[lang].toastPilot);
+const $ = (id)=>document.getElementById(id);
+
+function toast(msg){
+  alert(msg);
+}
+
+function applyLang(code){
+  const x = t(code);
+
+  // rtl 처리
+  document.documentElement.lang = code;
+  document.body.dir = RTL.has(code) ? "rtl" : "ltr";
+
+  $("langLabel").textContent = x.langLabel;
+  $("installTitle").textContent = x.installTitle;
+  $("installDesc").textContent = x.installDesc;
+  $("openPiBtn").textContent = x.openPi;
+  $("installBtn").textContent = x.install;
+  $("statusText").textContent = x.status;
+
+  document.querySelectorAll(".card").forEach(c=>{
+    const key = c.dataset.key;
+    c.querySelector("span").textContent = x[key];
   });
+}
 
-  // Pi Browser로 열기 (pi:// 스킴은 환경에 따라 제한될 수 있음)
-  $("openPiBrowser").addEventListener("click", ()=>{
-    // Pi Browser가 설치되어 있으면 열리도록 시도
-    // (막히면 웹 URL 그대로 사용)
-    const url = location.href;
-    // Pi 브라우저 슬러그가 있으면 바꾸세요:
-    // const piUrl = "pi://piworldbank";
-    // location.href = piUrl;
-    window.open(url, "_blank");
+/* populate language select */
+const sel = $("langSelect");
+LANGS.forEach(x=>{
+  const opt = document.createElement("option");
+  opt.value = x.code;
+  opt.textContent = x.label;
+  sel.appendChild(opt);
+});
+
+/* default: KO */
+sel.value = "ko";
+applyLang("ko");
+
+/* change event */
+sel.addEventListener("change", (e)=>applyLang(e.target.value));
+
+/* cards click */
+document.querySelectorAll(".card").forEach(c=>{
+  c.addEventListener("click", ()=>{
+    const x = t(sel.value);
+    toast(x.toastPilot);
   });
+});
 
-  // ===== PWA 설치 =====
-  let deferredPrompt = null;
+/* Pi Browser open: 안정적으로 현재 URL 새탭 */
+$("openPiBtn").addEventListener("click", ()=>{
+  window.open(location.href, "_blank");
+});
 
-  window.addEventListener("beforeinstallprompt", (e)=>{
-    e.preventDefault();
-    deferredPrompt = e;
-    $("installBtn").disabled = false;
-    const lang = $("langSelect").value || "ko";
-    toast(I18N[lang].toastInstallReady);
-  });
+/* External links (원하시면 본인 링크로 교체) */
+$("ytBtn").addEventListener("click", ()=>{
+  window.open("https://www.youtube.com", "_blank");
+});
+$("ttBtn").addEventListener("click", ()=>{
+  window.open("https://www.tiktok.com", "_blank");
+});
+$("contactBtn").addEventListener("click", ()=>{
+  window.open("mailto:ljw2358@gmail.com", "_blank");
+});
 
-  $("installBtn").addEventListener("click", async ()=>{
-    const lang = $("langSelect").value || "ko";
-    if(!deferredPrompt){
-      toast(I18N[lang].toastInstallNotReady);
-      return;
-    }
-    deferredPrompt.prompt();
-    await deferredPrompt.userChoice;
-    deferredPrompt = null;
-    $("installBtn").disabled = true;
-  });
+/* show URL */
+$("siteUrl").textContent = location.href;
+
+/* PWA install */
+let deferredPrompt = null;
+window.addEventListener("beforeinstallprompt", (e)=>{
+  e.preventDefault();
+  deferredPrompt = e;
+  $("installBtn").disabled = false;
+  // const x = t(sel.value); toast(x.toastInstallReady); // 원하면 켜기
+});
+
+$("installBtn").addEventListener("click", async ()=>{
+  const x = t(sel.value);
+
+  if(!deferredPrompt){
+    toast(x.toastInstallNotReady);
+    return;
+  }
+  deferredPrompt.prompt();
+  try { await deferredPrompt.userChoice; } catch(e){}
+  deferredPrompt = null;
+  $("installBtn").disabled = true;
+});
 </script>
 </body>
 </html>
