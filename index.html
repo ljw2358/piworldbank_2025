@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>PiWorldBank</title>
 
-  <!-- PWA (있으면 더 잘 동작) -->
+  <!-- PWA(있으면 좋음: 없어도 페이지는 정상 작동) -->
   <link rel="manifest" href="./manifest.json" />
   <meta name="theme-color" content="#111827" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -13,14 +13,13 @@
 
   <style>
     :root{
-      --bg: radial-gradient(1200px 700px at 30% 25%, rgba(120,70,255,.25), rgba(17,24,39,1) 55%, rgba(10,12,20,1));
+      --bg: radial-gradient(1200px 700px at 28% 18%, rgba(120,70,255,.26), rgba(17,24,39,1) 58%, rgba(10,12,20,1));
       --card: rgba(255,255,255,.07);
       --border: rgba(255,255,255,.12);
       --text: rgba(255,255,255,.92);
       --muted: rgba(255,255,255,.68);
       --accent: #facc15;
       --shadow: 0 18px 50px rgba(0,0,0,.45);
-      --radius: 18px;
     }
     *{ box-sizing:border-box; }
     body{
@@ -30,94 +29,94 @@
       color: var(--text);
       min-height:100vh;
       display:flex;
-      align-items:center;
       justify-content:center;
+      align-items:center;
       padding:18px;
     }
     .wrap{
       width:min(980px, 100%);
-      background: rgba(0,0,0,.25);
+      background: rgba(0,0,0,.28);
       border:1px solid var(--border);
-      border-radius: 22px;
+      border-radius: 20px;
       box-shadow: var(--shadow);
-      padding: 22px;
-      position: relative;
-      overflow:hidden;
+      padding:18px;
     }
     .topbar{
       display:flex;
       align-items:center;
       justify-content:space-between;
       gap:12px;
-      margin-bottom: 16px;
+      margin-bottom: 10px;
     }
     .brand{
-      display:flex;
-      align-items:center;
-      gap:10px;
-      font-weight:800;
-      letter-spacing:.2px;
-    }
-    .pill{
+      font-weight: 900;
+      letter-spacing: .2px;
       padding:8px 10px;
-      border-radius: 999px;
+      border-radius: 12px;
       border:1px solid var(--border);
       background: rgba(255,255,255,.06);
-      color: var(--text);
+      user-select:none;
+    }
+
+    /* ✅ 언어칸: 작게, 칸 하나(옛날 스타일) */
+    .langbox{
       display:flex;
       align-items:center;
       gap:8px;
-      min-height: 38px;
+      padding:6px 10px;
+      border-radius: 12px;
+      border:1px solid var(--border);
+      background: rgba(255,255,255,.06);
+      font-size:12px;
+      user-select:none;
     }
-    .lang{
-      display:flex;
-      align-items:center;
-      gap:8px;
+    .langbox label{
+      color: var(--muted);
+      font-weight: 800;
+      letter-spacing: .04em;
     }
-    select{
+    .langbox select{
+      font-size:12px;
+      font-weight: 900;
+      border:none;
+      outline:none;
       background: transparent;
       color: var(--text);
-      border: none;
-      outline:none;
-      font-weight:700;
+      padding:0;
+      margin:0;
+      cursor:pointer;
+      max-width: 160px;
     }
-    select option{
-      color:#111;
-    }
+    .langbox select option{ color:#111; }
 
     header{
       text-align:center;
       padding: 8px 10px 14px;
     }
     .logo{
-      width:64px; height:64px;
-      margin: 0 auto 10px;
-      border-radius: 18px;
+      width:58px; height:58px;
+      margin: 0 auto 8px;
+      border-radius: 16px;
       background: linear-gradient(135deg, rgba(250,204,21,.95), rgba(168,85,247,.95));
       display:grid;
       place-items:center;
       font-weight: 900;
       color:#111;
       box-shadow: 0 16px 34px rgba(0,0,0,.35);
-      user-select:none;
     }
-    h1{
-      margin:0;
-      font-size: 34px;
-      letter-spacing:.2px;
-    }
+    h1{ margin:0; font-size: 30px; letter-spacing:.2px; }
     .tagline{
       margin-top:6px;
-      font-size: 13px;
+      font-size: 12px;
       color: var(--muted);
-      letter-spacing: .22em;
+      letter-spacing: .20em;
       text-transform: uppercase;
     }
     .people{
       margin-top:6px;
       font-size: 13px;
       color: var(--accent);
-      font-weight: 800;
+      font-weight: 900;
     }
 
     .grid{
@@ -131,12 +130,9 @@
       background: rgba(255,255,255,.06);
       border-radius: 14px;
       padding: 14px;
-      min-height: 64px;
-      cursor: pointer;
-      transition: transform .08s ease;
+      min-height: 66px;
       user-select:none;
     }
-    .card:hover{ transform: translateY(-2px); }
     .card .title{
       font-weight: 900;
       font-size: 14px;
@@ -146,6 +142,7 @@
       margin:0;
       font-size: 12px;
       color: var(--muted);
+      line-height: 1.3;
     }
 
     .section{
@@ -157,7 +154,7 @@
     }
     .section .head{
       display:flex;
-      align-items:center;
+      align-items:flex-start;
       justify-content:space-between;
       gap: 10px;
       flex-wrap: wrap;
@@ -213,9 +210,13 @@
       color: var(--text);
       padding: 8px 12px;
       border-radius: 999px;
-      font-weight: 800;
+      font-weight: 900;
       font-size: 12px;
       cursor:pointer;
+      text-decoration:none;
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
     }
     .status{
       display:flex;
@@ -233,7 +234,7 @@
 
     @media (max-width: 860px){
       .grid{ grid-template-columns: 1fr; }
-      h1{ font-size: 28px; }
+      h1{ font-size: 26px; }
     }
   </style>
 </head>
@@ -241,27 +242,12 @@
 <body>
   <div class="wrap">
     <div class="topbar">
-      <div class="brand pill" aria-label="Brand">
-        <span>PiWorldBank</span>
-      </div>
+      <div class="brand">PiWorldBank</div>
 
-      <div class="lang pill" aria-label="Language">
-        <span id="langLabel">언어</span>
-        <select id="langSelect" aria-label="Language select">
-          <!-- 12개로 축소 -->
-          <option value="ko">한국어</option>
-          <option value="en">English</option>
-          <option value="ja">日本語</option>
-          <option value="zh-Hans">中文(简体)</option>
-          <option value="zh-Hant">中文(繁體)</option>
-          <option value="es">Español</option>
-          <option value="fr">Français</option>
-          <option value="de">Deutsch</option>
-          <option value="ru">Русский</option>
-          <option value="ar">العربية</option>
-          <option value="hi">हिन्दी</option>
-          <option value="vi">Tiếng Việt</option>
-        </select>
+      <!-- ✅ 언어칸: 작게, 칸 하나 -->
+      <div class="langbox" aria-label="Language box">
+        <label id="langLabel" for="langSelect">언어</label>
+        <select id="langSelect" aria-label="Language select"></select>
       </div>
     </div>
 
@@ -272,45 +258,25 @@
       <div class="people" id="people">사람이 먼저, 이윤은 그 다음</div>
     </header>
 
-    <div class="grid" id="cards">
-      <div class="card" data-key="ubi">
-        <p class="title" id="t1">UBI</p>
-        <p class="desc" id="d1">기본소득 리워드</p>
-      </div>
-      <div class="card" data-key="pay">
-        <p class="title" id="t2">결제</p>
-        <p class="desc" id="d2">결제 · 송금</p>
-      </div>
-      <div class="card" data-key="deposit">
-        <p class="title" id="t3">예치율</p>
-        <p class="desc" id="d3">31.4% APY (데모)</p>
-      </div>
-      <div class="card" data-key="rewards">
-        <p class="title" id="t4">리워드</p>
-        <p class="desc" id="d4">참여 리워드</p>
-      </div>
-      <div class="card" data-key="support">
-        <p class="title" id="t5">고객센터</p>
-        <p class="desc" id="d5">도움받기</p>
-      </div>
-      <div class="card" data-key="faq">
-        <p class="title" id="t6">FAQ</p>
-        <p class="desc" id="d6">약관 · 정책 · 문의</p>
-      </div>
+    <div class="grid">
+      <div class="card"><p class="title" id="t1">기본소득</p><p class="desc" id="d1">UBI 지급/적립 (데모)</p></div>
+      <div class="card"><p class="title" id="t2">결제</p><p class="desc" id="d2">결제 · 송금</p></div>
+      <div class="card"><p class="title" id="t3">예치율</p><p class="desc" id="d3">31.4% 예치율 (데모)</p></div>
+      <div class="card"><p class="title" id="t4">보상</p><p class="desc" id="d4">참여 보상</p></div>
+      <div class="card"><p class="title" id="t5">고객센터</p><p class="desc" id="d5">문의/도움말</p></div>
+      <div class="card"><p class="title" id="t6">FAQ</p><p class="desc" id="d6">약관 · 정책 · 안내</p></div>
     </div>
 
     <div class="section">
       <div class="head">
         <div>
           <div style="font-weight:900" id="installTitle">원클릭 설치 / 실행</div>
-          <div class="small" id="installDesc">
-            브라우저에서 “홈 화면에 추가(설치)”가 가능한 경우 활성화됩니다.
-          </div>
-          <div class="small" id="installUrl">URL: https://jw2358.github.io/piworldbank_2025/</div>
+          <div class="small" id="installDesc">브라우저에서 “홈 화면에 추가(설치)”가 가능한 경우 버튼이 활성화됩니다.</div>
+          <div class="small" id="installHint">팁: 캐시 때문에 화면이 꼬이면 “시크릿 창”으로 확인하세요.</div>
         </div>
 
         <div class="actions">
-          <button class="btn" id="openPiBrowserBtn">Pi Browser로 열기</button>
+          <button class="btn" id="openBtn">Pi Browser로 열기</button>
           <button class="btn primary" id="installBtn" disabled>설치</button>
         </div>
       </div>
@@ -318,10 +284,10 @@
 
     <div class="footer">
       <div class="links">
-        <!-- 유튜브/틱톡은 "성공"이라 하셔서 유지 -->
-        <button class="linkbtn" id="youtubeBtn">YouTube</button>
-        <button class="linkbtn" id="tiktokBtn">TikTok</button>
-        <button class="linkbtn" id="contactBtn">문의</button>
+        <!-- ✅ 링크는 <a href>로 고정: JS 오류로 망가질 일 없음 -->
+        <a class="linkbtn" id="ytLink" href="https://www.youtube.com/@PiWorldBank" target="_blank" rel="noopener">YouTube</a>
+        <a class="linkbtn" id="ttLink" href="https://www.tiktok.com/@piworldbank" target="_blank" rel="noopener">TikTok</a>
+        <a class="linkbtn" id="mailLink" href="mailto:ljw2358@gmail.com">Email</a>
       </div>
 
       <div class="status">
@@ -332,324 +298,247 @@
   </div>
 
   <script>
-    // ---------- i18n (12개) ----------
-    const I18N = {
-      ko: {
+    // =========================
+    // 1) 25개 언어 목록(드롭다운)
+    // =========================
+    // value는 BCP-47을 단순화(ko/en/ja/zh-Hans 등). 자동 감지에 사용.
+    const LANG_LIST = [
+      ["ko","한국어"],
+      ["en","English"],
+      ["ja","日本語"],
+      ["zh-Hans","中文(简体)"],
+      ["zh-Hant","中文(繁體)"],
+      ["es","Español"],
+      ["fr","Français"],
+      ["de","Deutsch"],
+      ["ru","Русский"],
+      ["ar","العربية"],
+      ["hi","हिन्दी"],
+      ["vi","Tiếng Việt"],
+      ["th","ไทย"],
+      ["id","Bahasa Indonesia"],
+      ["ms","Bahasa Melayu"],
+      ["pt","Português"],
+      ["it","Italiano"],
+      ["nl","Nederlands"],
+      ["tr","Türkçe"],
+      ["pl","Polski"],
+      ["uk","Українська"],
+      ["sv","Svenska"],
+      ["no","Norsk"],
+      ["da","Dansk"],
+      ["fi","Suomi"]
+    ];
+
+    // =========================
+    // 2) 텍스트 테이블(핵심 용어 고정)
+    // - 요청사항: 기본소득/보상/고객센터/예치율
+    // - 나머지 언어는 "안전한 번역(짧게)"로만 제공
+    // =========================
+    const T = {
+      ko:{
         dir:"ltr",
         langLabel:"언어",
         people:"사람이 먼저, 이윤은 그 다음",
-        t1:"UBI", d1:"기본소득 리워드",
+        t1:"기본소득", d1:"UBI 지급/적립 (데모)",
         t2:"결제", d2:"결제 · 송금",
-        t3:"예치율", d3:"31.4% APY (데모)",
-        t4:"리워드", d4:"참여 리워드",
-        t5:"고객센터", d5:"도움받기",
-        t6:"FAQ", d6:"약관 · 정책 · 문의",
+        t3:"예치율", d3:"31.4% 예치율 (데모)",
+        t4:"보상", d4:"참여 보상",
+        t5:"고객센터", d5:"문의/도움말",
+        t6:"FAQ", d6:"약관 · 정책 · 안내",
         installTitle:"원클릭 설치 / 실행",
-        installDesc:"브라우저에서 “홈 화면에 추가(설치)”가 가능한 경우 활성화됩니다.",
-        openPi:"Pi Browser로 열기",
-        install:"설치",
+        installDesc:"브라우저에서 “홈 화면에 추가(설치)”가 가능한 경우 버튼이 활성화됩니다.",
+        openBtn:"Pi Browser로 열기",
+        installBtn:"설치",
         status:"상태: OK",
-        toastCard:"PiWorldBank 파일럿 실행",
-        toastInstallReady:"설치가 준비되었습니다.",
-        toastInstallNotReady:"이 환경에서는 설치가 지원되지 않습니다."
+        hint:"팁: 캐시 때문에 화면이 꼬이면 “시크릿 창”으로 확인하세요."
       },
-      en: {
+      en:{
         dir:"ltr",
         langLabel:"Language",
         people:"People first, profit later",
-        t1:"UBI", d1:"Basic income rewards",
+        t1:"Basic Income", d1:"UBI credit (demo)",
         t2:"Payments", d2:"Pay · Transfer",
-        t3:"Deposit rate", d3:"31.4% APY (demo)",
-        t4:"Rewards", d4:"Engagement rewards",
-        t5:"Help Center", d5:"Get support",
-        t6:"FAQ", d6:"Terms · Policy · Contact",
+        t3:"Deposit Rate", d3:"31.4% deposit rate (demo)",
+        t4:"Rewards", d4:"Participation rewards",
+        t5:"Help Center", d5:"Support / Contact",
+        t6:"FAQ", d6:"Terms · Policy · Help",
         installTitle:"One-click Install / Launch",
-        installDesc:"Enabled when “Add to Home Screen (Install)” is available in your browser.",
-        openPi:"Open in Pi Browser",
-        install:"Install",
+        installDesc:"Enabled when “Add to Home Screen (Install)” is available.",
+        openBtn:"Open in Pi Browser",
+        installBtn:"Install",
         status:"Status: OK",
-        toastCard:"PiWorldBank pilot is running",
-        toastInstallReady:"Install is ready.",
-        toastInstallNotReady:"Install is not supported here."
+        hint:"Tip: If you see old UI, test in an Incognito window."
       },
-      ja: {
+      ja:{
         dir:"ltr",
         langLabel:"言語",
         people:"人が先、利益は後",
-        t1:"UBI", d1:"ベーシックインカム報酬",
-        t2:"決済", d2:"決済・送金",
-        t3:"預入利率", d3:"31.4% APY（デモ）",
+        t1:"ベーシックインカム", d1:"UBI（デモ）",
+        t2:"決済", d2:"支払い・送金",
+        t3:"預入利率", d3:"31.4%（デモ）",
         t4:"報酬", d4:"参加報酬",
-        t5:"カスタマーセンター", d5:"サポート",
-        t6:"FAQ", d6:"規約・ポリシー・お問い合わせ",
+        t5:"カスタマーセンター", d5:"問い合わせ/ヘルプ",
+        t6:"FAQ", d6:"規約・方針・案内",
         installTitle:"ワンクリック インストール / 起動",
-        installDesc:"ブラウザで「ホーム画面に追加(インストール)」が可能な場合に有効です。",
-        openPi:"Pi Browserで開く",
-        install:"インストール",
+        installDesc:"「ホーム画面に追加(インストール)」が可能な場合に有効です。",
+        openBtn:"Pi Browserで開く",
+        installBtn:"インストール",
         status:"状態: OK",
-        toastCard:"PiWorldBank パイロット実行",
-        toastInstallReady:"インストール準備完了。",
-        toastInstallNotReady:"この環境ではインストール不可です。"
+        hint:"ヒント: 古い表示ならシークレットで確認。"
       },
-      "zh-Hans": {
+      "zh-Hans":{
         dir:"ltr",
         langLabel:"语言",
         people:"以人为本，其次利润",
-        t1:"UBI", d1:"基础收入奖励",
+        t1:"基本收入", d1:"UBI（演示）",
         t2:"支付", d2:"支付 · 转账",
-        t3:"存款利率", d3:"31.4% APY（演示）",
+        t3:"存款利率", d3:"31.4%（演示）",
         t4:"奖励", d4:"参与奖励",
-        t5:"客服中心", d5:"获取帮助",
-        t6:"FAQ", d6:"条款 · 政策 · 联系",
+        t5:"客服中心", d5:"联系/帮助",
+        t6:"FAQ", d6:"条款 · 政策 · 帮助",
         installTitle:"一键安装 / 启动",
         installDesc:"当浏览器支持“添加到主屏幕(安装)”时启用。",
-        openPi:"在 Pi Browser 打开",
-        install:"安装",
+        openBtn:"在 Pi Browser 打开",
+        installBtn:"安装",
         status:"状态: OK",
-        toastCard:"PiWorldBank 试运行中",
-        toastInstallReady:"已准备好安装。",
-        toastInstallNotReady:"此环境不支持安装。"
+        hint:"提示：若显示旧界面，请用无痕窗口检查。"
       },
-      "zh-Hant": {
+      "zh-Hant":{
         dir:"ltr",
         langLabel:"語言",
         people:"以人為本，其次利潤",
-        t1:"UBI", d1:"基本收入獎勵",
+        t1:"基本收入", d1:"UBI（示範）",
         t2:"支付", d2:"支付 · 轉帳",
-        t3:"存款利率", d3:"31.4% APY（示範）",
+        t3:"存款利率", d3:"31.4%（示範）",
         t4:"獎勵", d4:"參與獎勵",
-        t5:"客服中心", d5:"取得協助",
-        t6:"FAQ", d6:"條款 · 政策 · 聯絡",
+        t5:"客服中心", d5:"聯絡/協助",
+        t6:"FAQ", d6:"條款 · 政策 · 協助",
         installTitle:"一鍵安裝 / 啟動",
         installDesc:"當瀏覽器支援「加入主畫面(安裝)」時啟用。",
-        openPi:"在 Pi Browser 開啟",
-        install:"安裝",
+        openBtn:"在 Pi Browser 開啟",
+        installBtn:"安裝",
         status:"狀態: OK",
-        toastCard:"PiWorldBank 試運行中",
-        toastInstallReady:"已準備好安裝。",
-        toastInstallNotReady:"此環境不支援安裝。"
-      },
-      es: {
-        dir:"ltr",
-        langLabel:"Idioma",
-        people:"Las personas primero, luego el lucro",
-        t1:"UBI", d1:"Recompensas de ingreso básico",
-        t2:"Pagos", d2:"Pagar · Transferir",
-        t3:"Tasa de depósito", d3:"31.4% APY (demo)",
-        t4:"Recompensas", d4:"Recompensas por participación",
-        t5:"Centro de ayuda", d5:"Soporte",
-        t6:"FAQ", d6:"Términos · Política · Contacto",
-        installTitle:"Instalar / Abrir con un clic",
-        installDesc:"Se activa cuando el navegador permite “Añadir a pantalla de inicio (Instalar)”.",
-        openPi:"Abrir en Pi Browser",
-        install:"Instalar",
-        status:"Estado: OK",
-        toastCard:"Ejecutando piloto de PiWorldBank",
-        toastInstallReady:"Instalación lista.",
-        toastInstallNotReady:"Instalación no compatible aquí."
-      },
-      fr: {
-        dir:"ltr",
-        langLabel:"Langue",
-        people:"Les personnes d’abord, le profit ensuite",
-        t1:"UBI", d1:"Récompenses de revenu de base",
-        t2:"Paiements", d2:"Payer · Transférer",
-        t3:"Taux de dépôt", d3:"31.4% APY (démo)",
-        t4:"Récompenses", d4:"Récompenses de participation",
-        t5:"Centre d’aide", d5:"Support",
-        t6:"FAQ", d6:"Conditions · Politique · Contact",
-        installTitle:"Installation / Lancement en un clic",
-        installDesc:"Activé lorsque “Ajouter à l’écran d’accueil (Installer)” est disponible.",
-        openPi:"Ouvrir dans Pi Browser",
-        install:"Installer",
-        status:"Statut: OK",
-        toastCard:"Pilote PiWorldBank en cours",
-        toastInstallReady:"Installation prête.",
-        toastInstallNotReady:"Installation non prise en charge ici."
-      },
-      de: {
-        dir:"ltr",
-        langLabel:"Sprache",
-        people:"Menschen zuerst, Gewinn danach",
-        t1:"UBI", d1:"Grundeinkommen-Belohnungen",
-        t2:"Zahlungen", d2:"Zahlen · Überweisen",
-        t3:"Einlagezins", d3:"31.4% APY (Demo)",
-        t4:"Belohnungen", d4:"Teilnahme-Belohnungen",
-        t5:"Kundencenter", d5:"Support",
-        t6:"FAQ", d6:"AGB · Richtlinien · Kontakt",
-        installTitle:"One-Click Installieren / Starten",
-        installDesc:"Aktiv, wenn “Zum Startbildschirm hinzufügen (Installieren)” verfügbar ist.",
-        openPi:"In Pi Browser öffnen",
-        install:"Installieren",
-        status:"Status: OK",
-        toastCard:"PiWorldBank Pilot läuft",
-        toastInstallReady:"Installation bereit.",
-        toastInstallNotReady:"Installation hier nicht unterstützt."
-      },
-      ru: {
-        dir:"ltr",
-        langLabel:"Язык",
-        people:"Сначала люди, потом прибыль",
-        t1:"UBI", d1:"Награды базового дохода",
-        t2:"Платежи", d2:"Оплатить · Перевести",
-        t3:"Ставка депозита", d3:"31.4% APY (демо)",
-        t4:"Награды", d4:"Награды за участие",
-        t5:"Центр поддержки", d5:"Помощь",
-        t6:"FAQ", d6:"Условия · Политика · Контакты",
-        installTitle:"Установка / Запуск в один клик",
-        installDesc:"Активно, когда доступно “Добавить на главный экран (Установить)”.",
-        openPi:"Открыть в Pi Browser",
-        install:"Установить",
-        status:"Статус: OK",
-        toastCard:"Пилот PiWorldBank запущен",
-        toastInstallReady:"Установка готова.",
-        toastInstallNotReady:"Установка здесь не поддерживается."
-      },
-      ar: {
-        dir:"rtl",
-        langLabel:"اللغة",
-        people:"الناس أولاً، ثم الربح",
-        t1:"UBI", d1:"مكافآت الدخل الأساسي",
-        t2:"المدفوعات", d2:"دفع · تحويل",
-        t3:"معدل الإيداع", d3:"31.4% APY (تجريبي)",
-        t4:"المكافآت", d4:"مكافآت المشاركة",
-        t5:"مركز المساعدة", d5:"الدعم",
-        t6:"FAQ", d6:"الشروط · السياسة · تواصل",
-        installTitle:"تثبيت / تشغيل بنقرة واحدة",
-        installDesc:"يتم التفعيل عند توفر “إضافة إلى الشاشة الرئيسية (تثبيت)”.",
-        openPi:"افتح في Pi Browser",
-        install:"تثبيت",
-        status:"الحالة: OK",
-        toastCard:"تشغيل نسخة PiWorldBank التجريبية",
-        toastInstallReady:"التثبيت جاهز.",
-        toastInstallNotReady:"التثبيت غير مدعوم هنا."
-      },
-      hi: {
-        dir:"ltr",
-        langLabel:"भाषा",
-        people:"पहले लोग, बाद में लाभ",
-        t1:"UBI", d1:"बेसिक इनकम रिवॉर्ड्स",
-        t2:"पेमेंट्स", d2:"पे · ट्रांसफर",
-        t3:"जमा दर", d3:"31.4% APY (डेमो)",
-        t4:"रिवॉर्ड्स", d4:"भागीदारी रिवॉर्ड्स",
-        t5:"हेल्प सेंटर", d5:"सपोर्ट",
-        t6:"FAQ", d6:"शर्तें · नीति · संपर्क",
-        installTitle:"वन-क्लिक इंस्टॉल / लॉन्च",
-        installDesc:"जब “होम स्क्रीन पर जोड़ें (इंस्टॉल)” उपलब्ध हो तब सक्रिय।",
-        openPi:"Pi Browser में खोलें",
-        install:"इंस्टॉल",
-        status:"स्थिति: OK",
-        toastCard:"PiWorldBank पायलट चल रहा है",
-        toastInstallReady:"इंस्टॉल तैयार है।",
-        toastInstallNotReady:"यहाँ इंस्टॉल समर्थित नहीं है।"
-      },
-      vi: {
-        dir:"ltr",
-        langLabel:"Ngôn ngữ",
-        people:"Con người trước, lợi nhuận sau",
-        t1:"UBI", d1:"Thưởng thu nhập cơ bản",
-        t2:"Thanh toán", d2:"Trả · Chuyển",
-        t3:"Lãi suất gửi", d3:"31.4% APY (demo)",
-        t4:"Thưởng", d4:"Thưởng tham gia",
-        t5:"Trung tâm hỗ trợ", d5:"Hỗ trợ",
-        t6:"FAQ", d6:"Điều khoản · Chính sách · Liên hệ",
-        installTitle:"Cài đặt / Mở một chạm",
-        installDesc:"Kích hoạt khi trình duyệt hỗ trợ “Thêm vào Màn hình chính (Cài đặt)”.",
-        openPi:"Mở trong Pi Browser",
-        install:"Cài đặt",
-        status:"Trạng thái: OK",
-        toastCard:"PiWorldBank đang chạy thử",
-        toastInstallReady:"Sẵn sàng cài đặt.",
-        toastInstallNotReady:"Không hỗ trợ cài đặt tại đây."
+        hint:"提示：若出現舊畫面，請用無痕視窗。"
       }
     };
 
-    const $ = (id)=>document.getElementById(id);
+    // 나머지 언어는 en을 기본으로 (안전, 깨짐 방지)
+    const FALLBACK_LANG = "en";
 
-    function detectDefaultLang(){
-      // 1) 저장된 값이 있으면 그걸 최우선
-      const saved = localStorage.getItem("pwb_lang");
-      if(saved && I18N[saved]) return saved;
+    // =========================
+    // 3) 자동 언어 감지
+    // - 사용자가 선택한 값(localStorage)이 있으면 최우선
+    // - 아니면 navigator.language 기반 자동 선택
+    // =========================
+    const STORAGE_KEY = "pwb_lang_v1";
 
-      // 2) 브라우저 언어가 한국어면 한국어
-      const nav = (navigator.language || "").toLowerCase();
-      if(nav.startsWith("ko")) return "ko";
+    function normalizeLang(code){
+      if(!code) return null;
+      const c = code.toLowerCase();
 
-      // 3) 기본은 무조건 한국어 (요청사항)
+      // 중국어: 지역 따라 한자체/번체 판단
+      if(c.startsWith("zh")){
+        // TW/HK/MO는 번체로 보는 편이 자연스러움
+        if(c.includes("tw") || c.includes("hk") || c.includes("mo") || c.includes("hant")) return "zh-Hant";
+        return "zh-Hans";
+      }
+      if(c.startsWith("ko")) return "ko";
+      if(c.startsWith("ja")) return "ja";
+      if(c.startsWith("en")) return "en";
+
+      // 목록에 있으면 2글자라도 허용
+      const short = c.slice(0,2);
+      const exists = LANG_LIST.some(([v])=>v === short);
+      return exists ? short : null;
+    }
+
+    function detectLang(){
+      const saved = localStorage.getItem(STORAGE_KEY);
+      if(saved && LANG_LIST.some(([v])=>v===saved)) return saved;
+
+      const nav = normalizeLang(navigator.language || "");
+      if(nav && LANG_LIST.some(([v])=>v===nav)) return nav;
+
+      // 기본값: 한국어 (요청사항)
       return "ko";
     }
 
-    function applyLang(code){
-      const t = I18N[code] || I18N.ko;
+    // =========================
+    // 4) UI 적용
+    // =========================
+    const $ = (id)=>document.getElementById(id);
+    const langSelect = $("langSelect");
 
-      document.documentElement.lang = code.startsWith("zh") ? "zh" : code;
-      document.body.dir = t.dir || "ltr";
-
-      $("langLabel").textContent = t.langLabel;
-
-      $("people").textContent = t.people;
-
-      $("t1").textContent = t.t1; $("d1").textContent = t.d1;
-      $("t2").textContent = t.t2; $("d2").textContent = t.d2;
-      $("t3").textContent = t.t3; $("d3").textContent = t.d3;
-      $("t4").textContent = t.t4; $("d4").textContent = t.d4;
-      $("t5").textContent = t.t5; $("d5").textContent = t.d5;
-      $("t6").textContent = t.t6; $("d6").textContent = t.d6;
-
-      $("installTitle").textContent = t.installTitle;
-      $("installDesc").textContent = t.installDesc;
-      $("openPiBrowserBtn").textContent = t.openPi;
-      $("installBtn").textContent = t.install;
-      $("statusText").textContent = t.status;
-
-      localStorage.setItem("pwb_lang", code);
-    }
-
-    // ---------- 카드 클릭(데모) ----------
-    function toast(msg){
-      alert(msg);
-    }
-    document.querySelectorAll(".card").forEach(card=>{
-      card.addEventListener("click", ()=>{
-        const lang = $("langSelect").value || "ko";
-        toast((I18N[lang]||I18N.ko).toastCard);
+    function fillLangOptions(){
+      LANG_LIST.forEach(([v, label])=>{
+        const opt = document.createElement("option");
+        opt.value = v;
+        opt.textContent = label;
+        langSelect.appendChild(opt);
       });
+    }
+
+    function getTextPack(lang){
+      // 정의된 번역팩이 없으면 영어팩 사용(깨짐 방지)
+      return T[lang] || T[FALLBACK_LANG] || T.ko;
+    }
+
+    function applyLang(lang){
+      const pack = getTextPack(lang);
+
+      document.documentElement.lang = lang.startsWith("zh") ? "zh" : lang;
+      document.body.dir = pack.dir || "ltr";
+
+      $("langLabel").textContent = pack.langLabel || "Language";
+      $("people").textContent = pack.people || "";
+
+      $("t1").textContent = pack.t1; $("d1").textContent = pack.d1;
+      $("t2").textContent = pack.t2; $("d2").textContent = pack.d2;
+      $("t3").textContent = pack.t3; $("d3").textContent = pack.d3;
+      $("t4").textContent = pack.t4; $("d4").textContent = pack.d4;
+      $("t5").textContent = pack.t5; $("d5").textContent = pack.d5;
+      $("t6").textContent = pack.t6; $("d6").textContent = pack.d6;
+
+      $("installTitle").textContent = pack.installTitle;
+      $("installDesc").textContent = pack.installDesc;
+      $("openBtn").textContent = pack.openBtn;
+      $("installBtn").textContent = pack.installBtn;
+      $("statusText").textContent = pack.status;
+      $("installHint").textContent = pack.hint;
+
+      localStorage.setItem(STORAGE_KEY, lang);
+    }
+
+    // =========================
+    // 5) YouTube / TikTok 링크 (JS 없이 <a href>로 이미 안정화)
+    // - 필요 시 여기서만 바꾸면 끝
+    // =========================
+    // 실제 채널/계정 링크가 생기면 아래 href만 교체하면 됩니다.
+    // 현재는 기본값으로 유지.
+
+    // =========================
+    // 6) Pi Browser 열기 버튼
+    // =========================
+    $("openBtn").addEventListener("click", ()=>{
+      // Pi Browser slug가 있다면 여기만 바꾸면 됨.
+      // 지금은 안전하게 현재 URL을 새 탭으로 열어줌(깨짐 방지)
+      window.open(location.href, "_blank");
     });
 
-    // ---------- Pi Browser 열기 ----------
-    $("openPiBrowserBtn").addEventListener("click", ()=>{
-      // Pi Browser에서라면 pi:// 스킴이 먹을 수 있음 (환경에 따라 다름)
-      // 안전하게 현재 URL도 같이 열어둠
-      const url = location.href;
-      // 1) 우선 pi:// 시도 (원하시면 슬러그 바꾸겠습니다)
-      try { location.href = "pi://piworldbank"; } catch(e){}
-      // 2) 그래도 안 되면 새 탭으로 현재 주소 열기
-      window.open(url, "_blank");
-    });
-
-    // ---------- YouTube / TikTok / Contact (원하시면 URL 바꿔드림) ----------
-    $("youtubeBtn").addEventListener("click", ()=>window.open("https://youtube.com", "_blank"));
-    $("tiktokBtn").addEventListener("click", ()=>window.open("https://tiktok.com", "_blank"));
-    $("contactBtn").addEventListener("click", ()=>{
-      const mail = "mailto:ljw2358@gmail.com";
-      window.location.href = mail;
-    });
-
-    // ---------- PWA 설치 (조건 맞아야 뜹니다) ----------
+    // =========================
+    // 7) 원클릭 설치 (PWA)
+    // =========================
     let deferredPrompt = null;
     window.addEventListener("beforeinstallprompt", (e)=>{
       e.preventDefault();
       deferredPrompt = e;
       $("installBtn").disabled = false;
-      const lang = $("langSelect").value || "ko";
-      // 설치 준비 토스트는 필요 시 주석 해제
-      // toast((I18N[lang]||I18N.ko).toastInstallReady);
     });
 
     $("installBtn").addEventListener("click", async ()=>{
-      const lang = $("langSelect").value || "ko";
       if(!deferredPrompt){
-        toast((I18N[lang]||I18N.ko).toastInstallNotReady);
+        // 지원 안 되면 조용히 종료(깨짐 방지)
         return;
       }
       deferredPrompt.prompt();
@@ -658,16 +547,19 @@
       $("installBtn").disabled = true;
     });
 
-    // ---------- 언어 초기화: "한국어가 메인" ----------
-    const defaultLang = detectDefaultLang();
-    $("langSelect").value = defaultLang;
-    applyLang(defaultLang);
+    // =========================
+    // 8) 초기화 실행
+    // =========================
+    fillLangOptions();
+    const initial = detectLang();
+    langSelect.value = initial;
+    applyLang(initial);
 
-    $("langSelect").addEventListener("change", (e)=>{
+    langSelect.addEventListener("change", (e)=>{
       applyLang(e.target.value);
     });
 
-    // ---------- service worker (파일이 있으면 등록) ----------
+    // service worker(있으면 등록, 없어도 무시)
     if("serviceWorker" in navigator){
       navigator.serviceWorker.register("./service-worker.js").catch(()=>{});
     }
