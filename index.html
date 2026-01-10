@@ -1,54 +1,47 @@
 <!doctype html>
-<html lang="en">
+<html lang="ko">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="theme-color" content="#141b42" />
-  <meta name="description" content="PiWorldBank – One World • One Pi • One Future" />
   <title>PiWorldBank</title>
 
   <!-- PWA -->
   <link rel="manifest" href="./manifest.json" />
-  <link rel="icon" href="./img/logo_192.png" />
-  <link rel="apple-touch-icon" href="./img/logo_192.png" />
+  <meta name="theme-color" content="#111827" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
   <style>
     :root{
-      --bg1:#0f1436;
-      --bg2:#1a1f4b;
-      --card:rgba(255,255,255,.06);
-      --card2:rgba(255,255,255,.08);
-      --border:rgba(255,255,255,.14);
-      --text:rgba(255,255,255,.92);
-      --muted:rgba(255,255,255,.68);
-      --shadow:0 12px 40px rgba(0,0,0,.35);
-      --radius:22px;
-      --radius2:16px;
-      --accent:#f6c945;
-      --accent2:#a78bfa;
-      --ok:#4ade80;
+      --bg: radial-gradient(1200px 700px at 30% 20%, #2b2a6f 0%, #0b1020 55%, #070a12 100%);
+      --card: rgba(255,255,255,.06);
+      --card2: rgba(255,255,255,.08);
+      --border: rgba(255,255,255,.14);
+      --text: rgba(255,255,255,.92);
+      --muted: rgba(255,255,255,.62);
+      --accent: #facc15;
+      --shadow: 0 18px 44px rgba(0,0,0,.35);
+      --radius: 18px;
     }
-
-    *{ box-sizing:border-box; }
+    *{ box-sizing: border-box; }
     body{
       margin:0;
-      font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,"Noto Sans",sans-serif;
-      background:linear-gradient(155deg,var(--bg1),var(--bg2));
-      color:var(--text);
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, "Apple SD Gothic Neo","Noto Sans KR", sans-serif;
+      background: var(--bg);
+      color: var(--text);
       min-height:100vh;
       display:flex;
       align-items:center;
       justify-content:center;
-      padding:22px;
+      padding: 18px;
     }
-
     .wrap{
-      width:min(980px, 100%);
-      background:rgba(0,0,0,.20);
+      width:min(1100px, 100%);
+      background: rgba(0,0,0,.22);
       border:1px solid var(--border);
-      border-radius:var(--radius);
-      box-shadow:var(--shadow);
-      padding:18px;
+      border-radius: 26px;
+      box-shadow: var(--shadow);
+      padding: 20px 20px 16px;
       position:relative;
       overflow:hidden;
     }
@@ -58,248 +51,209 @@
       align-items:center;
       justify-content:space-between;
       gap:12px;
-      margin-bottom:14px;
+      margin-bottom: 14px;
+    }
+    .brand{
+      display:flex; align-items:center; gap:10px;
+      padding:8px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.06);
+      border:1px solid var(--border);
+      font-weight:800;
+      letter-spacing:.2px;
+    }
+    .brand .dot{
+      width:12px;height:12px;border-radius:50%;
+      background: var(--accent);
+      box-shadow: 0 0 18px rgba(250,204,21,.6);
     }
 
-    .brand-pill{
+    .langBox{
       display:flex;
       align-items:center;
       gap:10px;
       padding:8px 12px;
-      border-radius:999px;
-      background:rgba(255,255,255,.06);
-      border:1px solid var(--border);
-      font-weight:700;
-      letter-spacing:.3px;
-      user-select:none;
-    }
-
-    .lang{
-      display:flex;
-      align-items:center;
-      gap:8px;
-      padding:7px 10px;
-      border-radius:999px;
-      background:rgba(255,255,255,.06);
+      border-radius: 999px;
+      background: rgba(255,255,255,.06);
       border:1px solid var(--border);
     }
-    .lang label{
-      font-size:12px;
-      color:var(--muted);
+    .langBox label{
+      color: var(--muted);
       font-weight:700;
+      font-size: 13px;
     }
-    .lang select{
-      background:transparent;
-      color:var(--text);
-      border:none;
-      outline:none;
-      font-weight:800;
+    .langBox select{
+      background: transparent;
+      border: none;
+      outline: none;
+      color: var(--text);
+      font-weight: 800;
       cursor:pointer;
-      min-width:160px;
     }
-    .lang option{
-      background:#10163a;
+    .langBox option{
+      background:#0b1020;
       color:#fff;
     }
 
     header{
       text-align:center;
-      padding:10px 10px 18px;
+      margin: 14px 0 14px;
     }
-
     .logo{
-      width:64px;height:64px;
-      border-radius:18px;
-      margin:0 auto 10px;
-      display:grid;
-      place-items:center;
-      font-size:26px;
-      font-weight:900;
-      color:#231c0b;
-      background:linear-gradient(135deg,var(--accent2),var(--accent));
-      box-shadow:0 10px 26px rgba(0,0,0,.35);
+      width:64px;height:64px;border-radius: 18px;
+      margin: 0 auto 10px;
+      display:grid; place-items:center;
+      background: linear-gradient(135deg, #7c3aed, #f59e0b);
+      border:1px solid rgba(255,255,255,.25);
+      box-shadow: 0 10px 26px rgba(0,0,0,.35);
+      font-weight: 900;
+      font-size: 26px;
     }
-
-    h1{
-      margin:0;
-      font-size:34px;
-      letter-spacing:.3px;
-    }
+    h1{ margin:0; font-size: 34px; letter-spacing:-.6px; }
     .tagline{
-      margin-top:8px;
-      font-size:12px;
-      color:var(--muted);
-      letter-spacing:2.6px;
-      text-transform:uppercase;
-      font-weight:800;
+      margin-top:6px;
+      font-size: 12px;
+      letter-spacing: .28em;
+      color: var(--muted);
+      text-transform: uppercase;
     }
     .people{
       margin-top:6px;
-      font-size:13px;
-      color:var(--accent);
-      font-weight:900;
+      font-size: 13px;
+      color: var(--accent);
+      font-weight: 900;
     }
 
-    .grid{
+    /* cards */
+    .services{
       display:grid;
-      grid-template-columns:repeat(3, 1fr);
-      gap:12px;
-      padding:4px 10px 0;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+      gap: 12px;
+      margin: 14px auto 10px;
+      width: min(980px, 100%);
     }
-    @media (max-width:900px){
-      .grid{ grid-template-columns:repeat(2,1fr); }
-    }
-    @media (max-width:560px){
-      .grid{ grid-template-columns:1fr; }
-    }
-
-    .tile{
-      background:var(--card);
+    .card{
+      background: var(--card);
       border:1px solid var(--border);
-      border-radius:var(--radius2);
-      padding:14px 14px;
-      text-align:left;
-      cursor:pointer;
-      transition:.12s transform ease, .12s background ease;
+      border-radius: var(--radius);
+      padding: 14px 14px 12px;
+      min-height: 70px;
+      cursor: pointer;
+      transition: transform .12s ease, background .12s ease;
       user-select:none;
     }
-    .tile:hover{
-      transform:translateY(-2px);
-      background:var(--card2);
-    }
+    .card:hover{ transform: translateY(-2px); background: var(--card2); }
+    .card .t{ font-weight: 900; font-size: 14px; }
+    .card .s{ margin-top:4px; color: var(--muted); font-size: 12px; }
 
-    .t-title{
-      font-weight:900;
-      font-size:14px;
-      margin:0;
-    }
-    .t-desc{
-      margin:6px 0 0;
-      color:var(--muted);
-      font-size:12px;
-      font-weight:700;
-    }
-
-    .panel{
-      margin:14px 10px 0;
-      padding:14px;
-      border-radius:var(--radius2);
-      border:1px solid var(--border);
-      background:rgba(0,0,0,.18);
-    }
-
-    .panel h3{
-      margin:0 0 6px;
-      font-size:13px;
-      letter-spacing:.2px;
-    }
-    .panel p{
-      margin:0;
-      font-size:12px;
-      color:var(--muted);
-      font-weight:700;
-      line-height:1.45;
-    }
-
+    /* actions row */
     .actions{
-      display:flex;
-      gap:10px;
-      align-items:center;
-      justify-content:flex-end;
-      margin-top:10px;
-      flex-wrap:wrap;
-    }
-
-    .btn{
-      border:none;
-      outline:none;
-      cursor:pointer;
-      font-weight:900;
-      border-radius:999px;
-      padding:9px 14px;
-      border:1px solid var(--border);
-      background:rgba(255,255,255,.06);
-      color:var(--text);
-      transition:.12s transform ease, .12s background ease, .12s opacity ease;
-      user-select:none;
-      white-space:nowrap;
-    }
-    .btn:hover{ transform:translateY(-1px); background:rgba(255,255,255,.09); }
-    .btn.primary{
-      background:linear-gradient(135deg,#f5d56b,#f3b445);
-      color:#241b07;
-      border:none;
-    }
-    .btn.primary:hover{ background:linear-gradient(135deg,#ffe08d,#ffbf55); }
-    .btn:disabled{
-      opacity:.45;
-      cursor:not-allowed;
-      transform:none;
-    }
-
-    .footer{
       display:flex;
       align-items:center;
       justify-content:space-between;
-      gap:10px;
-      padding:12px 10px 4px;
-      flex-wrap:wrap;
-    }
-
-    .chips{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-    }
-    .chip{
-      padding:8px 12px;
-      border-radius:999px;
+      gap: 12px;
+      margin-top: 12px;
+      padding: 12px 14px;
+      border-radius: 20px;
       border:1px solid var(--border);
-      background:rgba(255,255,255,.06);
-      font-weight:900;
-      font-size:12px;
-      cursor:pointer;
-      user-select:none;
+      background: rgba(255,255,255,.05);
     }
-    .chip:hover{ background:rgba(255,255,255,.09); }
+    .actions .left{
+      min-width: 220px;
+    }
+    .actions .left .k{ font-weight: 900; font-size: 13px; }
+    .actions .left .d{ color: var(--muted); font-size: 12px; margin-top:4px; line-height: 1.4; }
+    .actions .left .url{
+      margin-top:6px;
+      color: rgba(255,255,255,.8);
+      font-size: 12px;
+      word-break: break-all;
+    }
 
-    .status{
+    .btns{ display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end; }
+    button{
+      border:1px solid var(--border);
+      background: rgba(0,0,0,.12);
+      color: var(--text);
+      padding: 10px 14px;
+      border-radius: 999px;
+      cursor:pointer;
+      font-weight: 900;
+      transition: transform .12s ease, background .12s ease;
+    }
+    button:hover{ transform: translateY(-1px); background: rgba(255,255,255,.08); }
+    button.primary{
+      background: rgba(250,204,21,.95);
+      border:1px solid rgba(250,204,21,.55);
+      color:#111827;
+    }
+    button.primary:hover{ background: rgba(250,204,21,1); }
+    button:disabled{
+      opacity:.55;
+      cursor:not-allowed;
+      transform:none !important;
+    }
+
+    .links{
       display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top: 12px;
+      align-items:center;
+      justify-content:space-between;
+    }
+    .links .left{
+      display:flex; gap:10px; flex-wrap:wrap;
+    }
+    .pill{
+      display:inline-flex;
       align-items:center;
       gap:8px;
-      font-size:12px;
-      font-weight:900;
-      color:var(--muted);
+      padding: 10px 14px;
+      border-radius: 999px;
+      border:1px solid var(--border);
+      background: rgba(255,255,255,.05);
+      cursor:pointer;
+      font-weight: 900;
+      font-size: 13px;
       user-select:none;
     }
-    .dot{
-      width:8px;height:8px;border-radius:50%;
-      background:var(--ok);
-      box-shadow:0 0 0 3px rgba(74,222,128,.15);
+    .pill:hover{ background: rgba(255,255,255,.08); }
+    .status{
+      color: rgba(255,255,255,.75);
+      font-size: 12px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      border:1px solid var(--border);
+      background: rgba(255,255,255,.04);
+      white-space:nowrap;
     }
 
+    /* toast */
     .toast{
-      position:fixed;
-      left:50%;
-      bottom:18px;
-      transform:translateX(-50%);
-      background:rgba(10,10,18,.82);
+      position: fixed;
+      left: 50%;
+      bottom: 22px;
+      transform: translateX(-50%);
+      background: rgba(0,0,0,.72);
       border:1px solid rgba(255,255,255,.18);
       color:#fff;
-      border-radius:999px;
-      padding:10px 14px;
-      font-weight:900;
-      font-size:12px;
-      box-shadow:0 14px 40px rgba(0,0,0,.35);
+      padding: 10px 14px;
+      border-radius: 999px;
+      font-size: 13px;
       opacity:0;
       pointer-events:none;
-      transition:.18s opacity ease, .18s transform ease;
-      max-width:min(520px, calc(100% - 28px));
-      text-align:center;
+      transition: opacity .18s ease, transform .18s ease;
     }
     .toast.show{
       opacity:1;
-      transform:translateX(-50%) translateY(-4px);
+      transform: translateX(-50%) translateY(-4px);
+    }
+
+    @media (max-width: 860px){
+      .services{ grid-template-columns: 1fr; }
+      .btns{ justify-content:flex-start; }
+      h1{ font-size: 28px; }
     }
   </style>
 </head>
@@ -307,629 +261,665 @@
 <body>
   <div class="wrap">
     <div class="topbar">
-      <div class="brand-pill" id="brandPill">PiWorldBank</div>
+      <div class="brand"><span class="dot"></span><span id="brandName">PiWorldBank</span></div>
 
-      <div class="lang">
-        <label id="langLabel" for="langSelect">Language</label>
-        <select id="langSelect" aria-label="Language">
-          <!-- 40+ languages -->
-          <option value="en">English</option>
-          <option value="ko">한국어</option>
-          <option value="ja">日本語</option>
-          <option value="zh-Hans">中文(简体)</option>
-          <option value="zh-Hant">中文(繁體)</option>
-          <option value="es">Español</option>
-          <option value="pt">Português</option>
-          <option value="fr">Français</option>
-          <option value="de">Deutsch</option>
-          <option value="it">Italiano</option>
-          <option value="ru">Русский</option>
-          <option value="uk">Українська</option>
-          <option value="pl">Polski</option>
-          <option value="cs">Čeština</option>
-          <option value="hu">Magyar</option>
-          <option value="ro">Română</option>
-          <option value="el">Ελληνικά</option>
-          <option value="nl">Nederlands</option>
-          <option value="sv">Svenska</option>
-          <option value="no">Norsk</option>
-          <option value="da">Dansk</option>
-          <option value="fi">Suomi</option>
-          <option value="tr">Türkçe</option>
-          <option value="ar">العربية</option>
-          <option value="he">עברית</option>
-          <option value="fa">فارسی</option>
-          <option value="ur">اردو</option>
-          <option value="hi">हिन्दी</option>
-          <option value="bn">বাংলা</option>
-          <option value="id">Bahasa Indonesia</option>
-          <option value="ms">Bahasa Melayu</option>
-          <option value="vi">Tiếng Việt</option>
-          <option value="th">ไทย</option>
-          <option value="tl">Filipino</option>
-          <option value="sw">Kiswahili</option>
-          <option value="am">አማርኛ</option>
-          <option value="ha">Hausa</option>
-          <option value="yo">Yorùbá</option>
-          <option value="ig">Igbo</option>
-          <option value="zu">IsiZulu</option>
-          <option value="xh">isiXhosa</option>
-        </select>
+      <div class="langBox">
+        <label id="langLabel" for="langSelect">언어</label>
+        <select id="langSelect" aria-label="Language"></select>
       </div>
     </div>
 
     <header>
-      <div class="logo" aria-hidden="true">π</div>
+      <div class="logo">π</div>
       <h1 id="appTitle">PiWorldBank</h1>
-      <div class="tagline" id="tagline">ONE WORLD • ONE PI • ONE FUTURE</div>
+      <div class="tagline" id="tagline">ONE WORLD · ONE PI · ONE FUTURE</div>
       <div class="people" id="people">People, not profit</div>
     </header>
 
-    <div class="grid">
-      <div class="tile" id="tileUbi" role="button" tabindex="0">
-        <p class="t-title" id="t1">UBI</p>
-        <p class="t-desc" id="d1">Basic income rewards</p>
+    <div class="services">
+      <div class="card" id="cardUBI">
+        <div class="t" id="t1">UBI</div>
+        <div class="s" id="s1">Basic income rewards</div>
       </div>
-
-      <div class="tile" id="tilePay" role="button" tabindex="0">
-        <p class="t-title" id="t2">Payments</p>
-        <p class="t-desc" id="d2">Pay • Transfer</p>
+      <div class="card" id="cardPay">
+        <div class="t" id="t2">Payments</div>
+        <div class="s" id="s2">Pay · Transfer</div>
       </div>
-
-      <div class="tile" id="tileStake" role="button" tabindex="0">
-        <p class="t-title" id="t3">Staking</p>
-        <p class="t-desc" id="d3">31.4% APY (demo)</p>
+      <div class="card" id="cardStake">
+        <div class="t" id="t3">Staking</div>
+        <div class="s" id="s3">31.4% APY (demo)</div>
       </div>
-
-      <div class="tile" id="tileRewards" role="button" tabindex="0">
-        <p class="t-title" id="t4">Rewards</p>
-        <p class="t-desc" id="d4">Engagement rewards</p>
+      <div class="card" id="cardRewards">
+        <div class="t" id="t4">Rewards</div>
+        <div class="s" id="s4">Engagement rewards</div>
       </div>
-
-      <div class="tile" id="tileSupport" role="button" tabindex="0">
-        <p class="t-title" id="t5">Support</p>
-        <p class="t-desc" id="d5">Help center</p>
+      <div class="card" id="cardSupport">
+        <div class="t" id="t5">Support</div>
+        <div class="s" id="s5">Help center</div>
       </div>
-
-      <div class="tile" id="tileFaq" role="button" tabindex="0">
-        <p class="t-title" id="t6">FAQ</p>
-        <p class="t-desc" id="d6">Terms • Policy • Contact</p>
+      <div class="card" id="cardFAQ">
+        <div class="t" id="t6">FAQ</div>
+        <div class="s" id="s6">Terms · Policy · Contact</div>
       </div>
     </div>
 
-    <div class="panel">
-      <h3 id="installTitle">One-click Install / Launch</h3>
-      <p id="installDesc">
-        Enabled when “Add to Home Screen” is available in your browser.<br />
-        URL: <span id="siteUrl"></span>
-      </p>
+    <div class="actions">
+      <div class="left">
+        <div class="k" id="oneClickTitle">원클릭 설치 / 실행</div>
+        <div class="d" id="oneClickDesc">
+          브라우저에서 “홈 화면에 추가(설치)”가 가능할 때 활성화됩니다.
+        </div>
+        <div class="url" id="siteUrl"></div>
+      </div>
 
-      <div class="actions">
-        <button class="btn" id="openPiBrowserBtn">Open in Pi Browser</button>
-        <button class="btn primary" id="installBtn" disabled>Install</button>
+      <div class="btns">
+        <button id="openPiBtn" class="primary">Pi Browser로 열기</button>
+        <button id="installBtn" disabled>설치</button>
       </div>
     </div>
 
-    <div class="footer">
-      <div class="chips">
-        <div class="chip" id="ytBtn">YouTube</div>
-        <div class="chip" id="ttBtn">TikTok</div>
-        <div class="chip" id="contactBtn">Contact</div>
+    <div class="links">
+      <div class="left">
+        <div class="pill" id="youtubeBtn">YouTube</div>
+        <div class="pill" id="tiktokBtn">TikTok</div>
+        <div class="pill" id="contactBtn">Contact</div>
       </div>
-
-      <div class="status">
-        <span class="dot"></span>
-        <span id="statusText">status: OK</span>
-      </div>
+      <div class="status" id="statusText">status: OK</div>
     </div>
   </div>
 
   <div class="toast" id="toast"></div>
 
-  <script>
-    /***********************
-     * 1) 링크만 수정하세요
-     ***********************/
-    const LINKS = {
-      youtube: "https://www.youtube.com/@Hyekong2025",
-      tiktok: "https://www.tiktok.com/@hyekong2025",
-      contact: "mailto:ljw2358@gmail.com"
-    };
+<script>
+/* =========================
+   40+ Languages (A set)
+   - 기본언어: 한국어(ko)
+   - 저장값: localStorage "pwb_lang"
+   ========================= */
+const I18N = {
+  ko:{label:"한국어", langLabel:"언어", oneClickTitle:"원클릭 설치 / 실행", oneClickDesc:"브라우저에서 “홈 화면에 추가(설치)”가 가능할 때 활성화됩니다.",
+      tag:"ONE WORLD · ONE PI · ONE FUTURE", ppl:"People, not profit",
+      t1:"UBI", s1:"기본소득 리워드",
+      t2:"Payments", s2:"결제 · 송금",
+      t3:"Staking", s3:"31.4% APY (데모)",
+      t4:"Rewards", s4:"참여 리워드",
+      t5:"Support", s5:"헬프센터",
+      t6:"FAQ", s6:"약관 · 정책 · 문의",
+      openPi:"Pi Browser로 열기", install:"설치",
+      toastPilot:"PiWorldBank 파일럿 실행",
+      toastInstallReady:"설치 준비 완료",
+      toastInstallBlocked:"설치가 아직 준비되지 않았습니다(조건 미충족).",
+      toastOpenLink:"링크를 여는 중..."
+  },
+  en:{label:"English", langLabel:"Language", oneClickTitle:"One-click Install / Launch", oneClickDesc:"Enabled when “Add to Home Screen (Install)” is available in your browser.",
+      tag:"ONE WORLD · ONE PI · ONE FUTURE", ppl:"People, not profit",
+      t1:"UBI", s1:"Basic income rewards",
+      t2:"Payments", s2:"Pay · Transfer",
+      t3:"Staking", s3:"31.4% APY (demo)",
+      t4:"Rewards", s4:"Engagement rewards",
+      t5:"Support", s5:"Help center",
+      t6:"FAQ", s6:"Terms · Policy · Contact",
+      openPi:"Open in Pi Browser", install:"Install",
+      toastPilot:"PiWorldBank pilot is running",
+      toastInstallReady:"Install is ready",
+      toastInstallBlocked:"Install is not ready yet (requirements not met).",
+      toastOpenLink:"Opening link..."
+  },
+  ja:{label:"日本語", langLabel:"言語", oneClickTitle:"ワンクリック インストール / 起動", oneClickDesc:"ブラウザで「ホーム画面に追加(インストール)」が可能な場合に有効。",
+      tag:"ONE WORLD · ONE PI · ONE FUTURE", ppl:"People, not profit",
+      t1:"UBI", s1:"ベーシックインカム報酬",
+      t2:"Payments", s2:"支払い · 送金",
+      t3:"Staking", s3:"31.4% APY (デモ)",
+      t4:"Rewards", s4:"参加報酬",
+      t5:"Support", s5:"ヘルプセンター",
+      t6:"FAQ", s6:"規約 · ポリシー · 連絡",
+      openPi:"Pi Browserで開く", install:"インストール",
+      toastPilot:"PiWorldBank パイロット実行",
+      toastInstallReady:"インストール準備完了",
+      toastInstallBlocked:"インストールは未準備(条件未満)。",
+      toastOpenLink:"リンクを開いています..."
+  },
+  zh:{label:"中文(简体)", langLabel:"语言", oneClickTitle:"一键安装 / 启动", oneClickDesc:"当浏览器支持“添加到主屏幕(安装)”时启用。",
+      tag:"ONE WORLD · ONE PI · ONE FUTURE", ppl:"People, not profit",
+      t1:"UBI", s1:"基本收入奖励",
+      t2:"Payments", s2:"支付 · 转账",
+      t3:"Staking", s3:"31.4% APY（演示）",
+      t4:"Rewards", s4:"参与奖励",
+      t5:"Support", s5:"帮助中心",
+      t6:"FAQ", s6:"条款 · 政策 · 联系",
+      openPi:"在 Pi Browser 中打开", install:"安装",
+      toastPilot:"PiWorldBank 试运行中",
+      toastInstallReady:"安装已就绪",
+      toastInstallBlocked:"安装未就绪（条件不足）。",
+      toastOpenLink:"正在打开链接..."
+  },
+  "zh-TW":{label:"中文(繁體)", langLabel:"語言", oneClickTitle:"一鍵安裝 / 啟動", oneClickDesc:"瀏覽器支援「加入主畫面(安裝)」時啟用。",
+      tag:"ONE WORLD · ONE PI · ONE FUTURE", ppl:"People, not profit",
+      t1:"UBI", s1:"基本收入獎勵",
+      t2:"Payments", s2:"付款 · 轉帳",
+      t3:"Staking", s3:"31.4% APY（示範）",
+      t4:"Rewards", s4:"參與獎勵",
+      t5:"Support", s5:"協助中心",
+      t6:"FAQ", s6:"條款 · 政策 · 聯絡",
+      openPi:"用 Pi Browser 開啟", install:"安裝",
+      toastPilot:"PiWorldBank 試運行",
+      toastInstallReady:"安裝已就緒",
+      toastInstallBlocked:"安裝未就緒（條件不足）。",
+      toastOpenLink:"正在開啟連結..."
+  },
 
-    /***********************
-     * 2) 유틸
-     ***********************/
-    const $ = (id) => document.getElementById(id);
+  // Europe
+  fr:{label:"Français", langLabel:"Langue", oneClickTitle:"Installation / Lancement", oneClickDesc:"Actif lorsque « Ajouter à l’écran d’accueil (Installer) » est disponible.",
+      tag:"ONE WORLD · ONE PI · ONE FUTURE", ppl:"People, not profit",
+      t1:"UBI", s1:"Récompenses de revenu de base",
+      t2:"Payments", s2:"Payer · Transférer",
+      t3:"Staking", s3:"31.4% APY (démo)",
+      t4:"Rewards", s4:"Récompenses d’engagement",
+      t5:"Support", s5:"Centre d’aide",
+      t6:"FAQ", s6:"Conditions · Politique · Contact",
+      openPi:"Ouvrir dans Pi Browser", install:"Installer",
+      toastPilot:"PiWorldBank en mode pilote",
+      toastInstallReady:"Installation prête",
+      toastInstallBlocked:"Installation non prête (conditions non remplies).",
+      toastOpenLink:"Ouverture du lien..."
+  },
+  de:{label:"Deutsch", langLabel:"Sprache", oneClickTitle:"Installieren / Starten", oneClickDesc:"Aktiv, wenn „Zum Startbildschirm hinzufügen (Installieren)“ verfügbar ist.",
+      tag:"ONE WORLD · ONE PI · ONE FUTURE", ppl:"People, not profit",
+      t1:"UBI", s1:"Grundeinkommens-Prämien",
+      t2:"Payments", s2:"Zahlen · Überweisen",
+      t3:"Staking", s3:"31.4% APY (Demo)",
+      t4:"Rewards", s4:"Engagement-Prämien",
+      t5:"Support", s5:"Hilfe-Center",
+      t6:"FAQ", s6:"AGB · Richtlinien · Kontakt",
+      openPi:"In Pi Browser öffnen", install:"Installieren",
+      toastPilot:"PiWorldBank Pilot läuft",
+      toastInstallReady:"Installation bereit",
+      toastInstallBlocked:"Installation nicht bereit (Voraussetzungen fehlen).",
+      toastOpenLink:"Link wird geöffnet..."
+  },
+  es:{label:"Español", langLabel:"Idioma", oneClickTitle:"Instalar / Abrir", oneClickDesc:"Se activa cuando “Añadir a pantalla de inicio (Instalar)” está disponible.",
+      tag:"ONE WORLD · ONE PI · ONE FUTURE", ppl:"People, not profit",
+      t1:"UBI", s1:"Recompensas de ingreso básico",
+      t2:"Payments", s2:"Pagar · Transferir",
+      t3:"Staking", s3:"31.4% APY (demo)",
+      t4:"Rewards", s4:"Recompensas por participación",
+      t5:"Support", s5:"Centro de ayuda",
+      t6:"FAQ", s6:"Términos · Política · Contacto",
+      openPi:"Abrir en Pi Browser", install:"Instalar",
+      toastPilot:"PiWorldBank en modo piloto",
+      toastInstallReady:"Instalación lista",
+      toastInstallBlocked:"Instalación no lista (faltan requisitos).",
+      toastOpenLink:"Abriendo enlace..."
+  },
+  it:{label:"Italiano", langLabel:"Lingua", oneClickTitle:"Installa / Avvia", oneClickDesc:"Attivo quando “Aggiungi alla schermata Home (Installa)” è disponibile.",
+      tag:"ONE WORLD · ONE PI · ONE FUTURE", ppl:"People, not profit",
+      t1:"UBI", s1:"Ricompense reddito di base",
+      t2:"Payments", s2:"Paga · Trasferisci",
+      t3:"Staking", s3:"31.4% APY (demo)",
+      t4:"Rewards", s4:"Ricompense di partecipazione",
+      t5:"Support", s5:"Centro assistenza",
+      t6:"FAQ", s6:"Termini · Policy · Contatto",
+      openPi:"Apri in Pi Browser", install:"Installa",
+      toastPilot:"PiWorldBank pilot in esecuzione",
+      toastInstallReady:"Installazione pronta",
+      toastInstallBlocked:"Installazione non pronta (requisiti mancanti).",
+      toastOpenLink:"Apertura link..."
+  },
+  pt:{label:"Português", langLabel:"Idioma", oneClickTitle:"Instalar / Abrir", oneClickDesc:"Ativo quando “Adicionar à tela inicial (Instalar)” estiver disponível.",
+      tag:"ONE WORLD · ONE PI · ONE FUTURE", ppl:"People, not profit",
+      t1:"UBI", s1:"Recompensas de renda básica",
+      t2:"Payments", s2:"Pagar · Transferir",
+      t3:"Staking", s3:"31.4% APY (demo)",
+      t4:"Rewards", s4:"Recompensas de engajamento",
+      t5:"Support", s5:"Central de ajuda",
+      t6:"FAQ", s6:"Termos · Política · Contato",
+      openPi:"Abrir no Pi Browser", install:"Instalar",
+      toastPilot:"PiWorldBank em modo piloto",
+      toastInstallReady:"Instalação pronta",
+      toastInstallBlocked:"Instalação não pronta (requisitos faltando).",
+      toastOpenLink:"Abrindo link..."
+  },
+  nl:{label:"Nederlands", langLabel:"Taal", oneClickTitle:"Installeren / Starten", oneClickDesc:"Actief wanneer ‘Toevoegen aan startscherm (Installeren)’ beschikbaar is.",
+      tag:"ONE WORLD · ONE PI · ONE FUTURE", ppl:"People, not profit",
+      t1:"UBI", s1:"Basisinkomen-beloningen",
+      t2:"Payments", s2:"Betalen · Overmaken",
+      t3:"Staking", s3:"31.4% APY (demo)",
+      t4:"Rewards", s4:"Betrokkenheidsbeloningen",
+      t5:"Support", s5:"Helpcentrum",
+      t6:"FAQ", s6:"Voorwaarden · Beleid · Contact",
+      openPi:"Openen in Pi Browser", install:"Installeren",
+      toastPilot:"PiWorldBank pilot draait",
+      toastInstallReady:"Installatie gereed",
+      toastInstallBlocked:"Installatie niet gereed (vereisten niet gehaald).",
+      toastOpenLink:"Link openen..."
+  },
+  ru:{label:"Русский", langLabel:"Язык", oneClickTitle:"Установка / Запуск", oneClickDesc:"Активно, когда доступно «Добавить на главный экран (Установить)».",
+      tag:"ONE WORLD · ONE PI · ONE FUTURE", ppl:"People, not profit",
+      t1:"UBI", s1:"Награды базового дохода",
+      t2:"Payments", s2:"Оплата · Перевод",
+      t3:"Staking", s3:"31.4% APY (демо)",
+      t4:"Rewards", s4:"Награды за участие",
+      t5:"Support", s5:"Центр помощи",
+      t6:"FAQ", s6:"Условия · Политика · Контакты",
+      openPi:"Открыть в Pi Browser", install:"Установить",
+      toastPilot:"PiWorldBank в режиме пилота",
+      toastInstallReady:"Установка готова",
+      toastInstallBlocked:"Установка не готова (требования не выполнены).",
+      toastOpenLink:"Открываем ссылку..."
+  },
+  pl:{label:"Polski", langLabel:"Język", oneClickTitle:"Instaluj / Uruchom", oneClickDesc:"Aktywne, gdy dostępne jest „Dodaj do ekranu głównego (Zainstaluj)”.",
+      tag:"ONE WORLD · ONE PI · ONE FUTURE", ppl:"People, not profit",
+      t1:"UBI", s1:"Nagrody dochodu podstawowego",
+      t2:"Payments", s2:"Płać · Przelew",
+      t3:"Staking", s3:"31.4% APY (demo)",
+      t4:"Rewards", s4:"Nagrody za aktywność",
+      t5:"Support", s5:"Centrum pomocy",
+      t6:"FAQ", s6:"Warunki · Polityka · Kontakt",
+      openPi:"Otwórz w Pi Browser", install:"Zainstaluj",
+      toastPilot:"PiWorldBank uruchomiony (pilot)",
+      toastInstallReady:"Instalacja gotowa",
+      toastInstallBlocked:"Instalacja niegotowa (brak wymagań).",
+      toastOpenLink:"Otwieranie linku..."
+  },
+  tr:{label:"Türkçe", langLabel:"Dil", oneClickTitle:"Yükle / Aç", oneClickDesc:"Tarayıcıda “Ana ekrana ekle (Yükle)” mümkünse etkinleşir.",
+      tag:"ONE WORLD · ONE PI · ONE FUTURE", ppl:"People, not profit",
+      t1:"UBI", s1:"Temel gelir ödülleri",
+      t2:"Payments", s2:"Öde · Transfer",
+      t3:"Staking", s3:"31.4% APY (demo)",
+      t4:"Rewards", s4:"Katılım ödülleri",
+      t5:"Support", s5:"Yardım merkezi",
+      t6:"FAQ", s6:"Şartlar · Politika · İletişim",
+      openPi:"Pi Browser’da aç", install:"Yükle",
+      toastPilot:"PiWorldBank pilot çalışıyor",
+      toastInstallReady:"Yükleme hazır",
+      toastInstallBlocked:"Yükleme hazır değil (koşullar sağlanmadı).",
+      toastOpenLink:"Bağlantı açılıyor..."
+  },
 
-    function toast(msg){
-      const el = $("toast");
-      el.textContent = msg;
-      el.classList.add("show");
-      clearTimeout(toast._t);
-      toast._t = setTimeout(()=> el.classList.remove("show"), 2200);
+  // Middle East / Africa / South Asia
+  ar:{label:"العربية", dir:"rtl", langLabel:"اللغة", oneClickTitle:"تثبيت / تشغيل بنقرة واحدة", oneClickDesc:"يتفعّل عندما يكون خيار «إضافة إلى الشاشة الرئيسية (تثبيت)» متاحًا.",
+      tag:"ONE WORLD · ONE PI · ONE FUTURE", ppl:"People, not profit",
+      t1:"UBI", s1:"مكافآت الدخل الأساسي",
+      t2:"Payments", s2:"دفع · تحويل",
+      t3:"Staking", s3:"31.4% APY (تجريبي)",
+      t4:"Rewards", s4:"مكافآت المشاركة",
+      t5:"Support", s5:"مركز المساعدة",
+      t6:"FAQ", s6:"الشروط · السياسة · تواصل",
+      openPi:"افتح في Pi Browser", install:"تثبيت",
+      toastPilot:"تشغيل تجريبي لـ PiWorldBank",
+      toastInstallReady:"التثبيت جاهز",
+      toastInstallBlocked:"التثبيت غير جاهز (الشروط غير مكتملة).",
+      toastOpenLink:"فتح الرابط..."
+  },
+  he:{label:"עברית", dir:"rtl", langLabel:"שפה", oneClickTitle:"התקנה / הפעלה בלחיצה", oneClickDesc:"פעיל כאשר 'הוסף למסך הבית (התקן)' זמין.",
+      tag:"ONE WORLD · ONE PI · ONE FUTURE", ppl:"People, not profit",
+      t1:"UBI", s1:"תגמולי הכנסה בסיסית",
+      t2:"Payments", s2:"תשלום · העברה",
+      t3:"Staking", s3:"31.4% APY (דמו)",
+      t4:"Rewards", s4:"תגמולי השתתפות",
+      t5:"Support", s5:"מרכז עזרה",
+      t6:"FAQ", s6:"תנאים · מדיניות · קשר",
+      openPi:"פתח ב-Pi Browser", install:"התקן",
+      toastPilot:"PiWorldBank במצב פיילוט",
+      toastInstallReady:"התקנה מוכנה",
+      toastInstallBlocked:"התקנה לא מוכנה (חסרים תנאים).",
+      toastOpenLink:"פותח קישור..."
+  },
+  hi:{label:"हिन्दी", langLabel:"भाषा", oneClickTitle:"वन-क्लिक इंस्टॉल / लॉन्च", oneClickDesc:"जब ब्राउज़र में “होम स्क्रीन पर जोड़ें (इंस्टॉल)” उपलब्ध हो तब सक्रिय।",
+      tag:"ONE WORLD · ONE PI · ONE FUTURE", ppl:"People, not profit",
+      t1:"UBI", s1:"बेसिक इनकम रिवॉर्ड्स",
+      t2:"Payments", s2:"भुगतान · ट्रांसफर",
+      t3:"Staking", s3:"31.4% APY (डेमो)",
+      t4:"Rewards", s4:"भागीदारी रिवॉर्ड्स",
+      t5:"Support", s5:"हेल्प सेंटर",
+      t6:"FAQ", s6:"शर्तें · नीति · संपर्क",
+      openPi:"Pi Browser में खोलें", install:"इंस्टॉल",
+      toastPilot:"PiWorldBank पायलट चल रहा है",
+      toastInstallReady:"इंस्टॉल तैयार",
+      toastInstallBlocked:"इंस्टॉल तैयार नहीं (शर्तें पूरी नहीं)।",
+      toastOpenLink:"लिंक खोला जा रहा..."
+  },
+  bn:{label:"বাংলা", langLabel:"ভাষা", oneClickTitle:"এক-ক্লিক ইনস্টল / চালু", oneClickDesc:"ব্রাউজারে “হোম স্ক্রিনে যোগ করুন (ইনস্টল)” উপলব্ধ হলে সক্রিয়।",
+      tag:"ONE WORLD · ONE PI · ONE FUTURE", ppl:"People, not profit",
+      t1:"UBI", s1:"মৌলিক আয়ের রিওয়ার্ড",
+      t2:"Payments", s2:"পেমেন্ট · ট্রান্সফার",
+      t3:"Staking", s3:"31.4% APY (ডেমো)",
+      t4:"Rewards", s4:"অংশগ্রহণ রিওয়ার্ড",
+      t5:"Support", s5:"হেল্প সেন্টার",
+      t6:"FAQ", s6:"শর্তাবলী · নীতি · যোগাযোগ",
+      openPi:"Pi Browser-এ খুলুন", install:"ইনস্টল",
+      toastPilot:"PiWorldBank পাইলট চলছে",
+      toastInstallReady:"ইনস্টল প্রস্তুত",
+      toastInstallBlocked:"ইনস্টল প্রস্তুত নয় (শর্ত পূরণ হয়নি)।",
+      toastOpenLink:"লিংক খোলা হচ্ছে..."
+  },
+  th:{label:"ไทย", langLabel:"ภาษา", oneClickTitle:"ติดตั้ง / เปิดใช้งาน", oneClickDesc:"เปิดใช้เมื่อมี “เพิ่มไปยังหน้าจอหลัก (ติดตั้ง)” ในเบราว์เซอร์",
+      tag:"ONE WORLD · ONE PI · ONE FUTURE", ppl:"People, not profit",
+      t1:"UBI", s1:"รางวัลรายได้พื้นฐาน",
+      t2:"Payments", s2:"ชำระเงิน · โอน",
+      t3:"Staking", s3:"31.4% APY (เดโม)",
+      t4:"Rewards", s4:"รางวัลการมีส่วนร่วม",
+      t5:"Support", s5:"ศูนย์ช่วยเหลือ",
+      t6:"FAQ", s6:"เงื่อนไข · นโยบาย · ติดต่อ",
+      openPi:"เปิดใน Pi Browser", install:"ติดตั้ง",
+      toastPilot:"PiWorldBank โหมดทดลอง",
+      toastInstallReady:"พร้อมติดตั้ง",
+      toastInstallBlocked:"ยังติดตั้งไม่ได้ (เงื่อนไขไม่ครบ).",
+      toastOpenLink:"กำลังเปิดลิงก์..."
+  },
+  vi:{label:"Tiếng Việt", langLabel:"Ngôn ngữ", oneClickTitle:"Cài đặt / Mở", oneClickDesc:"Bật khi có “Thêm vào Màn hình chính (Cài đặt)” trong trình duyệt.",
+      tag:"ONE WORLD · ONE PI · ONE FUTURE", ppl:"People, not profit",
+      t1:"UBI", s1:"Thưởng thu nhập cơ bản",
+      t2:"Payments", s2:"Thanh toán · Chuyển",
+      t3:"Staking", s3:"31.4% APY (demo)",
+      t4:"Rewards", s4:"Thưởng tương tác",
+      t5:"Support", s5:"Trung tâm trợ giúp",
+      t6:"FAQ", s6:"Điều khoản · Chính sách · Liên hệ",
+      openPi:"Mở trong Pi Browser", install:"Cài đặt",
+      toastPilot:"PiWorldBank đang chạy (pilot)",
+      toastInstallReady:"Sẵn sàng cài đặt",
+      toastInstallBlocked:"Chưa sẵn sàng (thiếu điều kiện).",
+      toastOpenLink:"Đang mở liên kết..."
+  },
+  id:{label:"Bahasa Indonesia", langLabel:"Bahasa", oneClickTitle:"Instal / Buka", oneClickDesc:"Aktif saat “Tambahkan ke Layar Utama (Instal)” tersedia di browser.",
+      tag:"ONE WORLD · ONE PI · ONE FUTURE", ppl:"People, not profit",
+      t1:"UBI", s1:"Hadiah pendapatan dasar",
+      t2:"Payments", s2:"Bayar · Transfer",
+      t3:"Staking", s3:"31.4% APY (demo)",
+      t4:"Rewards", s4:"Hadiah partisipasi",
+      t5:"Support", s5:"Pusat bantuan",
+      t6:"FAQ", s6:"Syarat · Kebijakan · Kontak",
+      openPi:"Buka di Pi Browser", install:"Instal",
+      toastPilot:"PiWorldBank mode pilot",
+      toastInstallReady:"Instal siap",
+      toastInstallBlocked:"Instal belum siap (syarat belum terpenuhi).",
+      toastOpenLink:"Membuka tautan..."
+  },
+
+  // extra to exceed 40
+  uk:{label:"Українська", langLabel:"Мова", oneClickTitle:"Встановити / Запустити", oneClickDesc:"Активно, коли доступно «Додати на головний екран (Встановити)».",
+      tag:"ONE WORLD · ONE PI · ONE FUTURE", ppl:"People, not profit",
+      t1:"UBI", s1:"Нагороди базового доходу",
+      t2:"Payments", s2:"Оплата · Переказ",
+      t3:"Staking", s3:"31.4% APY (демо)",
+      t4:"Rewards", s4:"Нагороди за участь",
+      t5:"Support", s5:"Центр допомоги",
+      t6:"FAQ", s6:"Умови · Політика · Контакт",
+      openPi:"Відкрити в Pi Browser", install:"Встановити",
+      toastPilot:"PiWorldBank у режимі пілоту",
+      toastInstallReady:"Встановлення готове",
+      toastInstallBlocked:"Встановлення не готове (умови не виконано).",
+      toastOpenLink:"Відкриваємо посилання..."
+  },
+  sv:{label:"Svenska", langLabel:"Språk", oneClickTitle:"Installera / Starta", oneClickDesc:"Aktiveras när “Lägg till på hemskärmen (Installera)” finns i webbläsaren.",
+      tag:"ONE WORLD · ONE PI · ONE FUTURE", ppl:"People, not profit",
+      t1:"UBI", s1:"Basinkomst-belöningar",
+      t2:"Payments", s2:"Betala · Överför",
+      t3:"Staking", s3:"31.4% APY (demo)",
+      t4:"Rewards", s4:"Engagemangsbelöningar",
+      t5:"Support", s5:"Hjälpcenter",
+      t6:"FAQ", s6:"Villkor · Policy · Kontakt",
+      openPi:"Öppna i Pi Browser", install:"Installera",
+      toastPilot:"PiWorldBank pilot körs",
+      toastInstallReady:"Installationen är klar",
+      toastInstallBlocked:"Installationen är inte klar (krav saknas).",
+      toastOpenLink:"Öppnar länk..."
+  },
+  no:{label:"Norsk", langLabel:"Språk", oneClickTitle:"Installer / Åpne", oneClickDesc:"Aktiv når “Legg til på startskjermen (Installer)” er tilgjengelig.",
+      tag:"ONE WORLD · ONE PI · ONE FUTURE", ppl:"People, not profit",
+      t1:"UBI", s1:"Grunninntektsbelønninger",
+      t2:"Payments", s2:"Betal · Overfør",
+      t3:"Staking", s3:"31.4% APY (demo)",
+      t4:"Rewards", s4:"Engasjementsbelønninger",
+      t5:"Support", s5:"Hjelpesenter",
+      t6:"FAQ", s6:"Vilkår · Policy · Kontakt",
+      openPi:"Åpne i Pi Browser", install:"Installer",
+      toastPilot:"PiWorldBank pilot kjører",
+      toastInstallReady:"Installering klar",
+      toastInstallBlocked:"Installering ikke klar (krav mangler).",
+      toastOpenLink:"Åpner lenke..."
+  },
+  fi:{label:"Suomi", langLabel:"Kieli", oneClickTitle:"Asenna / Avaa", oneClickDesc:"Käytössä kun “Lisää aloitusnäyttöön (Asenna)” on saatavilla.",
+      tag:"ONE WORLD · ONE PI · ONE FUTURE", ppl:"People, not profit",
+      t1:"UBI", s1:"Perustulopalkkiot",
+      t2:"Payments", s2:"Maksa · Siirrä",
+      t3:"Staking", s3:"31.4% APY (demo)",
+      t4:"Rewards", s4:"Osallistumispalkkiot",
+      t5:"Support", s5:"Ohjekeskus",
+      t6:"FAQ", s6:"Ehdot · Käytäntö · Yhteys",
+      openPi:"Avaa Pi Browserissa", install:"Asenna",
+      toastPilot:"PiWorldBank pilotti käynnissä",
+      toastInstallReady:"Asennus valmis",
+      toastInstallBlocked:"Asennus ei valmis (vaatimukset puuttuvat).",
+      toastOpenLink:"Avataan linkkiä..."
+  },
+  cs:{label:"Čeština", langLabel:"Jazyk", oneClickTitle:"Instalovat / Spustit", oneClickDesc:"Aktivní, když je dostupné „Přidat na plochu (Instalovat)“.",
+      tag:"ONE WORLD · ONE PI · ONE FUTURE", ppl:"People, not profit",
+      t1:"UBI", s1:"Odměny základního příjmu",
+      t2:"Payments", s2:"Platba · Převod",
+      t3:"Staking", s3:"31.4% APY (demo)",
+      t4:"Rewards", s4:"Odměny za aktivitu",
+      t5:"Support", s5:"Centrum nápovědy",
+      t6:"FAQ", s6:"Podmínky · Zásady · Kontakt",
+      openPi:"Otevřít v Pi Browser", install:"Instalovat",
+      toastPilot:"PiWorldBank pilot běží",
+      toastInstallReady:"Instalace připravena",
+      toastInstallBlocked:"Instalace není připravena (chybí podmínky).",
+      toastOpenLink:"Otevírám odkaz..."
+  },
+  ro:{label:"Română", langLabel:"Limbă", oneClickTitle:"Instalare / Deschidere", oneClickDesc:"Activ când „Adaugă pe ecranul principal (Instalează)” este disponibil.",
+      tag:"ONE WORLD · ONE PI · ONE FUTURE", ppl:"People, not profit",
+      t1:"UBI", s1:"Recompense venit de bază",
+      t2:"Payments", s2:"Plată · Transfer",
+      t3:"Staking", s3:"31.4% APY (demo)",
+      t4:"Rewards", s4:"Recompense de participare",
+      t5:"Support", s5:"Centru de ajutor",
+      t6:"FAQ", s6:"Termeni · Politică · Contact",
+      openPi:"Deschide în Pi Browser", install:"Instalează",
+      toastPilot:"PiWorldBank rulează (pilot)",
+      toastInstallReady:"Instalarea este gata",
+      toastInstallBlocked:"Instalarea nu e gata (lipsesc condiții).",
+      toastOpenLink:"Se deschide linkul..."
+  },
+  el:{label:"Ελληνικά", langLabel:"Γλώσσα", oneClickTitle:"Εγκατάσταση / Άνοιγμα", oneClickDesc:"Ενεργό όταν υπάρχει «Προσθήκη στην αρχική οθόνη (Εγκατάσταση)».",
+      tag:"ONE WORLD · ONE PI · ONE FUTURE", ppl:"People, not profit",
+      t1:"UBI", s1:"Ανταμοιβές βασικού εισοδήματος",
+      t2:"Payments", s2:"Πληρωμή · Μεταφορά",
+      t3:"Staking", s3:"31.4% APY (demo)",
+      t4:"Rewards", s4:"Ανταμοιβές συμμετοχής",
+      t5:"Support", s5:"Κέντρο βοήθειας",
+      t6:"FAQ", s6:"Όροι · Πολιτική · Επικοινωνία",
+      openPi:"Άνοιγμα σε Pi Browser", install:"Εγκατάσταση",
+      toastPilot:"PiWorldBank σε λειτουργία pilot",
+      toastInstallReady:"Η εγκατάσταση είναι έτοιμη",
+      toastInstallBlocked:"Η εγκατάσταση δεν είναι έτοιμη (λείπουν προϋποθέσεις).",
+      toastOpenLink:"Άνοιγμα συνδέσμου..."
+  },
+  hu:{label:"Magyar", langLabel:"Nyelv", oneClickTitle:"Telepítés / Indítás", oneClickDesc:"Akkor aktív, ha elérhető a „Kezdőképernyőhöz adás (Telepítés)”.",
+      tag:"ONE WORLD · ONE PI · ONE FUTURE", ppl:"People, not profit",
+      t1:"UBI", s1:"Alapjövedelem jutalmak",
+      t2:"Payments", s2:"Fizetés · Utalás",
+      t3:"Staking", s3:"31.4% APY (demo)",
+      t4:"Rewards", s4:"Részvételi jutalmak",
+      t5:"Support", s5:"Súgóközpont",
+      t6:"FAQ", s6:"Feltételek · Szabályzat · Kapcsolat",
+      openPi:"Megnyitás Pi Browserben", install:"Telepítés",
+      toastPilot:"PiWorldBank pilot fut",
+      toastInstallReady:"Telepítés kész",
+      toastInstallBlocked:"Telepítés nem kész (feltételek hiányoznak).",
+      toastOpenLink:"Link megnyitása..."
+  },
+  ur:{label:"اردو", dir:"rtl", langLabel:"زبان", oneClickTitle:"ایک کلک انسٹال / چلائیں", oneClickDesc:"جب براؤزر میں “ہوم اسکرین پر شامل کریں (انسٹال)” دستیاب ہو تو فعال۔",
+      tag:"ONE WORLD · ONE PI · ONE FUTURE", ppl:"People, not profit",
+      t1:"UBI", s1:"بنیادی آمدن انعامات",
+      t2:"Payments", s2:"ادائیگی · ترسیل",
+      t3:"Staking", s3:"31.4% APY (ڈیمو)",
+      t4:"Rewards", s4:"شرکت انعامات",
+      t5:"Support", s5:"ہیلپ سینٹر",
+      t6:"FAQ", s6:"شرائط · پالیسی · رابطہ",
+      openPi:"Pi Browser میں کھولیں", install:"انسٹال",
+      toastPilot:"PiWorldBank پائلٹ چل رہا ہے",
+      toastInstallReady:"انسٹال تیار",
+      toastInstallBlocked:"انسٹال تیار نہیں (شرائط پوری نہیں).",
+      toastOpenLink:"لنک کھولا جا رہا..."
+  }
+};
+
+// ===== helpers =====
+const $ = (id)=>document.getElementById(id);
+const toastEl = $("toast");
+
+function toast(msg){
+  toastEl.textContent = msg;
+  toastEl.classList.add("show");
+  setTimeout(()=>toastEl.classList.remove("show"), 1400);
+}
+
+function pickDefaultLang(){
+  // ✅ 무조건 한국어가 기본(메인)
+  const forced = "ko";
+  const saved = localStorage.getItem("pwb_lang");
+  if(saved && I18N[saved]) return saved;
+  return forced;
+}
+
+function applyLang(code){
+  const t = I18N[code] || I18N.ko;
+
+  // lang/dir
+  document.documentElement.lang = code.startsWith("zh") ? "zh" : code;
+  document.body.dir = t.dir || "ltr";
+
+  // texts
+  $("langLabel").textContent = t.langLabel;
+  $("oneClickTitle").textContent = t.oneClickTitle;
+  $("oneClickDesc").textContent = t.oneClickDesc;
+
+  $("tagline").textContent = t.tag;
+  $("people").textContent = t.ppl;
+
+  $("t1").textContent = t.t1; $("s1").textContent = t.s1;
+  $("t2").textContent = t.t2; $("s2").textContent = t.s2;
+  $("t3").textContent = t.t3; $("s3").textContent = t.s3;
+  $("t4").textContent = t.t4; $("s4").textContent = t.s4;
+  $("t5").textContent = t.t5; $("s5").textContent = t.s5;
+  $("t6").textContent = t.t6; $("s6").textContent = t.s6;
+
+  $("openPiBtn").textContent = t.openPi;
+  $("installBtn").textContent = t.install;
+
+  localStorage.setItem("pwb_lang", code);
+}
+
+function buildLangSelect(){
+  const select = $("langSelect");
+  select.innerHTML = "";
+
+  // 40+ 언어를 "자동 생성" (하드코딩 옵션 사라짐 방지)
+  const keys = Object.keys(I18N);
+  keys.sort((a,b)=> (I18N[a].label || a).localeCompare(I18N[b].label || b));
+
+  for(const k of keys){
+    const opt = document.createElement("option");
+    opt.value = k;
+    opt.textContent = I18N[k].label || k;
+    select.appendChild(opt);
+  }
+}
+
+function openLink(url){
+  toast(I18N[currentLang()].toastOpenLink);
+  const w = window.open(url, "_blank", "noopener,noreferrer");
+  if(!w){
+    // 팝업 차단이면 현재 탭으로 강제 이동
+    location.href = url;
+  }
+}
+
+function currentLang(){
+  return $("langSelect").value || "ko";
+}
+
+// ===== actions =====
+let deferredPrompt = null;
+
+function setupPWA(){
+  // URL 표시
+  $("siteUrl").textContent = "URL: " + location.href;
+
+  // SW 등록
+  if("serviceWorker" in navigator){
+    navigator.serviceWorker.register("./service-worker.js").catch(()=>{});
+  }
+
+  // install prompt
+  window.addEventListener("beforeinstallprompt", (e)=>{
+    e.preventDefault();
+    deferredPrompt = e;
+    $("installBtn").disabled = false;
+    toast(I18N[currentLang()].toastInstallReady);
+  });
+
+  $("installBtn").addEventListener("click", async ()=>{
+    const lang = currentLang();
+    if(!deferredPrompt){
+      toast(I18N[lang].toastInstallBlocked);
+      return;
     }
+    deferredPrompt.prompt();
+    await deferredPrompt.userChoice;
+    deferredPrompt = null;
+    $("installBtn").disabled = true;
+  });
+}
 
-    function isRTL(code){
-      return ["ar","he","fa","ur"].includes(code);
-    }
-
-    /***********************
-     * 3) 다국어(40+)
-     ***********************/
-    const I18N = {
-      "en": { label:"Language", tag:"ONE WORLD • ONE PI • ONE FUTURE", ppl:"People, not profit",
-              t:["UBI","Payments","Staking","Rewards","Support","FAQ"],
-              d:["Basic income rewards","Pay • Transfer","31.4% APY (demo)","Engagement rewards","Help center","Terms • Policy • Contact"],
-              installT:"One-click Install / Launch",
-              installD:"Enabled when “Add to Home Screen” is available in your browser.",
-              openPi:"Open in Pi Browser", install:"Install", status:"status: OK",
-              contact:"Contact", demo:"This is a demo screen."},
-
-      "ko": { label:"언어", tag:"ONE WORLD • ONE PI • ONE FUTURE", ppl:"사람이 먼저, 이윤은 그 다음",
-              t:["UBI","결제","스테이킹","리워드","지원","FAQ"],
-              d:["기본소득 리워드","결제 • 송금","31.4% APY (데모)","참여 리워드","헬프센터","약관 • 정책 • 문의"],
-              installT:"원클릭 설치 / 실행",
-              installD:"브라우저에서 ‘홈 화면에 추가’가 가능할 때 활성화됩니다.",
-              openPi:"Pi Browser로 열기", install:"설치", status:"상태: OK",
-              contact:"문의", demo:"데모 화면입니다."},
-
-      "ja": { label:"言語", tag:"ONE WORLD • ONE PI • ONE FUTURE", ppl:"人を優先、利益は後",
-              t:["UBI","決済","ステーキング","報酬","サポート","FAQ"],
-              d:["ベーシックインカム報酬","支払い • 送金","31.4% APY（デモ）","参加報酬","ヘルプセンター","規約 • ポリシー • 連絡"],
-              installT:"ワンクリック インストール / 起動",
-              installD:"ブラウザで「ホーム画面に追加」が可能な場合に有効になります。",
-              openPi:"Pi Browserで開く", install:"インストール", status:"status: OK",
-              contact:"連絡", demo:"デモ画面です。"},
-
-      "zh-Hans": { label:"语言", tag:"ONE WORLD • ONE PI • ONE FUTURE", ppl:"以人为本，而非利润",
-              t:["UBI","支付","质押","奖励","支持","FAQ"],
-              d:["基本收入奖励","支付 • 转账","31.4% APY（演示）","参与奖励","帮助中心","条款 • 政策 • 联系"],
-              installT:"一键安装 / 启动",
-              installD:"当浏览器支持“添加到主屏幕”时启用。",
-              openPi:"在 Pi Browser 打开", install:"安装", status:"状态：OK",
-              contact:"联系", demo:"这是演示界面。"},
-
-      "zh-Hant": { label:"語言", tag:"ONE WORLD • ONE PI • ONE FUTURE", ppl:"以人為本，而非利潤",
-              t:["UBI","支付","質押","獎勵","支援","FAQ"],
-              d:["基本收入獎勵","支付 • 轉帳","31.4% APY（示範）","參與獎勵","幫助中心","條款 • 政策 • 聯絡"],
-              installT:"一鍵安裝 / 啟動",
-              installD:"當瀏覽器支援「加入主畫面」時啟用。",
-              openPi:"用 Pi Browser 開啟", install:"安裝", status:"狀態：OK",
-              contact:"聯絡", demo:"這是示範畫面。"},
-
-      "es": { label:"Idioma", tag:"ONE WORLD • ONE PI • ONE FUTURE", ppl:"Personas, no lucro",
-              t:["UBI","Pagos","Staking","Recompensas","Soporte","FAQ"],
-              d:["Recompensas de ingreso básico","Pagar • Transferir","31.4% APY (demo)","Recompensas por participación","Centro de ayuda","Términos • Política • Contacto"],
-              installT:"Instalación / Inicio con un clic",
-              installD:"Se habilita cuando “Añadir a la pantalla de inicio” está disponible.",
-              openPi:"Abrir en Pi Browser", install:"Instalar", status:"estado: OK",
-              contact:"Contacto", demo:"Pantalla de demostración."},
-
-      "pt": { label:"Idioma", tag:"ONE WORLD • ONE PI • ONE FUTURE", ppl:"Pessoas, não lucro",
-              t:["UBI","Pagamentos","Staking","Recompensas","Suporte","FAQ"],
-              d:["Recompensas de renda básica","Pagar • Transferir","31.4% APY (demo)","Recompensas de engajamento","Central de ajuda","Termos • Política • Contato"],
-              installT:"Instalar / Abrir com 1 clique",
-              installD:"Ativado quando “Adicionar à tela inicial” estiver disponível.",
-              openPi:"Abrir no Pi Browser", install:"Instalar", status:"status: OK",
-              contact:"Contato", demo:"Tela de demonstração."},
-
-      "fr": { label:"Langue", tag:"ONE WORLD • ONE PI • ONE FUTURE", ppl:"Les personnes avant le profit",
-              t:["UBI","Paiements","Staking","Récompenses","Support","FAQ"],
-              d:["Récompenses de revenu de base","Payer • Transférer","31.4% APY (démo)","Récompenses d'engagement","Centre d'aide","Conditions • Politique • Contact"],
-              installT:"Installation / Lancement en 1 clic",
-              installD:"Activé lorsque « Ajouter à l'écran d'accueil » est disponible.",
-              openPi:"Ouvrir dans Pi Browser", install:"Installer", status:"statut : OK",
-              contact:"Contact", demo:"Écran de démonstration."},
-
-      "de": { label:"Sprache", tag:"ONE WORLD • ONE PI • ONE FUTURE", ppl:"Menschen statt Profit",
-              t:["UBI","Zahlungen","Staking","Belohnungen","Support","FAQ"],
-              d:["Grund einkommen-Belohnungen","Zahlen • Überweisen","31.4% APY (Demo)","Engagement-Belohnungen","Hilfe-Center","AGB • Richtlinie • Kontakt"],
-              installT:"One-Click Installieren / Starten",
-              installD:"Aktiviert, wenn „Zum Startbildschirm hinzufügen“ verfügbar ist.",
-              openPi:"In Pi Browser öffnen", install:"Installieren", status:"Status: OK",
-              contact:"Kontakt", demo:"Demo-Bildschirm."},
-
-      "it": { label:"Lingua", tag:"ONE WORLD • ONE PI • ONE FUTURE", ppl:"Persone, non profitto",
-              t:["UBI","Pagamenti","Staking","Ricompense","Supporto","FAQ"],
-              d:["Ricompense di reddito di base","Paga • Trasferisci","31.4% APY (demo)","Ricompense di coinvolgimento","Centro assistenza","Termini • Policy • Contatto"],
-              installT:"Installazione / Avvio con 1 clic",
-              installD:"Attivo quando “Aggiungi alla schermata Home” è disponibile.",
-              openPi:"Apri in Pi Browser", install:"Installa", status:"stato: OK",
-              contact:"Contatto", demo:"Schermata demo."},
-
-      "ru": { label:"Язык", tag:"ONE WORLD • ONE PI • ONE FUTURE", ppl:"Люди важнее прибыли",
-              t:["UBI","Платежи","Стейкинг","Награды","Поддержка","FAQ"],
-              d:["Награды базового дохода","Оплата • Перевод","31.4% APY (демо)","Награды за активность","Центр помощи","Условия • Политика • Контакт"],
-              installT:"Установка / запуск в один клик",
-              installD:"Включается, когда доступно «Добавить на главный экран».",
-              openPi:"Открыть в Pi Browser", install:"Установить", status:"статус: OK",
-              contact:"Контакт", demo:"Демо-экран."},
-
-      "uk": { label:"Мова", tag:"ONE WORLD • ONE PI • ONE FUTURE", ppl:"Люди понад прибуток",
-              t:["UBI","Платежі","Стейкінг","Винагороди","Підтримка","FAQ"],
-              d:["Винагороди базового доходу","Оплата • Переказ","31.4% APY (демо)","Винагороди за активність","Центр допомоги","Умови • Політика • Контакт"],
-              installT:"Встановлення / запуск одним кліком",
-              installD:"Увімкнеться, коли доступно «Додати на головний екран».",
-              openPi:"Відкрити в Pi Browser", install:"Встановити", status:"статус: OK",
-              contact:"Контакт", demo:"Демо-екран."},
-
-      "pl": { label:"Język", tag:"ONE WORLD • ONE PI • ONE FUTURE", ppl:"Ludzie, nie zysk",
-              t:["UBI","Płatności","Staking","Nagrody","Wsparcie","FAQ"],
-              d:["Nagrody dochodu podstawowego","Płać • Przelew","31.4% APY (demo)","Nagrody za aktywność","Centrum pomocy","Warunki • Polityka • Kontakt"],
-              installT:"Instalacja / Uruchomienie 1 kliknięciem",
-              installD:"Włącza się, gdy dostępne jest „Dodaj do ekranu głównego”.",
-              openPi:"Otwórz w Pi Browser", install:"Zainstaluj", status:"status: OK",
-              contact:"Kontakt", demo:"Ekran demonstracyjny."},
-
-      "cs": { label:"Jazyk", tag:"ONE WORLD • ONE PI • ONE FUTURE", ppl:"Lidé před ziskem",
-              t:["UBI","Platby","Staking","Odměny","Podpora","FAQ"],
-              d:["Odměny základního příjmu","Platba • Převod","31.4% APY (demo)","Odměny za aktivitu","Centrum nápovědy","Podmínky • Zásady • Kontakt"],
-              installT:"Instalace / Spuštění jedním kliknutím",
-              installD:"Aktivuje se, když je k dispozici „Přidat na plochu“.",
-              openPi:"Otevřít v Pi Browser", install:"Instalovat", status:"status: OK",
-              contact:"Kontakt", demo:"Demo obrazovka."},
-
-      "hu": { label:"Nyelv", tag:"ONE WORLD • ONE PI • ONE FUTURE", ppl:"Emberek, nem profit",
-              t:["UBI","Fizetések","Staking","Jutalmak","Támogatás","GYIK"],
-              d:["Alapjövedelem jutalmak","Fizetés • Átutalás","31.4% APY (demo)","Részvételi jutalmak","Súgóközpont","Feltételek • Szabályzat • Kapcsolat"],
-              installT:"Egykattintásos telepítés / indítás",
-              installD:"Akkor aktív, ha elérhető a „Hozzáadás a kezdőképernyőhöz”.",
-              openPi:"Megnyitás Pi Browserben", install:"Telepítés", status:"állapot: OK",
-              contact:"Kapcsolat", demo:"Demo képernyő."},
-
-      "ro": { label:"Limbă", tag:"ONE WORLD • ONE PI • ONE FUTURE", ppl:"Oamenii, nu profitul",
-              t:["UBI","Plăți","Staking","Recompense","Suport","FAQ"],
-              d:["Recompense venit de bază","Plătește • Transferă","31.4% APY (demo)","Recompense de implicare","Centru de ajutor","Termeni • Politică • Contact"],
-              installT:"Instalare / Lansare cu un click",
-              installD:"Activat când „Adaugă pe ecranul principal” este disponibil.",
-              openPi:"Deschide în Pi Browser", install:"Instalează", status:"status: OK",
-              contact:"Contact", demo:"Ecran demo."},
-
-      "el": { label:"Γλώσσα", tag:"ONE WORLD • ONE PI • ONE FUTURE", ppl:"Άνθρωποι, όχι κέρδος",
-              t:["UBI","Πληρωμές","Staking","Ανταμοιβές","Υποστήριξη","FAQ"],
-              d:["Ανταμοιβές βασικού εισοδήματος","Πληρωμή • Μεταφορά","31.4% APY (demo)","Ανταμοιβές συμμετοχής","Κέντρο βοήθειας","Όροι • Πολιτική • Επικοινωνία"],
-              installT:"Εγκατάσταση / Εκκίνηση με ένα κλικ",
-              installD:"Ενεργοποιείται όταν είναι διαθέσιμο το «Προσθήκη στην αρχική οθόνη».",
-              openPi:"Άνοιγμα στο Pi Browser", install:"Εγκατάσταση", status:"κατάσταση: OK",
-              contact:"Επικοινωνία", demo:"Οθόνη επίδειξης."},
-
-      "nl": { label:"Taal", tag:"ONE WORLD • ONE PI • ONE FUTURE", ppl:"Mensen, niet winst",
-              t:["UBI","Betalingen","Staking","Beloningen","Support","FAQ"],
-              d:["Basisinkomen-beloningen","Betalen • Overmaken","31.4% APY (demo)","Betrokkenheidsbeloningen","Helpcentrum","Voorwaarden • Beleid • Contact"],
-              installT:"Installeren / Starten met 1 klik",
-              installD:"Actief wanneer ‘Toevoegen aan startscherm’ beschikbaar is.",
-              openPi:"Openen in Pi Browser", install:"Installeren", status:"status: OK",
-              contact:"Contact", demo:"Demo-scherm."},
-
-      "sv": { label:"Språk", tag:"ONE WORLD • ONE PI • ONE FUTURE", ppl:"Människor, inte vinst",
-              t:["UBI","Betalningar","Staking","Belöningar","Support","FAQ"],
-              d:["Grundinkomst-belöningar","Betala • Överför","31.4% APY (demo)","Engagemangsbelöningar","Hjälpcenter","Villkor • Policy • Kontakt"],
-              installT:"Installera / Starta med ett klick",
-              installD:"Aktiveras när “Lägg till på hemskärmen” är tillgängligt.",
-              openPi:"Öppna i Pi Browser", install:"Installera", status:"status: OK",
-              contact:"Kontakt", demo:"Demovy."},
-
-      "no": { label:"Språk", tag:"ONE WORLD • ONE PI • ONE FUTURE", ppl:"Mennesker, ikke profitt",
-              t:["UBI","Betalinger","Staking","Belønninger","Support","FAQ"],
-              d:["Grunninntekt-belønninger","Betal • Overfør","31.4% APY (demo)","Engasjementsbelønninger","Hjelpesenter","Vilkår • Policy • Kontakt"],
-              installT:"Installer / Start med ett klikk",
-              installD:"Aktiveres når «Legg til på startskjerm» er tilgjengelig.",
-              openPi:"Åpne i Pi Browser", install:"Installer", status:"status: OK",
-              contact:"Kontakt", demo:"Demo-skjerm."},
-
-      "da": { label:"Sprog", tag:"ONE WORLD • ONE PI • ONE FUTURE", ppl:"Mennesker, ikke profit",
-              t:["UBI","Betalinger","Staking","Belønninger","Support","FAQ"],
-              d:["Basisindkomst-belønninger","Betal • Overfør","31.4% APY (demo)","Engagement-belønninger","Hjælpecenter","Vilkår • Politik • Kontakt"],
-              installT:"Installer / Start med ét klik",
-              installD:"Aktiveres når “Føj til startskærm” er tilgængelig.",
-              openPi:"Åbn i Pi Browser", install:"Installer", status:"status: OK",
-              contact:"Kontakt", demo:"Demo-skærm."},
-
-      "fi": { label:"Kieli", tag:"ONE WORLD • ONE PI • ONE FUTURE", ppl:"Ihmiset, ei voitto",
-              t:["UBI","Maksut","Staking","Palkinnot","Tuki","UKK"],
-              d:["Perustulopalkinnot","Maksa • Siirrä","31.4% APY (demo)","Osallistumispalkinnot","Ohjekeskus","Ehdot • Käytäntö • Yhteys"],
-              installT:"Asenna / Käynnistä yhdellä klikkauksella",
-              installD:"Aktivoituu, kun “Lisää aloitusnäyttöön” on käytettävissä.",
-              openPi:"Avaa Pi Browserissa", install:"Asenna", status:"tila: OK",
-              contact:"Yhteys", demo:"Demo-näkymä."},
-
-      "tr": { label:"Dil", tag:"ONE WORLD • ONE PI • ONE FUTURE", ppl:"İnsanlar, kâr değil",
-              t:["UBI","Ödemeler","Staking","Ödüller","Destek","SSS"],
-              d:["Temel gelir ödülleri","Öde • Transfer","31.4% APY (demo)","Katılım ödülleri","Yardım merkezi","Şartlar • Politika • İletişim"],
-              installT:"Tek tıkla Kur / Başlat",
-              installD:"“Ana ekrana ekle” kullanılabilir olduğunda etkinleşir.",
-              openPi:"Pi Browser’da Aç", install:"Yükle", status:"durum: OK",
-              contact:"İletişim", demo:"Demo ekranı."},
-
-      "ar": { label:"اللغة", tag:"ONE WORLD • ONE PI • ONE FUTURE", ppl:"الناس أولاً لا الربح",
-              t:["UBI","المدفوعات","التخزين","المكافآت","الدعم","الأسئلة"],
-              d:["مكافآت الدخل الأساسي","ادفع • حوّل","31.4% APY (تجريبي)","مكافآت المشاركة","مركز المساعدة","الشروط • السياسة • تواصل"],
-              installT:"تثبيت / تشغيل بنقرة واحدة",
-              installD:"يُفعّل عندما يتوفر خيار «إضافة إلى الشاشة الرئيسية».",
-              openPi:"افتح في Pi Browser", install:"تثبيت", status:"الحالة: OK",
-              contact:"تواصل", demo:"هذه شاشة تجريبية."},
-
-      "he": { label:"שפה", tag:"ONE WORLD • ONE PI • ONE FUTURE", ppl:"אנשים לפני רווח",
-              t:["UBI","תשלומים","סטייקינג","תגמולים","תמיכה","שאלות"],
-              d:["תגמולי הכנסה בסיסית","שלם • העבר","31.4% APY (דמו)","תגמולי מעורבות","מרכז עזרה","תנאים • מדיניות • יצירת קשר"],
-              installT:"התקנה / הפעלה בלחיצה אחת",
-              installD:"מופעל כאשר “הוסף למסך הבית” זמין בדפדפן.",
-              openPi:"פתח ב-Pi Browser", install:"התקן", status:"סטטוס: OK",
-              contact:"יצירת קשר", demo:"מסך הדגמה."},
-
-      "fa": { label:"زبان", tag:"ONE WORLD • ONE PI • ONE FUTURE", ppl:"انسان ها، نه سود",
-              t:["UBI","پرداخت ها","استیکینگ","پاداش ها","پشتیبانی","FAQ"],
-              d:["پاداش درآمد پایه","پرداخت • انتقال","31.4% APY (دمو)","پاداش مشارکت","مرکز کمک","شرایط • سیاست • تماس"],
-              installT:"نصب / اجرا با یک کلیک",
-              installD:"وقتی «افزودن به صفحه اصلی» در مرورگر موجود باشد فعال می شود.",
-              openPi:"باز کردن در Pi Browser", install:"نصب", status:"وضعیت: OK",
-              contact:"تماس", demo:"صفحهٔ دمو."},
-
-      "ur": { label:"زبان", tag:"ONE WORLD • ONE PI • ONE FUTURE", ppl:"لوگ، منافع نہیں",
-              t:["UBI","ادائیگیاں","اسٹیکنگ","انعامات","سپورٹ","FAQ"],
-              d:["بنیادی آمدن انعامات","ادائیگی • منتقلی","31.4% APY (ڈیمو)","شمولیت انعامات","ہیلپ سینٹر","شرائط • پالیسی • رابطہ"],
-              installT:"ایک کلک انسٹال / لانچ",
-              installD:"جب ‘ہوم اسکرین پر شامل کریں’ دستیاب ہو تو فعال ہوتا ہے۔",
-              openPi:"Pi Browser میں کھولیں", install:"انسٹال", status:"اسٹیٹس: OK",
-              contact:"رابطہ", demo:"یہ ڈیمو اسکرین ہے۔"},
-
-      "hi": { label:"भाषा", tag:"ONE WORLD • ONE PI • ONE FUTURE", ppl:"लोग पहले, लाभ नहीं",
-              t:["UBI","भुगतान","स्टेकिंग","रिवॉर्ड","सपोर्ट","FAQ"],
-              d:["बेसिक इनकम रिवॉर्ड","भुगतान • ट्रांसफर","31.4% APY (डेमो)","एंगेजमेंट रिवॉर्ड","हेल्प सेंटर","शर्तें • नीति • संपर्क"],
-              installT:"वन-क्लिक इंस्टॉल / लॉन्च",
-              installD:"जब ‘होम स्क्रीन पर जोड़ें’ उपलब्ध हो तब सक्रिय होता है।",
-              openPi:"Pi Browser में खोलें", install:"इंस्टॉल", status:"स्थिति: OK",
-              contact:"संपर्क", demo:"डेमो स्क्रीन।"},
-
-      "bn": { label:"ভাষা", tag:"ONE WORLD • ONE PI • ONE FUTURE", ppl:"মানুষ আগে, লাভ নয়",
-              t:["UBI","পেমেন্ট","স্টেকিং","রিওয়ার্ড","সাপোর্ট","FAQ"],
-              d:["বেসিক ইনকাম রিওয়ার্ড","পে • ট্রান্সফার","31.4% APY (ডেমো)","এনগেজমেন্ট রিওয়ার্ড","হেল্প সেন্টার","টার্মস • পলিসি • কন্ট্যাক্ট"],
-              installT:"ওয়ান-ক্লিক ইনস্টল / লঞ্চ",
-              installD:"ব্রাউজারে ‘হোম স্ক্রিনে যোগ করুন’ উপলব্ধ হলে সক্রিয় হবে।",
-              openPi:"Pi Browser এ খুলুন", install:"ইনস্টল", status:"স্ট্যাটাস: OK",
-              contact:"যোগাযোগ", demo:"ডেমো স্ক্রিন।"},
-
-      "id": { label:"Bahasa", tag:"ONE WORLD • ONE PI • ONE FUTURE", ppl:"Manusia, bukan profit",
-              t:["UBI","Pembayaran","Staking","Hadiah","Dukungan","FAQ"],
-              d:["Hadiah pendapatan dasar","Bayar • Transfer","31.4% APY (demo)","Hadiah keterlibatan","Pusat bantuan","S&K • Kebijakan • Kontak"],
-              installT:"Instal / Jalankan 1 klik",
-              installD:"Aktif saat “Tambahkan ke layar utama” tersedia di browser.",
-              openPi:"Buka di Pi Browser", install:"Instal", status:"status: OK",
-              contact:"Kontak", demo:"Layar demo."},
-
-      "ms": { label:"Bahasa", tag:"ONE WORLD • ONE PI • ONE FUTURE", ppl:"Manusia, bukan untung",
-              t:["UBI","Pembayaran","Staking","Ganjaran","Sokongan","FAQ"],
-              d:["Ganjaran pendapatan asas","Bayar • Pindah","31.4% APY (demo)","Ganjaran penglibatan","Pusat bantuan","Terma • Polisi • Hubungi"],
-              installT:"Pasang / Lancar 1 klik",
-              installD:"Aktif apabila “Tambah ke skrin utama” tersedia.",
-              openPi:"Buka di Pi Browser", install:"Pasang", status:"status: OK",
-              contact:"Hubungi", demo:"Skrin demo."},
-
-      "vi": { label:"Ngôn ngữ", tag:"ONE WORLD • ONE PI • ONE FUTURE", ppl:"Con người, không lợi nhuận",
-              t:["UBI","Thanh toán","Staking","Phần thưởng","Hỗ trợ","FAQ"],
-              d:["Phần thưởng thu nhập cơ bản","Trả • Chuyển","31.4% APY (demo)","Phần thưởng tương tác","Trung tâm trợ giúp","Điều khoản • Chính sách • Liên hệ"],
-              installT:"Cài / Mở bằng 1 chạm",
-              installD:"Kích hoạt khi trình duyệt hỗ trợ “Thêm vào Màn hình chính”.",
-              openPi:"Mở bằng Pi Browser", install:"Cài đặt", status:"trạng thái: OK",
-              contact:"Liên hệ", demo:"Màn hình demo."},
-
-      "th": { label:"ภาษา", tag:"ONE WORLD • ONE PI • ONE FUTURE", ppl:"ผู้คนมาก่อนกำไร",
-              t:["UBI","การชำระเงิน","สเตกกิ้ง","รางวัล","สนับสนุน","FAQ"],
-              d:["รางวัลรายได้พื้นฐาน","จ่าย • โอน","31.4% APY (เดโม)","รางวัลการมีส่วนร่วม","ศูนย์ช่วยเหลือ","เงื่อนไข • นโยบาย • ติดต่อ"],
-              installT:"ติดตั้ง / เปิดใช้งานด้วยคลิกเดียว",
-              installD:"เปิดใช้เมื่อเบราว์เซอร์รองรับ “เพิ่มไปยังหน้าจอหลัก”",
-              openPi:"เปิดใน Pi Browser", install:"ติดตั้ง", status:"สถานะ: OK",
-              contact:"ติดต่อ", demo:"หน้าจอเดโม"},
-
-      "tl": { label:"Wika", tag:"ONE WORLD • ONE PI • ONE FUTURE", ppl:"Tao, hindi tubo",
-              t:["UBI","Bayad","Staking","Gantimpala","Suporta","FAQ"],
-              d:["Gantimpala sa basic income","Magbayad • Maglipat","31.4% APY (demo)","Gantimpala sa pakikilahok","Help center","Terms • Policy • Contact"],
-              installT:"One-click Install / Launch",
-              installD:"Gagana kapag available ang “Add to Home Screen” sa browser.",
-              openPi:"Buksan sa Pi Browser", install:"Install", status:"status: OK",
-              contact:"Contact", demo:"Demo screen."},
-
-      "sw": { label:"Lugha", tag:"ONE WORLD • ONE PI • ONE FUTURE", ppl:"Watu, si faida",
-              t:["UBI","Malipo","Staking","Zawadi","Msaada","Maswali"],
-              d:["Zawadi za kipato cha msingi","Lipa • Hamisha","31.4% APY (demo)","Zawadi za ushiriki","Kituo cha msaada","Masharti • Sera • Mawasiliano"],
-              installT:"Sakinisha / Anzisha kwa mbofyo mmoja",
-              installD:"Huwashwa wakati “Ongeza kwenye Skrini ya Nyumbani” inapatikana.",
-              openPi:"Fungua kwenye Pi Browser", install:"Sakinisha", status:"hali: OK",
-              contact:"Wasiliana", demo:"Skrini ya demo."},
-
-      "am": { label:"ቋንቋ", tag:"ONE WORLD • ONE PI • ONE FUTURE", ppl:"ሰዎች እንጂ ትርፍ አይደለም",
-              t:["UBI","ክፍያ","Staking","ሽልማቶች","ድጋፍ","FAQ"],
-              d:["የመሰረታዊ ገቢ ሽልማት","ክፈል • ላክ","31.4% APY (demo)","የተሳትፎ ሽልማት","የእገዛ ማዕከል","መመሪያ • ፖሊሲ • እውቂያ"],
-              installT:"በአንድ ጠቅ መጫን / መክፈት",
-              installD:"በአሳሽ ላይ “Add to Home Screen” ሲኖር ይሰራል።",
-              openPi:"በPi Browser ክፈት", install:"ጫን", status:"ሁኔታ: OK",
-              contact:"እውቂያ", demo:"የዲሞ ገጽ።"},
-
-      "ha": { label:"Harshe", tag:"ONE WORLD • ONE PI • ONE FUTURE", ppl:"Mutane, ba riba ba",
-              t:["UBI","Biya","Staking","Kyaututtuka","Tallafi","FAQ"],
-              d:["Kyaututtukan kudin shiga na asali","Biya • Canja","31.4% APY (demo)","Kyaututtukan shiga","Cibiyar taimako","Sharuɗɗa • Manufofi • Tuntuɓa"],
-              installT:"Shigar / Kaddamar da danna ɗaya",
-              installD:"Yana aiki idan “Add to Home Screen” yana samuwa a browser.",
-              openPi:"Buɗe a Pi Browser", install:"Shigar", status:"status: OK",
-              contact:"Tuntuɓa", demo:"Allon demo."},
-
-      "yo": { label:"Èdè", tag:"ONE WORLD • ONE PI • ONE FUTURE", ppl:"Àwọn ènìyàn, kì í ṣe èrè",
-              t:["UBI","Ìsanwó","Staking","Ẹ̀bùn","Ìtìlẹ́yìn","FAQ"],
-              d:["Ẹ̀bùn owó ìbámu","San • Rán","31.4% APY (demo)","Ẹ̀bùn ìfarahàn","Ile ìrànlọ́wọ́","Àwọn àdéhùn • Ilànà • Ìbáṣepọ̀"],
-              installT:"Fifi sori / Ṣíṣe pẹ̀lú ìtẹ̀ ẹyọkan",
-              installD:"Ó ṣiṣẹ́ nígbà tí “Add to Home Screen” bá wà.",
-              openPi:"Ṣí ni Pi Browser", install:"Fì sílẹ̀", status:"status: OK",
-              contact:"Ìbáṣepọ̀", demo:"Demo."},
-
-      "ig": { label:"Asụsụ", tag:"ONE WORLD • ONE PI • ONE FUTURE", ppl:"Ndị mmadụ, ọ bụghị uru",
-              t:["UBI","Ụgwọ","Staking","Nrite","Nkwado","FAQ"],
-              d:["Nrite ego bụ isi","Kwụọ • Zipu","31.4% APY (demo)","Nrite mmekọrịta","Ebe enyemaka","Usoro • Iwu • Kpọtụrụ"],
-              installT:"Wụnye / Mepee n’otu pịa",
-              installD:"Na-arụ ọrụ mgbe “Add to Home Screen” dị.",
-              openPi:"Mepee na Pi Browser", install:"Wụnye", status:"status: OK",
-              contact:"Kpọtụrụ", demo:"Demo."},
-
-      "zu": { label:"Ulimi", tag:"ONE WORLD • ONE PI • ONE FUTURE", ppl:"Abantu, hhayi inzuzo",
-              t:["UBI","Izinkokhelo","Staking","Imiklomelo","Usizo","FAQ"],
-              d:["Imiklomelo yomholo oyisisekelo","Khokha • Dlulisa","31.4% APY (demo)","Imiklomelo yokubamba iqhaza","Isikhungo sosizo","Imigomo • Inqubomgomo • Xhumana"],
-              installT:"Faka / Vula ngokuchofoza kanye",
-              installD:"Kuyasebenza uma “Add to Home Screen” itholakala.",
-              openPi:"Vula ku Pi Browser", install:"Faka", status:"isimo: OK",
-              contact:"Xhumana", demo:"Isikrini sedemo."},
-
-      "xh": { label:"Ulwimi", tag:"ONE WORLD • ONE PI • ONE FUTURE", ppl:"Abantu, hayi inzuzo",
-              t:["UBI","Iintlawulo","Staking","Imivuzo","Inkxaso","FAQ"],
-              d:["Imivuzo yengeniso esisiseko","Hlawula • Thumela","31.4% APY (demo)","Imivuzo yokuzibandakanya","Iziko loncedo","Imiqathango • Umgaqo-nkqubo • Qhagamshelana"],
-              installT:"Faka / Qalisa ngokucofa kube kanye",
-              installD:"Iyasebenza xa “Add to Home Screen” ikhona.",
-              openPi:"Vula kwi Pi Browser", install:"Faka", status:"isimo: OK",
-              contact:"Qhagamshelana", demo:"Isikrini sedemo."}
-    };
-
-    /***********************
-     * 4) 언어 적용
-     ***********************/
-    function applyLang(code){
-      const t = I18N[code] || I18N.en;
-
-      // rtl/ltr
-      document.documentElement.lang = code.startsWith("zh") ? "zh" : code;
-      document.documentElement.dir = isRTL(code) ? "rtl" : "ltr";
-
-      $("langLabel").textContent = t.label;
-
-      $("tagline").textContent = t.tag;
-      $("people").textContent = t.ppl;
-
-      $("t1").textContent = t.t[0]; $("d1").textContent = t.d[0];
-      $("t2").textContent = t.t[1]; $("d2").textContent = t.d[1];
-      $("t3").textContent = t.t[2]; $("d3").textContent = t.d[2];
-      $("t4").textContent = t.t[3]; $("d4").textContent = t.d[3];
-      $("t5").textContent = t.t[4]; $("d5").textContent = t.d[4];
-      $("t6").textContent = t.t[5]; $("d6").textContent = t.d[5];
-
-      $("installTitle").textContent = t.installT;
-      $("installDesc").innerHTML = `${t.installD}<br/>URL: <span id="siteUrl"></span>`;
-      $("siteUrl").textContent = location.href;
-
-      $("openPiBrowserBtn").textContent = t.openPi;
-      $("installBtn").textContent = t.install;
-      $("statusText").textContent = t.status;
-      $("contactBtn").textContent = t.contact;
-    }
-
-    /***********************
-     * 5) 기본 언어 선택(브라우저 기반)
-     ***********************/
-    function pickDefaultLang(){
-      const saved = localStorage.getItem("pwb_lang");
-      if(saved && I18N[saved]) return saved;
-
-      const nav = (navigator.language || "en").toLowerCase();
-      if(nav.startsWith("ko")) return "ko";
-      if(nav.startsWith("ja")) return "ja";
-      if(nav.startsWith("zh")) return nav.includes("tw") || nav.includes("hk") ? "zh-Hant" : "zh-Hans";
-
-      // 가장 많이 쓰는 언어들 매핑
-      const short = nav.split("-")[0];
-      if(I18N[short]) return short;
-
-      return "en";
-    }
-
-    /***********************
-     * 6) 카드/버튼 동작
-     ***********************/
-    function openLink(url){
-      try{ window.open(url, "_blank", "noopener,noreferrer"); }
-      catch(e){ location.href = url; }
-    }
-
-    function setupClickable(el, fn){
-      el.addEventListener("click", fn);
-      el.addEventListener("keydown", (e)=>{ if(e.key==="Enter"||e.key===" "){ e.preventDefault(); fn(); }});
-    }
-
-    // 카드 클릭: 데모 토스트
-    const demoToast = ()=> toast((I18N[$("langSelect").value] || I18N.en).demo);
-
-    ["tileUbi","tilePay","tileStake","tileRewards","tileSupport","tileFaq"].forEach(id=>{
-      setupClickable($(id), demoToast);
+function setupButtons(){
+  // cards
+  ["cardUBI","cardPay","cardStake","cardRewards","cardSupport","cardFAQ"].forEach(id=>{
+    $(id).addEventListener("click", ()=>{
+      toast(I18N[currentLang()].toastPilot);
+      alert(I18N[currentLang()].toastPilot);
     });
+  });
 
-    setupClickable($("ytBtn"), ()=> openLink(LINKS.youtube));
-    setupClickable($("ttBtn"), ()=> openLink(LINKS.tiktok));
-    setupClickable($("contactBtn"), ()=> openLink(LINKS.contact));
+  // Pi Browser open (모바일 Pi Browser에서 pi://가 의미있음)
+  $("openPiBtn").addEventListener("click", ()=>{
+    const lang = currentLang();
+    toast(I18N[lang].toastPilot);
 
-    // Pi Browser 열기
-    $("openPiBrowserBtn").addEventListener("click", ()=>{
-      // 1) pi:// 시도 (일부 환경에서만 동작)
-      const piUrl = "pi://" + location.host + location.pathname;
-      try{
-        location.href = piUrl;
-        toast("Trying to open Pi Browser…");
-        // 2) fallback: 현재 URL 새탭
-        setTimeout(()=> openLink(location.href), 900);
-      }catch(e){
-        openLink(location.href);
-      }
-    });
+    // 1) 일반적으로는 현재 URL 오픈
+    // 2) Pi Browser에서만 pi:// 스킴을 쓰고 싶으면 아래 슬러그 바꿔서 사용
+    // const piurl = "pi://piworldbank";
+    // location.href = piurl;
 
-    /***********************
-     * 7) PWA 설치(원클릭)
-     ***********************/
-    let deferredPrompt = null;
+    // 데스크탑/모바일 공통 안정 방식
+    openLink(location.href);
+  });
 
-    window.addEventListener("beforeinstallprompt", (e)=>{
-      e.preventDefault();
-      deferredPrompt = e;
-      $("installBtn").disabled = false;
-      toast("Install is ready.");
-    });
+  // ✅ 유튜브/틱톡/컨택: 무조건 열리게
+  // 혜공님 실제 채널/링크로 교체하세요
+  const YT = "https://www.youtube.com/";
+  const TT = "https://www.tiktok.com/";
+  const CONTACT = "mailto:ljw2358@gmail.com";
 
-    $("installBtn").addEventListener("click", async ()=>{
-      if(!deferredPrompt){
-        toast("Install not available on this device/browser.");
-        return;
-      }
-      deferredPrompt.prompt();
-      const choice = await deferredPrompt.userChoice;
-      deferredPrompt = null;
-      $("installBtn").disabled = true;
-      toast(choice.outcome === "accepted" ? "Installed." : "Canceled.");
-    });
+  $("youtubeBtn").addEventListener("click", ()=>openLink(YT));
+  $("tiktokBtn").addEventListener("click", ()=>openLink(TT));
+  $("contactBtn").addEventListener("click", ()=>openLink(CONTACT));
+}
 
-    /***********************
-     * 8) Service Worker 등록
-     * (repo에 service-worker.js가 있으면 자동 등록)
-     ***********************/
-    (async ()=>{
-      if("serviceWorker" in navigator){
-        try{
-          await navigator.serviceWorker.register("./service-worker.js");
-        }catch(e){
-          // SW가 없어도 앱은 동작해야 함
-          // toast("SW not registered.");
-        }
-      }
-    })();
+// ===== boot =====
+buildLangSelect();
 
-    /***********************
-     * 9) 초기화
-     ***********************/
-    const defaultLang = pickDefaultLang();
-    $("langSelect").value = defaultLang;
-    applyLang(defaultLang);
+// 기본 언어: 한국어(ko)
+$("langSelect").value = pickDefaultLang();
+applyLang($("langSelect").value);
 
-    $("langSelect").addEventListener("change", (e)=>{
-      const lang = e.target.value;
-      localStorage.setItem("pwb_lang", lang);
-      applyLang(lang);
-      toast("Language updated.");
-    });
+$("langSelect").addEventListener("change", (e)=>{
+  applyLang(e.target.value);
+});
 
-    // URL 표시
-    $("siteUrl").textContent = location.href;
-  </script>
+setupPWA();
+setupButtons();
+</script>
+
 </body>
-</html>
