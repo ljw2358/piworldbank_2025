@@ -1,466 +1,590 @@
+출발 언어영어도착 언어한국어번역하기
 <!doctype html>
 <html lang="ko">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>PiWorldBank</title>
-
+  <title>PWB Global | Global Finance & Industrial Infrastructure</title>
+  <meta name="description" content="PWB Global (Pi World Bank Global) — A global financial & industrial infrastructure platform linking Finance, Industry, Technology, and UBI." />
   <style>
     :root{
-      --bg1:#0b1020; --bg2:#151a2e;
-      --card: rgba(255,255,255,.06);
-      --card2: rgba(255,255,255,.08);
-      --border: rgba(255,255,255,.14);
-      --text: rgba(255,255,255,.92);
-      --muted: rgba(255,255,255,.68);
-      --accent:#f5c542;
-      --shadow: 0 18px 60px rgba(0,0,0,.45);
-      --radius: 22px;
+      --bg:#0b0f17; --card:#101827; --card2:#0f1624;
+      --text:#e9eef8; --muted:#a9b4c7; --line:rgba(255,255,255,.08);
+      --accent:#6ee7ff; --accent2:#a78bfa;
+      --shadow: 0 12px 40px rgba(0,0,0,.45);
+      --radius:18px;
+      --max:1080px;
     }
-    *{ box-sizing:border-box; }
+    *{box-sizing:border-box}
+    html,body{height:100%}
     body{
-      margin:0;
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
-      background:
-        radial-gradient(1200px 600px at 30% 20%, #2a2f55 0%, transparent 55%),
-        linear-gradient(180deg, var(--bg1), var(--bg2));
+      margin:0; background:radial-gradient(1200px 600px at 20% 0%, rgba(110,231,255,.12), transparent 55%),
+                 radial-gradient(900px 500px at 80% 20%, rgba(167,139,250,.10), transparent 55%),
+                 var(--bg);
       color:var(--text);
-      min-height:100vh;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      padding:18px;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, "Noto Sans KR", "Noto Sans Arabic", Arial, sans-serif;
+      line-height:1.55;
     }
-    .wrap{
-      width:min(980px, 100%);
-      background: rgba(0,0,0,.25);
-      border:1px solid var(--border);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
+    a{color:inherit; text-decoration:none}
+    .wrap{max-width:var(--max); margin:0 auto; padding:28px 18px 80px}
+    .topbar{
+      display:flex; align-items:center; justify-content:space-between;
+      gap:12px; position:sticky; top:0; z-index:10;
       backdrop-filter: blur(10px);
+      background: linear-gradient(to bottom, rgba(11,15,23,.92), rgba(11,15,23,.60));
+      border-bottom:1px solid var(--line);
+      padding:14px 18px;
+    }
+    .brand{display:flex; align-items:center; gap:10px; font-weight:800; letter-spacing:.3px}
+    .logo{
+      width:34px; height:34px; border-radius:12px;
+      background: linear-gradient(135deg, rgba(110,231,255,.95), rgba(167,139,250,.95));
+      box-shadow: 0 10px 30px rgba(110,231,255,.12);
+    }
+    .pill{
+      display:inline-flex; gap:8px; align-items:center;
+      border:1px solid var(--line);
+      background: rgba(16,24,39,.72);
+      padding:8px 10px; border-radius:999px;
+    }
+    .langbtn{
+      cursor:pointer; user-select:none;
+      border:1px solid var(--line);
+      background: rgba(15,22,36,.65);
+      color:var(--text);
+      padding:8px 10px; border-radius:999px;
+      font-weight:650; font-size:13px;
+    }
+    .langbtn.active{border-color: rgba(110,231,255,.55); box-shadow: 0 0 0 3px rgba(110,231,255,.10) inset}
+    .hero{
+      margin-top:18px;
+      border:1px solid var(--line);
+      background: linear-gradient(180deg, rgba(16,24,39,.85), rgba(15,22,36,.62));
+      border-radius: var(--radius);
+      padding:34px 22px;
+      box-shadow: var(--shadow);
       overflow:hidden;
       position:relative;
     }
-    .top{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      padding:16px 18px 8px 18px;
-      gap:12px;
-    }
-    .brand{
-      display:flex; align-items:center; gap:10px;
-      font-weight:700;
-      letter-spacing:.2px;
-      opacity:.95;
-    }
-    .pill{
-      width:10px; height:10px; border-radius:99px; background:var(--accent);
-      box-shadow: 0 0 18px rgba(245,197,66,.55);
-    }
-
-    /* ✅ 언어 UI 작게(옛날처럼 한칸) */
-    .langbox{
-      display:flex;
-      align-items:center;
-      gap:8px;
-      background: rgba(255,255,255,.06);
-      border:1px solid var(--border);
-      border-radius: 999px;
-      padding:6px 10px;
-      height:34px;
-    }
-    .langlabel{
-      font-size:12px;
-      opacity:.85;
-      padding:0 4px;
-      white-space:nowrap;
-    }
-    select{
-      appearance:none;
-      -webkit-appearance:none;
-      -moz-appearance:none;
-      background: transparent;
-      border:0;
-      color:var(--text);
-      font-size:12px;
-      outline:none;
-      padding-right:18px;
-      cursor:pointer;
-    }
-    .chev{
-      width:0; height:0;
-      border-left:5px solid transparent;
-      border-right:5px solid transparent;
-      border-top:6px solid rgba(255,255,255,.75);
-      margin-left:-10px;
+    .hero:before{
+      content:"";
+      position:absolute; inset:-2px;
+      background: radial-gradient(700px 300px at 30% 10%, rgba(110,231,255,.18), transparent 60%),
+                  radial-gradient(700px 300px at 70% 30%, rgba(167,139,250,.14), transparent 60%);
       pointer-events:none;
     }
-
-    .main{
-      padding:10px 18px 18px 18px;
-    }
-    .center{
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      text-align:center;
-      padding:10px 0 14px 0;
-      gap:10px;
-    }
-    .logo{
-      width:56px; height:56px;
-      border-radius:16px;
-      background: linear-gradient(135deg, #ffcc4a, #8c7bff, #ff6bd6);
-      display:grid;
-      place-items:center;
-      box-shadow: 0 14px 40px rgba(0,0,0,.35);
-      border:1px solid rgba(255,255,255,.18);
-    }
-    .logo span{
-      font-weight:900;
-      color: rgba(10,10,20,.9);
-      font-size:18px;
-    }
-    h1{
-      margin:0;
-      font-size:34px;
-      letter-spacing:.3px;
-      line-height:1.1;
-    }
-    .sub{
-      margin-top:2px;
-      font-size:12px;
-      letter-spacing:2px;
-      color:var(--muted);
-      text-transform:uppercase;
-    }
-    .motto{
-      margin-top:-2px;
-      font-size:14px;
-      color: var(--accent);
-      font-weight:700;
-    }
-
-    .grid{
-      display:grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap:12px;
-      margin-top:8px;
-    }
-    @media (max-width: 820px){
-      .grid{ grid-template-columns: 1fr; }
-      h1{ font-size:30px; }
-    }
-    .card{
-      background: var(--card);
-      border:1px solid var(--border);
-      border-radius: 14px;
-      padding:12px 12px;
-      display:flex;
-      flex-direction:column;
-      gap:6px;
-      min-height:72px;
-    }
-    .card .title{
-      font-weight:800;
-      font-size:14px;
-      line-height:1.2;
-    }
-    .card .desc{
-      font-size:12px;
+    .hero > *{position:relative}
+    .kicker{
+      display:inline-flex; align-items:center; gap:10px;
+      padding:8px 12px; border-radius:999px;
+      border:1px solid var(--line);
+      background: rgba(11,15,23,.35);
       color: var(--muted);
-      line-height:1.35;
+      font-weight:650; font-size:13px;
     }
-
-    .footer{
-      margin-top:12px;
-      background: rgba(255,255,255,.04);
-      border:1px solid var(--border);
-      border-radius: 14px;
-      padding:12px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:12px;
-      flex-wrap:wrap;
-    }
-    .installtext{
-      font-size:12px;
-      color: var(--muted);
-      line-height:1.35;
-    }
-    .btns{
-      display:flex;
-      gap:10px;
-      align-items:center;
-      flex-wrap:wrap;
-    }
+    h1{margin:14px 0 10px; font-size:38px; line-height:1.12}
+    .sub{margin:0; color:var(--muted); font-size:16px; max-width:900px}
+    .ctaRow{display:flex; flex-wrap:wrap; gap:10px; margin-top:18px}
     .btn{
-      border:1px solid var(--border);
-      background: rgba(255,255,255,.06);
-      color:var(--text);
-      padding:8px 12px;
-      border-radius: 999px;
-      font-size:12px;
+      display:inline-flex; align-items:center; justify-content:center; gap:10px;
+      padding:10px 14px; border-radius:12px;
+      border:1px solid var(--line);
+      background: rgba(16,24,39,.72);
+      color: var(--text);
+      font-weight:750; font-size:14px;
       cursor:pointer;
-      text-decoration:none;
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
     }
     .btn.primary{
-      background: rgba(245,197,66,.95);
-      color:#111;
-      border-color: rgba(245,197,66,.95);
-      font-weight:800;
+      border-color: rgba(110,231,255,.55);
+      background: linear-gradient(135deg, rgba(110,231,255,.18), rgba(167,139,250,.16));
     }
-    .status{
-      display:flex;
-      align-items:center;
-      gap:8px;
-      font-size:12px;
-      color:var(--muted);
+    .grid{
+      display:grid; gap:14px;
+      grid-template-columns: repeat(12, 1fr);
+      margin-top:16px;
     }
-    .dot{
-      width:8px; height:8px; border-radius:99px;
-      background:#25d366;
-      box-shadow: 0 0 16px rgba(37,211,102,.45);
+    .card{
+      grid-column: span 6;
+      border:1px solid var(--line);
+      background: linear-gradient(180deg, rgba(16,24,39,.78), rgba(15,22,36,.60));
+      border-radius: var(--radius);
+      padding:18px 16px;
+      box-shadow: 0 10px 30px rgba(0,0,0,.28);
     }
-
-    .links{
-      margin-top:10px;
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
+    .card h3{margin:2px 0 8px; font-size:18px}
+    .card p{margin:0; color:var(--muted)}
+    .section{
+      margin-top:22px;
+      border:1px solid var(--line);
+      background: rgba(16,24,39,.50);
+      border-radius: var(--radius);
+      padding:18px 16px;
     }
-    .linkbtn{
-      border:1px solid var(--border);
-      background: rgba(255,255,255,.05);
-      padding:7px 12px;
-      border-radius: 999px;
-      font-size:12px;
-      color:var(--text);
-      text-decoration:none;
+    .section h2{margin:0 0 10px; font-size:22px}
+    .bullets{margin:10px 0 0; padding-left:18px; color:var(--muted)}
+    .bullets li{margin:6px 0}
+    .split{
+      display:grid; gap:14px;
+      grid-template-columns: 1.2fr .8fr;
+      align-items:start;
+      margin-top:14px;
+    }
+    .quote{
+      border:1px solid var(--line);
+      background: rgba(11,15,23,.35);
+      border-radius: var(--radius);
+      padding:16px;
+      color: var(--muted);
+    }
+    .quote strong{color:var(--text)}
+    .footer{
+      margin-top:26px; padding-top:18px;
+      border-top:1px solid var(--line);
+      color: var(--muted);
+      display:flex; flex-wrap:wrap; gap:10px; justify-content:space-between; align-items:center;
+    }
+    .small{font-size:12px}
+    .rtl{direction:rtl; text-align:right}
+    @media (max-width: 860px){
+      h1{font-size:30px}
+      .card{grid-column: span 12}
+      .split{grid-template-columns: 1fr}
     }
   </style>
 </head>
 
 <body>
-  <div class="wrap">
-    <div class="top">
-      <div class="brand">
-        <span class="pill"></span>
-        <span>PiWorldBank</span>
-      </div>
-
-      <div class="langbox">
-        <span class="langlabel" id="langLabel">언어</span>
-        <select id="langSelect" aria-label="Language">
-          <option value="ko">한국어</option>
-          <option value="en">English</option>
-          <option value="zh">中文(简体)</option>
-          <option value="ja">日本語</option>
-        </select>
-        <span class="chev"></span>
+  <div class="topbar">
+    <div class="brand" aria-label="PWB Global">
+      <div class="logo" aria-hidden="true"></div>
+      <div>
+        <div style="font-size:14px; opacity:.95;">PWB Global</div>
+        <div class="small" style="opacity:.75;">Pi World Bank Global</div>
       </div>
     </div>
 
-    <div class="main">
-      <div class="center">
-        <div class="logo"><span>π</span></div>
-        <h1>PiWorldBank</h1>
-        <div class="sub">ONE WORLD · ONE PI · ONE FUTURE</div>
-        <div class="motto" id="motto">사람이 먼저, 이윤은 그 다음</div>
-      </div>
-
-      <div class="grid">
-        <div class="card">
-          <div class="title" id="c1t">기본소득</div>
-          <div class="desc" id="c1d">기본소득 리워드</div>
-        </div>
-        <div class="card">
-          <div class="title" id="c2t">결제</div>
-          <div class="desc" id="c2d">결제 · 송금</div>
-        </div>
-        <div class="card">
-          <div class="title" id="c3t">예치율</div>
-          <div class="desc" id="c3d">31.4% APY (데모)</div>
-        </div>
-
-        <div class="card">
-          <div class="title" id="c4t">보상</div>
-          <div class="desc" id="c4d">참여 보상</div>
-        </div>
-        <div class="card">
-          <div class="title" id="c5t">고객센터</div>
-          <div class="desc" id="c5d">도움받기</div>
-        </div>
-        <div class="card">
-          <div class="title" id="c6t">FAQ</div>
-          <div class="desc" id="c6d">약관 · 정책 · 문의</div>
-        </div>
-      </div>
-
-      <div class="footer">
-        <div class="installtext" id="installText">
-          원클릭 설치 / 실행<br>
-          브라우저에서 “홈 화면에 추가(설치)”가 가능한 경우 활성화됩니다.<br>
-          URL: <span id="siteUrl"></span>
-        </div>
-
-        <div class="btns">
-          <a class="btn" id="piBtn" href="#" target="_blank" rel="noopener">Pi Browser로 열기</a>
-          <button class="btn primary" id="installBtn">설치</button>
-          <div class="status"><span class="dot"></span><span id="statusText">상태: OK</span></div>
-        </div>
-      </div>
-
-      <div class="links">
-        <a class="linkbtn" id="ytLink" href="https://www.youtube.com/@Hyekong2025" target="_blank" rel="noopener">YouTube</a>
-        <a class="linkbtn" id="ttLink" href="https://www.tiktok.com/@hyekong2025" target="_blank" rel="noopener">TikTok</a>
-        <a class="linkbtn" id="contactLink" href="#" onclick="alert(getText('contactMsg')); return false;">문의</a>
-      </div>
+    <div class="pill" role="group" aria-label="Language selector">
+      <button class="langbtn" data-lang="ko">KR</button>
+      <button class="langbtn" data-lang="en">EN</button>
+      <button class="langbtn" data-lang="ar">AR</button>
+      <button class="langbtn" data-lang="zh">中文</button>
     </div>
   </div>
 
-<script>
-  // ✅ 번역 딱 4개만 / 라벨 고정
-  const I18N = {
-    ko: {
-      langLabel:"언어",
-      motto:"사람이 먼저, 이윤은 그 다음",
-      c1t:"기본소득", c1d:"기본소득 리워드",
-      c2t:"결제", c2d:"결제 · 송금",
-      c3t:"예치율", c3d:"31.4% APY (데모)",
-      c4t:"보상", c4d:"참여 보상",
-      c5t:"고객센터", c5d:"도움받기",
-      c6t:"FAQ", c6d:"약관 · 정책 · 문의",
-      piBtn:"Pi Browser로 열기",
-      installBtn:"설치",
-      installText1:"원클릭 설치 / 실행",
-      installText2:"브라우저에서 “홈 화면에 추가(설치)”가 가능한 경우 활성화됩니다.",
-      status:"상태: OK",
-      contactMsg:"문의는 준비 중입니다."
-    },
-    en: {
-      langLabel:"Language",
-      motto:"People first, profit second",
-      c1t:"Basic Income", c1d:"Basic income rewards",
-      c2t:"Payments", c2d:"Pay · Transfer",
-      c3t:"Deposit Rate", c3d:"31.4% APY (Demo)",
-      c4t:"Rewards", c4d:"Participation rewards",
-      c5t:"Customer Center", c5d:"Get help",
-      c6t:"FAQ", c6d:"Terms · Policy · Contact",
-      piBtn:"Open in Pi Browser",
-      installBtn:"Install",
-      installText1:"One-click install / launch",
-      installText2:"Enabled when “Add to Home Screen (Install)” is available.",
-      status:"Status: OK",
-      contactMsg:"Contact is being prepared."
-    },
-    zh: {
-      langLabel:"语言",
-      motto:"以人为本，其次才是利润",
-      c1t:"基本收入", c1d:"基本收入奖励",
-      c2t:"支付", c2d:"支付 · 转账",
-      c3t:"存款利率", c3d:"31.4% APY（演示）",
-      c4t:"奖励", c4d:"参与奖励",
-      c5t:"客服中心", c5d:"获取帮助",
-      c6t:"FAQ", c6d:"条款 · 政策 · 联系",
-      piBtn:"在 Pi Browser 中打开",
-      installBtn:"安装",
-      installText1:"一键安装 / 启动",
-      installText2:"当支持“添加到主屏幕（安装）”时启用。",
-      status:"状态：OK",
-      contactMsg:"联系功能正在准备中。"
-    },
-    ja: {
-      langLabel:"言語",
-      motto:"人が先、利益はその次",
-      c1t:"ベーシックインカム", c1d:"ベーシックインカム報酬",
-      c2t:"決済", c2d:"決済 · 送金",
-      c3t:"預け入れ利率", c3d:"31.4% APY（デモ）",
-      c4t:"報酬", c4d:"参加報酬",
-      c5t:"カスタマーセンター", c5d:"ヘルプ",
-      c6t:"FAQ", c6d:"規約 · ポリシー · 問い合わせ",
-      piBtn:"Pi Browserで開く",
-      installBtn:"インストール",
-      installText1:"ワンクリックでインストール / 起動",
-      installText2:"「ホーム画面に追加（インストール）」が可能な場合に有効です。",
-      status:"ステータス：OK",
-      contactMsg:"お問い合わせは準備中です。"
+  <main class="wrap">
+    <!-- HERO -->
+    <section class="hero" id="top">
+      <div class="kicker" id="kicker">Global Finance • Industry • Technology • UBI</div>
+      <h1 id="title">PWB Global</h1>
+      <p class="sub" id="subtitle">
+        PWB Global은 금융·산업·기술·기본소득(UBI)을 하나의 구조로 연결하는
+        글로벌 금융·산업 인프라 플랫폼입니다.
+      </p>
+
+      <div class="ctaRow">
+        <button class="btn primary" onclick="scrollToId('pillars')" id="cta1">핵심 구조 보기</button>
+        <button class="btn" onclick="scrollToId('relationship')" id="cta2">PHK Bank와 관계</button>
+        <button class="btn" onclick="scrollToId('founder')" id="cta3">Founder</button>
+      </div>
+    </section>
+
+    <!-- PILLARS -->
+    <section class="section" id="pillars">
+      <h2 id="pillarsTitle">핵심 구조</h2>
+
+      <div class="grid">
+        <div class="card">
+          <h3 id="p1t">1) Global Financial Infrastructure</h3>
+          <p id="p1d">국경 없는 결제·정산·가치 이전, 그리고 실물 산업과 연결되는 실질 금융 구조를 구축합니다.</p>
+          <ul class="bullets" id="p1b">
+            <li>디지털 자산 기반 글로벌 금융</li>
+            <li>결제·정산·송금·가치 이전</li>
+            <li>실물 산업과 직접 연동</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3 id="p2t">2) Industrial Capital Platform</h3>
+          <p id="p2d">로봇·AI·에너지·우주산업 등 초대형 산업을 ‘실행’으로 연결하는 산업 실현형 금융을 지향합니다.</p>
+          <ul class="bullets" id="p2b">
+            <li>산업 투자 → 생산·고용·수익 연동</li>
+            <li>초대형 산업 프로젝트 금융</li>
+            <li>현장형 성장 자본 구조</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3 id="p3t">3) UBI-Oriented Economic System</h3>
+          <p id="p3d">기술 발전이 불안이 아니라 ‘삶의 안정’으로 이어지도록, 수익 환원 구조를 설계합니다.</p>
+          <ul class="bullets" id="p3b">
+            <li>순이익의 일정 비율을 UBI로 환원</li>
+            <li>노동·지역·국경을 초월한 참여형 경제</li>
+            <li>기술의 성과가 시민에게 도달</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3 id="p4t">4) Global Governance & Trust Framework</h3>
+          <p id="p4d">투명성과 신뢰를 기반으로 국가·기업·시민이 공존 가능한 지속 가능한 거버넌스를 지향합니다.</p>
+          <ul class="bullets" id="p4b">
+            <li>투명하고 추적 가능한 구조</li>
+            <li>장기 지속 가능한 신뢰 프레임워크</li>
+            <li>글로벌 협력 거버넌스</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHY -->
+    <section class="section" id="why">
+      <h2 id="whyTitle">왜 PWB Global인가</h2>
+
+      <div class="split">
+        <div>
+          <p id="whyBody" style="margin:0; color:var(--muted);">
+            기존 시스템은 기술이 발전해도 부는 집중되고, 불안은 확산되는 구조였습니다.
+            PWB Global은 “기술 → 산업 → 수익 → 시민”으로 이어지는 순환 구조를 통해,
+            기술의 성과가 사람에게 돌아오도록 설계합니다.
+          </p>
+
+          <ul class="bullets" id="whyBullets">
+            <li>금융은 투기가 아니라 산업과 삶을 연결하는 도구여야 합니다.</li>
+            <li>기술의 성과는 소수가 아니라 시민과 인류 전체로 확산되어야 합니다.</li>
+            <li>국경은 협력의 한계가 아니라 확장의 출발점입니다.</li>
+          </ul>
+        </div>
+
+        <div class="quote" id="quoteBox">
+          <div id="quoteLine1"><strong>핵심 질문</strong></div>
+          <div id="quoteLine2" style="margin-top:8px;">“기술은 발전했지만, 왜 사람들은 더 불안해지는가?”</div>
+          <div id="quoteLine3" style="margin-top:10px;">PWB Global은 이 질문에 구조로 답합니다.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- RELATIONSHIP -->
+    <section class="section" id="relationship">
+      <h2 id="relTitle">PHK Bank와의 관계</h2>
+      <p id="relBody" style="margin:0; color:var(--muted);">
+        PHK Bank는 실행 중심의 핵심 메인 플랫폼이며,
+        PWB Global은 글로벌 확장과 연결을 담당하는 상위 개념 구조입니다.
+      </p>
+      <ul class="bullets" id="relBullets">
+        <li><strong>PHK Bank</strong>: 실행 중심의 핵심 메인 플랫폼(핵심 운영)</li>
+        <li><strong>PWB Global</strong>: 글로벌 구조·확장·연결(상위 프레임)</li>
+        <li>“PHK Bank가 ‘심장’이라면, PWB Global은 ‘신경망’입니다.”</li>
+      </ul>
+    </section>
+
+    <!-- FOUNDER -->
+    <section class="section" id="founder">
+      <h2 id="founderTitle">Founder</h2>
+      <p id="founderName" style="margin:0 0 8px; font-weight:800;">Hyekong (Lee Jaewan)</p>
+      <p id="founderRole" style="margin:0; color:var(--muted);">Founder & Architect, PWB Global</p>
+
+      <div class="quote" style="margin-top:14px;" id="founderQuote">
+        <div id="fq1"><strong>Message</strong></div>
+        <div id="fq2" style="margin-top:8px;">“기술은 멈출 수 없습니다.</div>
+        <div id="fq3">그렇다면, 그 기술이 사람을 살리도록 설계해야 합니다.”</div>
+      </div>
+    </section>
+
+    <div class="footer">
+      <div class="small" id="footLeft">© <span id="year"></span> PWB Global. All rights reserved.</div>
+      <div class="small" id="footRight">Finance • Industry • Technology • UBI</div>
+    </div>
+  </main>
+
+  <script>
+    const TEXT = {
+      ko: {
+        dir: "ltr",
+        kicker: "Global Finance • Industry • Technology • UBI",
+        title: "PWB Global",
+        subtitle: "PWB Global은 금융·산업·기술·기본소득(UBI)을 하나의 구조로 연결하는 글로벌 금융·산업 인프라 플랫폼입니다.",
+        cta1: "핵심 구조 보기",
+        cta2: "PHK Bank와 관계",
+        cta3: "Founder",
+        pillarsTitle: "핵심 구조",
+        p1t: "1) Global Financial Infrastructure",
+        p1d: "국경 없는 결제·정산·가치 이전, 그리고 실물 산업과 연결되는 실질 금융 구조를 구축합니다.",
+        p1b: ["디지털 자산 기반 글로벌 금융", "결제·정산·송금·가치 이전", "실물 산업과 직접 연동"],
+        p2t: "2) Industrial Capital Platform",
+        p2d: "로봇·AI·에너지·우주산업 등 초대형 산업을 ‘실행’으로 연결하는 산업 실현형 금융을 지향합니다.",
+        p2b: ["산업 투자 → 생산·고용·수익 연동", "초대형 산업 프로젝트 금융", "현장형 성장 자본 구조"],
+        p3t: "3) UBI-Oriented Economic System",
+        p3d: "기술 발전이 불안이 아니라 ‘삶의 안정’으로 이어지도록, 수익 환원 구조를 설계합니다.",
+        p3b: ["순이익의 일정 비율을 UBI로 환원", "노동·지역·국경을 초월한 참여형 경제", "기술의 성과가 시민에게 도달"],
+        p4t: "4) Global Governance & Trust Framework",
+        p4d: "투명성과 신뢰를 기반으로 국가·기업·시민이 공존 가능한 지속 가능한 거버넌스를 지향합니다.",
+        p4b: ["투명하고 추적 가능한 구조", "장기 지속 가능한 신뢰 프레임워크", "글로벌 협력 거버넌스"],
+        whyTitle: "왜 PWB Global인가",
+        whyBody: "기존 시스템은 기술이 발전해도 부는 집중되고, 불안은 확산되는 구조였습니다. PWB Global은 “기술 → 산업 → 수익 → 시민”으로 이어지는 순환 구조를 통해, 기술의 성과가 사람에게 돌아오도록 설계합니다.",
+        whyBullets: [
+          "금융은 투기가 아니라 산업과 삶을 연결하는 도구여야 합니다.",
+          "기술의 성과는 소수가 아니라 시민과 인류 전체로 확산되어야 합니다.",
+          "국경은 협력의 한계가 아니라 확장의 출발점입니다."
+        ],
+        q1: "핵심 질문",
+        q2: "“기술은 발전했지만, 왜 사람들은 더 불안해지는가?”",
+        q3: "PWB Global은 이 질문에 구조로 답합니다.",
+        relTitle: "PHK Bank와의 관계",
+        relBody: "PHK Bank는 실행 중심의 핵심 메인 플랫폼이며, PWB Global은 글로벌 확장과 연결을 담당하는 상위 개념 구조입니다.",
+        relBullets: [
+          "<strong>PHK Bank</strong>: 실행 중심의 핵심 메인 플랫폼(핵심 운영)",
+          "<strong>PWB Global</strong>: 글로벌 구조·확장·연결(상위 프레임)",
+          "“PHK Bank가 ‘심장’이라면, PWB Global은 ‘신경망’입니다.”"
+        ],
+        founderTitle: "Founder",
+        founderName: "Hyekong (Lee Jaewan)",
+        founderRole: "Founder & Architect, PWB Global",
+        fq1: "Message",
+        fq2: "“기술은 멈출 수 없습니다.",
+        fq3: "그렇다면, 그 기술이 사람을 살리도록 설계해야 합니다.”",
+        footRight: "Finance • Industry • Technology • UBI"
+      },
+
+      en: {
+        dir: "ltr",
+        kicker: "Global Finance • Industry • Technology • UBI",
+        title: "PWB Global",
+        subtitle: "PWB Global (Pi World Bank Global) is a global financial and industrial infrastructure platform that connects Finance, Industry, Technology, and UBI into one integrated system.",
+        cta1: "View Core Pillars",
+        cta2: "Relation to PHK Bank",
+        cta3: "Founder",
+        pillarsTitle: "Core Pillars",
+        p1t: "1) Global Financial Infrastructure",
+        p1d: "Build borderless payments, clearing, and value transfer connected to real-world industry.",
+        p1b: ["Digital-asset-based global finance", "Payments • clearing • transfers • value flow", "Direct linkage to real industry"],
+        p2t: "2) Industrial Capital Platform",
+        p2d: "Industrial-realization finance that turns mega-industries into execution, not just investment.",
+        p2b: ["Capital → production • jobs • profit linkage", "Mega-industry project finance", "Field-ready growth capital"],
+        p3t: "3) UBI-Oriented Economic System",
+        p3d: "Design profit-return structures so technology increases stability, not anxiety.",
+        p3b: ["Allocate a portion of net profit to UBI", "Participation beyond labor, region, and borders", "Technology outcomes reach people"],
+        p4t: "4) Global Governance & Trust Framework",
+        p4d: "Sustainable governance where governments, enterprises, and citizens can coexist with transparency.",
+        p4b: ["Transparent & traceable structure", "Long-term trust framework", "Global collaboration governance"],
+        whyTitle: "Why PWB Global",
+        whyBody: "In legacy systems, wealth concentrates while anxiety spreads. PWB Global designs a full circulation: “Technology → Industry → Profit → People.”",
+        whyBullets: [
+          "Finance should be a tool linking industry and life, not speculation.",
+          "Technology outcomes must diffuse to people, not a few.",
+          "Borders are a starting point for expansion, not a limit to collaboration."
+        ],
+        q1: "Key Question",
+        q2: "“Technology advances, so why do people feel more insecure?”",
+        q3: "PWB Global answers with architecture.",
+        relTitle: "Relationship with PHK Bank",
+        relBody: "PHK Bank is the execution-focused main platform. PWB Global is the top-level framework for global expansion and connection.",
+        relBullets: [
+          "<strong>PHK Bank</strong>: execution-focused main platform (core operation)",
+          "<strong>PWB Global</strong>: global structure • expansion • connection (top framework)",
+          "“If PHK Bank is the heart, PWB Global is the nervous system.”"
+        ],
+        founderTitle: "Founder",
+        founderName: "Hyekong (Lee Jaewan)",
+        founderRole: "Founder & Architect, PWB Global",
+        fq1: "Message",
+        fq2: "“Technology cannot be stopped.",
+        fq3: "So we must design it to save people.”",
+        footRight: "Finance • Industry • Technology • UBI"
+      },
+
+      ar: {
+        dir: "rtl",
+        kicker: "التمويل العالمي • الصناعة • التكنولوجيا • الدخل الأساسي",
+        title: "PWB Global",
+        subtitle: "PWB Global (Pi World Bank Global) هو منصة بنية تحتية مالية وصناعية عالمية تربط بين التمويل والصناعة والتكنولوجيا والدخل الأساسي (UBI) في نظام واحد متكامل.",
+        cta1: "عرض الركائز",
+        cta2: "العلاقة مع PHK Bank",
+        cta3: "المؤسس",
+        pillarsTitle: "الركائز الأساسية",
+        p1t: "1) البنية التحتية المالية العالمية",
+        p1d: "نُنشئ مدفوعات وتسويات وتحويل قيمة بلا حدود ومتصلة بالصناعة الحقيقية.",
+        p1b: ["تمويل عالمي قائم على الأصول الرقمية", "مدفوعات • تسويات • تحويلات • تدفق قيمة", "ارتباط مباشر بالاقتصاد الحقيقي"],
+        p2t: "2) منصة رأس المال الصناعي",
+        p2d: "تمويل يُحوّل الصناعات العملاقة إلى تنفيذ فعلي، وليس مجرد استثمار.",
+        p2b: ["رأس المال → إنتاج • وظائف • أرباح", "تمويل مشاريع صناعية ضخمة", "رأس مال نمو جاهز للميدان"],
+        p3t: "3) نظام اقتصادي موجه للدخل الأساسي (UBI)",
+        p3d: "نُصمم آليات لإعادة جزء من الأرباح بحيث تُنتج التكنولوجيا استقراراً لا قلقاً.",
+        p3b: ["تخصيص جزء من صافي الربح لـ UBI", "مشاركة تتجاوز العمل والحدود", "نتائج التكنولوجيا تصل إلى الناس"],
+        p4t: "4) الحوكمة والثقة العالمية",
+        p4d: "حوكمة مستدامة وشفافة تتعايش فيها الحكومات والشركات والمواطنون.",
+        p4b: ["هيكل شفاف وقابل للتتبع", "إطار ثقة طويل الأمد", "حوكمة تعاون عالمي"],
+        whyTitle: "لماذا PWB Global",
+        whyBody: "في الأنظمة التقليدية تتركز الثروة بينما يتسع القلق. PWB Global يصمم دورة كاملة: «التكنولوجيا → الصناعة → الربح → الناس».",
+        whyBullets: [
+          "يجب أن يكون التمويل أداة تربط الصناعة بالحياة، لا مضاربة.",
+          "يجب أن تنتشر نتائج التكنولوجيا إلى الناس، لا إلى قلة.",
+          "الحدود نقطة انطلاق للتوسع وليست نهاية للتعاون."
+        ],
+        q1: "السؤال المحوري",
+        q2: "«تتقدم التكنولوجيا، فلماذا يزداد شعور الناس بعدم الأمان؟»",
+        q3: "PWB Global يجيب بالهندسة.",
+        relTitle: "العلاقة مع PHK Bank",
+        relBody: "PHK Bank هو المنصة الأساسية للتنفيذ. أما PWB Global فهو الإطار الأعلى للتوسع والربط عالمياً.",
+        relBullets: [
+          "<strong>PHK Bank</strong>: منصة تنفيذية رئيسية (تشغيل أساسي)",
+          "<strong>PWB Global</strong>: هيكل عالمي • توسع • ربط (إطار أعلى)",
+          "«إذا كان PHK Bank هو القلب، فإن PWB Global هو الجهاز العصبي.»"
+        ],
+        founderTitle: "المؤسس",
+        founderName: "هيكونغ (لي جاي وان)",
+        founderRole: "المؤسس والمهندس المعماري، PWB Global",
+        fq1: "رسالة",
+        fq2: "«لا يمكن إيقاف التكنولوجيا.",
+        fq3: "لذلك يجب أن نصممها لإنقاذ الناس.»",
+        footRight: "التمويل العالمي • الصناعة • التكنولوجيا • الدخل الأساسي"
+      },
+
+      zh: {
+        dir: "ltr",
+        kicker: "全球金融 • 产业 • 技术 • 基本收入(UBI)",
+        title: "PWB Global",
+        subtitle: "PWB Global（Pi World Bank Global）是将金融、产业、技术与基本收入（UBI）连接为一体的全球金融与产业基础设施平台。",
+        cta1: "查看核心结构",
+        cta2: "与PHK Bank关系",
+        cta3: "创始人",
+        pillarsTitle: "核心结构",
+        p1t: "1) 全球金融基础设施",
+        p1d: "构建无国界的支付、清算与价值转移，并与实体产业直接连接。",
+        p1b: ["基于数字资产的全球金融", "支付 • 清算 • 转账 • 价值流动", "与实体产业直接联动"],
+        p2t: "2) 产业资本平台",
+        p2d: "面向机器人、AI、能源与航天等超级产业的“落地型”产业金融平台。",
+        p2b: ["资本 → 生产 • 就业 • 利润联动", "超级产业项目金融", "面向现场的增长资本结构"],
+        p3t: "3) UBI导向经济系统",
+        p3d: "设计利润回馈机制，让技术进步带来稳定，而非焦虑。",
+        p3b: ["将净利润的一部分用于UBI回馈", "跨越劳动、地域与国界的参与型经济", "技术成果真正抵达大众"],
+        p4t: "4) 全球治理与信任框架",
+        p4d: "建立透明、可追溯的结构，使政府、企业与公民长期共存与协作。",
+        p4b: ["透明且可追溯的结构", "长期信任框架", "全球协作治理"],
+        whyTitle: "为什么是PWB Global",
+        whyBody: "传统系统中，财富集中而不安扩散。PWB Global以“技术→产业→利润→公众”的完整循环来重构。",
+        whyBullets: [
+          "金融应连接产业与生活，而非投机。",
+          "技术成果应惠及大众，而非少数人。",
+          "国界是合作扩张的起点，而非限制。"
+        ],
+        q1: "核心问题",
+        q2: "“技术在进步，为什么人们却更不安？”",
+        q3: "PWB Global用系统架构来回答。",
+        relTitle: "与PHK Bank的关系",
+        relBody: "PHK Bank是执行型主平台；PWB Global是负责全球扩张与连接的上层框架。",
+        relBullets: [
+          "<strong>PHK Bank</strong>：执行型主平台（核心运营）",
+          "<strong>PWB Global</strong>：全球结构 • 扩张 • 连接（上层框架）",
+          "“PHK Bank是心脏，PWB Global是神经网络。”"
+        ],
+        founderTitle: "创始人",
+        founderName: "Hyekong（Lee Jaewan）",
+        founderRole: "Founder & Architect, PWB Global",
+        fq1: "寄语",
+        fq2: "“技术无法停止。",
+        fq3: "因此必须设计成能拯救人的方向。”",
+        footRight: "全球金融 • 产业 • 技术 • 基本收入(UBI)"
+      }
+    };
+
+    function setLang(lang){
+      const t = TEXT[lang] || TEXT.ko;
+
+      // direction (rtl for Arabic)
+      document.documentElement.lang = lang;
+      document.body.classList.toggle("rtl", t.dir === "rtl");
+      document.querySelectorAll(".langbtn").forEach(b => b.classList.toggle("active", b.dataset.lang === lang));
+
+      // apply texts
+      byId("kicker").textContent = t.kicker;
+      byId("title").textContent = t.title;
+      byId("subtitle").textContent = t.subtitle;
+      byId("cta1").textContent = t.cta1;
+      byId("cta2").textContent = t.cta2;
+      byId("cta3").textContent = t.cta3;
+
+      byId("pillarsTitle").textContent = t.pillarsTitle;
+      byId("p1t").textContent = t.p1t; byId("p1d").textContent = t.p1d; setBullets("p1b", t.p1b);
+      byId("p2t").textContent = t.p2t; byId("p2d").textContent = t.p2d; setBullets("p2b", t.p2b);
+      byId("p3t").textContent = t.p3t; byId("p3d").textContent = t.p3d; setBullets("p3b", t.p3b);
+      byId("p4t").textContent = t.p4t; byId("p4d").textContent = t.p4d; setBullets("p4b", t.p4b);
+
+      byId("whyTitle").textContent = t.whyTitle;
+      byId("whyBody").textContent = t.whyBody;
+      setBullets("whyBullets", t.whyBullets);
+
+      byId("quoteLine1").innerHTML = "<strong>"+t.q1+"</strong>";
+      byId("quoteLine2").textContent = t.q2;
+      byId("quoteLine3").textContent = t.q3;
+
+      byId("relTitle").textContent = t.relTitle;
+      byId("relBody").textContent = t.relBody;
+      setBulletsHTML("relBullets", t.relBullets);
+
+      byId("founderTitle").textContent = t.founderTitle;
+      byId("founderName").textContent = t.founderName;
+      byId("founderRole").textContent = t.founderRole;
+
+      byId("fq1").innerHTML = "<strong>"+t.fq1+"</strong>";
+      byId("fq2").textContent = t.fq2;
+      byId("fq3").textContent = t.fq3;
+
+      byId("footRight").textContent = t.footRight;
+
+      // rtl styling for sections where needed
+      const rtl = (t.dir === "rtl");
+      ["hero","pillars","why","relationship","founder"].forEach(id=>{
+        const el = byId(id);
+        el.classList.toggle("rtl", rtl);
+      });
     }
-  };
 
-  function normalizeLang(raw){
-    const s = (raw || "").toLowerCase();
-    if (s.startsWith("ko")) return "ko";
-    if (s.startsWith("ja")) return "ja";
-    if (s.startsWith("zh-cn") || s.startsWith("zh-hans") || s.startsWith("zh")) return "zh";
-    return "en";
-  }
+    function byId(id){ return document.getElementById(id); }
 
-  function applyLang(lang){
-    const t = I18N[lang] || I18N.ko;
+    function setBullets(ulId, items){
+      const ul = byId(ulId);
+      ul.innerHTML = "";
+      (items || []).forEach(s=>{
+        const li = document.createElement("li");
+        li.textContent = s;
+        ul.appendChild(li);
+      });
+    }
 
-    document.documentElement.lang = lang === "zh" ? "zh-CN" : lang;
+    function setBulletsHTML(ulId, items){
+      const ul = byId(ulId);
+      ul.innerHTML = "";
+      (items || []).forEach(s=>{
+        const li = document.createElement("li");
+        li.innerHTML = s;
+        ul.appendChild(li);
+      });
+    }
 
-    setText("langLabel", t.langLabel);
-    setText("motto", t.motto);
+    function scrollToId(id){
+      const el = document.getElementById(id);
+      if(!el) return;
+      el.scrollIntoView({behavior:"smooth", block:"start"});
+    }
 
-    setText("c1t", t.c1t); setText("c1d", t.c1d);
-    setText("c2t", t.c2t); setText("c2d", t.c2d);
-    setText("c3t", t.c3t); setText("c3d", t.c3d);
-    setText("c4t", t.c4t); setText("c4d", t.c4d);
-    setText("c5t", t.c5t); setText("c5d", t.c5d);
-    setText("c6t", t.c6t); setText("c6d", t.c6d);
+    // auto-detect language (Korean/English/Arabic/Chinese)
+    function detectLang(){
+      const nav = (navigator.language || "ko").toLowerCase();
+      if(nav.startsWith("ar")) return "ar";
+      if(nav.startsWith("zh")) return "zh";
+      if(nav.startsWith("en")) return "en";
+      if(nav.startsWith("ko")) return "ko";
+      // default
+      return "ko";
+    }
 
-    document.getElementById("piBtn").textContent = t.piBtn;
-    document.getElementById("installBtn").textContent = t.installBtn;
-    document.getElementById("statusText").textContent = t.status;
+    // init
+    document.getElementById("year").textContent = new Date().getFullYear();
+    const initial = detectLang();
+    setLang(initial);
 
-    const url = location.href;
-    document.getElementById("siteUrl").textContent = url;
-
-    document.getElementById("installText").innerHTML =
-      `${t.installText1}<br>${t.installText2}<br>URL: <span id="siteUrl">${url}</span>`;
-
-    // ✅ 문의 메시지도 언어별
-    window.getText = (key)=> (t[key] || "");
-  }
-
-  function setText(id, value){
-    const el = document.getElementById(id);
-    if(el) el.textContent = value;
-  }
-
-  // ✅ 자동 언어: 브라우저 언어 → 저장값
-  const saved = localStorage.getItem("pwb_lang");
-  const auto = normalizeLang(navigator.language || navigator.userLanguage);
-  const initial = saved ? saved : auto;
-
-  const langSelect = document.getElementById("langSelect");
-  langSelect.value = initial;
-  applyLang(initial);
-
-  langSelect.addEventListener("change", (e)=>{
-    const v = e.target.value;
-    localStorage.setItem("pwb_lang", v);
-    applyLang(v);
-  });
-
-  // ✅ Pi Browser 버튼 (웹에서 눌러도 최소한 주소는 유지)
-  document.getElementById("piBtn").addEventListener("click", (e)=>{
-    e.preventDefault();
-    // Pi Browser 전용 스킴이 있으면 여기에 넣으면 됩니다(현재는 URL 유지)
-    window.open(location.href, "_blank", "noopener");
-  });
-
-  // ✅ 설치 버튼(브라우저마다 다름: 안내용)
-  document.getElementById("installBtn").addEventListener("click", ()=>{
-    alert("설치는 브라우저 메뉴에서 ‘홈 화면에 추가(설치)’로 진행하실 수 있습니다.");
-  });
-</script>
+    document.querySelectorAll(".langbtn").forEach(btn=>{
+      btn.addEventListener("click", ()=> setLang(btn.dataset.lang));
+    });
+  </script>
 </body>
 </html>
