@@ -1,590 +1,238 @@
-출발 언어영어도착 언어한국어번역하기
 <!doctype html>
 <html lang="ko">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>PWB Global | Global Finance & Industrial Infrastructure</title>
-  <meta name="description" content="PWB Global (Pi World Bank Global) — A global financial & industrial infrastructure platform linking Finance, Industry, Technology, and UBI." />
-  <style>
-    :root{
-      --bg:#0b0f17; --card:#101827; --card2:#0f1624;
-      --text:#e9eef8; --muted:#a9b4c7; --line:rgba(255,255,255,.08);
-      --accent:#6ee7ff; --accent2:#a78bfa;
-      --shadow: 0 12px 40px rgba(0,0,0,.45);
-      --radius:18px;
-      --max:1080px;
-    }
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0; background:radial-gradient(1200px 600px at 20% 0%, rgba(110,231,255,.12), transparent 55%),
-                 radial-gradient(900px 500px at 80% 20%, rgba(167,139,250,.10), transparent 55%),
-                 var(--bg);
-      color:var(--text);
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, "Noto Sans KR", "Noto Sans Arabic", Arial, sans-serif;
-      line-height:1.55;
-    }
-    a{color:inherit; text-decoration:none}
-    .wrap{max-width:var(--max); margin:0 auto; padding:28px 18px 80px}
-    .topbar{
-      display:flex; align-items:center; justify-content:space-between;
-      gap:12px; position:sticky; top:0; z-index:10;
-      backdrop-filter: blur(10px);
-      background: linear-gradient(to bottom, rgba(11,15,23,.92), rgba(11,15,23,.60));
-      border-bottom:1px solid var(--line);
-      padding:14px 18px;
-    }
-    .brand{display:flex; align-items:center; gap:10px; font-weight:800; letter-spacing:.3px}
-    .logo{
-      width:34px; height:34px; border-radius:12px;
-      background: linear-gradient(135deg, rgba(110,231,255,.95), rgba(167,139,250,.95));
-      box-shadow: 0 10px 30px rgba(110,231,255,.12);
-    }
-    .pill{
-      display:inline-flex; gap:8px; align-items:center;
-      border:1px solid var(--line);
-      background: rgba(16,24,39,.72);
-      padding:8px 10px; border-radius:999px;
-    }
-    .langbtn{
-      cursor:pointer; user-select:none;
-      border:1px solid var(--line);
-      background: rgba(15,22,36,.65);
-      color:var(--text);
-      padding:8px 10px; border-radius:999px;
-      font-weight:650; font-size:13px;
-    }
-    .langbtn.active{border-color: rgba(110,231,255,.55); box-shadow: 0 0 0 3px rgba(110,231,255,.10) inset}
-    .hero{
-      margin-top:18px;
-      border:1px solid var(--line);
-      background: linear-gradient(180deg, rgba(16,24,39,.85), rgba(15,22,36,.62));
-      border-radius: var(--radius);
-      padding:34px 22px;
-      box-shadow: var(--shadow);
-      overflow:hidden;
-      position:relative;
-    }
-    .hero:before{
-      content:"";
-      position:absolute; inset:-2px;
-      background: radial-gradient(700px 300px at 30% 10%, rgba(110,231,255,.18), transparent 60%),
-                  radial-gradient(700px 300px at 70% 30%, rgba(167,139,250,.14), transparent 60%);
-      pointer-events:none;
-    }
-    .hero > *{position:relative}
-    .kicker{
-      display:inline-flex; align-items:center; gap:10px;
-      padding:8px 12px; border-radius:999px;
-      border:1px solid var(--line);
-      background: rgba(11,15,23,.35);
-      color: var(--muted);
-      font-weight:650; font-size:13px;
-    }
-    h1{margin:14px 0 10px; font-size:38px; line-height:1.12}
-    .sub{margin:0; color:var(--muted); font-size:16px; max-width:900px}
-    .ctaRow{display:flex; flex-wrap:wrap; gap:10px; margin-top:18px}
-    .btn{
-      display:inline-flex; align-items:center; justify-content:center; gap:10px;
-      padding:10px 14px; border-radius:12px;
-      border:1px solid var(--line);
-      background: rgba(16,24,39,.72);
-      color: var(--text);
-      font-weight:750; font-size:14px;
-      cursor:pointer;
-    }
-    .btn.primary{
-      border-color: rgba(110,231,255,.55);
-      background: linear-gradient(135deg, rgba(110,231,255,.18), rgba(167,139,250,.16));
-    }
-    .grid{
-      display:grid; gap:14px;
-      grid-template-columns: repeat(12, 1fr);
-      margin-top:16px;
-    }
-    .card{
-      grid-column: span 6;
-      border:1px solid var(--line);
-      background: linear-gradient(180deg, rgba(16,24,39,.78), rgba(15,22,36,.60));
-      border-radius: var(--radius);
-      padding:18px 16px;
-      box-shadow: 0 10px 30px rgba(0,0,0,.28);
-    }
-    .card h3{margin:2px 0 8px; font-size:18px}
-    .card p{margin:0; color:var(--muted)}
-    .section{
-      margin-top:22px;
-      border:1px solid var(--line);
-      background: rgba(16,24,39,.50);
-      border-radius: var(--radius);
-      padding:18px 16px;
-    }
-    .section h2{margin:0 0 10px; font-size:22px}
-    .bullets{margin:10px 0 0; padding-left:18px; color:var(--muted)}
-    .bullets li{margin:6px 0}
-    .split{
-      display:grid; gap:14px;
-      grid-template-columns: 1.2fr .8fr;
-      align-items:start;
-      margin-top:14px;
-    }
-    .quote{
-      border:1px solid var(--line);
-      background: rgba(11,15,23,.35);
-      border-radius: var(--radius);
-      padding:16px;
-      color: var(--muted);
-    }
-    .quote strong{color:var(--text)}
-    .footer{
-      margin-top:26px; padding-top:18px;
-      border-top:1px solid var(--line);
-      color: var(--muted);
-      display:flex; flex-wrap:wrap; gap:10px; justify-content:space-between; align-items:center;
-    }
-    .small{font-size:12px}
-    .rtl{direction:rtl; text-align:right}
-    @media (max-width: 860px){
-      h1{font-size:30px}
-      .card{grid-column: span 12}
-      .split{grid-template-columns: 1fr}
-    }
-  </style>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>PWB Global</title>
+
+<meta name="description"
+content="PWB Global은 PHKBank가 설계한 금융 구조를 현실 세계에서 실행하기 위해 만들어진 글로벌 실행 프레임이다."/>
+
+<style>
+:root{
+  --bg:#0b0f17;
+  --panel:#111827;
+  --panel2:#0b1220;
+  --text:#e5e7eb;
+  --muted:#9ca3af;
+  --accent:#facc15;
+  --radius:18px;
+  --shadow:0 20px 56px rgba(0,0,0,.55);
+  --max:480px;
+  --line:rgba(255,255,255,.08);
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:linear-gradient(180deg,#0b0f17,#020617);
+  color:var(--text);
+  font-family:system-ui,-apple-system,"Noto Sans KR",sans-serif;
+  line-height:1.95;
+}
+.wrap{
+  max-width:var(--max);
+  margin:0 auto;
+  padding:26px 20px 60px;
+}
+.header{
+  text-align:center;
+  margin:36px 0 44px;
+}
+.header h1{
+  margin:0;
+  font-size:46px;
+  font-weight:900;
+}
+.header .sub{
+  margin-top:14px;
+  font-size:15px;
+  color:var(--muted);
+  letter-spacing:3px;
+}
+.header .slogan{
+  margin-top:18px;
+  font-size:24px;
+  font-weight:900;
+  color:var(--accent);
+}
+
+.section{
+  margin:52px 0;
+}
+.section h2{
+  margin:0 0 18px;
+  font-size:26px;
+  font-weight:900;
+}
+.section p{
+  margin:0 0 18px;
+  font-size:16px;
+  color:#d1d5db;
+}
+.section ul{
+  margin:16px 0 0 20px;
+  font-size:15px;
+  color:#9ca3af;
+}
+.section ul li{
+  margin-bottom:10px;
+}
+.hr{
+  margin:48px 0;
+  height:1px;
+  background:linear-gradient(90deg,transparent,var(--line),transparent);
+}
+</style>
 </head>
 
 <body>
-  <div class="topbar">
-    <div class="brand" aria-label="PWB Global">
-      <div class="logo" aria-hidden="true"></div>
-      <div>
-        <div style="font-size:14px; opacity:.95;">PWB Global</div>
-        <div class="small" style="opacity:.75;">Pi World Bank Global</div>
-      </div>
-    </div>
+<main class="wrap">
 
-    <div class="pill" role="group" aria-label="Language selector">
-      <button class="langbtn" data-lang="ko">KR</button>
-      <button class="langbtn" data-lang="en">EN</button>
-      <button class="langbtn" data-lang="ar">AR</button>
-      <button class="langbtn" data-lang="zh">中文</button>
-    </div>
-  </div>
+<div class="header">
+  <h1>PWB Global</h1>
+  <div class="sub">ONE WORLD · ONE SYSTEM · ONE FUTURE</div>
+  <div class="slogan">PHKBank 하위 글로벌 실행 프레임</div>
+</div>
 
-  <main class="wrap">
-    <!-- HERO -->
-    <section class="hero" id="top">
-      <div class="kicker" id="kicker">Global Finance • Industry • Technology • UBI</div>
-      <h1 id="title">PWB Global</h1>
-      <p class="sub" id="subtitle">
-        PWB Global은 금융·산업·기술·기본소득(UBI)을 하나의 구조로 연결하는
-        글로벌 금융·산업 인프라 플랫폼입니다.
-      </p>
+<div class="section">
+  <h2>PHKBank만으로는 충분하지 않았다</h2>
+  <p>
+    PHKBank는 금융의 설계도다.  
+    구조를 정의하고, 원칙을 세우며, 방향을 고정한다.
+    그러나 설계도는 현실을 움직이지 않는다.
+  </p>
+  <p>
+    현실 세계에는 국가가 있고, 통화가 있고, 제도가 있고,
+    이해관계와 정치, 관습, 노동의 불균형이 존재한다.
+    이 모든 요소는 단일 금융 프레임만으로는 작동하지 않는다.
+  </p>
+  <p>
+    PWB Global은 이 문제에서 출발했다.  
+    <strong>PHKBank가 설계한 금융 구조를 실제 세계에서 “돌리기 위한 장치”</strong>가
+    필요했기 때문이다.
+  </p>
+</div>
 
-      <div class="ctaRow">
-        <button class="btn primary" onclick="scrollToId('pillars')" id="cta1">핵심 구조 보기</button>
-        <button class="btn" onclick="scrollToId('relationship')" id="cta2">PHK Bank와 관계</button>
-        <button class="btn" onclick="scrollToId('founder')" id="cta3">Founder</button>
-      </div>
-    </section>
+<div class="hr"></div>
 
-    <!-- PILLARS -->
-    <section class="section" id="pillars">
-      <h2 id="pillarsTitle">핵심 구조</h2>
+<div class="section">
+  <h2>PWB Global의 정확한 위치</h2>
+  <p>
+    PWB Global은 PHKBank와 경쟁하지 않는다.
+    또한 PHKBank를 대체하지도 않는다.
+  </p>
+  <p>
+    관계는 명확하다.
+  </p>
+  <ul>
+    <li>PHKBank : 금융 질서와 원칙을 설계하는 상위 프레임</li>
+    <li><strong>PWB Global : 그 설계를 현실 세계에서 실행하는 글로벌 레이어</strong></li>
+    <li>국가·기업·시민이 실제로 접속하는 실무적 접점</li>
+  </ul>
+  <p>
+    쉽게 말해,
+    PHKBank가 “법”이라면  
+    PWB Global은 그 법이 적용되는 “현장”이다.
+  </p>
+</div>
 
-      <div class="grid">
-        <div class="card">
-          <h3 id="p1t">1) Global Financial Infrastructure</h3>
-          <p id="p1d">국경 없는 결제·정산·가치 이전, 그리고 실물 산업과 연결되는 실질 금융 구조를 구축합니다.</p>
-          <ul class="bullets" id="p1b">
-            <li>디지털 자산 기반 글로벌 금융</li>
-            <li>결제·정산·송금·가치 이전</li>
-            <li>실물 산업과 직접 연동</li>
-          </ul>
-        </div>
+<div class="hr"></div>
 
-        <div class="card">
-          <h3 id="p2t">2) Industrial Capital Platform</h3>
-          <p id="p2d">로봇·AI·에너지·우주산업 등 초대형 산업을 ‘실행’으로 연결하는 산업 실현형 금융을 지향합니다.</p>
-          <ul class="bullets" id="p2b">
-            <li>산업 투자 → 생산·고용·수익 연동</li>
-            <li>초대형 산업 프로젝트 금융</li>
-            <li>현장형 성장 자본 구조</li>
-          </ul>
-        </div>
+<div class="section">
+  <h2>PWB Global은 앱이 아니다</h2>
+  <p>
+    많은 금융 프로젝트가 앱으로 시작해 앱으로 끝난다.
+    그러나 PWB Global은 처음부터 앱이 목적이 아니었다.
+  </p>
+  <p>
+    이것은 <strong>글로벌 금융 실행 네트워크</strong>이며,
+    결제·보상·기본소득·노동·산업 흐름을
+    하나의 질서로 묶기 위한 운영 구조다.
+  </p>
+</div>
+<div class="section">
+  <h2>기본소득은 왜 PWB Global에서만 가능한가</h2>
+  <p>
+    기존의 기본소득 논의는 늘 막혔다.
+    재원 부족, 정치 갈등, 국가 간 불균형 때문이다.
+  </p>
+  <p>
+    PWB Global은 접근 방식이 다르다.
+    기본소득을 “복지”로 보지 않고,
+    <strong>글로벌 시스템에서 발생한 잉여 가치의 정산 결과</strong>로 본다.
+  </p>
+  <p>
+    다시 말해,
+    사람들이 참여해 시스템을 유지했고,
+    그 시스템이 가치를 만들었다면,
+    그 가치는 참여자에게 되돌아가야 한다.
+    이것이 PWB Global 기본소득의 출발점이다.
+  </p>
+</div>
 
-        <div class="card">
-          <h3 id="p3t">3) UBI-Oriented Economic System</h3>
-          <p id="p3d">기술 발전이 불안이 아니라 ‘삶의 안정’으로 이어지도록, 수익 환원 구조를 설계합니다.</p>
-          <ul class="bullets" id="p3b">
-            <li>순이익의 일정 비율을 UBI로 환원</li>
-            <li>노동·지역·국경을 초월한 참여형 경제</li>
-            <li>기술의 성과가 시민에게 도달</li>
-          </ul>
-        </div>
+<div class="hr"></div>
 
-        <div class="card">
-          <h3 id="p4t">4) Global Governance & Trust Framework</h3>
-          <p id="p4d">투명성과 신뢰를 기반으로 국가·기업·시민이 공존 가능한 지속 가능한 거버넌스를 지향합니다.</p>
-          <ul class="bullets" id="p4b">
-            <li>투명하고 추적 가능한 구조</li>
-            <li>장기 지속 가능한 신뢰 프레임워크</li>
-            <li>글로벌 협력 거버넌스</li>
-          </ul>
-        </div>
-      </div>
-    </section>
+<div class="section">
+  <h2>결제와 보상은 통제 수단이 아니다</h2>
+  <p>
+    기존 금융에서 결제와 보상은 통제의 도구였다.
+    누가 접근할 수 있는지,
+    누가 배제되는지,
+    누가 신뢰받는지를 결정했다.
+  </p>
+  <p>
+    PWB Global은 반대로 설계되었다.
+    <strong>기록이 곧 신뢰이고,
+    참여가 곧 자격</strong>이다.
+  </p>
+  <p>
+    노동, 기여, 유지, 창작, 협력이
+    모두 기록되고,
+    이 기록은 보상과 권한으로 전환된다.
+    국가는 이를 막지 못하고,
+    기업은 이를 임의로 조작할 수 없다.
+  </p>
+</div>
 
-    <!-- WHY -->
-    <section class="section" id="why">
-      <h2 id="whyTitle">왜 PWB Global인가</h2>
+<div class="hr"></div>
 
-      <div class="split">
-        <div>
-          <p id="whyBody" style="margin:0; color:var(--muted);">
-            기존 시스템은 기술이 발전해도 부는 집중되고, 불안은 확산되는 구조였습니다.
-            PWB Global은 “기술 → 산업 → 수익 → 시민”으로 이어지는 순환 구조를 통해,
-            기술의 성과가 사람에게 돌아오도록 설계합니다.
-          </p>
+<div class="section">
+  <h2>PWB Global이 바꾸는 것</h2>
+  <ul>
+    <li>금융을 소수의 통제 수단에서 공공 실행 도구로 전환</li>
+    <li>기본소득을 시혜가 아닌 정산으로 재정의</li>
+    <li>국가 단위 금융의 한계를 글로벌 구조로 확장</li>
+    <li>사람을 비용이 아닌 시스템 참여자로 재배치</li>
+  </ul>
+</div>
 
-          <ul class="bullets" id="whyBullets">
-            <li>금융은 투기가 아니라 산업과 삶을 연결하는 도구여야 합니다.</li>
-            <li>기술의 성과는 소수가 아니라 시민과 인류 전체로 확산되어야 합니다.</li>
-            <li>국경은 협력의 한계가 아니라 확장의 출발점입니다.</li>
-          </ul>
-        </div>
+<div class="hr"></div>
 
-        <div class="quote" id="quoteBox">
-          <div id="quoteLine1"><strong>핵심 질문</strong></div>
-          <div id="quoteLine2" style="margin-top:8px;">“기술은 발전했지만, 왜 사람들은 더 불안해지는가?”</div>
-          <div id="quoteLine3" style="margin-top:10px;">PWB Global은 이 질문에 구조로 답합니다.</div>
-        </div>
-      </div>
-    </section>
+<div class="section">
+  <h2>최종 선언</h2>
+  <p>
+    PWB Global은 유행이 아니다.
+    실험도 아니다.
+    캠페인도 아니다.
+  </p>
+  <p>
+    이것은
+    PHKBank가 설계한 새로운 금융 질서를
+    현실 세계에 안착시키기 위한
+    <strong>필연적 실행 구조</strong>다.
+  </p>
+  <p>
+    금융이 다시 사람에게 돌아가는 과정에서
+    PWB Global은
+    반드시 존재해야 할 한 단계다.
+  </p>
+</div>
 
-    <!-- RELATIONSHIP -->
-    <section class="section" id="relationship">
-      <h2 id="relTitle">PHK Bank와의 관계</h2>
-      <p id="relBody" style="margin:0; color:var(--muted);">
-        PHK Bank는 실행 중심의 핵심 메인 플랫폼이며,
-        PWB Global은 글로벌 확장과 연결을 담당하는 상위 개념 구조입니다.
-      </p>
-      <ul class="bullets" id="relBullets">
-        <li><strong>PHK Bank</strong>: 실행 중심의 핵심 메인 플랫폼(핵심 운영)</li>
-        <li><strong>PWB Global</strong>: 글로벌 구조·확장·연결(상위 프레임)</li>
-        <li>“PHK Bank가 ‘심장’이라면, PWB Global은 ‘신경망’입니다.”</li>
-      </ul>
-    </section>
+<div class="footer" style="text-align:center;margin-top:64px;font-size:13px;color:#6b7280;">
+  © 2026 PWB Global<br/>
+  Global Execution Framework under PHKBank
+</div>
 
-    <!-- FOUNDER -->
-    <section class="section" id="founder">
-      <h2 id="founderTitle">Founder</h2>
-      <p id="founderName" style="margin:0 0 8px; font-weight:800;">Hyekong (Lee Jaewan)</p>
-      <p id="founderRole" style="margin:0; color:var(--muted);">Founder & Architect, PWB Global</p>
-
-      <div class="quote" style="margin-top:14px;" id="founderQuote">
-        <div id="fq1"><strong>Message</strong></div>
-        <div id="fq2" style="margin-top:8px;">“기술은 멈출 수 없습니다.</div>
-        <div id="fq3">그렇다면, 그 기술이 사람을 살리도록 설계해야 합니다.”</div>
-      </div>
-    </section>
-
-    <div class="footer">
-      <div class="small" id="footLeft">© <span id="year"></span> PWB Global. All rights reserved.</div>
-      <div class="small" id="footRight">Finance • Industry • Technology • UBI</div>
-    </div>
-  </main>
-
-  <script>
-    const TEXT = {
-      ko: {
-        dir: "ltr",
-        kicker: "Global Finance • Industry • Technology • UBI",
-        title: "PWB Global",
-        subtitle: "PWB Global은 금융·산업·기술·기본소득(UBI)을 하나의 구조로 연결하는 글로벌 금융·산업 인프라 플랫폼입니다.",
-        cta1: "핵심 구조 보기",
-        cta2: "PHK Bank와 관계",
-        cta3: "Founder",
-        pillarsTitle: "핵심 구조",
-        p1t: "1) Global Financial Infrastructure",
-        p1d: "국경 없는 결제·정산·가치 이전, 그리고 실물 산업과 연결되는 실질 금융 구조를 구축합니다.",
-        p1b: ["디지털 자산 기반 글로벌 금융", "결제·정산·송금·가치 이전", "실물 산업과 직접 연동"],
-        p2t: "2) Industrial Capital Platform",
-        p2d: "로봇·AI·에너지·우주산업 등 초대형 산업을 ‘실행’으로 연결하는 산업 실현형 금융을 지향합니다.",
-        p2b: ["산업 투자 → 생산·고용·수익 연동", "초대형 산업 프로젝트 금융", "현장형 성장 자본 구조"],
-        p3t: "3) UBI-Oriented Economic System",
-        p3d: "기술 발전이 불안이 아니라 ‘삶의 안정’으로 이어지도록, 수익 환원 구조를 설계합니다.",
-        p3b: ["순이익의 일정 비율을 UBI로 환원", "노동·지역·국경을 초월한 참여형 경제", "기술의 성과가 시민에게 도달"],
-        p4t: "4) Global Governance & Trust Framework",
-        p4d: "투명성과 신뢰를 기반으로 국가·기업·시민이 공존 가능한 지속 가능한 거버넌스를 지향합니다.",
-        p4b: ["투명하고 추적 가능한 구조", "장기 지속 가능한 신뢰 프레임워크", "글로벌 협력 거버넌스"],
-        whyTitle: "왜 PWB Global인가",
-        whyBody: "기존 시스템은 기술이 발전해도 부는 집중되고, 불안은 확산되는 구조였습니다. PWB Global은 “기술 → 산업 → 수익 → 시민”으로 이어지는 순환 구조를 통해, 기술의 성과가 사람에게 돌아오도록 설계합니다.",
-        whyBullets: [
-          "금융은 투기가 아니라 산업과 삶을 연결하는 도구여야 합니다.",
-          "기술의 성과는 소수가 아니라 시민과 인류 전체로 확산되어야 합니다.",
-          "국경은 협력의 한계가 아니라 확장의 출발점입니다."
-        ],
-        q1: "핵심 질문",
-        q2: "“기술은 발전했지만, 왜 사람들은 더 불안해지는가?”",
-        q3: "PWB Global은 이 질문에 구조로 답합니다.",
-        relTitle: "PHK Bank와의 관계",
-        relBody: "PHK Bank는 실행 중심의 핵심 메인 플랫폼이며, PWB Global은 글로벌 확장과 연결을 담당하는 상위 개념 구조입니다.",
-        relBullets: [
-          "<strong>PHK Bank</strong>: 실행 중심의 핵심 메인 플랫폼(핵심 운영)",
-          "<strong>PWB Global</strong>: 글로벌 구조·확장·연결(상위 프레임)",
-          "“PHK Bank가 ‘심장’이라면, PWB Global은 ‘신경망’입니다.”"
-        ],
-        founderTitle: "Founder",
-        founderName: "Hyekong (Lee Jaewan)",
-        founderRole: "Founder & Architect, PWB Global",
-        fq1: "Message",
-        fq2: "“기술은 멈출 수 없습니다.",
-        fq3: "그렇다면, 그 기술이 사람을 살리도록 설계해야 합니다.”",
-        footRight: "Finance • Industry • Technology • UBI"
-      },
-
-      en: {
-        dir: "ltr",
-        kicker: "Global Finance • Industry • Technology • UBI",
-        title: "PWB Global",
-        subtitle: "PWB Global (Pi World Bank Global) is a global financial and industrial infrastructure platform that connects Finance, Industry, Technology, and UBI into one integrated system.",
-        cta1: "View Core Pillars",
-        cta2: "Relation to PHK Bank",
-        cta3: "Founder",
-        pillarsTitle: "Core Pillars",
-        p1t: "1) Global Financial Infrastructure",
-        p1d: "Build borderless payments, clearing, and value transfer connected to real-world industry.",
-        p1b: ["Digital-asset-based global finance", "Payments • clearing • transfers • value flow", "Direct linkage to real industry"],
-        p2t: "2) Industrial Capital Platform",
-        p2d: "Industrial-realization finance that turns mega-industries into execution, not just investment.",
-        p2b: ["Capital → production • jobs • profit linkage", "Mega-industry project finance", "Field-ready growth capital"],
-        p3t: "3) UBI-Oriented Economic System",
-        p3d: "Design profit-return structures so technology increases stability, not anxiety.",
-        p3b: ["Allocate a portion of net profit to UBI", "Participation beyond labor, region, and borders", "Technology outcomes reach people"],
-        p4t: "4) Global Governance & Trust Framework",
-        p4d: "Sustainable governance where governments, enterprises, and citizens can coexist with transparency.",
-        p4b: ["Transparent & traceable structure", "Long-term trust framework", "Global collaboration governance"],
-        whyTitle: "Why PWB Global",
-        whyBody: "In legacy systems, wealth concentrates while anxiety spreads. PWB Global designs a full circulation: “Technology → Industry → Profit → People.”",
-        whyBullets: [
-          "Finance should be a tool linking industry and life, not speculation.",
-          "Technology outcomes must diffuse to people, not a few.",
-          "Borders are a starting point for expansion, not a limit to collaboration."
-        ],
-        q1: "Key Question",
-        q2: "“Technology advances, so why do people feel more insecure?”",
-        q3: "PWB Global answers with architecture.",
-        relTitle: "Relationship with PHK Bank",
-        relBody: "PHK Bank is the execution-focused main platform. PWB Global is the top-level framework for global expansion and connection.",
-        relBullets: [
-          "<strong>PHK Bank</strong>: execution-focused main platform (core operation)",
-          "<strong>PWB Global</strong>: global structure • expansion • connection (top framework)",
-          "“If PHK Bank is the heart, PWB Global is the nervous system.”"
-        ],
-        founderTitle: "Founder",
-        founderName: "Hyekong (Lee Jaewan)",
-        founderRole: "Founder & Architect, PWB Global",
-        fq1: "Message",
-        fq2: "“Technology cannot be stopped.",
-        fq3: "So we must design it to save people.”",
-        footRight: "Finance • Industry • Technology • UBI"
-      },
-
-      ar: {
-        dir: "rtl",
-        kicker: "التمويل العالمي • الصناعة • التكنولوجيا • الدخل الأساسي",
-        title: "PWB Global",
-        subtitle: "PWB Global (Pi World Bank Global) هو منصة بنية تحتية مالية وصناعية عالمية تربط بين التمويل والصناعة والتكنولوجيا والدخل الأساسي (UBI) في نظام واحد متكامل.",
-        cta1: "عرض الركائز",
-        cta2: "العلاقة مع PHK Bank",
-        cta3: "المؤسس",
-        pillarsTitle: "الركائز الأساسية",
-        p1t: "1) البنية التحتية المالية العالمية",
-        p1d: "نُنشئ مدفوعات وتسويات وتحويل قيمة بلا حدود ومتصلة بالصناعة الحقيقية.",
-        p1b: ["تمويل عالمي قائم على الأصول الرقمية", "مدفوعات • تسويات • تحويلات • تدفق قيمة", "ارتباط مباشر بالاقتصاد الحقيقي"],
-        p2t: "2) منصة رأس المال الصناعي",
-        p2d: "تمويل يُحوّل الصناعات العملاقة إلى تنفيذ فعلي، وليس مجرد استثمار.",
-        p2b: ["رأس المال → إنتاج • وظائف • أرباح", "تمويل مشاريع صناعية ضخمة", "رأس مال نمو جاهز للميدان"],
-        p3t: "3) نظام اقتصادي موجه للدخل الأساسي (UBI)",
-        p3d: "نُصمم آليات لإعادة جزء من الأرباح بحيث تُنتج التكنولوجيا استقراراً لا قلقاً.",
-        p3b: ["تخصيص جزء من صافي الربح لـ UBI", "مشاركة تتجاوز العمل والحدود", "نتائج التكنولوجيا تصل إلى الناس"],
-        p4t: "4) الحوكمة والثقة العالمية",
-        p4d: "حوكمة مستدامة وشفافة تتعايش فيها الحكومات والشركات والمواطنون.",
-        p4b: ["هيكل شفاف وقابل للتتبع", "إطار ثقة طويل الأمد", "حوكمة تعاون عالمي"],
-        whyTitle: "لماذا PWB Global",
-        whyBody: "في الأنظمة التقليدية تتركز الثروة بينما يتسع القلق. PWB Global يصمم دورة كاملة: «التكنولوجيا → الصناعة → الربح → الناس».",
-        whyBullets: [
-          "يجب أن يكون التمويل أداة تربط الصناعة بالحياة، لا مضاربة.",
-          "يجب أن تنتشر نتائج التكنولوجيا إلى الناس، لا إلى قلة.",
-          "الحدود نقطة انطلاق للتوسع وليست نهاية للتعاون."
-        ],
-        q1: "السؤال المحوري",
-        q2: "«تتقدم التكنولوجيا، فلماذا يزداد شعور الناس بعدم الأمان؟»",
-        q3: "PWB Global يجيب بالهندسة.",
-        relTitle: "العلاقة مع PHK Bank",
-        relBody: "PHK Bank هو المنصة الأساسية للتنفيذ. أما PWB Global فهو الإطار الأعلى للتوسع والربط عالمياً.",
-        relBullets: [
-          "<strong>PHK Bank</strong>: منصة تنفيذية رئيسية (تشغيل أساسي)",
-          "<strong>PWB Global</strong>: هيكل عالمي • توسع • ربط (إطار أعلى)",
-          "«إذا كان PHK Bank هو القلب، فإن PWB Global هو الجهاز العصبي.»"
-        ],
-        founderTitle: "المؤسس",
-        founderName: "هيكونغ (لي جاي وان)",
-        founderRole: "المؤسس والمهندس المعماري، PWB Global",
-        fq1: "رسالة",
-        fq2: "«لا يمكن إيقاف التكنولوجيا.",
-        fq3: "لذلك يجب أن نصممها لإنقاذ الناس.»",
-        footRight: "التمويل العالمي • الصناعة • التكنولوجيا • الدخل الأساسي"
-      },
-
-      zh: {
-        dir: "ltr",
-        kicker: "全球金融 • 产业 • 技术 • 基本收入(UBI)",
-        title: "PWB Global",
-        subtitle: "PWB Global（Pi World Bank Global）是将金融、产业、技术与基本收入（UBI）连接为一体的全球金融与产业基础设施平台。",
-        cta1: "查看核心结构",
-        cta2: "与PHK Bank关系",
-        cta3: "创始人",
-        pillarsTitle: "核心结构",
-        p1t: "1) 全球金融基础设施",
-        p1d: "构建无国界的支付、清算与价值转移，并与实体产业直接连接。",
-        p1b: ["基于数字资产的全球金融", "支付 • 清算 • 转账 • 价值流动", "与实体产业直接联动"],
-        p2t: "2) 产业资本平台",
-        p2d: "面向机器人、AI、能源与航天等超级产业的“落地型”产业金融平台。",
-        p2b: ["资本 → 生产 • 就业 • 利润联动", "超级产业项目金融", "面向现场的增长资本结构"],
-        p3t: "3) UBI导向经济系统",
-        p3d: "设计利润回馈机制，让技术进步带来稳定，而非焦虑。",
-        p3b: ["将净利润的一部分用于UBI回馈", "跨越劳动、地域与国界的参与型经济", "技术成果真正抵达大众"],
-        p4t: "4) 全球治理与信任框架",
-        p4d: "建立透明、可追溯的结构，使政府、企业与公民长期共存与协作。",
-        p4b: ["透明且可追溯的结构", "长期信任框架", "全球协作治理"],
-        whyTitle: "为什么是PWB Global",
-        whyBody: "传统系统中，财富集中而不安扩散。PWB Global以“技术→产业→利润→公众”的完整循环来重构。",
-        whyBullets: [
-          "金融应连接产业与生活，而非投机。",
-          "技术成果应惠及大众，而非少数人。",
-          "国界是合作扩张的起点，而非限制。"
-        ],
-        q1: "核心问题",
-        q2: "“技术在进步，为什么人们却更不安？”",
-        q3: "PWB Global用系统架构来回答。",
-        relTitle: "与PHK Bank的关系",
-        relBody: "PHK Bank是执行型主平台；PWB Global是负责全球扩张与连接的上层框架。",
-        relBullets: [
-          "<strong>PHK Bank</strong>：执行型主平台（核心运营）",
-          "<strong>PWB Global</strong>：全球结构 • 扩张 • 连接（上层框架）",
-          "“PHK Bank是心脏，PWB Global是神经网络。”"
-        ],
-        founderTitle: "创始人",
-        founderName: "Hyekong（Lee Jaewan）",
-        founderRole: "Founder & Architect, PWB Global",
-        fq1: "寄语",
-        fq2: "“技术无法停止。",
-        fq3: "因此必须设计成能拯救人的方向。”",
-        footRight: "全球金融 • 产业 • 技术 • 基本收入(UBI)"
-      }
-    };
-
-    function setLang(lang){
-      const t = TEXT[lang] || TEXT.ko;
-
-      // direction (rtl for Arabic)
-      document.documentElement.lang = lang;
-      document.body.classList.toggle("rtl", t.dir === "rtl");
-      document.querySelectorAll(".langbtn").forEach(b => b.classList.toggle("active", b.dataset.lang === lang));
-
-      // apply texts
-      byId("kicker").textContent = t.kicker;
-      byId("title").textContent = t.title;
-      byId("subtitle").textContent = t.subtitle;
-      byId("cta1").textContent = t.cta1;
-      byId("cta2").textContent = t.cta2;
-      byId("cta3").textContent = t.cta3;
-
-      byId("pillarsTitle").textContent = t.pillarsTitle;
-      byId("p1t").textContent = t.p1t; byId("p1d").textContent = t.p1d; setBullets("p1b", t.p1b);
-      byId("p2t").textContent = t.p2t; byId("p2d").textContent = t.p2d; setBullets("p2b", t.p2b);
-      byId("p3t").textContent = t.p3t; byId("p3d").textContent = t.p3d; setBullets("p3b", t.p3b);
-      byId("p4t").textContent = t.p4t; byId("p4d").textContent = t.p4d; setBullets("p4b", t.p4b);
-
-      byId("whyTitle").textContent = t.whyTitle;
-      byId("whyBody").textContent = t.whyBody;
-      setBullets("whyBullets", t.whyBullets);
-
-      byId("quoteLine1").innerHTML = "<strong>"+t.q1+"</strong>";
-      byId("quoteLine2").textContent = t.q2;
-      byId("quoteLine3").textContent = t.q3;
-
-      byId("relTitle").textContent = t.relTitle;
-      byId("relBody").textContent = t.relBody;
-      setBulletsHTML("relBullets", t.relBullets);
-
-      byId("founderTitle").textContent = t.founderTitle;
-      byId("founderName").textContent = t.founderName;
-      byId("founderRole").textContent = t.founderRole;
-
-      byId("fq1").innerHTML = "<strong>"+t.fq1+"</strong>";
-      byId("fq2").textContent = t.fq2;
-      byId("fq3").textContent = t.fq3;
-
-      byId("footRight").textContent = t.footRight;
-
-      // rtl styling for sections where needed
-      const rtl = (t.dir === "rtl");
-      ["hero","pillars","why","relationship","founder"].forEach(id=>{
-        const el = byId(id);
-        el.classList.toggle("rtl", rtl);
-      });
-    }
-
-    function byId(id){ return document.getElementById(id); }
-
-    function setBullets(ulId, items){
-      const ul = byId(ulId);
-      ul.innerHTML = "";
-      (items || []).forEach(s=>{
-        const li = document.createElement("li");
-        li.textContent = s;
-        ul.appendChild(li);
-      });
-    }
-
-    function setBulletsHTML(ulId, items){
-      const ul = byId(ulId);
-      ul.innerHTML = "";
-      (items || []).forEach(s=>{
-        const li = document.createElement("li");
-        li.innerHTML = s;
-        ul.appendChild(li);
-      });
-    }
-
-    function scrollToId(id){
-      const el = document.getElementById(id);
-      if(!el) return;
-      el.scrollIntoView({behavior:"smooth", block:"start"});
-    }
-
-    // auto-detect language (Korean/English/Arabic/Chinese)
-    function detectLang(){
-      const nav = (navigator.language || "ko").toLowerCase();
-      if(nav.startsWith("ar")) return "ar";
-      if(nav.startsWith("zh")) return "zh";
-      if(nav.startsWith("en")) return "en";
-      if(nav.startsWith("ko")) return "ko";
-      // default
-      return "ko";
-    }
-
-    // init
-    document.getElementById("year").textContent = new Date().getFullYear();
-    const initial = detectLang();
-    setLang(initial);
-
-    document.querySelectorAll(".langbtn").forEach(btn=>{
-      btn.addEventListener("click", ()=> setLang(btn.dataset.lang));
-    });
-  </script>
+</main>
 </body>
 </html>
