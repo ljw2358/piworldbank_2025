@@ -3,617 +3,107 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>PHK Bank</title>
-
+  <title>PHKBank – Financial Operating System</title>
+  <meta name="description" content="PHKBank is a Financial Operating System integrating payment, industry, and UBI on a global scale." />
   <style>
-    :root{
-      --bg:#0b0b0b;
-      --panel:rgba(255,255,255,.05);
-      --line:rgba(255,255,255,.12);
-      --text:#ffffff;
-      --muted:rgba(255,255,255,.72);
-      --muted2:rgba(255,255,255,.62);
-      --accent:#ffffff;
-      --danger:#ff3b30;
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: radial-gradient(circle at top, #0b1220, #020409);
+      color: #e5e7eb;
     }
-    *{box-sizing:border-box}
-    body{
-      margin:0;
-      background:linear-gradient(180deg,#080808,var(--bg));
-      color:var(--text);
-      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial;
-      line-height:1.75;
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 40px 20px 80px;
     }
-    .topbar{
-      position:fixed;
-      top:12px; right:12px;
-      z-index:999;
-      display:flex;
-      gap:10px;
-      align-items:center;
-      background:rgba(0,0,0,.55);
-      border:1px solid var(--line);
-      border-radius:12px;
-      padding:8px 10px;
-      backdrop-filter:blur(10px);
+    .card {
+      background: linear-gradient(180deg, #0f172a, #020617);
+      border-radius: 20px;
+      padding: 28px;
+      margin-bottom: 28px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.6);
     }
-    .topbar select{
-      background:#111;
-      color:#fff;
-      border:1px solid var(--line);
-      border-radius:8px;
-      padding:8px 10px;
-      font-size:14px;
-      outline:none;
+    h1, h2 {
+      margin: 0 0 12px 0;
+      letter-spacing: -0.02em;
     }
-    .container{
-      max-width:980px;
-      margin:0 auto;
-      padding:74px 20px 120px;
+    h1 {
+      font-size: 34px;
     }
-    h1{
-      margin:0 0 10px;
-      font-size:44px;
-      letter-spacing:-.6px;
-      font-weight:900;
+    h2 {
+      font-size: 26px;
     }
-    .tagline{
-      margin:0 0 40px;
-      color:var(--muted);
-      font-size:14px;
+    p {
+      font-size: 16px;
+      line-height: 1.7;
+      color: #cbd5f5;
+      margin: 0 0 10px 0;
     }
-    h2{
-      margin:70px 0 12px;
-      font-size:28px;
-      font-weight:900;
-      letter-spacing:-.3px;
+    .sub {
+      font-size: 14px;
+      color: #94a3b8;
     }
-    p{margin:0 0 16px; font-size:16px; color:rgba(255,255,255,.92)}
-    ul{margin:10px 0 18px 22px; color:rgba(255,255,255,.9)}
-    li{margin:6px 0}
-    .divider{
-      height:1px;
-      background:var(--line);
-      margin:60px 0;
-    }
-    .box{
-      background:var(--panel);
-      border:1px solid var(--line);
-      border-radius:18px;
-      padding:18px 18px;
-      margin:18px 0;
-    }
-    .notice{
-      border-left:4px solid var(--danger);
-      background:rgba(255,59,48,.10);
-    }
-    .kpi{
-      display:grid;
-      grid-template-columns:repeat(2,minmax(0,1fr));
-      gap:12px;
-      margin-top:14px;
-    }
-    .card{
-      background:rgba(255,255,255,.04);
-      border:1px solid var(--line);
-      border-radius:16px;
-      padding:14px 14px;
-    }
-    .card .t{font-weight:800;margin-bottom:6px}
-    .card .d{color:var(--muted2); font-size:14px}
-    .social{
-      display:flex;
-      gap:14px;
-      justify-content:center;
-      margin-top:20px;
-      flex-wrap:wrap;
-    }
-    .btn{
-      display:inline-block;
-      padding:12px 18px;
-      border-radius:12px;
-      font-weight:800;
-      text-decoration:none;
-      color:#fff;
-      border:1px solid var(--line);
-      background:rgba(255,255,255,.06);
-    }
-    .yt{background:#ff0000;border-color:rgba(255,0,0,.55)}
-    .tt{background:#000;border-color:rgba(255,255,255,.18)}
-    footer{
-      margin-top:90px;
-      text-align:center;
-      color:var(--muted2);
-      font-size:13px;
-    }
-    .lang{display:none}
-    .lang.active{display:block}
-    .rtl{direction:rtl; text-align:right}
-    @media (max-width:720px){
-      h1{font-size:38px}
-      h2{font-size:24px}
-      .kpi{grid-template-columns:1fr}
+    footer {
+      text-align: center;
+      margin-top: 60px;
+      font-size: 13px;
+      color: #64748b;
     }
   </style>
-
-  <script>
-    function setLang(code){
-      document.querySelectorAll(".lang").forEach(el=>el.classList.remove("active"));
-      const target = document.getElementById("lang-"+code);
-      if(target){ target.classList.add("active"); }
-      // set html lang + rtl
-      document.documentElement.lang = code;
-      const isRtl = (code === "ar");
-      document.body.classList.toggle("rtl", isRtl);
-    }
-    document.addEventListener("DOMContentLoaded", ()=>{
-      setLang("en");
-    });
-  </script>
 </head>
-
 <body>
-  <div class="topbar">
-    <select onchange="setLang(this.value)">
-      <option value="en">English</option>
-      <option value="ko">한국어</option>
-      <option value="zh">中文</option>
-      <option value="ja">日本語</option>
-      <option value="es">Español</option>
-      <option value="fr">Français</option>
-      <option value="de">Deutsch</option>
-      <option value="ru">Русский</option>
-      <option value="ar">العربية</option>
-      <option value="pt">Português</option>
-      <option value="hi">हिन्दी</option>
-      <option value="id">Bahasa Indonesia</option>
-    </select>
-  </div>
-
   <div class="container">
-    <!-- =========================
-      ENGLISH
-    ========================== -->
-    <div class="lang active" id="lang-en">
-      <h1>PHK Bank</h1>
-      <div class="tagline">Physical AI · Robotics · Fusion Energy · Space · Universal Basic Income Infrastructure</div>
 
-      <p><strong>PHK Bank is not a financial product.</strong> It is not a service, a startup, or an experiment.</p>
-      <p>PHK Bank exists because the existing financial system cannot survive the next industrial era.</p>
-      <p>Robotics replaces labor. Fusion energy removes scarcity. Space industry expands production beyond planetary limits.</p>
-      <p>When labor disappears, wages collapse. When wages collapse, consumption collapses. And when consumption collapses, traditional finance collapses with it.</p>
-
-      <div class="divider"></div>
-
-      <h2>PHK Bank · PWB Relationship</h2>
-      <div class="box">
-        <p><strong>PHK Bank is the only staking authority.</strong> All staking rights, records, and distribution rules belong to PHK Bank.</p>
-        <p>PWB is the execution/interface layer that delivers PHK Bank’s architecture to users and communities.</p>
-        <p><strong>This is a vertical structure:</strong> PHK Bank defines the rules, PWB executes the experience.</p>
-      </div>
-
-      <h2>Staking Policy Update</h2>
-      <div class="box notice">
-        <p><strong>NOTICE:</strong> PWB no longer accepts new staking.</p>
-        <p>All staking previously made through PWB is <strong>automatically recognized and preserved</strong> as contribution to PHK Bank.</p>
-        <p>If your staking period has ended (or you want to add more), you can <strong>re-stake via PHK Bank</strong>.</p>
-      </div>
-
-      <div class="kpi">
-        <div class="card">
-          <div class="t">What stays protected</div>
-          <div class="d">Your staking record, participation history, and distribution weight remain valid under PHK Bank.</div>
-        </div>
-        <div class="card">
-          <div class="t">What changes</div>
-          <div class="d">PWB stops receiving new staking. New/renewed staking is done only in PHK Bank.</div>
-        </div>
-      </div>
-
-      <h2>Why This Structure Exists</h2>
-      <p>PHK Bank redefines finance as a closed-loop system:</p>
-      <p><strong>Production → Accumulation → Distribution → Guaranteed Survival</strong></p>
-      <p>Production is measured in physical terms: robotics output, fusion energy delivered, operating infrastructure, material throughput and efficiency.</p>
-      <p>No speculation. No imaginary growth. No financial fiction.</p>
-
-      <h2>Universal Basic Income (UBI)</h2>
-      <p>UBI is not charity. It is a mathematical consequence of automation.</p>
-      <p>A predefined portion of net industrial output is redirected into UBI pools. No applications. No conditions. No approvals.</p>
-
-      <h2>Official Channels</h2>
-      <div class="social">
-        <a class="btn yt" href="https://www.youtube.com/@YOUR_CHANNEL_ID" target="_blank" rel="noopener">▶ YouTube</a>
-        <a class="btn tt" href="https://www.tiktok.com/@YOUR_TIKTOK_ID" target="_blank" rel="noopener">▶ TikTok</a>
-      </div>
-
-      <footer>
-        <p>PHK Bank is mandatory infrastructure for the post-labor era.</p>
-        <p>© PHK Bank</p>
-      </footer>
+    <div class="card">
+      <h1>PHKBank Framework</h1>
+      <p>
+        PHKBank는 단순한 금융 앱이 아니라,
+        결제 · 산업 · 기술 · UBI를 통합하는
+        <strong>금융 운영체계(Financial Operating System)</strong>입니다.
+      </p>
+      <p>
+        PHKBank는 국가 단위 금융을 넘어,
+        산업 구조와 시민 경제를 연결하는
+        장기 확장형 금융 OS를 목표로 설계되었습니다.
+      </p>
+      <p class="sub">Financial OS · Structural Design · Long-term Expansion</p>
     </div>
 
-    <!-- =========================
-      한국어
-    ========================== -->
-    <div class="lang" id="lang-ko">
-      <h1>PHK Bank</h1>
-      <div class="tagline">Physical AI · 로봇 · 인공태양(핵융합) · 우주 · 기본소득 인프라</div>
-
-      <p><strong>PHK Bank는 금융상품이 아닙니다.</strong> 서비스도, 스타트업도, 실험도 아닙니다.</p>
-      <p>기존 금융이 다음 산업 시대를 견디지 못하기 때문에 PHK Bank는 존재합니다.</p>
-      <p>로봇은 노동을 대체하고, 핵융합 에너지는 희소성을 낮추며, 우주산업은 생산 한계를 확장합니다.</p>
-
-      <div class="divider"></div>
-
-      <h2>PHK Bank · PWB 관계</h2>
-      <div class="box">
-        <p><strong>스테이킹의 유일한 주체는 PHK Bank입니다.</strong> 스테이킹 권리·기록·분배 기준은 PHK Bank에 귀속됩니다.</p>
-        <p>PWB는 PHK Bank 구조를 사용자와 커뮤니티에 전달·실행하는 인터페이스/실행 레이어입니다.</p>
-        <p><strong>수평 제휴가 아니라 수직 구조</strong>입니다. PHK Bank가 규칙을 정하고, PWB가 경험을 실행합니다.</p>
-      </div>
-
-      <h2>스테이킹 정책 공지</h2>
-      <div class="box notice">
-        <p><strong>[공지]</strong> PWB에서는 더 이상 신규 스테이킹을 받지 않습니다.</p>
-        <p>PWB를 통해 이루어진 기존 스테이킹은 <strong>PHK Bank 기여로 자동 승계</strong>되며, 권리와 기록은 그대로 보호됩니다.</p>
-        <p>스테이킹 기간이 종료되었거나 추가 참여를 원하시는 분은 <strong>PHK Bank에서 재스테이킹</strong>하시면 됩니다.</p>
-      </div>
-
-      <div class="kpi">
-        <div class="card">
-          <div class="t">보호되는 것</div>
-          <div class="d">기존 스테이킹 기록, 참여 이력, 분배 가중치는 PHK Bank 기준으로 유지됩니다.</div>
-        </div>
-        <div class="card">
-          <div class="t">바뀌는 것</div>
-          <div class="d">PWB 신규 스테이킹 중단. 신규/갱신 스테이킹은 PHK Bank에서만 진행.</div>
-        </div>
-      </div>
-
-      <h2>금융의 재정의</h2>
-      <p>PHK Bank에서 금융은 “대출/차입”이 아니라, 현실 기반 순환 구조입니다.</p>
-      <p><strong>생산 → 축적 → 분배 → 생존 보장</strong></p>
-      <p>생산은 실물 지표로 측정됩니다: 로봇 생산·배치, 에너지 생산·공급, 인프라 가동, 물질 처리 효율.</p>
-      <p>투기 없음. 허상 성장 없음. 금융 소설 없음.</p>
-
-      <h2>기본소득(UBI)</h2>
-      <p>기본소득은 시혜가 아니라 자동화의 수학적 결과입니다.</p>
-      <p>순산업수익의 사전 정의된 일부가 UBI 풀로 자동 전환됩니다. 신청·조건·승인 없습니다.</p>
-
-      <h2>공식 채널</h2>
-      <div class="social">
-        <a class="btn yt" href="https://www.youtube.com/@YOUR_CHANNEL_ID" target="_blank" rel="noopener">▶ YouTube</a>
-        <a class="btn tt" href="https://www.tiktok.com/@YOUR_TIKTOK_ID" target="_blank" rel="noopener">▶ TikTok</a>
-      </div>
-
-      <footer>
-        <p>PHK Bank는 노동 이후 시대의 필수 인프라입니다.</p>
-        <p>© PHK Bank</p>
-      </footer>
+    <div class="card">
+      <h2>Global Expansion</h2>
+      <p>
+        PHKBank는 단일 국가에 머무르지 않습니다.
+        글로벌 결제, 국제 정산, 산업 연동을 통해
+        국경을 초월한 금융 구조로 확장됩니다.
+      </p>
+      <p>
+        이 확장은 개별 서비스의 나열이 아니라,
+        하나의 통합된 금융 질서를 형성하는 과정입니다.
+      </p>
+      <p class="sub">Cross-border Finance · Partnerships · Scalable Structure</p>
+    </div>
+    <div class="card">
+      <h2>PHK Global</h2>
+      <p>
+        PHK Global은 PHKBank의
+        <strong>하위 글로벌 확장 프레임</strong>으로서,
+        국제 금융 · 산업 · UBI 구조를
+        통합하고 실행하는 역할을 담당합니다.
+      </p>
+      <p>
+        PHKBank가 설계한 금융 운영체계(OS)를 기반으로,
+        PHK Global은 글로벌 결제, 산업 연동,
+        그리고 보편적 기본소득(UBI)의
+        국제적 확장을 현실 세계에 적용합니다.
+      </p>
+      <p class="sub">Sub Framework · International Finance · Global UBI</p>
     </div>
 
-    <!-- =========================
-      中文
-    ========================== -->
-    <div class="lang" id="lang-zh">
-      <h1>PHK Bank</h1>
-      <div class="tagline">Physical AI · 机器人 · 核聚变能源 · 太空 · 全民基本收入基础设施</div>
-
-      <p><strong>PHK Bank 不是金融产品。</strong> 不是服务、创业项目或实验。</p>
-      <p>因为现有金融体系无法承受下一代工业时代，所以 PHK Bank 必须存在。</p>
-
-      <div class="divider"></div>
-
-      <h2>PHK Bank 与 PWB 的关系</h2>
-      <div class="box">
-        <p><strong>质押（Staking）的唯一主体是 PHK Bank。</strong> 权利、记录与分配规则都归属于 PHK Bank。</p>
-        <p>PWB 是执行/界面层，将 PHK Bank 的架构交付给用户与社区。</p>
-        <p><strong>这是垂直结构：</strong>PHK Bank 定义规则，PWB 执行体验。</p>
-      </div>
-
-      <h2>质押政策公告</h2>
-      <div class="box notice">
-        <p><strong>公告：</strong>PWB 不再接受新的质押。</p>
-        <p>此前通过 PWB 的质押将<strong>自动继承</strong>为对 PHK Bank 的贡献，权利与记录保持不变。</p>
-        <p>到期或想追加参与者，请在<strong>PHK Bank 重新质押</strong>。</p>
-      </div>
-
-      <h2>官方频道</h2>
-      <div class="social">
-        <a class="btn yt" href="https://www.youtube.com/@YOUR_CHANNEL_ID" target="_blank" rel="noopener">▶ YouTube</a>
-        <a class="btn tt" href="https://www.tiktok.com/@YOUR_TIKTOK_ID" target="_blank" rel="noopener">▶ TikTok</a>
-      </div>
-
-      <footer>
-        <p>PHK Bank 是后劳动时代的必需基础设施。</p>
-        <p>© PHK Bank</p>
-      </footer>
-    </div>
-
-    <!-- =========================
-      日本語
-    ========================== -->
-    <div class="lang" id="lang-ja">
-      <h1>PHK Bank</h1>
-      <div class="tagline">Physical AI · ロボティクス · 核融合エネルギー · 宇宙 · UBIインフラ</div>
-
-      <p><strong>PHK Bankは金融商品ではありません。</strong> サービスでも、スタートアップでも、実験でもありません。</p>
-
-      <div class="divider"></div>
-
-      <h2>PHK BankとPWBの関係</h2>
-      <div class="box">
-        <p><strong>ステーキングの唯一の主体はPHK Bankです。</strong> 権利・記録・分配ルールはPHK Bankに帰属します。</p>
-        <p>PWBはPHK Bankの構造をユーザーへ届ける実行/インターフェース層です。</p>
-        <p><strong>垂直構造：</strong>PHK Bankがルールを定義し、PWBが体験を実行します。</p>
-      </div>
-
-      <h2>ステーキング方針</h2>
-      <div class="box notice">
-        <p><strong>お知らせ：</strong>PWBでは新規ステーキングを受け付けません。</p>
-        <p>既存のPWBステーキングはPHK Bankへの貢献として自動承継され、権利と記録は保持されます。</p>
-        <p>満了または追加参加はPHK Bankで再ステーキングしてください。</p>
-      </div>
-
-      <h2>公式チャンネル</h2>
-      <div class="social">
-        <a class="btn yt" href="https://www.youtube.com/@YOUR_CHANNEL_ID" target="_blank" rel="noopener">▶ YouTube</a>
-        <a class="btn tt" href="https://www.tiktok.com/@YOUR_TIKTOK_ID" target="_blank" rel="noopener">▶ TikTok</a>
-      </div>
-
-      <footer>
-        <p>PHK Bankはポスト労働時代の必須インフラです。</p>
-        <p>© PHK Bank</p>
-      </footer>
-    </div>
-
-    <!-- =========================
-      Español
-    ========================== -->
-    <div class="lang" id="lang-es">
-      <h1>PHK Bank</h1>
-      <div class="tagline">Physical AI · Robótica · Energía de Fusión · Espacio · Infraestructura de Ingreso Básico Universal</div>
-
-      <div class="divider"></div>
-
-      <h2>Relación entre PHK Bank y PWB</h2>
-      <div class="box">
-        <p><strong>PHK Bank es la única autoridad de staking.</strong> Derechos, registros y reglas de distribución pertenecen a PHK Bank.</p>
-        <p>PWB es la capa de ejecución/interfaz que entrega la arquitectura de PHK Bank a usuarios y comunidades.</p>
-      </div>
-
-      <h2>Aviso de Staking</h2>
-      <div class="box notice">
-        <p><strong>AVISO:</strong> PWB ya no acepta nuevo staking.</p>
-        <p>El staking previo vía PWB se reconoce y preserva como contribución a PHK Bank.</p>
-        <p>Si terminó tu período o deseas añadir más, vuelve a hacer staking en PHK Bank.</p>
-      </div>
-
-      <h2>Canales Oficiales</h2>
-      <div class="social">
-        <a class="btn yt" href="https://www.youtube.com/@YOUR_CHANNEL_ID" target="_blank" rel="noopener">▶ YouTube</a>
-        <a class="btn tt" href="https://www.tiktok.com/@YOUR_TIKTOK_ID" target="_blank" rel="noopener">▶ TikTok</a>
-      </div>
-
-      <footer><p>© PHK Bank</p></footer>
-    </div>
-
-    <!-- =========================
-      Français
-    ========================== -->
-    <div class="lang" id="lang-fr">
-      <h1>PHK Bank</h1>
-      <div class="tagline">Physical AI · Robotique · Énergie de Fusion · Espace · Infrastructure de Revenu Universel</div>
-
-      <div class="divider"></div>
-
-      <h2>Relation PHK Bank · PWB</h2>
-      <div class="box">
-        <p><strong>PHK Bank est l’unique autorité de staking.</strong> Droits, enregistrements et règles de distribution appartiennent à PHK Bank.</p>
-        <p>PWB est la couche d’exécution/interface qui apporte l’architecture de PHK Bank aux utilisateurs et aux communautés.</p>
-      </div>
-
-      <h2>Annonce Staking</h2>
-      <div class="box notice">
-        <p><strong>AVIS :</strong> PWB n’accepte plus de nouveau staking.</p>
-        <p>Le staking existant via PWB est automatiquement reconnu comme contribution à PHK Bank et reste protégé.</p>
-        <p>Fin de période ou ajout : re-stake uniquement via PHK Bank.</p>
-      </div>
-
-      <h2>Canaux Officiels</h2>
-      <div class="social">
-        <a class="btn yt" href="https://www.youtube.com/@YOUR_CHANNEL_ID" target="_blank" rel="noopener">▶ YouTube</a>
-        <a class="btn tt" href="https://www.tiktok.com/@YOUR_TIKTOK_ID" target="_blank" rel="noopener">▶ TikTok</a>
-      </div>
-
-      <footer><p>© PHK Bank</p></footer>
-    </div>
-
-    <!-- =========================
-      Deutsch
-    ========================== -->
-    <div class="lang" id="lang-de">
-      <h1>PHK Bank</h1>
-      <div class="tagline">Physical AI · Robotik · Fusionsenergie · Raumfahrt · UBI-Infrastruktur</div>
-
-      <div class="divider"></div>
-
-      <h2>Beziehung PHK Bank · PWB</h2>
-      <div class="box">
-        <p><strong>PHK Bank ist die einzige Staking-Instanz.</strong> Rechte, Aufzeichnungen und Verteilungsregeln gehören zur PHK Bank.</p>
-        <p>PWB ist die Ausführungs-/Interface-Ebene, die die PHK-Bank-Architektur zu Nutzern und Communities bringt.</p>
-      </div>
-
-      <h2>Staking-Hinweis</h2>
-      <div class="box notice">
-        <p><strong>HINWEIS:</strong> PWB nimmt kein neues Staking mehr an.</p>
-        <p>Bestehendes Staking über PWB wird als Beitrag zur PHK Bank anerkannt und bleibt geschützt.</p>
-        <p>Bei Ablauf oder zusätzlicher Teilnahme: Re-Staking nur über PHK Bank.</p>
-      </div>
-
-      <h2>Offizielle Kanäle</h2>
-      <div class="social">
-        <a class="btn yt" href="https://www.youtube.com/@YOUR_CHANNEL_ID" target="_blank" rel="noopener">▶ YouTube</a>
-        <a class="btn tt" href="https://www.tiktok.com/@YOUR_TIKTOK_ID" target="_blank" rel="noopener">▶ TikTok</a>
-      </div>
-
-      <footer><p>© PHK Bank</p></footer>
-    </div>
-
-    <!-- =========================
-      Русский
-    ========================== -->
-    <div class="lang" id="lang-ru">
-      <h1>PHK Bank</h1>
-      <div class="tagline">Physical AI · Робототехника · Термоядерная энергия · Космос · Инфраструктура Базового Дохода</div>
-
-      <div class="divider"></div>
-
-      <h2>Связь PHK Bank и PWB</h2>
-      <div class="box">
-        <p><strong>PHK Bank — единственный субъект стейкинга.</strong> Права, записи и правила распределения принадлежат PHK Bank.</p>
-        <p>PWB — исполнительный/интерфейсный слой, который доставляет архитектуру PHK Bank пользователям и сообществам.</p>
-      </div>
-
-      <h2>Уведомление о стейкинге</h2>
-      <div class="box notice">
-        <p><strong>ВНИМАНИЕ:</strong> PWB больше не принимает новый стейкинг.</p>
-        <p>Существующий стейкинг через PWB автоматически признаётся вкладом в PHK Bank и сохраняется.</p>
-        <p>Если срок истёк или хотите добавить — повторный стейкинг через PHK Bank.</p>
-      </div>
-
-      <h2>Официальные каналы</h2>
-      <div class="social">
-        <a class="btn yt" href="https://www.youtube.com/@YOUR_CHANNEL_ID" target="_blank" rel="noopener">▶ YouTube</a>
-        <a class="btn tt" href="https://www.tiktok.com/@YOUR_TIKTOK_ID" target="_blank" rel="noopener">▶ TikTok</a>
-      </div>
-
-      <footer><p>© PHK Bank</p></footer>
-    </div>
-
-    <!-- =========================
-      العربية (RTL)
-    ========================== -->
-    <div class="lang rtl" id="lang-ar">
-      <h1>PHK Bank</h1>
-      <div class="tagline">Physical AI · الروبوتات · طاقة الاندماج · الفضاء · بنية الدخل الأساسي الشامل</div>
-
-      <div class="divider"></div>
-
-      <h2>العلاقة بين PHK Bank و PWB</h2>
-      <div class="box">
-        <p><strong>PHK Bank هو الجهة الوحيدة المسؤولة عن الستيكينغ.</strong> الحقوق والسجلات وقواعد التوزيع تعود إلى PHK Bank.</p>
-        <p>PWB هو طبقة التنفيذ/الواجهة التي تنقل هيكل PHK Bank إلى المستخدمين والمجتمعات.</p>
-      </div>
-
-      <h2>إشعار الستيكينغ</h2>
-      <div class="box notice">
-        <p><strong>إشعار:</strong> لن يقبل PWB أي ستيكينغ جديد بعد الآن.</p>
-        <p>يتم الاعتراف بالستيكينغ السابق عبر PWB تلقائياً كمساهمة في PHK Bank مع الحفاظ على الحقوق والسجلات.</p>
-        <p>عند انتهاء المدة أو الرغبة بالمزيد: أعد الستيكينغ عبر PHK Bank.</p>
-      </div>
-
-      <h2>القنوات الرسمية</h2>
-      <div class="social">
-        <a class="btn yt" href="https://www.youtube.com/@YOUR_CHANNEL_ID" target="_blank" rel="noopener">▶ YouTube</a>
-        <a class="btn tt" href="https://www.tiktok.com/@YOUR_TIKTOK_ID" target="_blank" rel="noopener">▶ TikTok</a>
-      </div>
-
-      <footer><p>© PHK Bank</p></footer>
-    </div>
-
-    <!-- =========================
-      Português
-    ========================== -->
-    <div class="lang" id="lang-pt">
-      <h1>PHK Bank</h1>
-      <div class="tagline">Physical AI · Robótica · Energia de Fusão · Espaço · Infraestrutura de Renda Básica Universal</div>
-
-      <div class="divider"></div>
-
-      <h2>Relação PHK Bank · PWB</h2>
-      <div class="box">
-        <p><strong>PHK Bank é a única autoridade de staking.</strong> Direitos, registros e regras pertencem ao PHK Bank.</p>
-        <p>PWB é a camada de execução/interface que entrega a arquitetura do PHK Bank aos usuários e comunidades.</p>
-      </div>
-
-      <h2>Aviso de Staking</h2>
-      <div class="box notice">
-        <p><strong>AVISO:</strong> PWB não aceita mais novo staking.</p>
-        <p>O staking existente via PWB é reconhecido como contribuição ao PHK Bank e permanece protegido.</p>
-        <p>Se o período terminou ou quiser adicionar: faça re-staking no PHK Bank.</p>
-      </div>
-
-      <h2>Canais Oficiais</h2>
-      <div class="social">
-        <a class="btn yt" href="https://www.youtube.com/@YOUR_CHANNEL_ID" target="_blank" rel="noopener">▶ YouTube</a>
-        <a class="btn tt" href="https://www.tiktok.com/@YOUR_TIKTOK_ID" target="_blank" rel="noopener">▶ TikTok</a>
-      </div>
-
-      <footer><p>© PHK Bank</p></footer>
-    </div>
-
-    <!-- =========================
-      हिन्दी
-    ========================== -->
-    <div class="lang" id="lang-hi">
-      <h1>PHK Bank</h1>
-      <div class="tagline">Physical AI · Robotics · Fusion Energy · Space · Universal Basic Income Infrastructure</div>
-
-      <div class="divider"></div>
-
-      <h2>PHK Bank और PWB का संबंध</h2>
-      <div class="box">
-        <p><strong>स्टेकिंग की एकमात्र प्राधिकरण PHK Bank है।</strong> अधिकार, रिकॉर्ड और वितरण नियम PHK Bank के अंतर्गत हैं।</p>
-        <p>PWB एक execution/interface layer है जो PHK Bank की संरचना को उपयोगकर्ताओं और समुदायों तक पहुँचाती है।</p>
-      </div>
-
-      <h2>स्टेकिंग सूचना</h2>
-      <div class="box notice">
-        <p><strong>सूचना:</strong> PWB अब नई स्टेकिंग स्वीकार नहीं करता।</p>
-        <p>PWB के माध्यम से की गई मौजूदा स्टेकिंग को PHK Bank में योगदान के रूप में मान्यता दी जाती है और रिकॉर्ड सुरक्षित रहता है।</p>
-        <p>अवधि समाप्त होने या अधिक जोड़ने पर: PHK Bank में पुनः स्टेक करें।</p>
-      </div>
-
-      <h2>Official Channels</h2>
-      <div class="social">
-        <a class="btn yt" href="https://www.youtube.com/@YOUR_CHANNEL_ID" target="_blank" rel="noopener">▶ YouTube</a>
-        <a class="btn tt" href="https://www.tiktok.com/@YOUR_TIKTOK_ID" target="_blank" rel="noopener">▶ TikTok</a>
-      </div>
-
-      <footer><p>© PHK Bank</p></footer>
-    </div>
-
-    <!-- =========================
-      Bahasa Indonesia
-    ========================== -->
-    <div class="lang" id="lang-id">
-      <h1>PHK Bank</h1>
-      <div class="tagline">Physical AI · Robotik · Energi Fusi · Antariksa · Infrastruktur UBI</div>
-
-      <div class="divider"></div>
-
-      <h2>Hubungan PHK Bank & PWB</h2>
-      <div class="box">
-        <p><strong>PHK Bank adalah satu-satunya otoritas staking.</strong> Hak, catatan, dan aturan distribusi berada di PHK Bank.</p>
-        <p>PWB adalah lapisan eksekusi/antarmuka yang menyampaikan arsitektur PHK Bank kepada pengguna dan komunitas.</p>
-      </div>
-
-      <h2>Pemberitahuan Staking</h2>
-      <div class="box notice">
-        <p><strong>PEMBERITAHUAN:</strong> PWB tidak lagi menerima staking baru.</p>
-        <p>Staking yang sudah dilakukan melalui PWB diakui sebagai kontribusi ke PHK Bank dan tetap dilindungi.</p>
-        <p>Jika masa staking berakhir atau ingin menambah: lakukan re-staking di PHK Bank.</p>
-      </div>
-
-      <h2>Kanal Resmi</h2>
-      <div class="social">
-        <a class="btn yt" href="https://www.youtube.com/@YOUR_CHANNEL_ID" target="_blank" rel="noopener">▶ YouTube</a>
-        <a class="btn tt" href="https://www.tiktok.com/@YOUR_TIKTOK_ID" target="_blank" rel="noopener">▶ TikTok</a>
-      </div>
-
-      <footer><p>© PHK Bank</p></footer>
-    </div>
+    <footer>
+      © 2026 PHKBank<br />
+      Financial Operating System
+    </footer>
 
   </div>
 </body>
