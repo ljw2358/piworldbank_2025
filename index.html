@@ -1,238 +1,164 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ko">
 <head>
-<meta charset="utf-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>PWB Global</title>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PWB Global</title>
+  <meta name="description" content="PWB Global은 PHKBank가 설계한 금융 질서를 현실에서 실행하는 글로벌 금융 레이어입니다."/>
 
-<meta name="description"
-content="PWB Global은 PHKBank가 설계한 금융 구조를 현실 세계에서 실행하기 위해 만들어진 글로벌 실행 프레임이다."/>
-
-<style>
-:root{
-  --bg:#0b0f17;
-  --panel:#111827;
-  --panel2:#0b1220;
-  --text:#e5e7eb;
-  --muted:#9ca3af;
-  --accent:#facc15;
-  --radius:18px;
-  --shadow:0 20px 56px rgba(0,0,0,.55);
-  --max:480px;
-  --line:rgba(255,255,255,.08);
-}
-*{box-sizing:border-box}
-body{
-  margin:0;
-  background:linear-gradient(180deg,#0b0f17,#020617);
-  color:var(--text);
-  font-family:system-ui,-apple-system,"Noto Sans KR",sans-serif;
-  line-height:1.95;
-}
-.wrap{
-  max-width:var(--max);
-  margin:0 auto;
-  padding:26px 20px 60px;
-}
-.header{
-  text-align:center;
-  margin:36px 0 44px;
-}
-.header h1{
-  margin:0;
-  font-size:46px;
-  font-weight:900;
-}
-.header .sub{
-  margin-top:14px;
-  font-size:15px;
-  color:var(--muted);
-  letter-spacing:3px;
-}
-.header .slogan{
-  margin-top:18px;
-  font-size:24px;
-  font-weight:900;
-  color:var(--accent);
-}
-
-.section{
-  margin:52px 0;
-}
-.section h2{
-  margin:0 0 18px;
-  font-size:26px;
-  font-weight:900;
-}
-.section p{
-  margin:0 0 18px;
-  font-size:16px;
-  color:#d1d5db;
-}
-.section ul{
-  margin:16px 0 0 20px;
-  font-size:15px;
-  color:#9ca3af;
-}
-.section ul li{
-  margin-bottom:10px;
-}
-.hr{
-  margin:48px 0;
-  height:1px;
-  background:linear-gradient(90deg,transparent,var(--line),transparent);
-}
-</style>
+  <style>
+    body{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;margin:0;background:#0b0e13;color:#eaeaf0;line-height:1.6}
+    header,section,footer{max-width:1100px;margin:auto;padding:40px 20px}
+    h1,h2,h3{color:#ffffff}
+    .tag{display:inline-block;padding:6px 12px;border-radius:20px;background:#1e2230;color:#9ad1ff;font-size:13px;margin-right:8px}
+    ul{padding-left:20px}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px}
+    .card{background:#141826;border-radius:14px;padding:20px}
+    footer{font-size:14px;color:#9aa3b2}
+    select{background:#141826;color:#fff;border:1px solid #333;padding:6px;border-radius:6px}
+  </style>
 </head>
 
 <body>
-<main class="wrap">
 
-<div class="header">
-  <h1>PWB Global</h1>
-  <div class="sub">ONE WORLD · ONE SYSTEM · ONE FUTURE</div>
-  <div class="slogan">PHKBank 하위 글로벌 실행 프레임</div>
-</div>
+<header>
+  <span class="tag">PHKBank Framework</span>
+  <span class="tag">Global Execution Layer</span>
+  <h1 data-i18n="brand_title">PWB Global</h1>
+  <p data-i18n="brand_desc"></p>
 
-<div class="section">
-  <h2>PHKBank만으로는 충분하지 않았다</h2>
-  <p>
-    PHKBank는 금융의 설계도다.  
-    구조를 정의하고, 원칙을 세우며, 방향을 고정한다.
-    그러나 설계도는 현실을 움직이지 않는다.
-  </p>
-  <p>
-    현실 세계에는 국가가 있고, 통화가 있고, 제도가 있고,
-    이해관계와 정치, 관습, 노동의 불균형이 존재한다.
-    이 모든 요소는 단일 금융 프레임만으로는 작동하지 않는다.
-  </p>
-  <p>
-    PWB Global은 이 문제에서 출발했다.  
-    <strong>PHKBank가 설계한 금융 구조를 실제 세계에서 “돌리기 위한 장치”</strong>가
-    필요했기 때문이다.
-  </p>
-</div>
+  <label>
+    🌐 Language :
+    <select onchange="setLang(this.value)">
+      <option value="ko">한국어</option>
+      <option value="en">English</option>
+      <option value="zh_cn">中文</option>
+      <option value="ja">日本語</option>
+      <option value="es">Español</option>
+      <option value="fr">Français</option>
+      <option value="de">Deutsch</option>
+      <option value="ru">Русский</option>
+      <option value="ar">العربية</option>
+      <option value="pt">Português</option>
+      <option value="it">Italiano</option>
+      <option value="hi">हिन्दी</option>
+      <option value="id">Bahasa</option>
+      <option value="vi">Tiếng Việt</option>
+      <option value="th">ไทย</option>
+      <option value="tr">Türkçe</option>
+      <option value="fa">فارسی</option>
+      <option value="ms">Melayu</option>
+      <option value="tl">Tagalog</option>
+    </select>
+  </label>
+</header>
 
-<div class="hr"></div>
+<section>
+  <h2 data-i18n="section_relation_title"></h2>
+  <p data-i18n="section_relation_desc"></p>
+</section>
 
-<div class="section">
-  <h2>PWB Global의 정확한 위치</h2>
-  <p>
-    PWB Global은 PHKBank와 경쟁하지 않는다.
-    또한 PHKBank를 대체하지도 않는다.
-  </p>
-  <p>
-    관계는 명확하다.
-  </p>
+<section>
+  <h2 data-i18n="section_functions_title"></h2>
+  <div class="grid">
+    <div class="card"><h3 data-i18n="fn_basic_income"></h3><p data-i18n="fn_basic_income_desc"></p></div>
+    <div class="card"><h3 data-i18n="fn_payment"></h3><p data-i18n="fn_payment_desc"></p></div>
+    <div class="card"><h3 data-i18n="fn_deposit"></h3><p data-i18n="fn_deposit_desc"></p></div>
+    <div class="card"><h3 data-i18n="fn_reward"></h3><p data-i18n="fn_reward_desc"></p></div>
+    <div class="card"><h3>YouTube</h3><p data-i18n="fn_youtube_desc"></p></div>
+    <div class="card"><h3>TikTok</h3><p data-i18n="fn_tiktok_desc"></p></div>
+  </div>
+</section>
+
+<section>
+  <h2 data-i18n="staking_title"></h2>
+  <p data-i18n="staking_intro"></p>
+
+  <p data-i18n="staking_preexist"></p>
+
+  <h3 data-i18n="staking_rule1_title"></h3>
   <ul>
-    <li>PHKBank : 금융 질서와 원칙을 설계하는 상위 프레임</li>
-    <li><strong>PWB Global : 그 설계를 현실 세계에서 실행하는 글로벌 레이어</strong></li>
-    <li>국가·기업·시민이 실제로 접속하는 실무적 접점</li>
+    <li data-i18n="staking_rule1_a"></li>
+    <li data-i18n="staking_rule1_b"></li>
+    <li data-i18n="staking_rule1_c"></li>
   </ul>
-  <p>
-    쉽게 말해,
-    PHKBank가 “법”이라면  
-    PWB Global은 그 법이 적용되는 “현장”이다.
-  </p>
-</div>
 
-<div class="hr"></div>
+  <h3 data-i18n="staking_rule2_title"></h3>
+  <p data-i18n="staking_rule2_desc"></p>
+</section>
 
-<div class="section">
-  <h2>PWB Global은 앱이 아니다</h2>
-  <p>
-    많은 금융 프로젝트가 앱으로 시작해 앱으로 끝난다.
-    그러나 PWB Global은 처음부터 앱이 목적이 아니었다.
-  </p>
-  <p>
-    이것은 <strong>글로벌 금융 실행 네트워크</strong>이며,
-    결제·보상·기본소득·노동·산업 흐름을
-    하나의 질서로 묶기 위한 운영 구조다.
-  </p>
-</div>
-<div class="section">
-  <h2>기본소득은 왜 PWB Global에서만 가능한가</h2>
-  <p>
-    기존의 기본소득 논의는 늘 막혔다.
-    재원 부족, 정치 갈등, 국가 간 불균형 때문이다.
-  </p>
-  <p>
-    PWB Global은 접근 방식이 다르다.
-    기본소득을 “복지”로 보지 않고,
-    <strong>글로벌 시스템에서 발생한 잉여 가치의 정산 결과</strong>로 본다.
-  </p>
-  <p>
-    다시 말해,
-    사람들이 참여해 시스템을 유지했고,
-    그 시스템이 가치를 만들었다면,
-    그 가치는 참여자에게 되돌아가야 한다.
-    이것이 PWB Global 기본소득의 출발점이다.
-  </p>
-</div>
+<footer>
+  <p data-i18n="footer_text"></p>
+</footer>
 
-<div class="hr"></div>
+<script>
+const LANG = {
+  ko:{
+    brand_title:"PWB Global",
+    brand_desc:"PWB Global은 PHKBank가 설계한 금융 질서를 현실 세계에서 실행하는 글로벌 금융 실행 레이어입니다.",
+    section_relation_title:"PHKBank와 PWB Global의 관계",
+    section_relation_desc:"PHKBank는 금융 구조와 원칙을 설계하는 상위 프레임이며, PWB Global은 이를 실제 사용자 환경에서 실행·확장하는 하위 글로벌 레이어입니다.",
+    section_functions_title:"PWB Global 핵심 기능",
+    fn_basic_income:"기본소득",
+    fn_basic_income_desc:"참여·유지·기여 기록에 따라 분배되는 구조적 기본소득 시스템",
+    fn_payment:"결제",
+    fn_payment_desc:"실제 상거래와 서비스에서 작동하는 글로벌 결제 레이어",
+    fn_deposit:"예치",
+    fn_deposit_desc:"유동성과 안정성을 위한 구조적 예치 시스템",
+    fn_reward:"보상",
+    fn_reward_desc:"참여·유지·기여 기록 기반의 정산형 보상",
+    fn_youtube_desc:"YouTube 기반 정보·콘텐츠 유통과 참여 기록 연동",
+    fn_tiktok_desc:"TikTok 기반 글로벌 확산 및 참여 트래킹",
+    staking_title:"Staking Policy · 스테이킹 정책",
+    staking_intro:"PWB Global에서의 스테이킹은 단순 예치가 아닌 시스템 참여 기록입니다.",
+    staking_preexist:"현재 총 34,000 단위의 선행 스테이킹이 존재하며, 이는 구조 완성 이전에 참여한 선행 기여자로 기록됩니다.",
+    staking_rule1_title:"① 선행 스테이킹 보호",
+    staking_rule1_a:"선행 참여자는 불리한 위치로 이동되지 않습니다.",
+    staking_rule1_b:"모든 정산과 보상의 최우선 기준입니다.",
+    staking_rule1_c:"스테이킹은 실험이나 리스크 전가가 아닙니다.",
+    staking_rule2_title:"② PWB 신규 스테이킹",
+    staking_rule2_desc:"PWB Global에서도 신규 스테이킹은 가능하나, 기존 선행 기록을 침해하지 않는 후순위 정산 구조로 편입됩니다.",
+    footer_text:"© 2026 PWB Global · Powered by PHKBank Framework"
+  },
+  en:{
+    brand_title:"PWB Global",
+    brand_desc:"PWB Global is the global execution layer that implements the financial order designed by PHKBank in the real world.",
+    section_relation_title:"Relationship between PHKBank and PWB Global",
+    section_relation_desc:"PHKBank designs the financial framework, while PWB Global executes and scales it globally.",
+    section_functions_title:"Core Functions of PWB Global",
+    fn_basic_income:"Basic Income",
+    fn_basic_income_desc:"Structural income distributed based on participation and contribution records",
+    fn_payment:"Payment",
+    fn_payment_desc:"Global payment layer for real-world transactions",
+    fn_deposit:"Deposit",
+    fn_deposit_desc:"Structural deposits for liquidity and stability",
+    fn_reward:"Reward",
+    fn_reward_desc:"Settlement-based rewards from contribution records",
+    fn_youtube_desc:"YouTube-based content participation tracking",
+    fn_tiktok_desc:"TikTok-based global engagement tracking",
+    staking_title:"Staking Policy",
+    staking_intro:"Staking in PWB Global records system participation, not simple deposits.",
+    staking_preexist:"A total of 34,000 units of early staking are recorded as early contributors.",
+    staking_rule1_title:"① Early Staker Protection",
+    staking_rule1_a:"Early participants are never disadvantaged.",
+    staking_rule1_b:"Their records have top settlement priority.",
+    staking_rule1_c:"Staking is not a loss experiment.",
+    staking_rule2_title:"② New Staking in PWB Global",
+    staking_rule2_desc:"New staking is allowed but placed in a lower settlement tier.",
+    footer_text:"© 2026 PWB Global · Powered by PHKBank Framework"
+  }
+};
 
-<div class="section">
-  <h2>결제와 보상은 통제 수단이 아니다</h2>
-  <p>
-    기존 금융에서 결제와 보상은 통제의 도구였다.
-    누가 접근할 수 있는지,
-    누가 배제되는지,
-    누가 신뢰받는지를 결정했다.
-  </p>
-  <p>
-    PWB Global은 반대로 설계되었다.
-    <strong>기록이 곧 신뢰이고,
-    참여가 곧 자격</strong>이다.
-  </p>
-  <p>
-    노동, 기여, 유지, 창작, 협력이
-    모두 기록되고,
-    이 기록은 보상과 권한으로 전환된다.
-    국가는 이를 막지 못하고,
-    기업은 이를 임의로 조작할 수 없다.
-  </p>
-</div>
+function setLang(l){
+  if(!LANG[l]) l="ko";
+  document.documentElement.lang=l;
+  document.querySelectorAll("[data-i18n]").forEach(el=>{
+    const k=el.dataset.i18n;
+    if(LANG[l][k]) el.textContent=LANG[l][k];
+  });
+}
+setLang("ko");
+</script>
 
-<div class="hr"></div>
-
-<div class="section">
-  <h2>PWB Global이 바꾸는 것</h2>
-  <ul>
-    <li>금융을 소수의 통제 수단에서 공공 실행 도구로 전환</li>
-    <li>기본소득을 시혜가 아닌 정산으로 재정의</li>
-    <li>국가 단위 금융의 한계를 글로벌 구조로 확장</li>
-    <li>사람을 비용이 아닌 시스템 참여자로 재배치</li>
-  </ul>
-</div>
-
-<div class="hr"></div>
-
-<div class="section">
-  <h2>최종 선언</h2>
-  <p>
-    PWB Global은 유행이 아니다.
-    실험도 아니다.
-    캠페인도 아니다.
-  </p>
-  <p>
-    이것은
-    PHKBank가 설계한 새로운 금융 질서를
-    현실 세계에 안착시키기 위한
-    <strong>필연적 실행 구조</strong>다.
-  </p>
-  <p>
-    금융이 다시 사람에게 돌아가는 과정에서
-    PWB Global은
-    반드시 존재해야 할 한 단계다.
-  </p>
-</div>
-
-<div class="footer" style="text-align:center;margin-top:64px;font-size:13px;color:#6b7280;">
-  © 2026 PWB Global<br/>
-  Global Execution Framework under PHKBank
-</div>
-
-</main>
 </body>
 </html>
