@@ -4,89 +4,87 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
   <meta name="theme-color" content="#0b0f1a" />
-  <title>PHK Bank | PWB</title>
+  <title>PWB | Pi World Bank</title>
 
   <style>
     :root{
-      --bg:#0b0f1a;
-      --card:#111a2e;
-      --card2:#0f1730;
+      --bg:#070b14;
+      --card1:#0f1730;
+      --card2:#0b1226;
+      --line:rgba(255,255,255,.12);
       --text:#eaf0ff;
       --muted:#a9b6d6;
-      --line:rgba(255,255,255,.12);
-      --btn:#1b2b52;
-      --btn2:#20366a;
+      --btn1:#20366a;
+      --btn2:#1b2b52;
       --good:#51e3a4;
       --warn:#ffd166;
       --bad:#ff5a6a;
-      --shadow: 0 18px 50px rgba(0,0,0,.35);
+      --shadow: 0 18px 55px rgba(0,0,0,.42);
       --radius:18px;
+      --radius2:16px;
     }
 
     *{box-sizing:border-box}
+    html,body{height:100%}
     body{
       margin:0;
       font-family: system-ui, -apple-system, "Apple SD Gothic Neo", "Noto Sans KR", Arial, sans-serif;
-      background: radial-gradient(1200px 700px at 10% 0%, #13214a 0%, transparent 55%),
-                  radial-gradient(900px 600px at 90% 20%, #1a2d63 0%, transparent 60%),
-                  var(--bg);
       color:var(--text);
+      background:
+        radial-gradient(1200px 700px at 10% 0%, #14255a 0%, transparent 55%),
+        radial-gradient(900px 600px at 90% 20%, #1a2d63 0%, transparent 60%),
+        radial-gradient(700px 500px at 40% 100%, #0f3a5a 0%, transparent 55%),
+        var(--bg);
     }
+    a{color:inherit;text-decoration:none}
+    .wrap{max-width:1020px;margin:0 auto;padding:18px 14px 70px}
 
-    a{color:inherit; text-decoration:none}
-    .wrap{
-      max-width: 980px;
-      margin: 0 auto;
-      padding: 18px 14px 60px;
-    }
-
+    /* Top */
     .top{
       display:flex;
       gap:14px;
       align-items:stretch;
       flex-wrap:wrap;
-      margin-bottom: 14px;
+      margin-bottom:14px;
     }
-
     .hero{
-      flex: 1 1 520px;
-      background: linear-gradient(135deg, rgba(255,255,255,.09), rgba(255,255,255,.03));
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      padding: 18px 18px;
-      box-shadow: var(--shadow);
+      flex:1 1 560px;
+      background: linear-gradient(135deg, rgba(255,255,255,.10), rgba(255,255,255,.03));
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      padding:18px 18px 16px;
+      box-shadow:var(--shadow);
       position:relative;
       overflow:hidden;
     }
-
     .hero:before{
       content:"";
       position:absolute;
-      inset:-120px -120px auto auto;
-      width: 280px;
-      height: 280px;
-      background: radial-gradient(circle at 30% 30%, rgba(81,227,164,.35), transparent 55%),
-                  radial-gradient(circle at 70% 70%, rgba(83,132,255,.35), transparent 55%);
-      filter: blur(2px);
-      transform: rotate(18deg);
-      opacity:.85;
+      right:-140px; top:-140px;
+      width:320px; height:320px;
+      background:
+        radial-gradient(circle at 30% 30%, rgba(81,227,164,.35), transparent 55%),
+        radial-gradient(circle at 70% 70%, rgba(83,132,255,.35), transparent 55%);
+      transform:rotate(18deg);
+      opacity:.9;
+      filter:blur(2px);
+      pointer-events:none;
     }
-
     .hero h1{
-      margin: 0 0 8px;
-      font-size: 28px;
-      letter-spacing: .2px;
+      margin:0 0 8px;
+      font-size:30px;
+      letter-spacing:.2px;
       position:relative;
       z-index:1;
     }
     .hero p{
-      margin: 0 0 14px;
-      color: var(--muted);
-      line-height: 1.55;
+      margin:0 0 14px;
+      color:var(--muted);
+      line-height:1.6;
       position:relative;
       z-index:1;
+      font-size:14px;
     }
-
     .badges{
       display:flex;
       gap:10px;
@@ -95,227 +93,210 @@
       z-index:1;
     }
     .badge{
-      padding: 8px 10px;
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      font-size: 12px;
-      color: var(--muted);
-      background: rgba(0,0,0,.18);
+      padding:8px 10px;
+      border:1px solid var(--line);
+      border-radius:999px;
+      background:rgba(0,0,0,.18);
+      color:var(--muted);
+      font-size:12px;
       backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
     }
 
     .side{
-      flex: 1 1 260px;
+      flex:1 1 280px;
+      min-width:280px;
       display:flex;
       flex-direction:column;
       gap:12px;
-      min-width: 260px;
     }
-
     .card{
       background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.03));
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      padding: 14px;
-      box-shadow: var(--shadow);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      padding:14px;
+      box-shadow:var(--shadow);
     }
-
-    .card h2{
-      margin: 0 0 10px;
-      font-size: 16px;
-      letter-spacing:.2px;
-    }
-    .card .muted{color: var(--muted); font-size: 13px; line-height:1.5}
-
-    .row{
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-      margin-top: 14px;
-    }
-    @media (max-width: 820px){
-      .row{grid-template-columns: 1fr;}
-    }
-
-    .btns{
-      display:flex;
+    .card h2{margin:0 0 10px;font-size:16px;letter-spacing:.2px}
+    .muted{color:var(--muted)}
+    .pill{
+      display:inline-flex;
+      align-items:center;
       gap:10px;
-      flex-wrap:wrap;
-      margin-top: 10px;
+      padding:9px 12px;
+      border:1px solid var(--line);
+      border-radius:999px;
+      background:rgba(0,0,0,.16);
+      font-size:12px;
+      color:var(--muted);
     }
+    .dot{
+      width:9px;height:9px;border-radius:99px;
+      background:var(--good);
+      box-shadow:0 0 0 4px rgba(81,227,164,.14);
+      display:inline-block;
+    }
+
+    .btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
     .btn{
       display:inline-flex;
       align-items:center;
       justify-content:center;
       gap:8px;
-      padding: 10px 12px;
-      border-radius: 12px;
-      border: 1px solid var(--line);
-      background: linear-gradient(180deg, var(--btn2), var(--btn));
+      padding:10px 12px;
+      border-radius:12px;
+      border:1px solid var(--line);
+      background: linear-gradient(180deg, var(--btn1), var(--btn2));
       cursor:pointer;
       user-select:none;
-      font-weight: 700;
-      letter-spacing: .2px;
-      font-size: 13px;
-      transition: transform .08s ease, filter .08s ease;
+      font-weight:900;
+      font-size:13px;
+      letter-spacing:.2px;
+      transition:transform .08s ease, filter .08s ease;
     }
-    .btn:active{transform: scale(.98)}
-    .btn small{font-weight: 600; opacity:.8}
+    .btn:active{transform:scale(.98)}
 
-    .pill{
-      font-size: 12px;
-      padding: 7px 10px;
-      border-radius: 999px;
-      border: 1px solid var(--line);
-      background: rgba(0,0,0,.15);
-      color: var(--muted);
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
+    /* Sections */
+    .row{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:14px;
+      margin-top:14px;
     }
-    .dot{
-      width:8px;
-      height:8px;
-      border-radius: 99px;
-      background: var(--good);
-      display:inline-block;
-      box-shadow: 0 0 0 3px rgba(81,227,164,.15);
+    @media (max-width: 880px){
+      .row{grid-template-columns:1fr}
     }
 
     .grid{
       display:grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
+      gap:12px;
+      margin-top:12px;
     }
-    @media (max-width: 860px){
-      .grid{grid-template-columns: repeat(2, 1fr);}
+    @media (max-width: 900px){
+      .grid{grid-template-columns: repeat(2, 1fr)}
     }
     @media (max-width: 520px){
-      .grid{grid-template-columns: 1fr;}
+      .grid{grid-template-columns: 1fr}
     }
 
     .feature{
       background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      padding: 12px;
-      box-shadow: var(--shadow);
+      border:1px solid var(--line);
+      border-radius:var(--radius2);
+      padding:12px;
+      box-shadow:var(--shadow);
     }
-    .feature h3{
-      margin: 0 0 6px;
-      font-size: 14px;
-    }
-    .feature p{
-      margin: 0 0 10px;
-      color: var(--muted);
-      font-size: 13px;
-      line-height: 1.55;
-    }
-    .feature .actions{
-      display:flex;
-      gap:8px;
-      flex-wrap:wrap;
-    }
+    .feature h3{margin:0 0 6px;font-size:14px}
+    .feature p{margin:0 0 10px;font-size:13px;color:var(--muted);line-height:1.55}
+    .actions{display:flex;gap:8px;flex-wrap:wrap}
     .mini{
-      padding: 8px 10px;
-      border-radius: 12px;
-      border: 1px solid var(--line);
-      background: rgba(0,0,0,.18);
+      padding:8px 10px;
+      border-radius:12px;
+      border:1px solid var(--line);
+      background:rgba(0,0,0,.18);
       cursor:pointer;
-      font-size: 12px;
-      font-weight: 700;
+      font-size:12px;
+      font-weight:900;
     }
-    .mini:active{transform: scale(.98)}
+    .mini:active{transform:scale(.98)}
 
-    /* 설명 패널 (모바일 클릭용) */
     .desc{
       display:none;
-      margin-top: 10px;
-      padding: 10px 10px;
-      border-radius: 12px;
-      border: 1px dashed rgba(255,255,255,.18);
-      background: rgba(10,16,35,.55);
-      color: #dbe6ff;
-      font-size: 13px;
-      line-height: 1.6;
+      margin-top:10px;
+      padding:10px 10px;
+      border-radius:12px;
+      border:1px dashed rgba(255,255,255,.18);
+      background:rgba(10,16,35,.55);
+      color:#dbe6ff;
+      font-size:13px;
+      line-height:1.62;
     }
-    .desc strong{color: var(--good)}
-    .desc .warn{color: var(--warn); font-weight:800}
-    .desc .bad{color: var(--bad); font-weight:800}
+    .desc strong{color:var(--good)}
+    .desc .warn{color:var(--warn);font-weight:900}
+    .desc .bad{color:var(--bad);font-weight:900}
 
-    /* 유튜브/틱톡 영역 */
-    .media{
+    /* Media */
+    .mediaGrid{
       display:grid;
       grid-template-columns: 1.2fr .8fr;
-      gap: 12px;
+      gap:12px;
+      margin-top:12px;
     }
-    @media (max-width: 820px){
-      .media{grid-template-columns: 1fr;}
+    @media (max-width: 880px){
+      .mediaGrid{grid-template-columns:1fr}
     }
     .frame{
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
       overflow:hidden;
-      background: rgba(0,0,0,.2);
-      box-shadow: var(--shadow);
+      background:rgba(0,0,0,.20);
+      box-shadow:var(--shadow);
     }
-    .frame .bar{
+    .bar{
       display:flex;
       align-items:center;
       justify-content:space-between;
-      padding: 10px 12px;
-      background: rgba(255,255,255,.06);
-      border-bottom: 1px solid var(--line);
-      font-weight: 800;
-      font-size: 13px;
+      padding:10px 12px;
+      background:rgba(255,255,255,.06);
+      border-bottom:1px solid var(--line);
+      font-weight:900;
+      font-size:13px;
     }
     iframe{
       width:100%;
-      height: 360px;
+      height:360px;
       border:0;
       display:block;
       background:#000;
     }
     .hint{
-      font-size: 12px;
-      color: var(--muted);
-      line-height: 1.6;
+      font-size:12px;
+      color:var(--muted);
+      line-height:1.65;
     }
-
-    /* 소셜 버튼: 모바일에서 "반응 없음" 방지 => a 태그 */
     .social{
       display:flex;
       gap:10px;
       flex-wrap:wrap;
-      margin-top: 10px;
+      margin-top:10px;
     }
     .social a{
       display:inline-flex;
       align-items:center;
       justify-content:center;
-      padding: 10px 12px;
-      border-radius: 12px;
-      border: 1px solid var(--line);
-      background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.03));
-      font-weight: 900;
-      font-size: 13px;
+      padding:10px 12px;
+      border-radius:12px;
+      border:1px solid var(--line);
+      background:linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.03));
+      font-weight:900;
+      font-size:13px;
       cursor:pointer;
     }
+
+    /* Footer */
     .footer{
-      margin-top: 18px;
-      color: var(--muted);
-      font-size: 12px;
+      margin-top:18px;
+      color:var(--muted);
+      font-size:12px;
       line-height:1.7;
       opacity:.95;
+      text-align:left;
     }
     code.inline{
-      padding: 2px 6px;
-      border-radius: 8px;
-      background: rgba(255,255,255,.08);
-      border: 1px solid rgba(255,255,255,.12);
+      padding:2px 6px;
+      border-radius:8px;
+      background:rgba(255,255,255,.08);
+      border:1px solid rgba(255,255,255,.12);
       font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
-      font-size: 12px;
-      color: #eaf0ff;
+      font-size:12px;
+      color:#eaf0ff;
+      white-space:nowrap;
+    }
+    .divider{
+      height:1px;
+      background:rgba(255,255,255,.12);
+      margin:12px 0;
     }
   </style>
 </head>
@@ -323,21 +304,21 @@
 <body>
   <div class="wrap">
 
-    <!-- 상단 -->
+    <!-- TOP -->
     <div class="top">
       <section class="hero">
-        <h1>PHK Bank</h1>
+        <h1>PWB</h1>
         <p>
-          PHK Bank는 <strong>예치·결제·송금·보상·기본소득(UBI)</strong>을 하나의 흐름으로 묶어
-          <strong>PWB( Pi World Bank )</strong> 생태계에서 실행되는 <strong>금융 OS</strong> 역할을 합니다.<br/>
+          PWB(Pi World Bank)는 <strong>예치·결제·송금·보상·기본소득(UBI)</strong>을 하나의 흐름으로 묶어
+          생활 속에서 바로 작동하는 <strong>디지털 금융 OS</strong>입니다.<br/>
           사용자는 “맡기고(예치) → 쓰고(결제) → 보내고(송금) → 받고(보상/UBI)”를 한 화면에서 처리합니다.
         </p>
 
         <div class="badges">
-          <span class="badge">PWB Ecosystem</span>
           <span class="badge">Deposit • Pay • Transfer</span>
           <span class="badge">Rewards • UBI</span>
           <span class="badge">Staking / Vault</span>
+          <span class="badge">Transparency</span>
         </div>
       </section>
 
@@ -345,9 +326,9 @@
         <div class="card">
           <h2>상태</h2>
           <div class="pill"><span class="dot"></span> 모바일 클릭/설명 방식 적용 (hover 제거)</div>
-          <p class="muted" style="margin:10px 0 0">
-            지금 페이지는 “눌러도 반응 없음”을 막기 위해<br/>
-            유튜브/틱톡을 <strong>onclick이 아닌 링크(a)</strong>로 고정했습니다.
+          <p class="muted" style="margin:10px 0 0; line-height:1.6; font-size:13px">
+            “눌러도 반응 없음”을 막기 위해,
+            모든 핵심 기능은 <strong>클릭하면 설명이 열리는 구조</strong>로 만들었습니다.
           </p>
         </div>
 
@@ -359,16 +340,45 @@
             <a class="btn" href="#staking">스테이킹</a>
           </div>
         </div>
+
+        <div class="card">
+          <h2>핵심 한 줄</h2>
+          <p class="muted" style="margin:0; line-height:1.7">
+            PWB는 “예치 기반 유동성” 위에서<br/>
+            결제·송금·보상·UBI가 <strong>끊기지 않게 순환</strong>하도록 설계합니다.
+          </p>
+        </div>
       </aside>
     </div>
 
-    <!-- 기능 카드 -->
-    <section id="features" class="row">
-      <div class="card">
-        <h2>핵심 4기능 (클릭하면 설명이 열립니다)</h2>
+    <!-- FEATURES + MEDIA -->
+    <section class="row">
+      <!-- FEATURES -->
+      <div class="card" id="features">
+        <h2>핵심 기능 (클릭하면 설명이 열립니다)</h2>
+        <p class="muted" style="margin:0 0 10px; line-height:1.65; font-size:13px">
+          모바일 환경에서는 hover가 작동하지 않습니다.<br/>
+          그래서 모든 설명은 <strong>버튼 클릭</strong>으로 바로 펼쳐지게 했습니다.
+        </p>
 
-        <div class="grid" style="margin-top:12px">
-          <!-- 결제 -->
+        <div class="grid">
+          <!-- Deposit -->
+          <div class="feature">
+            <h3>예치</h3>
+            <p>예치율·보상·정산 구조를 설명합니다.</p>
+            <div class="actions">
+              <button class="mini" onclick="toggleDesc('d_deposit')">설명 보기</button>
+              <button class="mini" onclick="openInfo('예치')">짧은 안내</button>
+            </div>
+            <div id="d_deposit" class="desc">
+              <strong>예치</strong>는 PWB의 “유동성 기반”입니다.<br/>
+              예치된 자산은 생태계 내 결제/정산 흐름의 토대가 되며,
+              <span class="warn">예치율</span>은 정책으로 조정 가능합니다.<br/>
+              보상은 “기여 기반”과 “안정성 기반”을 조합해 설계할 수 있습니다.
+            </div>
+          </div>
+
+          <!-- Pay -->
           <div class="feature">
             <h3>결제</h3>
             <p>Pi 기반 즉시 결제, 정산 흐름을 단순화합니다.</p>
@@ -377,13 +387,14 @@
               <button class="mini" onclick="openInfo('결제')">짧은 안내</button>
             </div>
             <div id="d_pay" class="desc">
-              <strong>결제</strong>는 PHK Bank의 핵심 사용 시나리오입니다.<br/>
-              1) 사용자는 Pi로 결제합니다. 2) 가맹점은 즉시 확인합니다. 3) 정산은 자동으로 기록됩니다.<br/>
-              <span class="warn">포인트:</span> “결제 버튼을 누르면 설명이 바로 뜨도록” 모바일 클릭 구조로 만들었습니다.
+              <strong>결제</strong>는 PWB의 “실사용”을 만드는 핵심 기능입니다.<br/>
+              사용자는 Pi로 결제하고, 가맹점은 즉시 확인하며,
+              정산은 자동으로 기록됩니다.<br/>
+              <span class="warn">목표:</span> 누구나 “누르고 바로 끝”나는 결제 경험.
             </div>
           </div>
 
-          <!-- 송금 -->
+          <!-- Transfer -->
           <div class="feature">
             <h3>송금</h3>
             <p>지갑 간 송금 흐름을 한 번에 안내합니다.</p>
@@ -393,27 +404,12 @@
             </div>
             <div id="d_transfer" class="desc">
               <strong>송금</strong>은 “주소 입력 → 금액 입력 → 확인”의 3단계로 단순화합니다.<br/>
-              거래는 기록되며, 사용자에게는 “최근 거래” 형태로 요약 표시됩니다.<br/>
-              <span class="warn">주의:</span> 실제 온체인 송금은 SDK/서버 연동이 필요합니다. 본 페이지는 UI/설명 구조입니다.
+              거래는 기록되며 “최근 거래” 형태로 요약 표시됩니다.<br/>
+              <span class="warn">주의:</span> 실제 온체인 송금은 SDK/서버 연동이 필요합니다. (이 페이지는 UI/설명 구조)
             </div>
           </div>
 
-          <!-- 예치 -->
-          <div class="feature">
-            <h3>예치</h3>
-            <p>예치율·보상·정산 구조를 설명합니다.</p>
-            <div class="actions">
-              <button class="mini" onclick="toggleDesc('d_deposit')">설명 보기</button>
-              <button class="mini" onclick="openInfo('예치')">짧은 안내</button>
-            </div>
-            <div id="d_deposit" class="desc">
-              <strong>예치</strong>는 “자산 안정 + 생태계 유동성”을 동시에 만드는 장치입니다.<br/>
-              예치된 물량은 PWB 생태계에서 결제/정산/보상 흐름의 기반이 됩니다.<br/>
-              <span class="warn">예치율</span>은 정책에 따라 조정 가능하며, 보상은 “기여 기반”으로 설계할 수 있습니다.
-            </div>
-          </div>
-
-          <!-- 보상 -->
+          <!-- Rewards -->
           <div class="feature">
             <h3>보상</h3>
             <p>참여·사용·기여에 따른 보상 흐름을 만듭니다.</p>
@@ -424,11 +420,11 @@
             <div id="d_reward" class="desc">
               <strong>보상</strong>은 “사용/기여/정산 참여”에 대한 인센티브입니다.<br/>
               예: 결제 참여, 가맹점 유지, 설문/검증, 커뮤니티 기여 등에 따른 보상.<br/>
-              <span class="warn">목표:</span> 단기 펌핑이 아니라 “지속 가능한 유입/유지” 구조로 설계합니다.
+              <span class="warn">핵심:</span> 단기 펌핑이 아니라 “지속 유입/유지” 구조로 설계합니다.
             </div>
           </div>
 
-          <!-- 기본소득 -->
+          <!-- UBI -->
           <div class="feature">
             <h3>기본소득(UBI)</h3>
             <p>PWB 수익·정책 기반 UBI 분배 구상입니다.</p>
@@ -437,12 +433,14 @@
               <button class="mini" onclick="openInfo('UBI')">짧은 안내</button>
             </div>
             <div id="d_ubi" class="desc">
-              <strong>UBI</strong>는 “최종 수혜자(서민/노동자/노년층/청년/소상공인)”에게 돌아가는 구조입니다.<br/>
-              지급 방식은 월/주/일 단위로 설계 가능하며, “기여 기반 + 최소 보장” 혼합 모델도 가능합니다.
+              <strong>UBI</strong>는 PWB의 최종 목적입니다.<br/>
+              취약계층(서민·노동자·노년층·청년·소상공인)이
+              생태계 성장의 결과를 함께 받도록 설계합니다.<br/>
+              지급은 월/주/일 단위로 설계 가능하며 “최소 보장 + 기여 기반” 혼합도 가능합니다.
             </div>
           </div>
 
-          <!-- 스테이킹 -->
+          <!-- Staking -->
           <div class="feature" id="staking">
             <h3>스테이킹</h3>
             <p>스테이킹 참여자 보호·재스테이킹 옵션을 제공합니다.</p>
@@ -451,14 +449,14 @@
               <button class="mini" onclick="openInfo('스테이킹')">짧은 안내</button>
             </div>
             <div id="d_staking" class="desc">
-              <strong>문제:</strong> “3만4천개 스테이킹” 참여자들이 기대와 달리 멈춰버리면 <span class="bad">참담하고 실망</span>할 수 있습니다.<br/>
-              <strong>해법:</strong> PWB 안에서 <span class="warn">추가 스테이킹(재스테이킹)</span> 또는
-              <span class="warn">기여 기반 보상 전환</span> 같은 “출구/유지” 설계를 제공합니다.<br/>
-              <strong>핵심 메시지:</strong> “스테이킹은 끝이 아니라, PWB 내에서 다시 굴리는 구조”입니다.
+              <strong>문제:</strong> 스테이킹 참여자들이 “멈춤/침묵”을 겪으면 <span class="bad">실망</span>이 커집니다.<br/>
+              <strong>해법:</strong> PWB 안에서 <span class="warn">재스테이킹</span>, <span class="warn">기여 기반 보상 전환</span>,
+              <span class="warn">단계별 락업/보상</span> 같은 “유지/출구”를 동시에 제공합니다.<br/>
+              <strong>핵심 메시지:</strong> 스테이킹은 끝이 아니라, PWB 내에서 다시 굴리는 구조입니다.
             </div>
           </div>
 
-          <!-- 안전/투명 -->
+          <!-- Transparency -->
           <div class="feature">
             <h3>투명성</h3>
             <p>정책·보상·예치율을 공개형으로 운영합니다.</p>
@@ -468,163 +466,181 @@
             </div>
             <div id="d_transparency" class="desc">
               정책 변경(예치율/보상/UBI)은 공지와 버전으로 관리합니다.<br/>
-              사용자는 “왜 이렇게 되는지”를 화면에서 바로 확인할 수 있어야 합니다.
+              사용자는 “왜 이렇게 되는지”를 화면에서 바로 확인할 수 있어야 합니다.<br/>
+              <span class="warn">원칙:</span> 투명한 정책 + 간단한 사용자 경험.
             </div>
           </div>
         </div>
-
       </div>
 
-      <!-- 오른쪽: 유튜브/틱톡 바로가기 + 안내 -->
+      <!-- MEDIA -->
       <div class="card" id="media">
-        <h2>유튜브 · 틱톡 (눌러도 반응 없던 문제 해결)</h2>
-        <p class="muted">
-          모바일/Pi Browser에서 <code class="inline">onclick</code> + <code class="inline">window.open</code>은 자주 막힙니다.<br/>
-          그래서 아래는 <strong>JS 없이 a 링크</strong>로 고정했습니다. (반응 100% 나옵니다)
+        <h2>유튜브 · 틱톡</h2>
+        <p class="muted" style="margin:0; line-height:1.65">
+          모바일/Pi Browser 환경에서는 일부 방식이 막힐 수 있습니다.<br/>
+          그래서 <strong>유튜브는 “내 업로드(UU…)”로 고정</strong>하고,
+          틱톡은 <strong>링크 이동 방식</strong>을 기본으로 둡니다.
         </p>
 
-        <!-- 본인 주소로 바꾸세요 -->
+        <div class="divider"></div>
+
+        <!-- IMPORTANT: Replace these 2 values -->
+        <div class="hint">
+          ✅ 아래 두 값을 반드시 바꾸세요<br/>
+          1) <code class="inline">PASTE_UU_UPLOADS_PLAYLIST_ID_HERE</code> (UU로 시작)<br/>
+          2) <code class="inline">PASTE_TIKTOK_ID_HERE</code> (틱톡 아이디, @ 없이)
+        </div>
+
         <div class="social">
-          <a href="https://www.youtube.com/@YOUR_CHANNEL" target="_blank" rel="noopener">
-            YouTube 열기
-          </a>
-          <a href="https://www.tiktok.com/@YOUR_TIKTOK_ID" target="_blank" rel="noopener">
-            TikTok 열기
-          </a>
+          <a href="https://www.youtube.com/" target="_blank" rel="noopener">YouTube 열기</a>
+          <a href="https://www.tiktok.com/@PASTE_TIKTOK_ID_HERE" target="_blank" rel="noopener">TikTok 열기</a>
         </div>
 
-        <div class="hint" style="margin-top:10px">
-          <strong>중요:</strong> 위 주소의 <code class="inline">YOUR_CHANNEL</code> 과 <code class="inline">YOUR_TIKTOK_ID</code>만
-          대표님 계정으로 바꿔주시면 “누르면 바로 대표님 영상”으로 이동합니다.
-        </div>
-
-        <div class="media" style="margin-top:12px">
-          <!-- 유튜브 임베드: 본인 채널 업로드/플레이리스트로 교체 -->
+        <div class="mediaGrid">
+          <!-- YouTube -->
           <div class="frame">
             <div class="bar">
               <span>내 유튜브 영상</span>
-              <span class="hint">채널/플레이리스트 ID만 교체</span>
+              <span class="hint">UU 업로드 재생목록 고정</span>
             </div>
-            <!-- 예시: 특정 플레이리스트를 보여주는 방식(가장 안정적) -->
+
             <iframe
-              src="https://www.youtube.com/embed/videoseries?list=YOUR_PLAYLIST_ID"
-              title="YouTube playlist"
+              id="ytFrame"
+              src="https://www.youtube.com/embed/videoseries?list=PASTE_UU_UPLOADS_PLAYLIST_ID_HERE"
+              title="My YouTube Uploads"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               allowfullscreen>
             </iframe>
+
+            <div class="hint" style="padding:10px 12px">
+              검은 화면이면 <strong>UU ID가 비어있거나 오타</strong>입니다. UU만 정확히 넣으면 바로 뜹니다.
+            </div>
           </div>
 
-          <!-- 틱톡 임베드: 틱톡은 환경에 따라 차단될 수 있어 "바로가기"도 함께 유지 -->
+          <!-- TikTok (No embed, always works) -->
           <div class="frame">
             <div class="bar">
-              <span>내 틱톡 영상</span>
-              <span class="hint">임베드가 막히면 위 링크 사용</span>
+              <span>내 틱톡</span>
+              <span class="hint">버튼 이동(확실)</span>
             </div>
-            <iframe
-              src="about:blank"
-              title="TikTok embed placeholder">
-            </iframe>
+
+            <div style="padding:14px">
+              <p class="muted" style="margin:0 0 12px; line-height:1.65; font-size:13px">
+                틱톡은 보안 정책 때문에 앱/브라우저/웹뷰에서 임베드가 막히는 경우가 많습니다.<br/>
+                그래서 아래 버튼은 <strong>내 틱톡 계정으로 즉시 이동</strong>하게 고정합니다.
+              </p>
+
+              <a class="btn" href="https://www.tiktok.com/@PASTE_TIKTOK_ID_HERE" style="width:100%">
+                TikTok 내 영상 열기
+              </a>
+
+              <div class="hint" style="margin-top:12px">
+                “켜면 바로 틱톡이 화면에 뜨게”는 환경마다 실패합니다.<br/>
+                <strong>버튼 1번으로 100% 이동</strong>이 가장 확실합니다.
+              </div>
+            </div>
           </div>
         </div>
-
-        <div class="hint" style="margin-top:10px">
-          틱톡은 보안 정책 때문에 <strong>앱/브라우저 환경에서 임베드가 막히는 경우</strong>가 많습니다.<br/>
-          그래서 <strong>상단의 TikTok 열기 링크</strong>를 “확실한 방식”으로 넣어두었습니다.
-        </div>
-
       </div>
     </section>
 
-    <!-- 추가 설명 -->
-    <section class="row" style="margin-top:14px">
+    <!-- PWB Summary -->
+    <section class="row">
       <div class="card">
-        <h2>PHK Bank ↔ PWB 관계 (요약)</h2>
-        <p class="muted" style="margin:0">
-          <strong>PHK Bank</strong>는 “사용자 화면(금융 OS)”이고,
-          <strong>PWB</strong>는 “생태계(예치·결제·보상·UBI가 돌아가는 전체 시스템)”입니다.<br/>
-          즉, PHK Bank는 PWB의 실행 앱/포털이며, PWB는 PHK Bank가 작동하는 경제권입니다.
+        <h2>PWB 한 장 요약</h2>
+        <p class="muted" style="margin:0; line-height:1.75">
+          PWB는 “예치 기반 유동성” 위에서 결제·송금·보상·UBI가 끊기지 않게 순환하는
+          생활형 디지털 금융 OS입니다.<br/>
+          핵심은 <strong>실사용(결제/송금)</strong>과 <strong>참여 인센티브(보상/UBI)</strong>를
+          하나의 경험으로 묶어 “지속 가능한 생태계”를 만드는 것입니다.
         </p>
         <div class="btns" style="margin-top:12px">
-          <button class="btn" onclick="toggleDesc('d_relation')">설명 더 보기</button>
+          <button class="btn" onclick="toggleDesc('d_more')">설명 더 보기</button>
+          <button class="btn" onclick="toggleAll(true)">전부 펼치기</button>
         </div>
-        <div id="d_relation" class="desc">
-          <strong>한 줄로:</strong> PHK Bank는 “앞단 UI”, PWB는 “뒤단 경제 시스템”입니다.<br/>
-          사용자가 느끼는 모든 체감(결제, 송금, 보상, UBI)은 PHK Bank에서 시작하지만,
-          실제 구조(예치율, 보상정책, UBI 분배)는 PWB의 정책/엔진에서 돌아갑니다.
+        <div id="d_more" class="desc">
+          <strong>핵심 흐름</strong><br/>
+          1) 예치로 유동성/안정성 확보 → 2) 결제로 실사용 확산 → 3) 송금으로 네트워크 확장<br/>
+          4) 보상으로 참여 유지 → 5) UBI로 최종 수혜 실현<br/><br/>
+          <span class="warn">운영 원칙</span><br/>
+          정책(예치율/보상/UBI)은 공개형으로, 사용자 경험은 단순하게.
         </div>
       </div>
 
       <div class="card">
-        <h2>대표님이 “반응 없음”을 다시 안 겪게 하려면</h2>
-        <p class="muted">
-          1) 버튼은 되도록 <strong>a 링크</strong>로 연결합니다.<br/>
+        <h2>체크리스트 (반응 없음 방지)</h2>
+        <p class="muted" style="margin:0; line-height:1.75">
+          1) 외부 이동은 되도록 <strong>a 링크</strong>로 연결합니다.<br/>
           2) 설명은 hover가 아니라 <strong>클릭 토글</strong>로 만듭니다.<br/>
-          3) Pi Browser/모바일은 <strong>window.open</strong>을 피합니다.
+          3) Pi Browser/모바일은 <strong>window.open</strong>을 최소화합니다.
         </p>
-        <div class="btns">
-          <button class="btn" onclick="openInfo('체크리스트')">체크리스트</button>
+        <div class="btns" style="margin-top:12px">
+          <button class="btn" onclick="openInfo('체크리스트')">짧은 안내</button>
           <button class="btn" onclick="toggleDesc('d_check')">한번에 보기</button>
         </div>
         <div id="d_check" class="desc">
-          <strong>체크리스트</strong><br/>
-          ✅ 유튜브/틱톡: <span class="warn">onclick 금지</span> → a 링크로<br/>
-          ✅ 설명문: <span class="warn">hover 금지</span> → 클릭 토글로<br/>
-          ✅ 모바일: 새창 열기 대신 <span class="warn">그냥 이동</span> 방식 우선
+          ✅ 유튜브: <span class="warn">UU 업로드 재생목록</span>으로 임베드하면 “내 영상만” 안정적<br/>
+          ✅ 틱톡: 임베드 대신 <span class="warn">내 계정 링크 이동</span>을 기본으로 (확실)<br/>
+          ✅ 기능 설명: hover 금지 → <span class="warn">클릭 토글</span>로 100% 동작
         </div>
       </div>
     </section>
 
     <div class="footer">
-      <div>© PHK Bank • PWB Ecosystem</div>
-      <div>
-        위 코드에서 반드시 바꾸실 부분:
-        <code class="inline">YOUR_CHANNEL</code>,
-        <code class="inline">YOUR_TIKTOK_ID</code>,
-        <code class="inline">YOUR_PLAYLIST_ID</code>
+      <div>© PWB • Pi World Bank</div>
+      <div class="hint">
+        반드시 바꾸실 부분:
+        <code class="inline">PASTE_UU_UPLOADS_PLAYLIST_ID_HERE</code>,
+        <code class="inline">PASTE_TIKTOK_ID_HERE</code>
       </div>
       <div class="hint">
-        유튜브는 <strong>플레이리스트 ID</strong>를 쓰는 방식이 가장 안정적으로 “내 영상만” 나오게 합니다.
+        유튜브 “업로드 재생목록”은 보통 <code class="inline">UU</code>로 시작합니다.
+        (채널ID가 <code class="inline">UC</code>면 <code class="inline">UU</code>로 바꾸면 됩니다)
       </div>
     </div>
 
   </div>
 
   <script>
-    // 모바일에서 "설명문"을 확실히 띄우기 위한 토글
     function toggleDesc(id){
       var el = document.getElementById(id);
       if(!el) return;
-      var isOpen = (el.style.display === "block");
-      el.style.display = isOpen ? "none" : "block";
+      el.style.display = (el.style.display === "block") ? "none" : "block";
     }
 
-    // 아주 짧은 안내(대표님이 원하시면 제거 가능)
+    function toggleAll(open){
+      var items = document.querySelectorAll(".desc");
+      for(var i=0;i<items.length;i++){
+        items[i].style.display = open ? "block" : "none";
+      }
+    }
+
     function openInfo(type){
       var msg = "";
       switch(type){
+        case "예치":
+          msg = "예치: PWB 유동성 기반. 예치율/보상은 정책으로 조정 가능.";
+          break;
         case "결제":
-          msg = "결제: Pi 기반 즉시 결제/정산 흐름입니다. (설명 이해를 위해 UI 안내로만 구성)";
+          msg = "결제: Pi 기반 즉시 결제/정산 경험을 단순화.";
           break;
         case "송금":
-          msg = "송금: 주소→금액→확인. 실제 온체인/SDK 연동은 별도 구현이 필요합니다.";
-          break;
-        case "예치":
-          msg = "예치: 유동성 기반. 예치율/보상정책은 PWB 정책으로 조정 가능합니다.";
+          msg = "송금: 주소→금액→확인. 실제 온체인은 SDK/서버 연동 필요.";
           break;
         case "보상":
-          msg = "보상: 참여/기여/사용 기반 인센티브. 지속 가능한 구조로 설계합니다.";
+          msg = "보상: 사용/기여/참여 인센티브로 지속 유입을 만듭니다.";
           break;
         case "UBI":
-          msg = "UBI: 취약계층 우선 분배를 포함한 기본소득 구조. 정책+수익 기반 설계.";
+          msg = "UBI: PWB의 최종 목표. 취약계층 중심 분배 + 정책 기반 운영.";
           break;
         case "스테이킹":
-          msg = "스테이킹: 참여자 실망을 막기 위해 '재스테이킹/기여 보상 전환' 출구를 같이 설계합니다.";
+          msg = "스테이킹: 참여자 보호, 재스테이킹/보상 전환 등 출구 포함.";
           break;
         case "투명성":
-          msg = "투명성: 예치율/보상/UBI 정책을 공개 버전으로 운영하는 방향입니다.";
+          msg = "투명성: 예치율/보상/UBI 정책을 공개·버전 관리.";
           break;
         case "체크리스트":
-          msg = "체크: 링크는 a태그, 설명은 클릭 토글, window.open 최소화.";
+          msg = "체크: 외부이동은 a링크, 설명은 클릭토글, window.open 최소화.";
           break;
         default:
           msg = type + " 안내";
