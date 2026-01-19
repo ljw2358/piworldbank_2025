@@ -1,22 +1,42 @@
+출발 언어영어도착 언어한국어번역하기
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>PWB Global</title>
-  <meta name="description" content="PWB Global은 PHKBank가 설계한 금융 질서를 현실에서 실행하는 글로벌 금융 레이어입니다."/>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>PWB Global</title>
 
-  <style>
-    body{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;margin:0;background:#0b0e13;color:#eaeaf0;line-height:1.6}
-    header,section,footer{max-width:1100px;margin:auto;padding:40px 20px}
-    h1,h2,h3{color:#ffffff}
-    .tag{display:inline-block;padding:6px 12px;border-radius:20px;background:#1e2230;color:#9ad1ff;font-size:13px;margin-right:8px}
-    ul{padding-left:20px}
-    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px}
-    .card{background:#141826;border-radius:14px;padding:20px}
-    footer{font-size:14px;color:#9aa3b2}
-    select{background:#141826;color:#fff;border:1px solid #333;padding:6px;border-radius:6px}
-  </style>
+<style>
+body{
+  margin:0;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  background:#0b0e13;color:#eaeaf0;line-height:1.6
+}
+header,section,footer{max-width:1100px;margin:auto;padding:40px 20px}
+h1,h2,h3{color:#fff}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px}
+.card{background:#141826;border-radius:16px;padding:22px;position:relative}
+button,a.btn{
+  display:inline-block;margin-top:12px;padding:10px 14px;
+  border-radius:10px;background:#1f2937;color:#fff;
+  border:1px solid #374151;text-decoration:none;cursor:pointer
+}
+button:hover,a.btn:hover{background:#273449}
+.tag{display:inline-block;background:#1e2230;color:#9ad1ff;padding:6px 12px;border-radius:20px;font-size:13px;margin-right:8px}
+footer{font-size:14px;color:#9aa3b2;text-align:center}
+
+/* modal */
+.modal{
+  display:none;position:fixed;z-index:999;
+  left:0;top:0;width:100%;height:100%;
+  background:rgba(0,0,0,.6)
+}
+.modal-content{
+  background:#141826;margin:10% auto;padding:24px;
+  max-width:600px;border-radius:16px
+}
+.close{float:right;font-size:22px;cursor:pointer;color:#aaa}
+.close:hover{color:#fff}
+</style>
 </head>
 
 <body>
@@ -24,140 +44,149 @@
 <header>
   <span class="tag">PHKBank Framework</span>
   <span class="tag">Global Execution Layer</span>
-  <h1 data-i18n="brand_title">PWB Global</h1>
-  <p data-i18n="brand_desc"></p>
-
-  <label>
-    🌐 Language :
-    <select onchange="setLang(this.value)">
-      <option value="ko">한국어</option>
-      <option value="en">English</option>
-      <option value="zh_cn">中文</option>
-      <option value="ja">日本語</option>
-      <option value="es">Español</option>
-      <option value="fr">Français</option>
-      <option value="de">Deutsch</option>
-      <option value="ru">Русский</option>
-      <option value="ar">العربية</option>
-      <option value="pt">Português</option>
-      <option value="it">Italiano</option>
-      <option value="hi">हिन्दी</option>
-      <option value="id">Bahasa</option>
-      <option value="vi">Tiếng Việt</option>
-      <option value="th">ไทย</option>
-      <option value="tr">Türkçe</option>
-      <option value="fa">فارسی</option>
-      <option value="ms">Melayu</option>
-      <option value="tl">Tagalog</option>
-    </select>
-  </label>
+  <h1>PWB Global</h1>
+  <p>
+    PWB Global은 PHKBank가 설계한 금융 질서를<br/>
+    현실 세계에서 실행하는 글로벌 금융 실행 레이어입니다.
+  </p>
 </header>
 
 <section>
-  <h2 data-i18n="section_relation_title"></h2>
-  <p data-i18n="section_relation_desc"></p>
+<h2>PHKBank와 PWB Global의 관계</h2>
+<p>
+PHKBank는 금융의 원칙·질서·정산 구조를 설계하는 상위 프레임이며,<br/>
+PWB Global은 그 구조를 실제 사용자 환경에서 실행·확장하는 하위 글로벌 레이어입니다.
+</p>
 </section>
 
 <section>
-  <h2 data-i18n="section_functions_title"></h2>
-  <div class="grid">
-    <div class="card"><h3 data-i18n="fn_basic_income"></h3><p data-i18n="fn_basic_income_desc"></p></div>
-    <div class="card"><h3 data-i18n="fn_payment"></h3><p data-i18n="fn_payment_desc"></p></div>
-    <div class="card"><h3 data-i18n="fn_deposit"></h3><p data-i18n="fn_deposit_desc"></p></div>
-    <div class="card"><h3 data-i18n="fn_reward"></h3><p data-i18n="fn_reward_desc"></p></div>
-    <div class="card"><h3>YouTube</h3><p data-i18n="fn_youtube_desc"></p></div>
-    <div class="card"><h3>TikTok</h3><p data-i18n="fn_tiktok_desc"></p></div>
+<h2>PWB Global 핵심 기능</h2>
+
+<div class="grid">
+
+  <div class="card">
+    <h3>기본소득</h3>
+    <p>참여·유지·기여 기록에 따라 분배되는 구조적 기본소득</p>
+    <button onclick="openModal('bi')">설명 보기</button>
   </div>
+
+  <div class="card">
+    <h3>결제</h3>
+    <p>실제 상거래와 서비스에서 작동하는 글로벌 결제 레이어</p>
+    <button onclick="openModal('pay')">설명 보기</button>
+  </div>
+
+  <div class="card">
+    <h3>예치</h3>
+    <p>유동성과 안정성을 위한 구조적 예치 시스템</p>
+    <button onclick="openModal('deposit')">설명 보기</button>
+  </div>
+
+  <div class="card">
+    <h3>보상</h3>
+    <p>참여·유지·기여 기록 기반 정산형 보상</p>
+    <button onclick="openModal('reward')">설명 보기</button>
+  </div>
+
+  <div class="card">
+    <h3>YouTube</h3>
+    <p>혜공님의 공식 영상 채널</p>
+    <a class="btn" href="YOUR_YOUTUBE_CHANNEL_URL" target="_blank">
+      유튜브 바로 열기
+    </a>
+  </div>
+
+  <div class="card">
+    <h3>TikTok</h3>
+    <p>혜공님의 공식 숏폼 영상 채널</p>
+    <a class="btn" href="YOUR_TIKTOK_PROFILE_URL" target="_blank">
+      틱톡 바로 열기
+    </a>
+  </div>
+
+</div>
 </section>
 
 <section>
-  <h2 data-i18n="staking_title"></h2>
-  <p data-i18n="staking_intro"></p>
+<h2>Staking Policy · 스테이킹 정책</h2>
 
-  <p data-i18n="staking_preexist"></p>
+<p>
+PWB Global에서의 스테이킹은 단순 예치가 아니라<br/>
+<strong>시스템에 참여했다는 기록을 남기는 구조적 행위</strong>입니다.
+</p>
 
-  <h3 data-i18n="staking_rule1_title"></h3>
-  <ul>
-    <li data-i18n="staking_rule1_a"></li>
-    <li data-i18n="staking_rule1_b"></li>
-    <li data-i18n="staking_rule1_c"></li>
-  </ul>
+<p>
+현재 총 <strong>34,000 단위의 선행 스테이킹</strong>이 존재하며,<br/>
+이는 구조 완성 이전에 시스템을 신뢰하고 참여한<br/>
+선행 기여자로 공식 기록됩니다.
+</p>
 
-  <h3 data-i18n="staking_rule2_title"></h3>
-  <p data-i18n="staking_rule2_desc"></p>
+<h3>① 선행 스테이킹 보호</h3>
+<ul>
+  <li>선행 참여자는 어떤 구조 변경 이후에도 불리해지지 않습니다.</li>
+  <li>모든 보상·정산·분배의 최우선 기준입니다.</li>
+  <li>스테이킹은 실험이나 리스크 전가 수단이 아닙니다.</li>
+</ul>
+
+<h3>② PWB Global 신규 스테이킹</h3>
+<p>
+PWB Global에서도 신규 스테이킹은 가능합니다.<br/>
+다만 기존 선행 기록을 침해하지 않는<br/>
+<strong>후순위 정산 구조</strong>로 편입됩니다.
+</p>
+
 </section>
 
 <footer>
-  <p data-i18n="footer_text"></p>
+<p>© 2026 PWB Global · Powered by PHKBank Framework</p>
 </footer>
 
+<!-- MODALS -->
+<div id="modal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal()">×</span>
+    <div id="modalText"></div>
+  </div>
+</div>
+
 <script>
-const LANG = {
-  ko:{
-    brand_title:"PWB Global",
-    brand_desc:"PWB Global은 PHKBank가 설계한 금융 질서를 현실 세계에서 실행하는 글로벌 금융 실행 레이어입니다.",
-    section_relation_title:"PHKBank와 PWB Global의 관계",
-    section_relation_desc:"PHKBank는 금융 구조와 원칙을 설계하는 상위 프레임이며, PWB Global은 이를 실제 사용자 환경에서 실행·확장하는 하위 글로벌 레이어입니다.",
-    section_functions_title:"PWB Global 핵심 기능",
-    fn_basic_income:"기본소득",
-    fn_basic_income_desc:"참여·유지·기여 기록에 따라 분배되는 구조적 기본소득 시스템",
-    fn_payment:"결제",
-    fn_payment_desc:"실제 상거래와 서비스에서 작동하는 글로벌 결제 레이어",
-    fn_deposit:"예치",
-    fn_deposit_desc:"유동성과 안정성을 위한 구조적 예치 시스템",
-    fn_reward:"보상",
-    fn_reward_desc:"참여·유지·기여 기록 기반의 정산형 보상",
-    fn_youtube_desc:"YouTube 기반 정보·콘텐츠 유통과 참여 기록 연동",
-    fn_tiktok_desc:"TikTok 기반 글로벌 확산 및 참여 트래킹",
-    staking_title:"Staking Policy · 스테이킹 정책",
-    staking_intro:"PWB Global에서의 스테이킹은 단순 예치가 아닌 시스템 참여 기록입니다.",
-    staking_preexist:"현재 총 34,000 단위의 선행 스테이킹이 존재하며, 이는 구조 완성 이전에 참여한 선행 기여자로 기록됩니다.",
-    staking_rule1_title:"① 선행 스테이킹 보호",
-    staking_rule1_a:"선행 참여자는 불리한 위치로 이동되지 않습니다.",
-    staking_rule1_b:"모든 정산과 보상의 최우선 기준입니다.",
-    staking_rule1_c:"스테이킹은 실험이나 리스크 전가가 아닙니다.",
-    staking_rule2_title:"② PWB 신규 스테이킹",
-    staking_rule2_desc:"PWB Global에서도 신규 스테이킹은 가능하나, 기존 선행 기록을 침해하지 않는 후순위 정산 구조로 편입됩니다.",
-    footer_text:"© 2026 PWB Global · Powered by PHKBank Framework"
-  },
-  en:{
-    brand_title:"PWB Global",
-    brand_desc:"PWB Global is the global execution layer that implements the financial order designed by PHKBank in the real world.",
-    section_relation_title:"Relationship between PHKBank and PWB Global",
-    section_relation_desc:"PHKBank designs the financial framework, while PWB Global executes and scales it globally.",
-    section_functions_title:"Core Functions of PWB Global",
-    fn_basic_income:"Basic Income",
-    fn_basic_income_desc:"Structural income distributed based on participation and contribution records",
-    fn_payment:"Payment",
-    fn_payment_desc:"Global payment layer for real-world transactions",
-    fn_deposit:"Deposit",
-    fn_deposit_desc:"Structural deposits for liquidity and stability",
-    fn_reward:"Reward",
-    fn_reward_desc:"Settlement-based rewards from contribution records",
-    fn_youtube_desc:"YouTube-based content participation tracking",
-    fn_tiktok_desc:"TikTok-based global engagement tracking",
-    staking_title:"Staking Policy",
-    staking_intro:"Staking in PWB Global records system participation, not simple deposits.",
-    staking_preexist:"A total of 34,000 units of early staking are recorded as early contributors.",
-    staking_rule1_title:"① Early Staker Protection",
-    staking_rule1_a:"Early participants are never disadvantaged.",
-    staking_rule1_b:"Their records have top settlement priority.",
-    staking_rule1_c:"Staking is not a loss experiment.",
-    staking_rule2_title:"② New Staking in PWB Global",
-    staking_rule2_desc:"New staking is allowed but placed in a lower settlement tier.",
-    footer_text:"© 2026 PWB Global · Powered by PHKBank Framework"
-  }
+const modalData = {
+  bi: `
+  <h3>기본소득</h3>
+  <p>
+  PWB Global의 기본소득은 무작위 배포가 아닙니다.<br/>
+  참여, 유지, 기여 기록을 기반으로 정산되는<br/>
+  구조적 분배 시스템입니다.
+  </p>`,
+  pay: `
+  <h3>결제</h3>
+  <p>
+  PWB Global 결제는 실제 상거래에서 작동하며,<br/>
+  결제 기록은 보상·기본소득·신뢰 지표로 연결됩니다.
+  </p>`,
+  deposit: `
+  <h3>예치</h3>
+  <p>
+  예치는 단순 보관이 아니라<br/>
+  시스템 안정성과 유동성을 유지하기 위한<br/>
+  구조적 참여 수단입니다.
+  </p>`,
+  reward: `
+  <h3>보상</h3>
+  <p>
+  보상은 클릭 수가 아니라<br/>
+  참여·유지·기여 기록에 따라<br/>
+  정산 방식으로 지급됩니다.
+  </p>`
 };
 
-function setLang(l){
-  if(!LANG[l]) l="ko";
-  document.documentElement.lang=l;
-  document.querySelectorAll("[data-i18n]").forEach(el=>{
-    const k=el.dataset.i18n;
-    if(LANG[l][k]) el.textContent=LANG[l][k];
-  });
+function openModal(key){
+  document.getElementById("modalText").innerHTML = modalData[key];
+  document.getElementById("modal").style.display = "block";
 }
-setLang("ko");
+function closeModal(){
+  document.getElementById("modal").style.display = "none";
+}
 </script>
 
 </body>
