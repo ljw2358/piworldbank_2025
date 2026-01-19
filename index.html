@@ -1,110 +1,406 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>PHKBank – Financial Operating System</title>
-  <meta name="description" content="PHKBank is a Financial Operating System integrating payment, industry, and UBI on a global scale." />
-  <style>
-    body {
-      margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      background: radial-gradient(circle at top, #0b1220, #020409);
-      color: #e5e7eb;
-    }
-    .container {
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 40px 20px 80px;
-    }
-    .card {
-      background: linear-gradient(180deg, #0f172a, #020617);
-      border-radius: 20px;
-      padding: 28px;
-      margin-bottom: 28px;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.6);
-    }
-    h1, h2 {
-      margin: 0 0 12px 0;
-      letter-spacing: -0.02em;
-    }
-    h1 {
-      font-size: 34px;
-    }
-    h2 {
-      font-size: 26px;
-    }
-    p {
-      font-size: 16px;
-      line-height: 1.7;
-      color: #cbd5f5;
-      margin: 0 0 10px 0;
-    }
-    .sub {
-      font-size: 14px;
-      color: #94a3b8;
-    }
-    footer {
-      text-align: center;
-      margin-top: 60px;
-      font-size: 13px;
-      color: #64748b;
-    }
-  </style>
+<meta charset="UTF-8">
+<title>PHK Global | PWB Ecosystem</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta http-equiv="Content-Security-Policy"
+content="default-src * 'self' data: blob: https:;
+script-src * 'self' 'unsafe-inline' https:;
+style-src * 'self' 'unsafe-inline' https:;">
+
+<style>
+  body{
+    margin:0;
+    background:#0b0f1c;
+    color:#ffffff;
+    font-family:Arial, Helvetica, sans-serif;
+    line-height:1.65;
+  }
+  header{
+    padding:34px 20px;
+    background:linear-gradient(135deg,#1e3c72,#0b102a);
+    text-align:center;
+  }
+  header h1{margin:0;font-size:30px;letter-spacing:0.5px;}
+  header p{opacity:0.88;margin:10px 0 0;font-size:14px;}
+
+  .badgeRow{
+    margin-top:14px;
+    display:flex;
+    gap:8px;
+    justify-content:center;
+    flex-wrap:wrap;
+  }
+  .badge{
+    font-size:12px;
+    padding:6px 10px;
+    border:1px solid rgba(255,255,255,0.22);
+    border-radius:999px;
+    background:rgba(255,255,255,0.06);
+    opacity:0.95;
+  }
+
+  .section{
+    padding:28px 20px;
+    border-bottom:1px solid rgba(255,255,255,0.10);
+  }
+  .section h2{
+    margin:0 0 12px 0;
+    font-size:20px;
+    color:#5fa8ff;
+  }
+  .section p{
+    margin:10px 0;
+    font-size:14px;
+    opacity:0.92;
+  }
+  .hr{
+    margin:14px auto;
+    max-width:920px;
+    height:1px;
+    background:rgba(255,255,255,0.10);
+  }
+
+  .grid{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:12px;
+    max-width:980px;
+    margin:0 auto;
+  }
+  @media (min-width: 860px){
+    .grid{grid-template-columns:1fr 1fr;}
+  }
+  .card{
+    border:1px solid rgba(255,255,255,0.14);
+    background:rgba(255,255,255,0.04);
+    border-radius:12px;
+    padding:16px;
+    text-align:left;
+  }
+  .card h3{
+    margin:0 0 10px 0;
+    font-size:16px;
+    color:#ffffff;
+  }
+  .card ul{
+    margin:0;
+    padding-left:18px;
+    opacity:0.9;
+    font-size:14px;
+  }
+
+  .btn{
+    display:block;
+    margin:12px 0;
+    padding:14px;
+    text-align:center;
+    background:#2a7cff;
+    color:#fff;
+    text-decoration:none;
+    border-radius:10px;
+    font-weight:bold;
+  }
+  .btn.green{background:#00c896;}
+  .btn.gray{background:#555;}
+  .btn.dark{background:#1b2136;border:1px solid rgba(255,255,255,0.16);}
+
+  .note{
+    border-left:4px solid #5fa8ff;
+    padding:10px 12px;
+    background:rgba(95,168,255,0.08);
+    border-radius:10px;
+    opacity:0.95;
+  }
+  .warn{
+    border-left:4px solid #ffcc00;
+    padding:10px 12px;
+    background:rgba(255,204,0,0.10);
+    border-radius:10px;
+    opacity:0.95;
+  }
+
+  footer{
+    padding:20px;
+    text-align:center;
+    font-size:12px;
+    opacity:0.72;
+  }
+</style>
 </head>
+
 <body>
-  <div class="container">
 
-    <div class="card">
-      <h1>PHKBank Framework</h1>
-      <p>
-        PHKBank는 단순한 금융 앱이 아니라,
-        결제 · 산업 · 기술 · UBI를 통합하는
-        <strong>금융 운영체계(Financial Operating System)</strong>입니다.
-      </p>
-      <p>
-        PHKBank는 국가 단위 금융을 넘어,
-        산업 구조와 시민 경제를 연결하는
-        장기 확장형 금융 OS를 목표로 설계되었습니다.
-      </p>
-      <p class="sub">Financial OS · Structural Design · Long-term Expansion</p>
-    </div>
+<header>
+  <h1>PHK Global</h1>
+  <p>Global Public Platform · PWB Ecosystem Interface · Trust & Continuity</p>
 
-    <div class="card">
-      <h2>Global Expansion</h2>
-      <p>
-        PHKBank는 단일 국가에 머무르지 않습니다.
-        글로벌 결제, 국제 정산, 산업 연동을 통해
-        국경을 초월한 금융 구조로 확장됩니다.
-      </p>
-      <p>
-        이 확장은 개별 서비스의 나열이 아니라,
-        하나의 통합된 금융 질서를 형성하는 과정입니다.
-      </p>
-      <p class="sub">Cross-border Finance · Partnerships · Scalable Structure</p>
-    </div>
-    <div class="card">
-      <h2>PHK Global</h2>
-      <p>
-        PHK Global은 PHKBank의
-        <strong>하위 글로벌 확장 프레임</strong>으로서,
-        국제 금융 · 산업 · UBI 구조를
-        통합하고 실행하는 역할을 담당합니다.
-      </p>
-      <p>
-        PHKBank가 설계한 금융 운영체계(OS)를 기반으로,
-        PHK Global은 글로벌 결제, 산업 연동,
-        그리고 보편적 기본소득(UBI)의
-        국제적 확장을 현실 세계에 적용합니다.
-      </p>
-      <p class="sub">Sub Framework · International Finance · Global UBI</p>
-    </div>
-
-    <footer>
-      © 2026 PHKBank<br />
-      Financial Operating System
-    </footer>
-
+  <div class="badgeRow">
+    <div class="badge">Payments</div>
+    <div class="badge">Staking</div>
+    <div class="badge">Deposit Ratio</div>
+    <div class="badge">Rewards</div>
+    <div class="badge">Basic Income</div>
+    <div class="badge">Media</div>
   </div>
+</header>
+
+<!-- 1. PHK Global 개요 -->
+<div class="section">
+  <h2>What is PHK Global?</h2>
+  <p>
+    PHK Global is a public-oriented global platform designed to connect people,
+    communities, and future institutions into one coherent ecosystem.
+    It is not a single “app page” or a short-term project.
+  </p>
+  <p>
+    PHK Global is built as the global interface layer: a place where participants can
+    understand the rules, access verified links, join structured programs, and follow public updates.
+  </p>
+
+  <div class="note">
+    PHK Global focuses on “clarity, trust, and continuity.”  
+    We do not promise instant profit. We build a long-term system that can survive pressure,
+    misunderstanding, and market noise.
+  </div>
+</div>
+
+<!-- 2. PHK Global 핵심 역할 -->
+<div class="section">
+  <h2>Core Roles of PHK Global</h2>
+
+  <div class="grid">
+    <div class="card">
+      <h3>1) Public Interface</h3>
+      <ul>
+        <li>Clear public explanation of rules and policies</li>
+        <li>Official links and verification points</li>
+        <li>Simple access to key functions and announcements</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>2) Program Gateway</h3>
+      <ul>
+        <li>Structured staking / deposit / reward programs</li>
+        <li>Participation & contribution pathways</li>
+        <li>Transparency-first announcements before changes</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>3) Stability Layer</h3>
+      <ul>
+        <li>Protect continuity for existing participants</li>
+        <li>Prevent confusion during transitions</li>
+        <li>Reduce “panic” through clear policy</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>4) Global Communication</h3>
+      <ul>
+        <li>YouTube / TikTok updates</li>
+        <li>Community messaging</li>
+        <li>Public roadmap & status notices</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- 3. PWB 관계 -->
+<div class="section">
+  <h2>Relationship Between PHK Global and PWB</h2>
+  <p>
+    PWB (Pi World Bank) is an ecosystem-level infrastructure that focuses on long-term staking,
+    liquidity concentration, and macro-scale value circulation.
+  </p>
+  <p>
+    PHK Global is the public “front layer” where people understand the system,
+    confirm policies, and access trusted gateways.
+    PWB is the deeper “infrastructure layer” that handles long-term staking structures.
+  </p>
+
+  <div class="warn">
+    Important: Existing PWB stakers are not abandoned.  
+    Continuity is a priority. Any future transition must respect existing commitments.
+  </div>
+</div>
+
+<!-- 4. 스테이킹 정책 -->
+<div class="section">
+  <h2>Staking Policy (Continuity First)</h2>
+  <p>
+    Existing staking in PWB remains valid under the original conditions.
+    PHK Global does not forcibly cancel, confiscate, or rewrite the past.
+  </p>
+  <p>
+    When a staking period ends, participants may choose one of the following:
+  </p>
+
+  <div class="grid">
+    <div class="card">
+      <h3>Option A: Withdraw</h3>
+      <ul>
+        <li>Withdraw according to the original terms</li>
+        <li>Hold independently</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Option B: Re-stake into PHK-linked programs</h3>
+      <ul>
+        <li>Join PHK Global programs when officially announced</li>
+        <li>Continue participation with clearer public policy</li>
+      </ul>
+    </div>
+  </div>
+
+  <p>
+    Future staking intake may be directed through PHK Global announcements to reduce confusion
+    and provide a single trusted point of reference.
+  </p>
+</div>
+
+<!-- 5. 기본소득 -->
+<div class="section">
+  <h2>Basic Income (Design Direction)</h2>
+  <p>
+    PHK Global supports a future basic income architecture.
+    Basic income is not a “magic giveaway.” It must be sustainable and tied to real economic activity.
+  </p>
+  <p>
+    The direction is a contribution-based system where verified participation and public utility
+    can be rewarded transparently over time.
+  </p>
+</div>
+
+<!-- 6. 결제 -->
+<div class="section">
+  <h2>Payments & Settlement</h2>
+  <p>
+    PHK Global includes a payment and settlement direction to support Pi-based commerce:
+    person-to-person payments, merchant settlement, and transparent record paths.
+  </p>
+  <p>
+    The goal is simple: reduce friction, protect trust, and make participation understandable.
+  </p>
+</div>
+
+<!-- 7. 예치율 -->
+<div class="section">
+  <h2>Deposit Ratio / Reserve Concept</h2>
+  <p>
+    PHK Global policy includes a “deposit ratio” concept: stability-first reserve thinking.
+    It exists to reduce risk, avoid reckless promises, and keep the system resilient.
+  </p>
+  <p>
+    This is not a high-risk gambling model.
+    It is a discipline model: sustainability before expansion.
+  </p>
+</div>
+
+<!-- 8. 보상 -->
+<div class="section">
+  <h2>Rewards & Participation</h2>
+  <p>
+    Rewards may be distributed through verified participation programs such as:
+  </p>
+  <div class="grid">
+    <div class="card">
+      <h3>Possible Reward Sources</h3>
+      <ul>
+        <li>Network contribution (education, onboarding, support)</li>
+        <li>Public utility tasks (community participation)</li>
+        <li>Verified engagement and transparent rule-based distribution</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Reward Principles</h3>
+      <ul>
+        <li>Rules first, not hype</li>
+        <li>Announced before activation</li>
+        <li>No hidden switches, no surprise lockups</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- 9. 투명성 -->
+<div class="section">
+  <h2>Transparency & Trust</h2>
+  <p>
+    PHK Global operates on transparency. If anything changes, it is announced publicly first.
+    A stable system does not fear clarity.
+  </p>
+  <p>
+    We focus on building a structure that can scale globally without breaking trust.
+  </p>
+</div>
+
+<!-- 10. 미디어 -->
+<div class="section">
+  <h2>Official Media</h2>
+  <p>
+    Replace the links below with your own official channel URLs.
+    (Pi Browser works best with standard HTTPS links and simple anchors.)
+  </p>
+
+  <!-- 🔴 여기에 본인 유튜브 채널 주소로 교체 -->
+  <a class="btn" href="https://www.youtube.com/" target="_blank">
+    Official YouTube Channel
+  </a>
+
+  <!-- 🔴 여기에 본인 틱톡 계정 주소로 교체 -->
+  <a class="btn green" href="https://www.tiktok.com/" target="_blank">
+    Official TikTok Channel
+  </a>
+
+  <a class="btn dark" href="https://www.youtube.com/results?search_query=Pi+Network" target="_blank">
+    Search: Pi Network Updates
+  </a>
+</div>
+
+<!-- 11. Pi 네트워크 링크 -->
+<div class="section">
+  <h2>Pi Network Links</h2>
+
+  <a class="btn gray" href="https://minepi.com" target="_blank">
+    Pi Network Official
+  </a>
+
+  <a class="btn gray" href="https://blockexplorer.minepi.com" target="_blank">
+    Pi Blockchain Explorer
+  </a>
+
+  <a class="btn gray" href="https://minepi.com/kyc" target="_blank">
+    Pi KYC
+  </a>
+</div>
+
+<!-- 12. 공지 -->
+<div class="section">
+  <h2>Important Notice</h2>
+  <p>
+    PHK Global is under continuous development.
+    Sections on staking, basic income, payments, deposit ratio, and rewards represent
+    policy direction and structural intent.
+  </p>
+  <p>
+    Nothing is activated without testing and public notice.
+    The mission is not speed only, but survival + trust + continuity.
+  </p>
+
+  <div class="note">
+    If you are a long-term participant: you are not forgotten.  
+    The platform exists to protect clarity for everyone worldwide.
+  </div>
+</div>
+
+<footer>
+  © 2026 PHK Global · PWB Ecosystem · Public Human Kind  
+</footer>
+
 </body>
 </html>
